@@ -6,6 +6,11 @@
 Dindi_Song_AMR.MP4
 *.MP4
 
+# Intermediate video encodes. Only the chosen fallback is tracked; the discarded
+# rungs of the quality ladder are not.
+assets/video/dindi_song_720p.m4v
+assets/video/dindi_song_540p.m4v
+
 # Archive / source material folders. These are the originals the web assets were
 # derived from (camera JPGs, EPS/AI logos, brand PDFs). They stay on disk but are
 # not part of the site, so they are not tracked.

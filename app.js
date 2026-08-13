@@ -1,68 +1,193 @@
-// Local storage database structure
-let pledgesCount = parseInt(localStorage.getItem('amr_pledges_count'));
-let iecDownloads = parseInt(localStorage.getItem('amr_iec_downloads'));
-let quizPassed = localStorage.getItem('amr_quiz_passed') === 'true';
+// ─── i18n Runtime (English inline, other languages lazily loaded) ───
+// English text lives inline in index.html, so English renders with zero JS,
+// zero network requests and zero string-table parsing. The data-i18n*
+// attributes only MARK the swap points for the Marathi toggle (Bucket 6):
+//   <h1 data-i18n="hero.title">Defeating the Silent Pandemic</h1>
+//   <img data-i18n-attr="alt:hero.image.alt" alt="AMR illustration">
+//   <p data-i18n-html="hero.note">text with <strong>inline markup</strong></p>
+// This is the runtime only — the toggle UI itself is Bucket 6.
+const I18N = { lang: 'en', strings: null };
 
-// Region statistics tracking
-let regionPledges = JSON.parse(localStorage.getItem('amr_region_pledges'));
-if (!regionPledges) {
-  regionPledges = {
-    North: 31427,
-    South: 38570,
-    East: 24285,
-    West: 28570,
-    Central: 20000
-  };
-  localStorage.setItem('amr_region_pledges', JSON.stringify(regionPledges));
+const I18N_LANG_KEY = 'act4amr_lang';
+const I18N_SELECTOR = '[data-i18n], [data-i18n-html], [data-i18n-attr]';
+const I18N_LOADED = {};                // lang -> string table, once its file has run
+const I18N_ORIGINALS = new WeakMap();  // element -> its original English content
+const I18N_EN = {};                    // key -> original English text, for t() fallback
+
+// A translation file is a plain script that calls:
+//   registerStrings('mr', { 'hero.title': '...' });
+function registerStrings(lang, strings) {
+  if (lang && strings) I18N_LOADED[lang] = strings;
 }
 
-if (!pledgesCount || isNaN(pledgesCount)) {
-  pledgesCount = 142852;
-  localStorage.setItem('amr_pledges_count', pledgesCount);
-}
-if (!iecDownloads || isNaN(iecDownloads)) {
-  iecDownloads = 15482;
-  localStorage.setItem('amr_iec_downloads', iecDownloads);
+// Own-property check, so keys like "constructor" can't leak Object.prototype values
+function i18nHas(obj, key) {
+  return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
 }
 
-// Render Swachh India Inspired Boxed Digit Odometer Counter
-function renderSwachhDigitBoxes(count) {
-  const container = document.getElementById('digitBoxesRow');
-  if (!container) return;
+// data-i18n-attr="alt:hero.image.alt" — comma/semicolon separated for several attrs
+function parseI18nAttrPairs(el) {
+  const raw = el.getAttribute('data-i18n-attr');
+  if (!raw) return [];
+  return raw.split(/[;,]/).map(part => {
+    const bits = part.split(':');
+    return { attr: (bits[0] || '').trim(), key: (bits[1] || '').trim() };
+  }).filter(pair => pair.attr && pair.key);
+}
 
-  const num = parseInt(count) || 142852;
-  const str = num.toString();
-  container.innerHTML = '';
+// Cache the inline English once, before the first translation overwrites it
+function cacheI18nOriginals() {
+  document.querySelectorAll(I18N_SELECTOR).forEach(el => {
+    if (I18N_ORIGINALS.has(el)) return;
 
-  for (let i = 0; i < str.length; i++) {
-    const box = document.createElement('div');
-    box.className = 'digit-box';
-    box.innerText = str[i];
-    container.appendChild(box);
+    const original = { text: el.textContent, html: el.innerHTML, attrs: {} };
+    parseI18nAttrPairs(el).forEach(pair => {
+      original.attrs[pair.attr] = el.getAttribute(pair.attr);
+    });
+    I18N_ORIGINALS.set(el, original);
+
+    const key = el.getAttribute('data-i18n') || el.getAttribute('data-i18n-html');
+    if (key && !i18nHas(I18N_EN, key)) I18N_EN[key] = original.text;
+  });
+}
+
+// Replace an element's own text without touching its child elements. Ten
+// translated elements wrap an SVG icon or a .pulse-dot, and el.textContent = …
+// would delete those children, so only the text nodes are rewritten.
+function setI18nText(el, value) {
+  const textNodes = Array.from(el.childNodes).filter(node => node.nodeType === 3);
+  const filled = textNodes.filter(node => node.nodeValue.trim());
+
+  if (filled.length) {
+    filled[0].nodeValue = value;
+    filled.slice(1).forEach(node => { node.nodeValue = ''; });
+  } else if (textNodes.length) {
+    textNodes[0].nodeValue = value;
+  } else {
+    el.appendChild(document.createTextNode(value));
   }
 }
 
-// Swachh India Inspired 1-Click Pledge Action
+// Swap in the active language; keys with no translation keep their English
+function applyI18n() {
+  const strings = I18N.strings;
+  document.querySelectorAll(I18N_SELECTOR).forEach(el => {
+    const textKey = el.getAttribute('data-i18n');
+    if (textKey && i18nHas(strings, textKey)) setI18nText(el, strings[textKey]);
+
+    const htmlKey = el.getAttribute('data-i18n-html');
+    if (htmlKey && i18nHas(strings, htmlKey)) el.innerHTML = strings[htmlKey];
+
+    parseI18nAttrPairs(el).forEach(pair => {
+      if (i18nHas(strings, pair.key)) el.setAttribute(pair.attr, strings[pair.key]);
+    });
+  });
+}
+
+// Put the cached inline English back
+function restoreI18nOriginals() {
+  document.querySelectorAll(I18N_SELECTOR).forEach(el => {
+    const original = I18N_ORIGINALS.get(el);
+    if (!original) return;
+
+    // Restore from the cached markup, not textContent — the same child-element
+    // problem setI18nText avoids applies in reverse on the way back to English.
+    if (el.hasAttribute('data-i18n-html') || el.hasAttribute('data-i18n')) {
+      el.innerHTML = original.html;
+    }
+
+    Object.keys(original.attrs).forEach(attr => {
+      if (original.attrs[attr] === null) el.removeAttribute(attr);
+      else el.setAttribute(attr, original.attrs[attr]);
+    });
+  });
+}
+
+// Lazily inject strings.<lang>.js — a script tag, not fetch, so it also works from file://
+function loadStringsFile(lang) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = `strings.${lang}.js`;
+    script.async = true;
+    script.setAttribute('data-i18n-lang', lang);
+    script.onload = () => resolve(I18N_LOADED[lang] || null);
+    script.onerror = () => reject(new Error(`Missing strings.${lang}.js`));
+    document.head.appendChild(script);
+  });
+}
+
+// localStorage can throw in private mode — never let a preference break the page
+function rememberLang(lang) {
+  try { localStorage.setItem(I18N_LANG_KEY, lang); } catch (e) { /* ignore */ }
+}
+function readRememberedLang() {
+  try { return localStorage.getItem(I18N_LANG_KEY); } catch (e) { return null; }
+}
+
+async function setLanguage(lang) {
+  if (!lang || lang === I18N.lang) return;
+
+  // Back to English: restore inline text, load nothing
+  if (lang === 'en') {
+    restoreI18nOriginals();
+    I18N.lang = 'en';
+    I18N.strings = null;
+    rememberLang('en');
+    document.documentElement.setAttribute('lang', 'en');
+    return;
+  }
+
+  // Nothing marked for translation yet — no-op, and no pointless request
+  if (!document.querySelector(I18N_SELECTOR)) return;
+
+  let strings = I18N_LOADED[lang];
+  if (!strings) {
+    try {
+      strings = await loadStringsFile(lang);
+    } catch (err) {
+      console.warn(`[i18n] ${err.message} — staying in ${I18N.lang}`);
+      return;
+    }
+  }
+  if (!strings) return;
+
+  cacheI18nOriginals();
+  I18N.strings = strings;
+  I18N.lang = lang;
+  applyI18n();
+  rememberLang(lang);
+  document.documentElement.setAttribute('lang', lang);
+}
+
+// Current translation for a key, falling back to the cached inline English
+function t(key) {
+  if (i18nHas(I18N.strings, key)) return I18N.strings[key];
+  if (i18nHas(I18N_EN, key)) return I18N_EN[key];
+  const el = document.querySelector(`[data-i18n="${key}"], [data-i18n-html="${key}"]`);
+  return el ? el.textContent : key;
+}
+
+// Re-apply a remembered non-English choice. English (the default) does nothing.
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = readRememberedLang();
+  if (saved && saved !== 'en') setLanguage(saved);
+});
+
+// Make i18n globally accessible (Bucket 6 toggle calls these from an inline onclick)
+window.setLanguage = setLanguage;
+window.registerStrings = registerStrings;
+window.t = t;
+window.I18N = I18N;
+
+
+// 1-Click Pledge Action — a personal commitment, nothing is counted or stored
 let hasSwachhPledged = false;
 
 function takeSwachhPledge() {
   if (hasSwachhPledged) return;
   hasSwachhPledged = true;
 
-  pledgesCount = (parseInt(localStorage.getItem('amr_pledges_count')) || pledgesCount || 142852) + 1;
-  localStorage.setItem('amr_pledges_count', pledgesCount);
-
-  // Re-render digit boxes with pop animation
-  renderSwachhDigitBoxes(pledgesCount);
-
-  // Update other counters on page
-  const totalElem = document.getElementById('total-pledges-val');
-  if (totalElem) totalElem.innerText = pledgesCount.toLocaleString();
-
-  const todayElem = document.getElementById('today-pledges-counter');
-  if (todayElem) todayElem.innerText = (4852 + (pledgesCount % 100)).toLocaleString();
-
-  // Disable button & show success notification
+  // Confirm the promise & show success notification
   const btn = document.getElementById('btn-swachh-pledge');
   const toast = document.getElementById('swachhSuccessToast');
 
@@ -75,56 +200,11 @@ function takeSwachhPledge() {
   if (toast) {
     toast.style.display = 'block';
   }
-
-  // Trigger pop animation on digit boxes
-  const boxes = document.querySelectorAll('.digit-box');
-  boxes.forEach(b => {
-    b.classList.add('pop-anim');
-    setTimeout(() => b.classList.remove('pop-anim'), 600);
-  });
 }
 
 // Make functions globally accessible
 window.takeSwachhPledge = takeSwachhPledge;
-window.renderSwachhDigitBoxes = renderSwachhDigitBoxes;
 
-
-
-// Filter configuration variables
-let selectedRegion = 'All';
-
-// Seasons Timeline Data (Swachh India Inspired)
-const SEASONS_DATA = {
-  1: [
-    { date: "September 25, 2024", img: "assets/amr_season1_launch.png", desc: "Launch of ACT4AMR national campaign with Campaign Ambassadors and leading medical experts." },
-    { date: "October 1, 2024", img: "assets/amr_season1_bus.png", desc: "ACT4AMR Express flagged off to travel across 10 states over 90 days to spread awareness on safe antibiotic usage." },
-
-    { date: "October 15, 2024", img: "assets/amr_season1_drawing.png", desc: "Celebrated Global Hand-Hygiene Day with a nationwide student painting and science poster competition." },
-    { date: "December 14, 2024", img: "assets/amr_season1_telethon.png", desc: "India's biggest 12-Hour AMR Telethon broadcast organized, raising pledge commitments and clinical outreach funds." }
-  ],
-  2: [
-    { date: "March 10, 2025", img: "assets/amr_season1_launch.png", desc: "Clinical Stewardship Alliance established across 150+ hospital networks for standardized prescription monitoring." },
-    { date: "June 5, 2025", img: "assets/amr_season1_bus.png", desc: "Mobile Diagnostic & Prescribing Awareness Units deployed in regional communities across 8 states." },
-    { date: "September 20, 2025", img: "assets/amr_season1_drawing.png", desc: "Youth Science Ambassador program launched in 500+ high schools nationwide." },
-    { date: "November 18, 2025", img: "assets/amr_season1_telethon.png", desc: "World Antimicrobial Resistance Awareness Week summit featuring over 10,000 medical pledges." }
-  ],
-  3: [
-    { date: "January 15, 2026", img: "assets/amr_season1_launch.png", desc: "Real-time Regional Distribution Registry & Interactive Dashboard public release." },
-    { date: "April 22, 2026", img: "assets/amr_season1_bus.png", desc: "Over 140,000 active citizens registered under responsible medicine pledges." },
-    { date: "August 5, 2026", img: "assets/amr_season1_drawing.png", desc: "National Public Health Alliance expansion reaching 230+ partner outpatient clinics." },
-    { date: "October 24, 2026", img: "assets/amr_season1_telethon.png", desc: "Season 3 Telethon & Policy Summit bringing together 50,000 new pledge commitments." }
-  ]
-};
-
-// Generate default data for Seasons 4 through 11
-for (let i = 4; i <= 11; i++) {
-  SEASONS_DATA[i] = [
-    { date: `Phase 1, Season ${i}`, img: "assets/amr_season1_launch.png", desc: `Season ${i} national stewardship launch & regional outpatient network expansion.` },
-    { date: `Phase 2, Season ${i}`, img: "assets/amr_season1_bus.png", desc: `Statewide AMR Express mobile health awareness campaign targeting community clinics.` },
-    { date: `Phase 3, Season ${i}`, img: "assets/amr_season1_drawing.png", desc: `School & Youth Ambassador hand-hygiene and antibiotic safety challenge.` },
-    { date: `Phase 4, Season ${i}`, img: "assets/amr_season1_telethon.png", desc: `Season ${i} Telethon broadcast & clinical prescribing policy summit.` }
-  ];
-}
 
 // Quiz Questions (8 Educational Questions)
 const QUIZ_QUESTIONS = [
@@ -217,220 +297,9 @@ let optionSelected = false;
 
 // DOM Load Setup
 document.addEventListener("DOMContentLoaded", () => {
-  initCounters();
   initQuiz();
-  renderSwachhDigitBoxes(pledgesCount);
 });
 
-
-// Increment counters page load
-function initCounters() {
-  const totElem = document.getElementById('total-pledges-val');
-  if (totElem) totElem.innerText = pledgesCount.toLocaleString();
-  const dlElem = document.getElementById('total-downloads-val');
-  if (dlElem) dlElem.innerText = iecDownloads.toLocaleString();
-  const todayElem = document.getElementById('today-pledges-counter');
-  if (todayElem) todayElem.innerText = (4852 + (pledgesCount % 100)).toLocaleString();
-
-  renderSwachhDigitBoxes(pledgesCount);
-}
-
-
-
-
-
-
-// Update Regional map UI elements
-function updateRegionStatsUI() {
-  const mapTot = document.getElementById('map-total-pledges');
-  if (mapTot) mapTot.innerText = pledgesCount.toLocaleString();
-  const mapN = document.getElementById('map-north-pledges');
-  if (mapN) mapN.innerText = regionPledges.North.toLocaleString();
-  const mapS = document.getElementById('map-south-pledges');
-  if (mapS) mapS.innerText = regionPledges.South.toLocaleString();
-  const mapE = document.getElementById('map-east-pledges');
-  if (mapE) mapE.innerText = regionPledges.East.toLocaleString();
-  const mapW = document.getElementById('map-west-pledges');
-  if (mapW) mapW.innerText = regionPledges.West.toLocaleString();
-  const mapC = document.getElementById('map-central-pledges');
-  if (mapC) mapC.innerText = regionPledges.Central.toLocaleString();
-}
-
-// Setup Map interaction hover classes
-function setupMapInteraction() {
-  const labels = document.querySelectorAll('.map-region-label');
-  labels.forEach(label => {
-    label.addEventListener('mouseover', () => {
-      const region = label.textContent.trim();
-      const path = document.getElementById(`map-${region}`);
-      if (path) path.classList.add('hover');
-    });
-    label.addEventListener('mouseout', () => {
-      const region = label.textContent.trim();
-      const path = document.getElementById(`map-${region}`);
-      if (path) path.classList.remove('hover');
-    });
-  });
-}
-
-// Interactive Map selection filter
-function selectMapRegion(regionName) {
-  selectedRegion = regionName;
-
-  const statItems = document.querySelectorAll('.region-stat-item');
-  statItems.forEach(item => item.classList.remove('active'));
-  const activeStat = document.getElementById(`stat-${regionName}`);
-  if (activeStat) activeStat.classList.add('active');
-
-  const paths = document.querySelectorAll('.map-region');
-  paths.forEach(p => p.classList.remove('active'));
-  if (regionName !== 'All') {
-    const activePath = document.getElementById(`map-${regionName}`);
-    if (activePath) activePath.classList.add('active');
-  }
-}
-
-
-// 1-Click Quick Pledge Action
-let hasPledged = false;
-function takeQuickPledge() {
-  if (hasPledged) return;
-  hasPledged = true;
-
-  pledgesCount += 1;
-  localStorage.setItem('amr_pledges_count', pledgesCount);
-
-  const regions = ["North", "South", "East", "West", "Central"];
-  const randomRegion = regions[Math.floor(Math.random() * regions.length)];
-  regionPledges[randomRegion] += 1;
-  localStorage.setItem('amr_region_pledges', JSON.stringify(regionPledges));
-
-  initCounters();
-  updateRegionStatsUI();
-
-  const btn = document.getElementById('btn-quick-pledge');
-  if (btn) {
-    btn.innerHTML = "✅ Pledge Confirmed!";
-    btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
-    btn.style.color = "#ffffff";
-    btn.style.boxShadow = "0 0 15px rgba(16, 185, 129, 0.4)";
-    btn.style.pointerEvents = "none";
-  }
-
-  const msg = document.getElementById('pledgeSuccessMsg');
-  if (msg) msg.style.display = 'block';
-}
-
-// Render Seasons Timeline Cards (Swachh India Inspired)
-function renderSeasonCards(seasonNum) {
-  const grid = document.getElementById('seasonsCardsGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-
-  const items = SEASONS_DATA[seasonNum] || SEASONS_DATA[1];
-  items.forEach(item => {
-    const card = document.createElement('div');
-    card.className = 'season-card-item';
-    card.innerHTML = `
-      <span class="season-card-date">${escapeHTML(item.date)}</span>
-      <div class="season-card-img-wrapper">
-        <img src="${item.img}" alt="${escapeHTML(item.desc)}" class="season-card-img">
-      </div>
-      <p class="season-card-desc">${escapeHTML(item.desc)}</p>
-    `;
-    grid.appendChild(card);
-  });
-}
-
-function switchSeason(seasonNum, btnElement) {
-  const tabs = document.querySelectorAll('.season-tab-btn');
-  tabs.forEach(t => t.classList.remove('active'));
-  if (btnElement) btnElement.classList.add('active');
-  renderSeasonCards(seasonNum);
-}
-
-// IEC Materials Filter & Search
-function filterCategory(category, btnElement) {
-  const tabs = document.querySelectorAll('.filter-btn');
-  tabs.forEach(t => t.classList.remove('active'));
-  if (btnElement) btnElement.classList.add('active');
-
-  const cards = document.querySelectorAll('.iec-card');
-  const query = document.getElementById('iecSearch').value.toLowerCase().trim();
-
-  cards.forEach(card => {
-    const cardCat = card.getAttribute('data-category');
-    const cardTitle = card.getAttribute('data-title').toLowerCase();
-
-    const matchesCategory = (category === 'all') || (cardCat === category);
-    const matchesSearch = query === '' || cardTitle.includes(query);
-
-    if (matchesCategory && matchesSearch) {
-      card.style.display = 'flex';
-    } else {
-      card.style.display = 'none';
-    }
-  });
-}
-
-function filterIEC() {
-  const activeTab = document.querySelector('.filter-btn.active');
-  const activeCategory = activeTab ? activeTab.getAttribute('onclick').match(/'([^']+)'/)[1] : 'all';
-  filterCategory(activeCategory, activeTab);
-}
-
-function triggerIECDownload(resourceTitle) {
-  iecDownloads += 1;
-  localStorage.setItem('amr_iec_downloads', iecDownloads);
-  initCounters();
-
-  const tempLink = document.createElement('a');
-  tempLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(`ACT4AMR Resource: ${resourceTitle}\nThank you for spreading awareness on Antimicrobial Resistance.`);
-
-  tempLink.download = `${resourceTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.txt`;
-  document.body.appendChild(tempLink);
-  tempLink.click();
-  document.body.removeChild(tempLink);
-}
-
-// Media Modal Functions
-function playMockMedia(type, title, desc) {
-  const modal = document.getElementById('mediaModal');
-  if (!modal) return;
-
-  const titleElem = document.getElementById('mediaModalTitle');
-  if (titleElem) titleElem.innerText = title;
-  const descElem = document.getElementById('mediaModalDesc');
-  if (descElem) descElem.innerText = desc;
-  const iconElem = document.getElementById('playerIconDisplay');
-  if (iconElem) iconElem.innerText = type === 'video' ? '🎬' : '🎧';
-
-  const anim = document.getElementById('mediaWaveAnim');
-  if (anim) anim.style.display = 'flex';
-
-  modal.classList.add('active');
-
-  const progressBar = document.getElementById('mediaProgressBar');
-  const mediaTime = document.getElementById('mediaTime');
-  let progress = 0;
-
-  if (window.mediaInterval) clearInterval(window.mediaInterval);
-  window.mediaInterval = setInterval(() => {
-    progress += 2;
-    if (progress > 100) progress = 0;
-    if (progressBar) progressBar.style.width = `${progress}%`;
-    const seconds = Math.floor((progress / 100) * 90);
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    if (mediaTime) mediaTime.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs} / 1:30`;
-  }, 200);
-}
-
-function closeMediaModal() {
-  const modal = document.getElementById('mediaModal');
-  if (modal) modal.classList.remove('active');
-  if (window.mediaInterval) clearInterval(window.mediaInterval);
-}
 
 
 // Quiz Functions
@@ -550,8 +419,6 @@ function showQuizResults() {
       "Return unused medicines to a pharmacy take-back point.",
       "Never share or self-prescribe antibiotics."
     ];
-    quizPassed = true;
-    localStorage.setItem('amr_quiz_passed', 'true');
   } else if (pct >= 0.5) {
     emoji = "🛡️";
     title = "AMR Aware";
@@ -561,8 +428,6 @@ function showQuizResults() {
       "Never flush medicines — use safe disposal instead.",
       "Ask your pharmacist about safe disposal."
     ];
-    quizPassed = true;
-    localStorage.setItem('amr_quiz_passed', 'true');
   } else {
     emoji = "🌱";
     title = "AMR Newcomer";
@@ -572,8 +437,6 @@ function showQuizResults() {
       "Only use antibiotics when a doctor prescribes them.",
       "Take leftover medicines to nearest health facility, never the bin or toilet."
     ];
-    quizPassed = false;
-    localStorage.setItem('amr_quiz_passed', 'false');
   }
 
   if (medal) medal.innerText = emoji;
@@ -612,16 +475,32 @@ function escapeHTML(str) {
 }
 
 // Poster Modal & Direct Download Handlers
+// assets/events/foo/1.jpg -> assets/web/events/foo/1.webp
+// The originals are 6000x4000 camera files up to 16 MB; the modal renders them a
+// few hundred px wide, so the lightbox shows the WebP and only the Download
+// button reaches for the full-resolution original.
+function webVersionOf(src) {
+  if (typeof src !== 'string' || !src.startsWith('assets/') || src.startsWith('assets/web/')) return src;
+  return 'assets/web/' + src.slice('assets/'.length).replace(/\.[^./]+$/, '.webp');
+}
+
 function openPosterModal(imgSrc, title, desc, hideDownload) {
   const modal = document.getElementById('posterModal');
   if (!modal) return;
-  document.getElementById('posterModalImg').src = imgSrc;
+
+  const img = document.getElementById('posterModalImg');
+  const webSrc = webVersionOf(imgSrc);
+  // If a WebP is ever missing, show the original rather than a broken image
+  img.onerror = webSrc === imgSrc ? null : function () { img.onerror = null; img.src = imgSrc; };
+  img.src = webSrc;
+
   document.getElementById('posterModalTitle').innerText = title;
   document.getElementById('posterModalDesc').innerText = desc;
   const dlBtn = document.getElementById('posterModalDownloadBtn');
   if (dlBtn) {
+    const ext = (imgSrc.match(/\.[^./]+$/) || ['.jpg'])[0];
     dlBtn.href = imgSrc;
-    dlBtn.setAttribute('download', title.replace(/[^a-zA-Z0-9]/g, '_') + '.jpg');
+    dlBtn.setAttribute('download', title.replace(/[^a-zA-Z0-9]/g, '_') + ext);
     dlBtn.style.display = hideDownload ? 'none' : 'flex';
   }
   modal.classList.add('active');
@@ -639,12 +518,6 @@ function triggerDirectDownload(fileUrl, fileName) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-
-  // Increment IEC Downloads metric
-  totalDownloadsCount += 1;
-  localStorage.setItem('amr_iec_downloads', totalDownloadsCount);
-  updateMetricsDisplay();
-  showToast('Standard A3 High-Res Poster download started!');
 }
 
 // Carousel Navigation and Auto-Slide Handler
@@ -687,7 +560,7 @@ function setCarouselSlide(carouselId, slideIndex) {
 
 // Auto-advance multi-image event carousels every 4.5 seconds
 setInterval(() => {
-  const carousels = ['carousel-national', 'carousel-stewardship', 'carousel-innovation', 'carousel-jury'];
+  const carousels = ['carousel-national', 'carousel-stewardship', 'carousel-innovation'];
   carousels.forEach(id => {
     moveCarousel(id, 1);
   });
