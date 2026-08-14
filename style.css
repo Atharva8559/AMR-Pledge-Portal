@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
-
 /* ═══════════════════════════════════════════════
    DESIGN TOKENS — derived from AMR campaign posters
    ═══════════════════════════════════════════════ */
@@ -51,9 +49,19 @@
   --border-default: var(--gray-200);
   --border-hover: var(--green-600);
 
-  /* Typography */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* Typography — system fonts only. No webfont bytes, no CDN, and no
+     render-blocking request before first paint.
+     Latin faces come first; the Devanagari families are only reached for glyphs
+     the Latin faces lack, which is what the Marathi toggle will depend on. */
+  --font-system:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    'Noto Sans Devanagari', 'Nirmala UI', 'Kohinoor Devanagari', 'Devanagari Sangam MN',
+    Arial, sans-serif;
+
+  /* Kept as two names: Bucket 2 rebuilds hierarchy through weight, size and
+     tracking rather than a contrasting typeface. */
+  --font-display: var(--font-system);
+  --font-body: var(--font-system);
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
