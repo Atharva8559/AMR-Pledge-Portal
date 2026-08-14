@@ -587,24 +587,180 @@ setInterval(() => {
   });
 })();
 
-// ─── Intersection Observer Scroll-Reveal Animations ───
+// ─── Scroll-Reveal Engine ───
+// ONE shared IntersectionObserver drives every .reveal element. Each element
+// fires exactly once and is then unobserved — nothing re-animates on scroll
+// back and no observer is left running.
+//
+// A container marked [data-reveal-children] staggers its DIRECT children:
+//   <div class="reveal" data-reveal-children> ... </div>
+// Children get transition-delay in 60ms steps, capped at 6 steps (360ms), so a
+// long list never keeps the reader waiting.
+//
+// This file only ever toggles the .visible class and writes transition-delay.
+// The animated properties themselves (opacity/transform) belong to style.css.
+//
+// SAFETY: content must never end up permanently hidden. If the user prefers
+// reduced motion, or IntersectionObserver is missing/broken (old Android
+// WebView, Opera Mini), every .reveal is marked visible immediately and no
+// observer is created at all.
 (function () {
-  const reveals = document.querySelectorAll('.reveal');
-  if (!reveals.length) return;
+  const REVEAL_CLASS = 'reveal';
+  const REVEAL_SELECTOR = '.reveal';
+  const VISIBLE_CLASS = 'visible';
+  const CHILDREN_ATTR = 'data-reveal-children';
+  const STAGGER_STEP_MS = 60;    // gap between siblings
+  const STAGGER_MAX_STEPS = 6;   // cap: 6 x 60ms = 360ms
+  const DELAY_CLEANUP_MS = 900;  // strip the inline delay once the reveal is done
 
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  const OBSERVER_OPTIONS = {
+    // Low threshold so a section taller than the viewport still fires, and a
+    // negative bottom margin so the element is properly in view before it
+    // animates — nothing is ever caught mid-fade at the screen edge.
+    threshold: 0.01,
+    rootMargin: '0px 0px -10% 0px'
+  };
+
+  const tracked = new WeakSet(); // elements already handed to the observer
+  let observer = null;
+
+  const motionQuery = (function () {
+    if (!window.matchMedia) return null;
+    try {
+      return window.matchMedia('(prefers-reduced-motion: reduce)');
+    } catch (err) {
+      return null;
+    }
+  })();
+
+  function prefersReducedMotion() {
+    return !!(motionQuery && motionQuery.matches);
+  }
+
+  // Stagger the direct children of a [data-reveal-children] container.
+  // stepMs of 0 means "no stagger" (reduced motion / fallback path).
+  function staggerChildren(container, stepMs) {
+    if (!container.hasAttribute(CHILDREN_ATTR)) return;
+
+    const children = container.children;
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i];
+      const delay = stepMs ? Math.min(i, STAGGER_MAX_STEPS) * stepMs : 0;
+
+      if (delay > 0) {
+        child.style.transitionDelay = delay + 'ms';
+        // The inline delay would otherwise also hold up hover/press
+        // transitions on this child forever, so drop it once the reveal ends.
+        window.setTimeout(function () {
+          child.style.transitionDelay = '';
+        }, delay + DELAY_CLEANUP_MS);
+      } else {
+        child.style.transitionDelay = '';
       }
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -40px 0px'
-  });
 
-  reveals.forEach(function (el) {
-    observer.observe(el);
-  });
+      // A child that is itself a .reveal rides the parent's stagger rather
+      // than waiting for its own intersection.
+      if (child.classList.contains(REVEAL_CLASS)) {
+        if (observer) observer.unobserve(child);
+        tracked.add(child);
+        child.classList.add(VISIBLE_CLASS);
+      }
+    }
+  }
+
+  function revealElement(el, stepMs) {
+    // Already revealed: don't re-stagger it. The stepMs === 0 path is allowed
+    // through so the reduced-motion / fallback sweep can still strip delays.
+    if (stepMs && el.classList.contains(VISIBLE_CLASS)) return;
+    staggerChildren(el, stepMs);
+    el.classList.add(VISIBLE_CLASS);
+  }
+
+  // Everything visible, right now, with no animation and no delays.
+  function revealAll() {
+    const reveals = document.querySelectorAll(REVEAL_SELECTOR);
+    for (let i = 0; i < reveals.length; i++) {
+      revealElement(reveals[i], 0);
+    }
+  }
+
+  function onIntersect(entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      if (observer) observer.unobserve(entry.target); // fire once, then let go
+      revealElement(entry.target, STAGGER_STEP_MS);
+    });
+  }
+
+  // Safe to call again after new .reveal markup is added — already-tracked and
+  // already-visible elements are skipped.
+  function initScrollReveal() {
+    const reveals = document.querySelectorAll(REVEAL_SELECTOR);
+    if (!reveals.length) return;
+
+    // HARD REQUIREMENT: reduced motion means no animation and no observer.
+    if (prefersReducedMotion()) {
+      revealAll();
+      return;
+    }
+
+    if (typeof window.IntersectionObserver !== 'function') {
+      revealAll();
+      return;
+    }
+
+    if (!observer) {
+      try {
+        observer = new window.IntersectionObserver(onIntersect, OBSERVER_OPTIONS);
+      } catch (err) {
+        observer = null;
+        revealAll();
+        return;
+      }
+    }
+
+    for (let i = 0; i < reveals.length; i++) {
+      const el = reveals[i];
+      if (tracked.has(el) || el.classList.contains(VISIBLE_CLASS)) continue;
+      tracked.add(el);
+      observer.observe(el);
+    }
+  }
+
+  function start() {
+    try {
+      initScrollReveal();
+    } catch (err) {
+      revealAll(); // never leave the page half-blank
+    }
+  }
+
+  // If the preference flips to "reduce" mid-session, stop observing and show
+  // the rest of the page straight away.
+  function onMotionPreferenceChange(event) {
+    if (!event.matches) return;
+    if (observer) {
+      observer.disconnect();
+      observer = null;
+    }
+    revealAll();
+  }
+
+  if (motionQuery) {
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener('change', onMotionPreferenceChange);
+    } else if (motionQuery.addListener) {
+      motionQuery.addListener(onMotionPreferenceChange); // older WebViews
+    }
+  }
+
+  // Exposed so later sections injected into the page can be picked up.
+  window.initScrollReveal = start;
+
+  start();
+  // Belt and braces: if this file is ever moved out of the end of <body>,
+  // re-scan once the DOM is complete. Idempotent.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  }
 })();

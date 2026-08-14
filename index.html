@@ -13,13 +13,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="light-theme">
+<body>
 
   <!-- Navigation Bar -->
   <header>
     <div class="container nav-container">
       <a href="#" class="logo">
-        <div class="logo-icon">A</div>
+        <div class="logo-icon" aria-hidden="true">A</div>
         <div class="logo-text">ACT<span>4AMR</span></div>
       </a>
 
@@ -47,7 +47,7 @@
         <div class="bubble bubble-5"></div>
 
         <div class="pledge-card-content">
-          <span class="pledge-hashtag" data-i18n="pledge.hashtag"># योग्य विल्हेवाट, AMR वर मात!</span>
+          <span class="pledge-hashtag" lang="mr" data-i18n="pledge.hashtag"># योग्य विल्हेवाट, AMR वर मात!</span>
           <h2 class="pledge-main-title" data-i18n="pledge.title">WE INVITE EVERY CITIZEN TO MAKE A PROMISE</h2>
           <p class="pledge-main-desc" data-i18n="pledge.desc">
             Not just a hashtag — a personal commitment to safeguard antibiotics, practice safe medicine disposal, and
@@ -63,7 +63,7 @@
 
           <!-- 1-Click Pledge Button -->
           <div class="pledge-btn-wrapper">
-            <button onclick="takeSwachhPledge()" class="btn-swachh-pledge" id="btn-swachh-pledge">
+            <button type="button" onclick="takeSwachhPledge()" class="btn-swachh-pledge" id="btn-swachh-pledge">
               <span class="btn-text" data-i18n="pledge.cta">Pledge Now</span>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -73,7 +73,7 @@
           </div>
 
           <!-- Success Notification -->
-          <div class="swachh-success-toast" id="swachhSuccessToast" style="display: none;"
+          <div class="swachh-success-toast" id="swachhSuccessToast" role="status" style="display: none;"
             data-i18n-html="pledge.toast.success">
             <strong>Pledge taken.</strong> Finish every course your doctor prescribes, and take leftover or expired
             medicines to your nearest PHC or sub-centre.
@@ -87,11 +87,11 @@
   </section>
 
   <!-- Hero Section -->
-  <section class="hero reveal" id="home">
-    <div class="container hero-grid">
-      <div class="hero-content">
+  <section class="hero" id="home">
+    <div class="container hero-grid" data-reveal-children>
+      <div class="hero-content reveal">
         <div class="hero-tagline" data-i18n="hero.tagline">
-          <div class="pulse-dot"></div>
+          <div class="pulse-dot" aria-hidden="true"></div>
           # योग्य विल्हेवाट, AMR वर मात! | Global Awareness Initiative
         </div>
         <h1 data-i18n-html="hero.title">Defeating the Silent Pandemic: <span>Antimicrobial Resistance</span></h1>
@@ -104,13 +104,13 @@
           <a href="#about" class="btn-secondary" data-i18n="hero.cta.learn">Learn About AMR</a>
         </div>
       </div>
-      <div class="hero-image-container">
+      <div class="hero-image-container reveal">
         <div class="hero-image-wrapper">
           <img src="assets/web/amr_hero_banner.webp" alt="AMR Illustration DNA and capsules" width="1024" height="1024"
             loading="lazy" decoding="async" data-i18n-attr="alt:hero.image.alt">
         </div>
         <div class="floating-badge">
-          <div class="badge-icon">🛡️</div>
+          <div class="badge-icon" aria-hidden="true">🛡️</div>
           <div>
             <h4 data-i18n="hero.badge.title">Finish the Course</h4>
             <p data-i18n="hero.badge.label">Then drop leftovers at your PHC</p>
@@ -121,9 +121,9 @@
   </section>
 
   <!-- About AMR Section (Translated 3 Questions from Official Campaign Poster) -->
-  <section class="about reveal" id="about">
+  <section class="about" id="about">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-subtitle" data-i18n="about.subtitle">Understanding The Threat</span>
         <h2 class="section-title" data-i18n="about.title">Not Feeling Better Quickly Despite Taking Medicines?</h2>
         <p class="section-desc" data-i18n-html="about.desc">The reason could be <strong>Antimicrobial Resistance
@@ -131,10 +131,10 @@
           facts through these 3 essential campaign questions:</p>
       </div>
 
-      <div class="amr-grid">
+      <div class="amr-grid" data-reveal-children>
         <!-- Card 1: What is AMR? -->
-        <div class="glass-card fact-card">
-          <div class="poster-q-number">1</div>
+        <div class="glass-card fact-card reveal">
+          <div class="poster-q-number" aria-hidden="true">1</div>
           <h3 data-i18n="about.card1.title">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -157,8 +157,8 @@
         </div>
 
         <!-- Card 2: Why is AMR Dangerous for Our Health? -->
-        <div class="glass-card fact-card cyan">
-          <div class="poster-q-number cyan">2</div>
+        <div class="glass-card fact-card cyan reveal">
+          <div class="poster-q-number cyan" aria-hidden="true">2</div>
           <h3 data-i18n="about.card2.title">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -169,23 +169,23 @@
             Why is AMR Dangerous?
           </h3>
           <ul class="poster-points-list">
-            <li><span>💊</span>
+            <li><span aria-hidden="true">💊</span>
               <div data-i18n-html="about.card2.point1"><strong>Medicines Become Ineffective:</strong> Standard drugs
                 fail to cure common infections.</div>
             </li>
-            <li><span>⏳</span>
+            <li><span aria-hidden="true">⏳</span>
               <div data-i18n-html="about.card2.point2"><strong>Prolonged Illness:</strong> Infections take much longer
                 to recover.</div>
             </li>
-            <li><span>🏥</span>
+            <li><span aria-hidden="true">🏥</span>
               <div data-i18n-html="about.card2.point3"><strong>Complex Treatments:</strong> Medical care &amp;
                 procedures become high-risk.</div>
             </li>
-            <li><span>💰</span>
+            <li><span aria-hidden="true">💰</span>
               <div data-i18n-html="about.card2.point4"><strong>Rising Costs:</strong> Treatment &amp; hospital expenses
                 increase.</div>
             </li>
-            <li><span>🚨</span>
+            <li><span aria-hidden="true">🚨</span>
               <div data-i18n-html="about.card2.point5"><strong>Severe Risk:</strong> Risk of severe complications &amp;
                 mortality rises.</div>
             </li>
@@ -193,8 +193,8 @@
         </div>
 
         <!-- Card 3: What Can We Do to Prevent AMR? -->
-        <div class="glass-card fact-card">
-          <div class="poster-q-number">3</div>
+        <div class="glass-card fact-card reveal">
+          <div class="poster-q-number" aria-hidden="true">3</div>
           <h3 data-i18n="about.card3.title">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -204,16 +204,16 @@
             What Can We Do to Prevent AMR?
           </h3>
           <ul class="poster-points-list">
-            <li><span>🩺</span>
+            <li><span aria-hidden="true">🩺</span>
               <div data-i18n-html="about.card3.point1"><strong>Doctor's Advice Only:</strong> Take antibiotics strictly
                 when prescribed by a certified
                 doctor.</div>
             </li>
-            <li><span>📅</span>
+            <li><span aria-hidden="true">📅</span>
               <div data-i18n-html="about.card3.point2"><strong>Complete Full Course:</strong> Always finish the complete
                 treatment course prescribed.</div>
             </li>
-            <li><span>🗑️</span>
+            <li><span aria-hidden="true">🗑️</span>
               <div data-i18n-html="about.card3.point3"><strong>Safe Medicine Drop-Off:</strong> Deposit leftover or
                 expired medicines into designated
                 collection boxes or nearby health centers. Safe disposal protects our environment and stops AMR!</div>
@@ -230,9 +230,9 @@
 
 
   <!-- IEC Materials Section -->
-  <section class="iec-section reveal" id="iec">
+  <section class="iec-section" id="iec">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-subtitle" data-i18n="iec.subtitle">IEC Center</span>
         <h2 class="section-title" data-i18n="iec.title">Information, Education, & Communication Materials</h2>
         <p class="section-desc" data-i18n="iec.desc">Explore official public health posters, guidelines, and broadcast
@@ -241,10 +241,10 @@
       </div>
 
       <!-- Horizontal Grid of Compact Cards (Clean Layout, Search & Tabs Removed) -->
-      <div class="iec-grid horizontal-cards-grid" id="iecGrid">
+      <div class="iec-grid horizontal-cards-grid" id="iecGrid" data-reveal-children>
         <!-- Official Poster 1 -->
-        <div class="glass-card iec-card iec-poster-card" data-category="flyer">
-          <div class="iec-thumbnail poster-img-thumb"
+        <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
+          <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster1.modal.title,data-modal-desc:iec.poster1.modal.desc"
             onclick="openPosterModal('assets/A3_Posters_page-0001.jpg', 'Do You Have Leftover or Expired Medicines at Home?', 'Official Public Health awareness poster detailing medicine collection boxes for safe antibiotic disposal.')">
             <img src="assets/web/A3_Posters_page-0001.webp" alt="Medicine Disposal Box Poster" class="poster-card-img"
@@ -254,10 +254,10 @@
             </div>
           </div>
           <div class="iec-info">
-            <h4 class="iec-title" data-i18n="iec.poster1.title">Do You Have Leftover or Expired Medicines at Home?</h4>
+            <h3 class="iec-title" data-i18n="iec.poster1.title">Do You Have Leftover or Expired Medicines at Home?</h3>
           </div>
           <div class="iec-actions">
-            <button class="iec-download-btn" data-i18n="common.download"
+            <button type="button" class="iec-download-btn" data-i18n="common.download"
               onclick="triggerDirectDownload('assets/A3_Posters_page-0001.jpg', 'AMR_Medicine_Disposal_Box_Poster.jpg')">
               Download
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -271,8 +271,8 @@
         </div>
 
         <!-- Official Poster 2 -->
-        <div class="glass-card iec-card iec-poster-card" data-category="flyer">
-          <div class="iec-thumbnail poster-img-thumb"
+        <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
+          <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster2.modal.title,data-modal-desc:iec.poster2.modal.desc"
             onclick="openPosterModal('assets/A3_Posters_page-0002.jpg', 'Let\'s Dispose of Antibiotics Safely & Defeat AMR!', 'Official poster illustrating green collection box drop-offs for expired medicines.')">
             <img src="assets/web/A3_Posters_page-0002.webp" alt="Safe Disposal Poster" class="poster-card-img"
@@ -282,11 +282,11 @@
             </div>
           </div>
           <div class="iec-info">
-            <h4 class="iec-title" data-i18n="iec.poster2.title">Let's Dispose of Antibiotics Safely &amp; Defeat AMR!
-            </h4>
+            <h3 class="iec-title" data-i18n="iec.poster2.title">Let's Dispose of Antibiotics Safely &amp; Defeat AMR!
+            </h3>
           </div>
           <div class="iec-actions">
-            <button class="iec-download-btn" data-i18n="common.download"
+            <button type="button" class="iec-download-btn" data-i18n="common.download"
               onclick="triggerDirectDownload('assets/A3_Posters_page-0002.jpg', 'AMR_Safe_Disposal_Guide_Poster.jpg')">
               Download
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -300,8 +300,8 @@
         </div>
 
         <!-- Official Poster 3 -->
-        <div class="glass-card iec-card iec-poster-card" data-category="flyer">
-          <div class="iec-thumbnail poster-img-thumb"
+        <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
+          <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster3.modal.title,data-modal-desc:iec.poster3.modal.desc"
             onclick="openPosterModal('assets/A3_Posters_page-0003.jpg', 'Not Feeling Better Quickly? (AMR 3 Key Questions)', 'Comprehensive 3-question visual guide explaining Antimicrobial Resistance causes and prevention.')">
             <img src="assets/web/A3_Posters_page-0003.webp" alt="AMR 3 Questions Poster" class="poster-card-img"
@@ -311,10 +311,10 @@
             </div>
           </div>
           <div class="iec-info">
-            <h4 class="iec-title" data-i18n="iec.poster3.title">Not Feeling Better Quickly? (AMR 3 Key Questions)</h4>
+            <h3 class="iec-title" data-i18n="iec.poster3.title">Not Feeling Better Quickly? (AMR 3 Key Questions)</h3>
           </div>
           <div class="iec-actions">
-            <button class="iec-download-btn" data-i18n="common.download"
+            <button type="button" class="iec-download-btn" data-i18n="common.download"
               onclick="triggerDirectDownload('assets/A3_Posters_page-0003.jpg', 'AMR_3_Questions_Awareness_Chart.jpg')">
               Download
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -328,8 +328,8 @@
         </div>
 
         <!-- Official Poster 4 -->
-        <div class="glass-card iec-card iec-poster-card" data-category="flyer">
-          <div class="iec-thumbnail poster-img-thumb"
+        <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
+          <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster4.modal.title,data-modal-desc:iec.poster4.modal.desc"
             onclick="openPosterModal('assets/A3_Posters_page-0004.jpg', 'What Can We Do to Prevent AMR?', 'Official guidelines poster outlining doctor-advised full antibiotic courses and safe disposal.')">
             <img src="assets/web/A3_Posters_page-0004.webp" alt="AMR Prevention Poster" class="poster-card-img"
@@ -339,10 +339,10 @@
             </div>
           </div>
           <div class="iec-info">
-            <h4 class="iec-title" data-i18n="iec.poster4.title">What Can We Do to Prevent AMR?</h4>
+            <h3 class="iec-title" data-i18n="iec.poster4.title">What Can We Do to Prevent AMR?</h3>
           </div>
           <div class="iec-actions">
-            <button class="iec-download-btn" data-i18n="common.download"
+            <button type="button" class="iec-download-btn" data-i18n="common.download"
               onclick="triggerDirectDownload('assets/A3_Posters_page-0004.jpg', 'AMR_Action_Guide_Poster.jpg')">
               Download
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -357,7 +357,7 @@
       </div>
 
       <!-- Centered Dindi Song Video — click-to-load facade: no video bytes load until the user taps -->
-      <div class="centered-video-section">
+      <div class="centered-video-section reveal">
         <div class="glass-card iec-card dindi-video-card">
           <div class="embedded-video-box" id="dindiVideoBox">
             <button type="button" class="dindi-video-facade"
@@ -384,9 +384,9 @@
               allowfullscreen></iframe></template>
           <div class="iec-info" style="margin-top: 1.25rem;">
             <span class="video-pill-badge" data-i18n="iec.video.badge">🎬 Official Campaign Video</span>
-            <h4 class="iec-title" style="margin-top: 0.5rem; font-size: 1.35rem;" data-i18n="iec.video.title">Official
+            <h3 class="iec-title" style="margin-top: 0.5rem; font-size: 1.35rem;" data-i18n="iec.video.title">Official
               Dindi Song AMR Awareness
-              Video</h4>
+              Video</h3>
             <p class="iec-desc" data-i18n="iec.video.desc">Playable campaign video featuring the official public health
               awareness Dindi Song
               promoting safe medicine collection box drop-offs.</p>
@@ -413,9 +413,9 @@
 
 
   <!-- Interactive Quiz Section -->
-  <section class="quiz-section reveal" id="quiz">
+  <section class="quiz-section" id="quiz">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-subtitle" data-i18n="quiz.subtitle">Interactive Learning</span>
         <h2 class="section-title" data-i18n="quiz.title">Test Your AMR Knowledge</h2>
         <p class="section-desc" data-i18n="quiz.desc">Test your know-how on antibiotics & safe disposal — and find out
@@ -423,7 +423,7 @@
           across 8 quick questions!</p>
       </div>
 
-      <div class="quiz-container">
+      <div class="quiz-container reveal">
         <div class="glass-card quiz-card" id="quizContainer">
           <div class="quiz-meta">
             <span data-i18n-html="quiz.meta.question_progress">Question <span id="currentQuestionNum">1</span> of <span
@@ -440,8 +440,8 @@
             <div class="quiz-options" id="optionsBox">
               <!-- Rendered dynamically -->
             </div>
-            <div class="quiz-feedback" id="quizFeedback"></div>
-            <button onclick="nextQuestion()" class="btn-primary quiz-nav-btn" id="quizNavBtn"
+            <div class="quiz-feedback" id="quizFeedback" role="status"></div>
+            <button type="button" onclick="nextQuestion()" class="btn-primary quiz-nav-btn" id="quizNavBtn"
               data-i18n="quiz.nav.next">
               Next Question
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -453,13 +453,13 @@
 
           <!-- Quiz Completion Results -->
           <div class="quiz-results" id="quizResults">
-            <div class="quiz-medal" id="quizMedal">🏆</div>
+            <div class="quiz-medal" id="quizMedal" aria-hidden="true">🏆</div>
             <h3 class="glow-text-cyan" data-i18n="quiz.results.heading">Quiz Completed!</h3>
             <div class="quiz-score-circle" id="scoreCircle">8/8<span data-i18n="quiz.results.score_label">Score</span>
             </div>
             <p id="quizResultsMessage" data-i18n="quiz.results.default_message">Great job!</p>
             <div class="quiz-tips-box" id="quizTipsBox"></div>
-            <button onclick="restartQuiz()" class="btn-secondary" style="margin-top: 1.5rem;"
+            <button type="button" onclick="restartQuiz()" class="btn-secondary" style="margin-top: 1.5rem;"
               data-i18n="quiz.results.retake">Retake Quiz</button>
           </div>
         </div>
@@ -469,9 +469,9 @@
 
 
   <!-- Carousel-based Vertical Event Timeline Roadmap Section (Kept at the END) -->
-  <section class="roadmap-timeline-section reveal" id="milestones">
+  <section class="roadmap-timeline-section" id="milestones">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <span class="section-subtitle" data-i18n="roadmap.subtitle">Project Milestones</span>
         <h2 class="section-title" data-i18n="roadmap.title">Campaign Event Roadmap</h2>
         <p class="section-desc" data-i18n="roadmap.desc">Interactive chronological timeline documenting key
@@ -480,15 +480,15 @@
         <div class="roadmap-header-badge" data-i18n="roadmap.badge.date_range">JAN 2026 – MAY 2026</div>
       </div>
 
-      <div class="vertical-roadmap-wrapper">
-        <div class="vertical-roadmap-track"></div>
+      <div class="vertical-roadmap-wrapper" data-reveal-children>
+        <div class="vertical-roadmap-track" aria-hidden="true"></div>
 
         <!-- Event 1: Jan 2026 - National Consultative Meeting -->
-        <div class="roadmap-event-item">
+        <div class="roadmap-event-item reveal">
           <div class="event-left-col">
             <span class="event-date-pill" data-i18n="roadmap.event1.date">Jan 2026</span>
           </div>
-          <div class="event-node">
+          <div class="event-node" aria-hidden="true">
             <div class="check-node">✓</div>
           </div>
           <div class="event-right-card glass-card">
@@ -514,12 +514,18 @@
                     data-i18n-attr="alt:roadmap.event1.image3.alt,data-modal-title:roadmap.event1.modal.title,data-modal-desc:roadmap.event1.modal.desc"
                     onclick="openPosterModal('assets/events/national_consultation/3.jpg', 'National Consultative Meeting', 'Key stakeholders deliberating on systemic issues.', true)">
                 </div>
-                <button class="carousel-nav prev" onclick="moveCarousel('carousel-national', -1)">&lsaquo;</button>
-                <button class="carousel-nav next" onclick="moveCarousel('carousel-national', 1)">&rsaquo;</button>
+                <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-national', -1)"
+                  aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
+                <button type="button" class="carousel-nav next" onclick="moveCarousel('carousel-national', 1)"
+                  aria-label="Next image" data-i18n-attr="aria-label:common.carousel.next">&rsaquo;</button>
                 <div class="carousel-dots">
-                  <span class="dot active" onclick="setCarouselSlide('carousel-national', 0)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-national', 1)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-national', 2)"></span>
+                  <button type="button" class="dot active" onclick="setCarouselSlide('carousel-national', 0)"
+                    aria-label="Go to slide 1" aria-current="true"
+                    data-i18n-attr="aria-label:common.carousel.slide_1"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-national', 1)"
+                    aria-label="Go to slide 2" data-i18n-attr="aria-label:common.carousel.slide_2"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-national', 2)"
+                    aria-label="Go to slide 3" data-i18n-attr="aria-label:common.carousel.slide_3"></button>
                 </div>
               </div>
             </div>
@@ -527,11 +533,11 @@
         </div>
 
         <!-- Event 2: Mar 2026 - KAP Study Completed -->
-        <div class="roadmap-event-item">
+        <div class="roadmap-event-item reveal">
           <div class="event-left-col">
             <span class="event-date-pill" data-i18n="roadmap.event2.date">Mar 2026</span>
           </div>
-          <div class="event-node">
+          <div class="event-node" aria-hidden="true">
             <div class="check-node">✓</div>
           </div>
           <div class="event-right-card glass-card">
@@ -555,11 +561,11 @@
         </div>
 
         <!-- Event 3: Mar 2026 - State-level Consultative Meeting -->
-        <div class="roadmap-event-item">
+        <div class="roadmap-event-item reveal">
           <div class="event-left-col">
             <span class="event-date-pill" data-i18n="roadmap.event3.date">Mar 2026</span>
           </div>
-          <div class="event-node">
+          <div class="event-node" aria-hidden="true">
             <div class="check-node">✓</div>
           </div>
           <div class="event-right-card glass-card">
@@ -582,11 +588,16 @@
                     data-i18n-attr="alt:roadmap.event3.image2.alt,data-modal-title:roadmap.event3.modal2.title,data-modal-desc:roadmap.event3.modal2.desc"
                     onclick="openPosterModal('assets/events/report_dissemination/1.jpeg', 'National Consultative Report Dissemination', 'Report formally presented to DHS Maharashtra and shared with all stakeholders.', true)">
                 </div>
-                <button class="carousel-nav prev" onclick="moveCarousel('carousel-state-consult', -1)">&lsaquo;</button>
-                <button class="carousel-nav next" onclick="moveCarousel('carousel-state-consult', 1)">&rsaquo;</button>
+                <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-state-consult', -1)"
+                  aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
+                <button type="button" class="carousel-nav next" onclick="moveCarousel('carousel-state-consult', 1)"
+                  aria-label="Next image" data-i18n-attr="aria-label:common.carousel.next">&rsaquo;</button>
                 <div class="carousel-dots">
-                  <span class="dot active" onclick="setCarouselSlide('carousel-state-consult', 0)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-state-consult', 1)"></span>
+                  <button type="button" class="dot active" onclick="setCarouselSlide('carousel-state-consult', 0)"
+                    aria-label="Go to slide 1" aria-current="true"
+                    data-i18n-attr="aria-label:common.carousel.slide_1"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-state-consult', 1)"
+                    aria-label="Go to slide 2" data-i18n-attr="aria-label:common.carousel.slide_2"></button>
                 </div>
               </div>
             </div>
@@ -594,11 +605,11 @@
         </div>
 
         <!-- Event 4: Mar 2026 - Statewide Antimicrobial Stewardship (AMS) Workshops -->
-        <div class="roadmap-event-item">
+        <div class="roadmap-event-item reveal">
           <div class="event-left-col">
             <span class="event-date-pill" data-i18n="roadmap.event4.date">Mar 2026</span>
           </div>
-          <div class="event-node">
+          <div class="event-node" aria-hidden="true">
             <div class="check-node">✓</div>
           </div>
           <div class="event-right-card glass-card">
@@ -625,12 +636,18 @@
                     data-i18n-attr="alt:roadmap.event4.image3.alt,data-modal-title:roadmap.event4.modal.title,data-modal-desc:roadmap.event4.modal.desc"
                     onclick="openPosterModal('assets/events/state_stewardship/3.jpg', 'Statewide Antimicrobial Stewardship', 'Sensitizing health actors on AMS practices.', true)">
                 </div>
-                <button class="carousel-nav prev" onclick="moveCarousel('carousel-stewardship', -1)">&lsaquo;</button>
-                <button class="carousel-nav next" onclick="moveCarousel('carousel-stewardship', 1)">&rsaquo;</button>
+                <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-stewardship', -1)"
+                  aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
+                <button type="button" class="carousel-nav next" onclick="moveCarousel('carousel-stewardship', 1)"
+                  aria-label="Next image" data-i18n-attr="aria-label:common.carousel.next">&rsaquo;</button>
                 <div class="carousel-dots">
-                  <span class="dot active" onclick="setCarouselSlide('carousel-stewardship', 0)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-stewardship', 1)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-stewardship', 2)"></span>
+                  <button type="button" class="dot active" onclick="setCarouselSlide('carousel-stewardship', 0)"
+                    aria-label="Go to slide 1" aria-current="true"
+                    data-i18n-attr="aria-label:common.carousel.slide_1"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-stewardship', 1)"
+                    aria-label="Go to slide 2" data-i18n-attr="aria-label:common.carousel.slide_2"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-stewardship', 2)"
+                    aria-label="Go to slide 3" data-i18n-attr="aria-label:common.carousel.slide_3"></button>
                 </div>
               </div>
             </div>
@@ -638,11 +655,11 @@
         </div>
 
         <!-- Event 5: April-May 2026 - Innovation Challenge Launched & Jury Round Completed -->
-        <div class="roadmap-event-item">
+        <div class="roadmap-event-item reveal">
           <div class="event-left-col">
             <span class="event-date-pill" data-i18n="roadmap.event5.date">May 2026</span>
           </div>
-          <div class="event-node">
+          <div class="event-node" aria-hidden="true">
             <div class="check-node">✓</div>
           </div>
           <div class="event-right-card glass-card">
@@ -673,13 +690,20 @@
                     data-i18n-attr="alt:roadmap.event5.image4.alt,data-modal-title:roadmap.event5.modal.title,data-modal-desc:roadmap.event5.modal.desc4"
                     onclick="openPosterModal('assets/events/innovation_challenge/4.jpg', 'Innovation Challenge & Jury Round', '2 digital & 1 social innovation selected.', true)">
                 </div>
-                <button class="carousel-nav prev" onclick="moveCarousel('carousel-innovation', -1)">&lsaquo;</button>
-                <button class="carousel-nav next" onclick="moveCarousel('carousel-innovation', 1)">&rsaquo;</button>
+                <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-innovation', -1)"
+                  aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
+                <button type="button" class="carousel-nav next" onclick="moveCarousel('carousel-innovation', 1)"
+                  aria-label="Next image" data-i18n-attr="aria-label:common.carousel.next">&rsaquo;</button>
                 <div class="carousel-dots">
-                  <span class="dot active" onclick="setCarouselSlide('carousel-innovation', 0)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-innovation', 1)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-innovation', 2)"></span>
-                  <span class="dot" onclick="setCarouselSlide('carousel-innovation', 3)"></span>
+                  <button type="button" class="dot active" onclick="setCarouselSlide('carousel-innovation', 0)"
+                    aria-label="Go to slide 1" aria-current="true"
+                    data-i18n-attr="aria-label:common.carousel.slide_1"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-innovation', 1)"
+                    aria-label="Go to slide 2" data-i18n-attr="aria-label:common.carousel.slide_2"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-innovation', 2)"
+                    aria-label="Go to slide 3" data-i18n-attr="aria-label:common.carousel.slide_3"></button>
+                  <button type="button" class="dot" onclick="setCarouselSlide('carousel-innovation', 3)"
+                    aria-label="Go to slide 4" data-i18n-attr="aria-label:common.carousel.slide_4"></button>
                 </div>
               </div>
             </div>
@@ -694,29 +718,29 @@
   <!-- Official Campaign Partners Section (Bottom of Page) -->
   <section class="partners-banner-bottom">
     <div class="container">
-      <span class="partners-title" data-i18n="partners.title">OFFICIAL PUBLIC HEALTH & RESEARCH PARTNERS</span>
-      <div class="partners-logos-grid">
-        <div class="partner-logo-card" title="सार्वजनिक आरोग्य विभाग महाराष्ट्र शासन">
+      <span class="partners-title reveal" data-i18n="partners.title">OFFICIAL PUBLIC HEALTH & RESEARCH PARTNERS</span>
+      <div class="partners-logos-grid" data-reveal-children>
+        <div class="partner-logo-card reveal" lang="mr" title="सार्वजनिक आरोग्य विभाग महाराष्ट्र शासन">
           <img src="assets/web/logos/logo_public_health.webp" alt="सार्वजनिक आरोग्य विभाग" class="partner-logo-img"
             width="158" height="107" loading="lazy" decoding="async">
         </div>
-        <div class="partner-logo-card" title="National Health Mission (NHM)">
+        <div class="partner-logo-card reveal" title="National Health Mission (NHM)">
           <img src="assets/web/logos/logo_nhm.webp" alt="National Health Mission" class="partner-logo-img" width="140"
             height="107" loading="lazy" decoding="async">
         </div>
-        <div class="partner-logo-card" title="Centre for Health Research and Innovation (CHRI)">
+        <div class="partner-logo-card reveal" title="Centre for Health Research and Innovation (CHRI)">
           <img src="assets/web/logos/logo_chri.webp" alt="CHRI" class="partner-logo-img" width="280" height="111"
             loading="lazy" decoding="async">
         </div>
-        <div class="partner-logo-card" title="PATH Global Health Initiative">
+        <div class="partner-logo-card reveal" title="PATH Global Health Initiative">
           <img src="assets/web/logos/logo_path.webp" alt="PATH" class="partner-logo-img" width="228" height="111"
             loading="lazy" decoding="async">
         </div>
-        <div class="partner-logo-card" title="GSK Global Health">
+        <div class="partner-logo-card reveal" title="GSK Global Health">
           <img src="assets/web/logos/logo_gsk.webp" alt="GSK" class="partner-logo-img" width="245" height="111"
             loading="lazy" decoding="async">
         </div>
-        <div class="partner-logo-card" title="Rnisarg Foundation">
+        <div class="partner-logo-card reveal" title="Rnisarg Foundation">
           <img src="assets/web/logos/logo_rnisarg.webp" alt="Rnisarg Foundation" class="partner-logo-img" width="211"
             height="124" loading="lazy" decoding="async">
         </div>
@@ -729,7 +753,7 @@
     <div class="container footer-grid">
       <div class="footer-about">
         <a href="#" class="logo">
-          <div class="logo-icon">A</div>
+          <div class="logo-icon" aria-hidden="true">A</div>
           <div class="logo-text">ACT<span>4AMR</span></div>
         </a>
         <p data-i18n="footer.tagline">Safeguarding antimicrobial efficacy through active community engagement, official
@@ -772,8 +796,10 @@
 
   <!-- Poster Viewer Modal -->
   <div class="poster-modal" id="posterModal" onclick="closePosterModal()">
-    <div class="poster-modal-content" onclick="event.stopPropagation()">
-      <button class="close-modal-btn" onclick="closePosterModal()">&times;</button>
+    <div class="poster-modal-content" role="dialog" aria-modal="true" aria-labelledby="posterModalTitle"
+      onclick="event.stopPropagation()">
+      <button type="button" class="close-modal-btn" onclick="closePosterModal()" aria-label="Close poster viewer"
+        data-i18n-attr="aria-label:modal.poster.close">&times;</button>
       <h3 id="posterModalTitle" data-i18n="modal.poster.title_default">Official Campaign Poster</h3>
       <div class="poster-img-container">
         <!-- No src attribute: an empty src resolves to the page URL and makes the
