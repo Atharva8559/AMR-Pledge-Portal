@@ -140,6 +140,17 @@
   --space-12: 5rem;     /* 80px */
 
   /* ───────────────────────────────────────────────
+     TOUCH TARGET — the minimum box any control may occupy.
+     44px is the WCAG 2.5.5 (AAA) / Apple HIG / Material figure, and it is not
+     a style choice on this page: the audience is the Maharashtra public on
+     cheap Android phones, often one-handed and outdoors. A 30px control there
+     is a coin toss.
+     Deliberately NOT on the --space-* grid — it is a physical-ergonomics
+     constant, not a rhythm step, and it must never drift when the grid does.
+     ─────────────────────────────────────────────── */
+  --tap-min: 44px;
+
+  /* ───────────────────────────────────────────────
      RADII
      ─────────────────────────────────────────────── */
   --radius-sm: 8px;
@@ -212,6 +223,19 @@
   --transition-fast: var(--dur-fast) var(--ease-out);
   --transition-base: var(--dur-base) var(--ease-out);
   --transition-slow: var(--dur-slow) var(--ease-out);
+
+  /* ───────────────────────────────────────────────
+     FOCUS RING — no new hues, just two of the existing ones picked for
+     contrast against the two backdrops this page actually has.
+     --green-600 on white/--gray-50 measures 6.7:1; white on --green-900
+     (pledge card, footer) measures ~15:1. Both clear the 3:1 minimum for a
+     non-text indicator by a wide margin, which matters on a cheap phone
+     screen in daylight.
+     ─────────────────────────────────────────────── */
+  --focus-ring: var(--green-600);
+  --focus-ring-light: var(--white);
+  --focus-width: 2px;
+  --focus-offset: 2px;
 }
 
 /* ═══════════════════════════════════════════════
@@ -236,7 +260,9 @@ body {
   font-size: var(--text-base);
   font-weight: var(--weight-normal);
   line-height: var(--lh-body);
-  overflow-x: hidden;
+  /* Deliberately NO overflow-x: hidden. Every QA pass on this page asserts
+     scrollWidth === clientWidth; hiding the overflow would silently disarm that
+     tripwire and let a future regression through unnoticed. Fix the offender. */
   text-rendering: optimizeLegibility;
 }
 
@@ -311,6 +337,59 @@ ul { list-style: none; }
 }
 
 /* ═══════════════════════════════════════════════
+   FOCUS — ONE ring for the whole page.
+   Before this block the file had zero :focus-visible rules, so a keyboard user
+   had no idea where they were: the page was navigable but not usable.
+
+   :focus-visible, never :focus — a mouse or touch user sees nothing, a keyboard
+   user always does. The ring is an `outline`, which browsers already bend around
+   each control's own border-radius, so a pill button gets a pill ring and a card
+   gets a card ring with no per-component radius rules.
+
+   RULE FOR ANY FUTURE EDIT: never write `outline: none` anywhere in this file
+   without an equally visible replacement in the same rule.
+   ═══════════════════════════════════════════════ */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Dark green surfaces — the pledge card and the footer. --green-600 against
+   --green-900 is about 1.3:1, i.e. an invisible ring, so those two contexts
+   switch to the light one. On the orange pledge CTA the ring sits just outside
+   the button, on the dark green behind it, so the light ring is correct there too. */
+.pledge-section a:focus-visible,
+.pledge-section button:focus-visible,
+footer a:focus-visible,
+footer button:focus-visible {
+  outline-color: var(--focus-ring-light);
+}
+
+/* (.carousel-nav sits on photographs and needs a white halo behind the green
+   ring; that rule lives with the carousel further down, after its :hover rule,
+   so the two box-shadows resolve in the right order.) */
+
+/* These three are clipped by an overflow:hidden ancestor — .iec-card,
+   .event-carousel-wrapper and .embedded-video-box — so an outward ring would be
+   sliced off on three sides. Theirs is drawn inside the element instead. */
+.iec-thumbnail:focus-visible,
+.carousel-img:focus-visible {
+  outline-offset: calc(var(--focus-offset) * -2);
+}
+
+.dindi-video-facade:focus-visible {
+  outline-color: var(--focus-ring-light);
+  outline-offset: calc(var(--focus-offset) * -2);
+}
+
+/* ═══════════════════════════════════════════════
    LAYOUT
    ═══════════════════════════════════════════════ */
 .container {
@@ -365,6 +444,20 @@ section::after {
 
 /* ═══════════════════════════════════════════════
    CARD BASE
+
+   DEPTH LADDER — four steps, and every surface on the page sits on exactly one:
+     0  page ground   — sections, banners: no shadow at all
+     1  card          — .glass-card: --shadow-sm, a 1px border doing most of the
+                        separation work. Flat enough that a page of twelve cards
+                        does not read as twelve floating slabs.
+     2  raised        — cards that own their section (.quiz-card), the sticky
+                        header once scrolled, .floating-badge, and any card the
+                        pointer is currently on (--shadow-hover)
+     3  hero art      — .hero-image-wrapper: --shadow-lg
+     4  overlay       — .poster-modal-content: --shadow-xl, the only thing that
+                        should ever look like it left the page
+   A card lifting on hover moves one step up the ladder and 4px toward the
+   reader. It never skips a step, and nothing outranks the modal.
    ═══════════════════════════════════════════════ */
 .glass-card {
   background: var(--bg-card);
@@ -372,13 +465,21 @@ section::after {
   border-radius: var(--radius-lg);
   padding: var(--space-7);
   box-shadow: var(--shadow-sm);
-  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
-.glass-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-hover);
+/* Guarded on (hover: hover): a touch browser applies :hover on tap and then
+   leaves it stuck until the next tap elsewhere, so on a phone this rule would
+   strand a random card lifted and shadowed. */
+@media (hover: hover) {
+  .glass-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -412,6 +513,14 @@ header.scrolled {
   align-items: center;
   gap: var(--space-3);
   text-decoration: none;
+  /* The wordmark is 36px of art sitting inside a 64px bar, so the link itself
+     measured 36px tall and was the shortest control in the header. min-height
+     costs nothing visually — the art stays where it was and the extra 4px top
+     and bottom are transparent — but the link now clears 44px. */
+  min-height: var(--tap-min);
+  /* Invisible on a transparent element — it exists so the focus ring rounds
+     off instead of boxing the wordmark in a hard rectangle. */
+  border-radius: var(--radius-sm);
 }
 
 .logo-icon {
@@ -447,19 +556,40 @@ nav ul {
   gap: var(--space-1);
 }
 
+/* Flex rather than block purely so min-height can centre the label: a block
+   would grow the box to 44px and leave the text pinned to the top of it.
+   Height comes from min-height, not from padding, so the label keeps its
+   original optical position inside the pill. */
 nav ul li a {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
   padding: var(--space-2) var(--space-4);
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-nav ul li a:hover {
-  color: var(--green-600);
-  background: var(--green-50);
+/* ─── Why every :hover in this file is gated ─────
+   A touch browser fires :hover on tap and then LEAVES IT ON until the next tap
+   somewhere else. Ungated, a Maharashtra reader on a phone — most of this
+   audience — taps a card and it stays lifted and shadowed behind them, which
+   reads as a rendering fault. So: pointer decoration lives inside
+   @media (hover: hover); anything a touch user must see lives outside it, and
+   the press feedback is :active, which fires correctly on every input type. */
+@media (hover: hover) {
+  nav ul li a:hover {
+    color: var(--green-600);
+    background-color: var(--green-50);
+  }
+}
+
+nav ul li a:active {
+  color: var(--green-700);
+  background-color: var(--green-100);
 }
 
 /* ═══════════════════════════════════════════════
@@ -587,7 +717,9 @@ nav ul li a:hover {
 .btn-swachh-pledge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-3);
+  min-height: var(--tap-min);
   padding: var(--space-4) var(--space-8);
   background: linear-gradient(135deg, var(--orange-600), var(--red-600));
   color: var(--white);
@@ -613,17 +745,23 @@ nav ul li a:hover {
   transition: opacity var(--transition-fast);
 }
 
-.btn-swachh-pledge:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-cta-strong);
+@media (hover: hover) {
+  .btn-swachh-pledge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-cta-strong);
+  }
+
+  .btn-swachh-pledge:hover::before {
+    opacity: 1;
+  }
 }
 
-.btn-swachh-pledge:hover::before {
-  opacity: 1;
-}
-
+/* Press: the button gives under the finger and the glow tightens, so the tap
+   registers even on a slow connection where nothing else has happened yet. */
 .btn-swachh-pledge:active {
-  transform: translateY(0) scale(0.98);
+  transform: scale(0.97);
+  box-shadow: var(--shadow-cta);
+  transition-duration: var(--dur-fast);
 }
 
 .btn-swachh-pledge.pledged {
@@ -741,10 +879,16 @@ nav ul li a:hover {
 
 /* Secondary controls. One step below the pledge CTA in size and weight so the
    hierarchy between "the action" and "an action" is legible without colour. */
+/* min-height, not more padding, because one instance of this class carries an
+   inline `padding: 0.65rem 1.5rem` from index.html (the "Watch on YouTube"
+   link) that this file cannot outrank. min-height is a separate property, so
+   it applies to that button too and lifts it from 39px to 44px. */
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
+  min-height: var(--tap-min);
   padding: var(--space-3) var(--space-7);
   background: linear-gradient(135deg, var(--green-600), var(--green-700));
   color: var(--white);
@@ -758,16 +902,25 @@ nav ul li a:hover {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-green-md);
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-green-md);
+  }
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: var(--shadow-green-sm);
 }
 
 /* Secondary Button */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
+  min-height: var(--tap-min);
   padding: var(--space-3) var(--space-7);
   background: var(--white);
   color: var(--green-700);
@@ -777,12 +930,30 @@ nav ul li a:hover {
   line-height: var(--lh-tight);
   border-radius: var(--radius-full);
   border: 1.5px solid var(--green-200);
-  transition: all var(--transition-fast);
+  /* Was `transition: all`, which quietly animated every property the element
+     will ever have — including any layout property a later edit adds. */
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.btn-secondary:hover {
+@media (hover: hover) {
+  .btn-secondary:hover {
+    border-color: var(--green-600);
+    background-color: var(--green-50);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
+  background-color: var(--green-50);
   border-color: var(--green-600);
-  background: var(--green-50);
+  box-shadow: none;
 }
 
 /* Hero Image */
@@ -805,8 +976,10 @@ nav ul li a:hover {
   transition: transform 0.6s var(--ease-out);
 }
 
-.hero-image-wrapper:hover img {
-  transform: scale(1.03);
+@media (hover: hover) {
+  .hero-image-wrapper:hover img {
+    transform: scale(1.03);
+  }
 }
 
 .floating-badge {
@@ -917,13 +1090,15 @@ nav ul li a:hover {
   border-left-color: var(--red-600);
 }
 
-.fact-card:hover {
-  border-color: var(--green-300);
-  border-left-color: var(--green-400);
-}
+@media (hover: hover) {
+  .fact-card:hover {
+    border-color: var(--green-300);
+    border-left-color: var(--green-400);
+  }
 
-.fact-card.cyan:hover {
-  border-left-color: var(--red-400);
+  .fact-card.cyan:hover {
+    border-left-color: var(--red-400);
+  }
 }
 
 .poster-q-number {
@@ -1051,9 +1226,11 @@ nav ul li a:hover {
   overflow: hidden;
 }
 
-.iec-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
+@media (hover: hover) {
+  .iec-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
 }
 
 .iec-thumbnail {
@@ -1075,10 +1252,6 @@ nav ul li a:hover {
   transition: transform 0.5s var(--ease-out);
 }
 
-.iec-card:hover .poster-card-img {
-  transform: scale(1.05);
-}
-
 .poster-overlay {
   position: absolute;
   inset: 0;
@@ -1091,10 +1264,6 @@ nav ul li a:hover {
   transition: opacity var(--transition-base);
 }
 
-.iec-card:hover .poster-overlay {
-  opacity: 1;
-}
-
 .view-icon {
   padding: var(--space-2) var(--space-5);
   background: rgba(255,255,255,0.95);
@@ -1105,6 +1274,61 @@ nav ul li a:hover {
   line-height: var(--lh-tight);
   color: var(--green-700);
   box-shadow: var(--shadow-sm);
+  /* Eases up into place with the gradient instead of appearing fully formed
+     the instant the pointer crosses the edge. */
+  transform: translateY(6px);
+  transition: transform var(--transition-base);
+}
+
+/* Keyboard users get the same affordance the pointer gets — the thumbnail is a
+   role="button" tabindex="0", so it is a real stop in the tab order. */
+.iec-thumbnail:focus-visible .poster-overlay {
+  opacity: 1;
+}
+
+.iec-thumbnail:focus-visible .view-icon {
+  transform: none;
+}
+
+/* ─── Pointer: the overlay is the reveal ───────── */
+@media (hover: hover) {
+  .iec-card:hover .poster-card-img {
+    transform: scale(1.05);
+  }
+
+  .iec-card:hover .poster-overlay {
+    opacity: 1;
+  }
+
+  .iec-card:hover .view-icon {
+    transform: none;
+  }
+}
+
+/* ─── Touch: there is no hover, so there was no affordance ─────
+   This overlay used to be reachable ONLY by hovering, which means every phone
+   and tablet reader — effectively the entire Maharashtra audience this page is
+   built for — saw four poster images with no sign they open. On touch the
+   label is simply always on, at a lighter weight than the hover version so it
+   sits on the poster instead of covering it, and the press deepens it. */
+@media (hover: none) {
+  .poster-overlay {
+    opacity: 1;
+    background: linear-gradient(180deg, transparent 62%, rgba(0,0,0,0.42));
+    transition:
+      opacity var(--transition-base),
+      background-color var(--transition-base);
+  }
+
+  .view-icon {
+    transform: none;
+    background: rgba(255,255,255,0.92);
+    transition: transform var(--transition-fast);
+  }
+
+  .iec-thumbnail:active .view-icon {
+    transform: scale(0.96);
+  }
 }
 
 .iec-info {
@@ -1138,10 +1362,16 @@ nav ul li a:hover {
   gap: var(--space-2);
 }
 
+/* The one control on this page that a reader is meant to press four times.
+   It measured 32px tall — the smallest real button in the layout — and sits
+   inside a 156px-wide card at 360px, so a mis-tap lands on the poster instead
+   and opens the modal. min-height fixes the box without widening the pill. */
 .iec-download-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-1);
+  min-height: var(--tap-min);
   padding: var(--space-2) var(--space-4);
   background: var(--green-50);
   border: 1.5px solid var(--green-200);
@@ -1151,14 +1381,32 @@ nav ul li a:hover {
   letter-spacing: var(--tracking-wide);
   line-height: var(--lh-tight);
   color: var(--green-700);
-  transition: all var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-.iec-download-btn:hover {
-  background: var(--green-600);
+@media (hover: hover) {
+  .iec-download-btn:hover {
+    background-color: var(--green-600);
+    border-color: var(--green-600);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-green-sm);
+  }
+}
+
+/* Fills solid on press, so a touch reader gets the same confirmation a pointer
+   reader gets from hover. */
+.iec-download-btn:active {
+  background-color: var(--green-600);
   border-color: var(--green-600);
   color: var(--white);
-  box-shadow: var(--shadow-green-sm);
+  transform: scale(0.97);
+  box-shadow: none;
 }
 
 .iec-download-btn svg {
@@ -1180,8 +1428,10 @@ nav ul li a:hover {
   padding: 0;
 }
 
-.dindi-video-card:hover {
-  transform: translateY(-4px);
+@media (hover: hover) {
+  .dindi-video-card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 .embedded-video-box {
@@ -1195,6 +1445,27 @@ nav ul li a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Click-to-load facade. The play badge inside it is inline-styled markup this
+   file does not own, so the feedback is carried by the poster frame instead:
+   it dims a little under the pointer and the whole plate gives on press. */
+.dindi-video-facade {
+  transition: transform var(--transition-fast);
+}
+
+.dindi-video-facade img {
+  transition: opacity var(--transition-base);
+}
+
+@media (hover: hover) {
+  .dindi-video-facade:hover img {
+    opacity: 0.86;
+  }
+}
+
+.dindi-video-facade:active {
+  transform: scale(0.995);
 }
 
 .video-pill-badge {
@@ -1222,13 +1493,22 @@ nav ul li a:hover {
   margin: 0 auto;
 }
 
+/* Step 2 on the depth ladder: this card IS its section — one card, centred,
+   nothing else competing — so it sits a step above the grids of cards elsewhere
+   and does not lift on hover, because there is nowhere for it to go. */
 .quiz-card {
   padding: var(--space-8);
   border-top: 4px solid var(--green-600);
+  box-shadow: var(--shadow-md);
 }
 
 .quiz-card:hover {
   transform: none;
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-default);
+  /* Re-stated because the border-color above is a shorthand and would otherwise
+     wash the green accent rule off the top edge. */
+  border-top-color: var(--green-600);
 }
 
 .quiz-meta {
@@ -1244,6 +1524,7 @@ nav ul li a:hover {
 }
 
 .quiz-progress-bar {
+  position: relative;
   width: 100%;
   height: 5px;
   background: var(--gray-100);
@@ -1252,12 +1533,25 @@ nav ul li a:hover {
   overflow: hidden;
 }
 
+/* PARTIAL FIX, and the reason is worth recording. This bar still animates
+   `width`, which is a layout property. The clean version animates
+   `transform: scaleX()` — but app.js drives the fill with
+   `document.getElementById('quizProgress').style.width = pct + '%'`, and an
+   inline width beats anything this file can say. Rewriting it needs one line in
+   app.js, which this agent does not own:
+       el.style.transform = 'scaleX(' + pct / 100 + ')';
+   What IS fixed here: the fill is now absolutely positioned, so it is out of
+   flow. Its width change no longer reflows anything around it — the layout work
+   is confined to one empty 5px-tall box inside an overflow:hidden parent. */
 .quiz-progress {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   width: 12.5%;
   background: linear-gradient(90deg, var(--green-600), var(--green-400));
   border-radius: var(--radius-full);
-  transition: width 0.4s var(--ease-out);
+  transition: width var(--dur-base) var(--ease-out);
 }
 
 .quiz-question {
@@ -1276,13 +1570,18 @@ nav ul li a:hover {
   margin-bottom: var(--space-6);
 }
 
-/* app.js emits `quiz-option`; this file only ever styled `quiz-option-btn`, so
-   the answers were rendering as bare unstyled 13px text. Both names are matched
-   here, and the state classes cover BOTH vocabularies the two files use
-   (`incorrect` from app.js, `wrong` from the original CSS), so the quiz stays
-   styled whichever way the markup and script settle. */
-.quiz-option,
-.quiz-option-btn {
+/* SELECTOR NAMES ARE PINNED TO app.js. Verified against it line by line:
+     app.js:343  optBtn.className = 'quiz-option'          → .quiz-option
+     app.js:345  <span class="option-indicator">            → .option-indicator
+     app.js:361  classList.add('correct')                   → .quiz-option.correct
+     app.js:369  classList.add('incorrect')                 → .quiz-option.incorrect
+     app.js:365  feedback.className='quiz-feedback success' → .quiz-feedback.success
+     app.js:377  feedback.className='quiz-feedback error'   → .quiz-feedback.error
+   The names this file used to style — `.quiz-option-btn`, `.wrong`,
+   `.correct-feedback`, `.wrong-feedback` — appear NOWHERE in app.js or
+   index.html (grepped, zero hits), so they were styling nothing at all and are
+   gone. One vocabulary now, matching the only code that emits classes. */
+.quiz-option {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
@@ -1296,7 +1595,11 @@ nav ul li a:hover {
   font-weight: var(--weight-medium);
   line-height: var(--lh-snug);
   color: var(--text-primary);
-  transition: all var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 /* The A/B/C/D letter chip app.js renders inside each option. */
@@ -1316,35 +1619,74 @@ nav ul li a:hover {
   color: var(--text-secondary);
 }
 
-.quiz-option:hover,
-.quiz-option-btn:hover {
-  border-color: var(--green-400);
-  background: var(--green-50);
-  transform: translateX(4px);
+/* Hover slides the row 4px toward the reader's thumb — a transform, so no
+   reflow of the four-option stack. */
+@media (hover: hover) {
+  .quiz-option:hover {
+    border-color: var(--green-400);
+    background-color: var(--green-50);
+    transform: translateX(4px);
+  }
 }
 
-.quiz-option.correct,
-.quiz-option-btn.correct {
+.quiz-option:active {
   border-color: var(--green-500);
-  background: var(--green-50);
+  background-color: var(--green-50);
+  transform: scale(0.99);
+}
+
+/* The letter chip picks up the hover too, so the whole row reads as one target. */
+.option-indicator {
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .quiz-option:hover .option-indicator {
+    border-color: var(--green-400);
+    color: var(--green-700);
+  }
+}
+
+.quiz-option.correct {
+  border-color: var(--green-500);
+  background-color: var(--green-50);
   color: var(--green-800);
   font-weight: var(--weight-semibold);
 }
 
-.quiz-option.incorrect,
-.quiz-option.wrong,
-.quiz-option-btn.incorrect,
-.quiz-option-btn.wrong {
+.quiz-option.correct .option-indicator {
+  background: var(--green-600);
+  border-color: var(--green-600);
+  color: var(--white);
+}
+
+.quiz-option.incorrect {
   border-color: var(--red-500);
-  background: var(--red-100);
+  background-color: var(--red-100);
   color: var(--red-700);
   font-weight: var(--weight-semibold);
 }
 
-.quiz-option.disabled,
-.quiz-option-btn.disabled {
-  pointer-events: none;
-  opacity: 0.7;
+.quiz-option.incorrect .option-indicator {
+  background: var(--red-600);
+  border-color: var(--red-600);
+  color: var(--white);
+}
+
+/* Once an answer is marked, app.js ignores further clicks (its `optionSelected`
+   latch). Freezing the answered rows keeps the styling honest about that — a
+   row that still slid and glowed under the pointer would be promising a second
+   guess the quiz will not accept. */
+.quiz-option.correct,
+.quiz-option.incorrect,
+.quiz-option.correct:hover,
+.quiz-option.incorrect:hover,
+.quiz-option.correct:active,
+.quiz-option.incorrect:active {
+  transform: none;
 }
 
 .quiz-feedback {
@@ -1356,17 +1698,16 @@ nav ul li a:hover {
   margin-bottom: var(--space-4);
 }
 
-/* Same story: app.js writes `quiz-feedback success` / `quiz-feedback error`
-   while this file defined `.correct-feedback` / `.wrong-feedback`. */
-.quiz-feedback.success,
-.quiz-feedback.correct-feedback {
+/* app.js writes `quiz-feedback success` / `quiz-feedback error`. The
+   `.correct-feedback` / `.wrong-feedback` names this file used to define were
+   never emitted by anything and are gone. */
+.quiz-feedback.success {
   background: var(--green-50);
   border: 1px solid var(--green-200);
   color: var(--green-800);
 }
 
-.quiz-feedback.error,
-.quiz-feedback.wrong-feedback {
+.quiz-feedback.error {
   background: var(--red-100);
   border: 1px solid rgba(198,40,40,0.15);
   color: var(--red-700);
@@ -1559,8 +1900,10 @@ nav ul li a:hover {
   border-left: 3px solid var(--green-600);
 }
 
-.event-right-card:hover {
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .event-right-card:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .event-card-grid {
@@ -1620,54 +1963,156 @@ nav ul li a:hover {
   opacity: 1;
 }
 
+/* GROWN, not padded. These float on top of the photograph, so there is no
+   layout to disturb — the honest fix is to make the control itself the size of
+   the thing that presses it. 30px → 44px; the chevron steps up one token with
+   it so the glyph still fills the disc instead of rattling around in it. */
 .carousel-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 30px;
-  height: 30px;
+  width: var(--tap-min);
+  height: var(--tap-min);
   border-radius: var(--radius-full);
   background: rgba(255,255,255,0.9);
   border: 1px solid var(--gray-200);
   color: var(--gray-700);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
-  transition: all var(--transition-fast);
+  /* The transform here is doing the vertical centring, so every state below has
+     to re-declare translateY(-50%) or the button jumps to the top of the frame. */
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   box-shadow: var(--shadow-xs);
 }
 
-.carousel-nav:hover {
-  background: var(--white);
-  box-shadow: var(--shadow-sm);
+@media (hover: hover) {
+  .carousel-nav:hover {
+    background: var(--white);
+    color: var(--green-700);
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: var(--shadow-sm);
+  }
 }
 
-.carousel-nav.prev { left: 6px; }
-.carousel-nav.next { right: 6px; }
+.carousel-nav:active {
+  background: var(--white);
+  color: var(--green-700);
+  transform: translateY(-50%) scale(0.94);
+  box-shadow: var(--shadow-xs);
+}
 
+/* These two float on top of event photographs, so neither ring colour is safe
+   on its own: the green ring gets a white halo behind it. Placed after :hover
+   so the halo survives a pointer that is both hovering and focused. */
+.carousel-nav:focus-visible {
+  box-shadow: var(--shadow-sm), 0 0 0 5px rgba(255,255,255,0.92);
+}
+
+.carousel-nav.prev { left: var(--space-2); }
+.carousel-nav.next { right: var(--space-2); }
+
+/* GAP IS LOAD-BEARING, not taste. The dot below carries a 44px-wide hit area
+   that overhangs its 20px box by 12px on each side. A 24px gap makes the pitch
+   20 + 24 = 44px, so those hit areas tile edge to edge: every pixel of the row
+   belongs to exactly one dot, and none of them overlap. Tighten this gap and
+   neighbouring targets start stealing each other's taps — which is worse than
+   the small targets this replaced, because the wrong slide appears. */
 .carousel-dots {
   display: flex;
   justify-content: center;
-  gap: 6px;
-  padding: var(--space-2) 0;
+  align-items: center;
+  gap: var(--space-6);
+  padding: 0;
 }
 
+/* The dot used to animate `width` 7px → 20px, which relaid out the whole dot row
+   on every slide change — and shuffled the other dots sideways while it did.
+   Now the BOX is a constant 20×7 and the visible pill is a pseudo-element that
+   scales on the X axis, so switching slides is a composited transform and the
+   row never moves.
+   The radius is 50% rather than --radius-full on purpose: an ellipse scaled to
+   0.35 lands on an exact 7px circle for the inactive state, whereas a clamped
+   pill radius would squash into a rounded rectangle. */
+/* THE DOT IS 7px TALL AND THE TARGET IS 44px. Those are two different boxes and
+   this rule keeps them apart on purpose:
+     .dot         — the 20 × 44 element. Height comes from the target, so the
+                    row is 44px tall and the ring on :focus-visible is a real,
+                    findable shape rather than a 7px sliver.
+     .dot::before — the VISIBLE pill. Absolutely centred, still 20 × 7, still
+                    scaling on X between states. Nothing about the design moved.
+     .dot::after  — the rest of the TARGET. Pure hit area, no paint: it widens
+                    the pressable box from 20px to 44px, 12px past each edge.
+   Shrinking the dot to look right and then shipping a 20 × 7 tap target is the
+   mistake this replaces — it looked correct in a screenshot and failed in a
+   hand. */
 .dot {
-  width: 7px;
-  height: 7px;
+  position: relative;
+  display: block;
+  width: 20px;
+  height: var(--tap-min);
+  padding: 0;
+  border: none;
+  background: none;
   border-radius: var(--radius-full);
-  background: var(--gray-300);
   cursor: pointer;
-  transition: all var(--transition-fast);
 }
 
-.dot.active {
+.dot::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 7px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  transform: scaleX(0.35);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+/* Hit area only. Invisible, unpainted, and sized off the same token as every
+   other control so it cannot drift out of agreement with .carousel-dots' gap. */
+.dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc((var(--tap-min) - 20px) / -2);
+  right: calc((var(--tap-min) - 20px) / -2);
+}
+
+.dot.active::before {
   background: var(--green-600);
-  width: 20px;
-  border-radius: var(--radius-full);
+  transform: scaleX(1);
+}
+
+@media (hover: hover) {
+  .dot:hover::before {
+    background: var(--gray-400);
+  }
+
+  .dot.active:hover::before {
+    background: var(--green-600);
+  }
+}
+
+.dot:active::before {
+  background: var(--green-400);
+}
+
+.dot.active:active::before {
+  background: var(--green-600);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1706,13 +2151,18 @@ nav ul li a:hover {
   background: var(--white);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
-  transition: all var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
-.partner-logo-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .partner-logo-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+  }
 }
 
 .partner-logo-img {
@@ -1723,8 +2173,10 @@ nav ul li a:hover {
   transition: filter var(--transition-base);
 }
 
-.partner-logo-card:hover .partner-logo-img {
-  filter: grayscale(0%);
+@media (hover: hover) {
+  .partner-logo-card:hover .partner-logo-img {
+    filter: grayscale(0%);
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -1776,21 +2228,60 @@ footer::after {
   margin-bottom: var(--space-4);
 }
 
+/* gap is 0 because the links now carry their own 12px of vertical padding —
+   the row spacing moved INSIDE the target instead of sitting between targets as
+   dead space. Same visual rhythm, 24px of it now pressable. */
 .footer-links ul {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0;
 }
 
+/* The underline is a background gradient, not text-decoration: it grows from
+   0% to 100% of the link's width without ever changing the line box, so a
+   column of ten links cannot reflow under the pointer. background-size is a
+   paint-only property here — no layout, no compositing surprise. */
+/* These measured 16px tall — the smallest targets on the page by a wide margin,
+   and nine of them stacked 8px apart, which is a mis-tap generator.
+   inline → inline-block so vertical padding actually builds a box (padding on a
+   true inline box does not affect the line and leaves neighbouring hit areas
+   overlapping). background-origin: content-box then keeps the underline
+   measuring against the TEXT rather than the padding edge, so it still draws
+   directly under the words instead of 12px below them. */
 .footer-links ul li a {
+  display: inline-block;
+  padding: var(--space-3) 0;
   font-size: var(--text-sm);
   font-weight: var(--weight-medium);
   color: rgba(255,255,255,0.55);
-  transition: color var(--transition-fast);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background-size var(--transition-base);
 }
 
-.footer-links ul li a:hover {
+@media (hover: hover) {
+  .footer-links ul li a:hover {
+    color: var(--green-300);
+    background-size: 100% 1px;
+  }
+}
+
+.footer-links ul li a:active {
+  color: var(--green-200);
+  background-size: 100% 1px;
+}
+
+/* Keyboard: the ring already marks the link, and the underline confirms it
+   the same way the pointer state does. */
+.footer-links ul li a:focus-visible {
   color: var(--green-300);
+  background-size: 100% 1px;
 }
 
 .footer-bottom {
@@ -1813,21 +2304,32 @@ footer::after {
 }
 
 .footer-socials a {
-  width: 36px;
-  height: 36px;
+  width: var(--tap-min);
+  height: var(--tap-min);
   border-radius: var(--radius-full);
   background: rgba(255,255,255,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-base);
+  /* Emoji glyph, deliberately off the type ramp — it steps up with the disc so
+     the icon keeps its proportion inside the larger circle. */
+  font-size: var(--text-lg);
   line-height: 1;
-  transition: all var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.footer-socials a:hover {
-  background: rgba(255,255,255,0.15);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .footer-socials a:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.footer-socials a:active {
+  background: rgba(255,255,255,0.2);
+  transform: scale(0.94);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1870,6 +2372,10 @@ footer::after {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* The disc stays 32px. Growing it would put a heavy grey circle over the poster
+   title, and unlike the carousel arrows this control has nothing next to it —
+   it owns its whole corner — so an invisible overhang is safe here and steals
+   no other target's taps. ::before below carries the missing 12px. */
 .close-modal-btn {
   position: absolute;
   top: 12px;
@@ -1886,12 +2392,36 @@ footer::after {
   align-items: center;
   justify-content: center;
   z-index: 2;
-  transition: all var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.close-modal-btn:hover {
-  background: var(--gray-200);
+/* Hit area only — no paint. Extends the 32px disc to 44 × 44 while leaving the
+   6px it gains on each side inside the modal's own padding.
+   Square, NOT `border-radius: inherit`: hit-testing honours border-radius, so
+   inheriting the button's pill radius would have carved the corners back off
+   and left a 44px circle whose diagonal reach is short of the target. Measured
+   — the corner probes missed before this was a square. Nothing paints here, so
+   there is no visual reason to round it. */
+.close-modal-btn::before {
+  content: '';
+  position: absolute;
+  inset: calc((var(--tap-min) - 32px) / -2);
+}
+
+@media (hover: hover) {
+  .close-modal-btn:hover {
+    background: var(--gray-200);
+    color: var(--gray-900);
+  }
+}
+
+.close-modal-btn:active {
+  background: var(--gray-300);
   color: var(--gray-900);
+  transform: scale(0.92);
 }
 
 .poster-modal-content h3 {
@@ -1933,14 +2463,31 @@ footer::after {
   justify-content: center;
   padding: var(--space-3);
 }
-
 /* ═══════════════════════════════════════════════
-   RESPONSIVE
-   NOTE: there are no font-size overrides in here any more. Every type size on
-   the page is a clamp() that interpolates from 360px to 1440px, so the ramp is
-   continuous instead of jumping at three breakpoints — and the clamp minimums
-   are now actually reachable. What remains below is layout only.
+   RESPONSIVE — TWO breakpoints, and that is the whole set.
+
+   It used to be three (1024 / 768 / 480) and they were doing three unrelated
+   jobs, which is why they read as arbitrary. They now mean one thing each:
+
+     ≤1024px  MULTI-COLUMN COLLAPSE. Grids that only work with real horizontal
+              room fold to one or two columns. Nothing about rhythm changes.
+     ≤768px   PHONE. The header restacks and the vertical rhythm steps down one
+              notch across the board.
+
+   The old 480px tier is gone: every rule in it (chip padding, pledge button
+   padding, quiz padding, partner logo size) was a phone rule that had no reason
+   to wait until 480px, and holding it back only meant a 500px-wide screen got
+   desktop-scale padding it had no room for. All of it moved up into 768.
+
+   NOTE: there are no font-size overrides in here, and none may be added. Every
+   type size on the page is a clamp() interpolating from 360px to 1440px, so the
+   ramp is continuous instead of jumping at breakpoints. A hardcoded font-size
+   inside a media query does not tune that ramp — it cancels it.
    ═══════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────
+   ≤1024px — COLUMNS COLLAPSE
+   ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -1979,40 +2526,169 @@ footer::after {
   }
 }
 
+/* ───────────────────────────────────────────────
+   ≤768px — PHONE
+   ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .container { padding: 0 var(--space-4); }
-  section { padding: var(--space-10) 0; }
+  /* LONGHANDS, not `padding: 0 var(--space-4)`. Three elements on this page
+     carry .container AND a second class that sets vertical padding —
+     .nav-container, .footer-grid and .footer-bottom — and the shorthand here
+     sits later in the file than all three, so it was silently resetting their
+     top and bottom padding to zero. Measured before this fix: .footer-grid's
+     48px bottom padding became 0, leaving the divider rule 1px under the last
+     footer link, and .footer-bottom's 24px became 0, jamming the copyright line
+     against that divider. The longhands touch only the axis they mean to. */
+  .container {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
 
+  /* ── VERTICAL RHYTHM ──────────────────────────
+     80px between sections is correct at 1440px, where it is about 6% of the
+     viewport height. At 360px the viewport is ~640px tall and that same 80px
+     is 12% of the screen — twice, above and below, so a quarter of every
+     screenful is empty before any content appears. Every band steps down one
+     notch on the same --space-* scale. Nothing here is a new number.
+
+     These are five separate rules and not one `section` rule because .hero,
+     .pledge-section, .partners-banner-bottom and footer all set padding via a
+     class, which outranks the bare `section` selector. Overriding only
+     `section` left the four biggest bands untouched. */
+  section { padding: var(--space-9) 0; }
+  .hero { padding: var(--space-9) 0 var(--space-8); }
+  .swachh-pledge-card { padding: var(--space-8) 0; }
+  .partners-banner-bottom { padding: var(--space-8) 0; }
+  footer { padding: var(--space-9) 0 0; }
+  .section-header { margin-bottom: var(--space-7); }
+
+  /* ── CARD INTERIORS ───────────────────────────
+     A 328px card with 32px of padding leaves 264px of text. Dropping to 20px
+     leaves 288px — 9% more measure per line, which on a 33-character column is
+     roughly three characters, i.e. one fewer mid-word wrap per paragraph.
+     Padding is where mobile width is won; the container gutter is already as
+     tight as it should go. */
+  .glass-card { padding: var(--space-5); }
+  .fact-card { padding: var(--space-5); }
+  .quiz-card { padding: var(--space-5); }
+  .quiz-option { padding: var(--space-3) var(--space-4); }
+  .event-right-card { padding: var(--space-4); }
+  .poster-modal { padding: var(--space-4); }
+  .poster-modal-content { padding: var(--space-5); }
+
+  /* The poster cards are the narrowest column on the page (two up at ~156px),
+     so their internal padding comes in a step further than the general card. */
+  .iec-info { padding: var(--space-3) var(--space-3) var(--space-1); }
+  .iec-actions { padding: var(--space-2) var(--space-3) var(--space-3); }
+
+  /* ── GRID GAPS ────────────────────────────────
+     One column means a gap is vertical rhythm, not a gutter, so it tightens
+     with everything else. */
+  .amr-grid { gap: var(--space-4); }
+  .iec-grid.horizontal-cards-grid { gap: var(--space-3); }
+  .hero-grid { gap: var(--space-7); }
+  .roadmap-event-item { margin-bottom: var(--space-6); }
+  .partners-logos-grid { gap: var(--space-4); }
+  .partner-logo-img { height: 32px; }
+
+  .pledge-commitments-mini span {
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .btn-swachh-pledge {
+    padding: var(--space-3) var(--space-7);
+  }
+
+  /* ── HEADER ───────────────────────────────────
+     WHAT WAS WRONG: the nav wrapped to two ragged rows (three links, then two)
+     and the whole sticky header measured 150px at 360px — 23% of the screen,
+     permanently, on every scroll position.
+
+     WHAT THIS IS: one centred logo row, then the five links as a single
+     full-bleed horizontal strip that scrolls. No JS, no hamburger, no hidden
+     state to get out of sync — the links are always all present in the DOM and
+     in the tab order, they are simply not all on screen at once.
+
+     Why a strip and not two tidy rows: at 44px per link (the touch minimum) two
+     rows cost 92px of nav on their own, which makes the header TALLER than the
+     150px it already was. One 44px row is the only arrangement that pays for
+     the bigger targets instead of charging for them. Result: 113px.
+
+     Why the cut-off is fine: the fourth chip is sliced mid-word by the screen
+     edge, and a half-visible label is the strongest scroll affordance there is —
+     stronger than an arrow, and it costs nothing to render.
+
+     That slice is MEASURED, not hoped for, and it is why the chip padding drops
+     to 12px below. At the original 16px the third chip ended at x=357 on a
+     360px screen and the fourth began at 361 — one pixel past the edge, so the
+     row looked complete and finished, and two links were silently unreachable.
+     At 12px the fourth chip starts at 329 and ~19px of "AMR Quiz" is on screen.
+     Anyone re-tuning this padding must re-measure that number. */
+  /* The horizontal gutter is deliberately ZERO here — this shorthand overrides
+     .container's 16px — and is handed down to the two rows instead. That is
+     what lets the strip below run to the screen edge without a negative margin;
+     a negative margin on top of a 0 gutter is what pushed the document 16px
+     wider than the viewport the first time this was measured. The logo is
+     centred, so it needs no gutter of its own. */
   .nav-container {
     flex-direction: column;
+    align-items: center;
     height: auto;
-    padding: var(--space-3) 0;
-    gap: var(--space-2);
+    padding: var(--space-1) 0;
+    gap: 0;
+  }
+
+  /* Full bleed by stretching to a container that already has no gutter, so the
+     cut-off chip is cut by the SCREEN rather than floating short of it.
+     overflow-x on the list does not propagate to the document — the page still
+     measures scrollWidth === clientWidth, which is verified, not assumed. */
+  nav {
+    align-self: stretch;
   }
 
   nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    /* justify-content stays flex-start on purpose. `center` on an overflowing
+       flex row pushes the first item off the left edge into space that cannot
+       be scrolled back to — the links before the midpoint become unreachable.
+       The two auto-margin pseudo-elements below centre the row when it fits and
+       collapse to nothing when it does not, which is the same result without
+       the trap. */
+    justify-content: flex-start;
     gap: var(--space-1);
-  }
-
-  nav ul li a {
+    /* Vertical padding is not decoration: overflow-x:auto computes overflow-y
+       to auto as well, so without it the 2px focus ring (plus its 2px offset)
+       on a 44px link would be clipped by the scroll box. */
     padding: var(--space-2) var(--space-3);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .swachh-pledge-card {
-    padding: var(--space-9) 0;
+  nav ul::-webkit-scrollbar { display: none; }
+
+  /* Two empty flex items with auto margins. When the row FITS (roughly 560px
+     and up) they absorb the slack evenly and the row is centred; when it
+     overflows, auto margins resolve to zero and they vanish.
+     This is why justify-content is left alone: `center` on an overflowing flex
+     row puts the first item at a negative offset that no scroll position can
+     reach, so the earliest links become permanently unreachable. Auto margins
+     centre without ever producing unscrollable overflow. */
+  nav ul::before,
+  nav ul::after {
+    content: '';
+    margin: auto;
   }
 
-  .hero-grid {
-    gap: var(--space-7);
-  }
+  nav ul li { flex: 0 0 auto; }
 
-  /* NOTE: the duplicate `.iec-grid.horizontal-cards-grid { repeat(2, 1fr) }`
-     that sat here was a no-op — the 1024px rule already sets exactly that.
-     At 360px those two columns leave each poster ~144px wide, which is the
-     real problem and is a layout fix, not a type one. */
+  /* 16px → 12px each side. Vertical padding is untouched because the 44px
+     min-height, not the padding, sets the target height. See the slice
+     arithmetic in the header note above — this is the number that makes the
+     fourth chip visible. */
+  nav ul li a { padding: var(--space-2) var(--space-3); }
 
+  /* ── FOOTER ───────────────────────────────────── */
   .footer-grid {
     grid-template-columns: 1fr;
     gap: var(--space-7);
@@ -2024,6 +2700,11 @@ footer::after {
     text-align: center;
   }
 
+  .footer-socials { justify-content: center; }
+
+  /* ── ROADMAP ──────────────────────────────────
+     The date column is dropped and the track pulls in to a 30px rail, which is
+     the narrowest indent that still clears the 28px check node. */
   .vertical-roadmap-wrapper {
     padding-left: 30px;
   }
@@ -2045,28 +2726,142 @@ footer::after {
   }
 }
 
-@media (max-width: 480px) {
-  .pledge-commitments-mini {
-    gap: var(--space-2);
+/* ═══════════════════════════════════════════════
+   REDUCED MOTION — the last block in the file, deliberately.
+
+   Source order is the safety net: every rule here sits after everything it
+   overrides, so it wins on order as well as on !important. A future edit that
+   adds motion ABOVE this block is neutralised automatically. One added below it
+   is not — so nothing goes below this.
+
+   The failure mode this block guards against is not "the page is a bit
+   jumpy". .reveal starts at opacity: 0. If the reveal engine is neutralised
+   without also being forced visible, a reader who has asked for less motion
+   gets a blank page. That is why rule 3 comes with an explicit inventory.
+   ═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+
+  /* ─── 1. GLOBAL CLAMP ───────────────────────────
+     Near-zero rather than `none`, and iteration-count 1 rather than 0, so any
+     code waiting on a transitionend/animationend event still receives it — the
+     animation runs, it just finishes inside one frame. `none` silently drops
+     those events and hangs whatever was waiting.
+     This also covers any rule added to this file later without a matching entry
+     below: the specific rules that follow are for correctness, this one is for
+     coverage. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 
-  .pledge-commitments-mini span {
-    padding: var(--space-1) var(--space-3);
+  /* ─── 2. SMOOTH SCROLLING OFF ───────────────────
+     `html { scroll-behavior: smooth }` in the base reset turns every one of the
+     nine in-page nav links into a long animated fly-past of the whole document,
+     which is the single most nauseating thing on the page for anyone with a
+     vestibular disorder. Jump instead. */
+  html {
+    scroll-behavior: auto !important;
   }
 
-  .btn-swachh-pledge {
-    padding: var(--space-3) var(--space-7);
+  /* ─── 3. THE REVEAL ENGINE — 32 .reveal elements ─
+     .reveal is opacity: 0 + translateY(20px) until app.js adds .visible.
+     app.js has its own reduced-motion path and reveals everything immediately,
+     but this rule must hold WITHOUT it: if JS is disabled, fails to parse, or
+     is still in flight on a slow Maharashtra connection, opacity: 0 is the
+     computed state of nearly every content block on the page.
+
+     So the base .reveal state is overridden directly — not merely un-animated —
+     and the container rule covers the five [data-reveal-children] blocks
+     (.hero-grid, .amr-grid, .iec-grid, .vertical-roadmap-wrapper,
+     .partners-logos-grid) whose children receive an inline transition-delay
+     from app.js that inline styles would otherwise keep alive. */
+  .reveal,
+  .reveal.visible,
+  [data-reveal-children] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
-  .quiz-card {
-    padding: var(--space-6);
+  .reveal-delay-1,
+  .reveal-delay-2,
+  .reveal-delay-3,
+  .reveal-delay-4,
+  .reveal-delay-5,
+  .reveal-delay-6 {
+    transition-delay: 0ms !important;
   }
 
-  .partners-logos-grid {
-    gap: var(--space-4);
+  /* ─── 4. EVERY @keyframes IN THIS FILE ───────────
+     Enumerated, not assumed. Five exist and all five are listed:
+
+       floatBubble   infinite  .bubble ×5          → still, at rest position
+       pulseDot      infinite  .pulse-dot          → a plain green dot
+       badgeFloat    infinite  .floating-badge     → sits on the hero image
+       toastSlideIn  once      .swachh-success-toast → appears, does not slide
+       modalSlideIn  once      .poster-modal-content → appears, does not rise
+
+     The three infinite ones are the important ones: an endless loop is motion
+     the reader never asked for and cannot dismiss, and the clamp in rule 1
+     alone would leave them looping at 0.01ms, i.e. flickering. `animation:
+     none` removes them outright. Each animates only transform/opacity from a
+     resting base state, so with the animation gone every element lands exactly
+     where its layout puts it — nothing is left mid-flight or invisible. */
+  .bubble,
+  .pulse-dot,
+  .floating-badge,
+  .swachh-success-toast,
+  .poster-modal-content {
+    animation: none !important;
   }
 
-  .partner-logo-img {
-    height: 32px;
+  /* ─── 5. INTERACTION MOVEMENT ────────────────────
+     Rule 1 makes these instant rather than animated, but instant is still
+     movement: a card that jumps 4px under the finger reads as a glitch. Colour,
+     border and shadow feedback all stay — only displacement goes.
+     Listed explicitly rather than with a blanket `transform: none`, because
+     three transforms on this page are LAYOUT, not motion, and killing them
+     would break the design:
+       .carousel-nav      translateY(-50%) does its vertical centring
+       .dot::before       scaleX() IS the active/inactive state, not an entrance
+       section::after     translateX(-50%) centres the section divider
+     .carousel-nav therefore re-states its centring in every state below. */
+  .glass-card:hover,
+  .iec-card:hover,
+  .dindi-video-card:hover,
+  .event-right-card:hover,
+  .partner-logo-card:hover,
+  .btn-swachh-pledge:hover,
+  .btn-swachh-pledge:active,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-secondary:hover,
+  .btn-secondary:active,
+  .iec-download-btn:hover,
+  .iec-download-btn:active,
+  .quiz-option:hover,
+  .quiz-option:active,
+  .footer-socials a:hover,
+  .footer-socials a:active,
+  .close-modal-btn:active,
+  .dindi-video-facade:active,
+  .dindi-video-facade:hover,
+  .hero-image-wrapper:hover img,
+  .iec-card:hover .poster-card-img,
+  .iec-thumbnail:active .view-icon,
+  .view-icon {
+    transform: none !important;
+  }
+
+  .carousel-nav,
+  .carousel-nav:hover,
+  .carousel-nav:active,
+  .carousel-nav:focus-visible {
+    transform: translateY(-50%) !important;
   }
 }
