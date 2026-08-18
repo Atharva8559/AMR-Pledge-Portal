@@ -27,6 +27,7 @@
         <ul>
           <li><a href="#pledge" data-i18n="nav.pledge">Take Pledge</a></li>
           <li><a href="#about" data-i18n="nav.about">About AMR</a></li>
+          <li><a href="#journey" data-i18n="nav.journey">Safe Disposal</a></li>
           <li><a href="#iec" data-i18n="nav.iec">IEC Materials</a></li>
           <li><a href="#quiz" data-i18n="nav.quiz">AMR Quiz</a></li>
           <li><a href="#milestones" data-i18n="nav.roadmap">Roadmap</a></li>
@@ -228,6 +229,191 @@
 
 
 
+
+  <!-- The Disposal Journey — a circular cycle at >=1025px, a vertical stepped path below it.
+       One set of seven <li>; only CSS differs between the two forms. -->
+  <section class="journey-section" id="journey" aria-labelledby="journey-title">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-subtitle" data-i18n="journey.subtitle">Safe Disposal</span>
+        <h2 class="section-title" id="journey-title" data-i18n="journey.title">The Disposal Journey</h2>
+        <p class="section-desc" data-i18n="journey.desc">Seven steps that take a leftover tablet from your shelf to
+          safe destruction — and keep antibiotics working for everyone.</p>
+      </div>
+
+      <div class="journey-diagram">
+
+        <!-- Graphic layer: decoration only. No text, no discs, no interaction. -->
+        <svg class="journey-orbit reveal" viewBox="0 0 860 860" aria-hidden="true" focusable="false">
+          <circle class="journey-orbit-disc" cx="430" cy="430" r="150" />
+          <circle class="journey-orbit-disc-ring" cx="430" cy="430" r="162" />
+          <circle class="journey-orbit-ring" cx="430" cy="430" r="215" />
+          <g class="journey-orbit-arrows">
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(523.285 236.292) rotate(25.7143)" />
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(639.610 382.158) rotate(77.1429)" />
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(598.094 564.050) rotate(128.5714)" />
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(430.000 645.000) rotate(180.0000)" />
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(261.906 564.050) rotate(231.4286)" />
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(220.390 382.158) rotate(282.8571)" />
+            <path d="M-4 -5 L6 0 L-4 5 Z" transform="translate(336.715 236.292) rotate(334.2857)" />
+          </g>
+        </svg>
+
+        <!-- Centre hub: real text, not decoration. -->
+        <div class="journey-hub reveal">
+          <div class="journey-hub-inner">
+            <span class="journey-hub-mark" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.6 19.4a5 5 0 0 1 0-7.07l7.73-7.73a5 5 0 0 1 7.07 7.07l-7.73 7.73a5 5 0 0 1-7.07 0z" />
+                <path d="M8.16 15.84 15.84 8.16" />
+              </svg>
+            </span>
+            <p class="journey-hub-title" lang="mr" data-i18n="journey.hub.hashtag"># योग्य विल्हेवाट, AMR वर मात!</p>
+            <p class="journey-hub-line" data-i18n="journey.hub.line">Safe disposal, every single time</p>
+          </div>
+        </div>
+
+        <!-- The seven steps. This ordered list is the only copy of the content. -->
+        <ol class="journey-steps" role="list" data-reveal-children>
+
+          <li class="journey-step journey-step--top reveal" data-step="1">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10.5 12 3.5l9 7V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+                <path d="M9.6 14.6h4.8a2.4 2.4 0 0 1 0 4.8H9.6a2.4 2.4 0 0 1 0-4.8z" />
+                <path d="M12 14.6v4.8" />
+              </svg>
+              <span class="journey-node-num">1</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step1.label">Leftover medicines at home</h3>
+              <p class="journey-step-detail" data-i18n="journey.step1.detail">Unfinished or expired tablets, syrups and
+                capsules are still sitting in the house.</p>
+            </div>
+          </li>
+
+          <li class="journey-step journey-step--right journey-step--warn reveal" data-step="2">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7h16" />
+                <path d="M6 7v12.5a1.5 1.5 0 0 0 1.5 1.5h9a1.5 1.5 0 0 0 1.5-1.5V7" />
+                <path d="M9.5 7V4.5h5V7" />
+                <path d="M3.5 20.5 20.5 3.5" />
+              </svg>
+              <span class="journey-node-num">2</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step2.label">Never bin it or flush it</h3>
+              <p class="journey-step-detail" data-i18n="journey.step2.detail">Thrown in the bin or flushed away,
+                medicines reach soil and water. Safe disposal exists to stop exactly that.</p>
+            </div>
+          </li>
+
+          <li class="journey-step journey-step--right reveal" data-step="3">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 21V6.5h15V21" />
+                <path d="M2.5 21h19" />
+                <path d="M12 10.5v6" />
+                <path d="M9 13.5h6" />
+              </svg>
+              <span class="journey-node-num">3</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step3.label">Take them to your PHC</h3>
+              <p class="journey-step-detail" data-i18n="journey.step3.detail">Carry them to your nearest PHC,
+                sub-centre or government health facility.</p>
+            </div>
+          </li>
+
+          <li class="journey-step journey-step--bottom reveal" data-step="4">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v6.5" />
+                <path d="M8.75 6.5 12 9.75l3.25-3.25" />
+                <path d="M3.5 12.5 6 9.5h12l2.5 3" />
+                <path d="M3.5 12.5h17V20a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1z" />
+              </svg>
+              <span class="journey-node-num">4</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step4.label">Hand them over</h3>
+              <p class="journey-step-detail" data-i18n="journey.step4.detail">Give them to the staff, or put them in the
+                medicine collection box if there is one.</p>
+            </div>
+          </li>
+
+          <li class="journey-step journey-step--bottom reveal" data-step="5">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.5 11.5h15V20a1 1 0 0 1-1 1h-13a1 1 0 0 1-1-1z" />
+                <path d="M9 11.5V8.5a3 3 0 0 1 6 0v3" />
+                <path d="M12 15v2.5" />
+              </svg>
+              <span class="journey-node-num">5</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step5.label">Staff collect and seal them</h3>
+              <p class="journey-step-detail" data-i18n="journey.step5.detail">Health staff take charge of what is handed
+                in and store it safely until it is taken for disposal.</p>
+            </div>
+          </li>
+
+          <li class="journey-step journey-step--left reveal" data-step="6">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M8.6 12.2l2.4 2.4 4.4-4.7" />
+              </svg>
+              <span class="journey-node-num">6</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step6.label">Destroyed the safe way</h3>
+              <p class="journey-step-detail" data-i18n="journey.step6.detail">It is disposed of through the health
+                system, not left in a landfill or a water body.</p>
+            </div>
+          </li>
+
+          <li class="journey-step journey-step--left reveal" data-step="7">
+            <span class="journey-node" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18" />
+                <path d="M12 21v-7.5" />
+                <path d="M12 13.5c-3.6 0-5.5-2.2-5.5-5.5 3.6 0 5.5 2.2 5.5 5.5z" />
+                <path d="M12 13.5c3.6 0 5.5-2.2 5.5-5.5-3.6 0-5.5 2.2-5.5 5.5z" />
+              </svg>
+              <span class="journey-node-num">7</span>
+            </span>
+            <div class="journey-step-text">
+              <h3 class="journey-step-label" data-i18n="journey.step7.label">Soil and water stay clean</h3>
+              <p class="journey-step-detail" data-i18n="journey.step7.detail">Antibiotics keep working for the next
+                person who needs them — and the cycle starts again at home.</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+
+      <div class="glass-card journey-cta reveal">
+        <p class="journey-cta-text" data-i18n="journey.cta.text">Do it today: take any leftover or expired medicines to
+          your nearest PHC, sub-centre or government health facility, and ask the staff there.</p>
+        <div class="journey-cta-actions">
+          <a class="btn-primary" href="#pledge" data-i18n="journey.cta.pledge">Take the pledge</a>
+          <a class="btn-secondary" href="#iec" data-i18n="journey.cta.poster">See the official poster</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- IEC Materials Section -->
   <section class="iec-section" id="iec">
@@ -764,6 +950,7 @@
         <h4 data-i18n="footer.nav.heading">Navigation</h4>
         <ul>
           <li><a href="#about" data-i18n="footer.nav.about">About AMR</a></li>
+          <li><a href="#journey" data-i18n="footer.nav.journey">Safe Disposal</a></li>
           <li><a href="#pledge" data-i18n="footer.nav.pledge">Take Pledge</a></li>
           <li><a href="#iec" data-i18n="footer.nav.iec">IEC Library</a></li>
           <li><a href="#quiz" data-i18n="footer.nav.quiz">Quiz Center</a></li>

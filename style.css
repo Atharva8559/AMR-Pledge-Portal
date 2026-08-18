@@ -328,6 +328,7 @@ ul { list-style: none; }
 .section-subtitle,
 .roadmap-header-badge,
 .partners-title,
+.journey-hub-line,
 .footer-links h4 {
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
@@ -1206,6 +1207,220 @@ nav ul li a:active {
 
 .poster-points-list li div {
   flex: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   JOURNEY — THE DISPOSAL JOURNEY
+
+   Two forms, ONE set of markup. What follows is the vertical stepped path,
+   written mobile-first so it is also the no-media-query fallback: if the
+   min-width:1025px block below never matches — old browser, print, a future
+   mistake — the reader still gets a readable numbered list rather than a
+   collapsed circle.
+
+   NOTHING HERE MAY USE `transform` FOR POSITIONING. Every .journey-* element
+   that animates in carries .reveal, which owns transform (translateY(20px) →
+   translateY(0)). A positioning transform would be overwritten the moment the
+   reveal fires, dropping the element to the wrong place. Position with
+   left/top/right/bottom and flex only.
+   ═══════════════════════════════════════════════ */
+.journey-section {
+  background: var(--white);
+}
+
+.journey-diagram {
+  position: relative;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* Decoration only; the circular form switches it on. */
+.journey-orbit {
+  display: none;
+}
+
+.journey-hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-8);
+}
+
+.journey-hub-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 260px;
+  text-align: center;
+}
+
+.journey-hub-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--green-50);
+  border: 1.5px solid var(--green-200);
+  color: var(--green-600);
+}
+
+.journey-hub-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--lh-snug);
+  color: var(--green-800);
+  margin: 0;
+}
+
+/* Typography comes from the shared eyebrow rule; only colour and spacing here. */
+.journey-hub-line {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.journey-steps {
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  margin: 0;
+  padding: 0;
+}
+
+/* The rail. Inset top and bottom so it starts and ends inside the end discs
+   rather than sticking out past them. */
+.journey-steps::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  margin-left: -1.5px;
+  width: 3px;
+  top: 28px;
+  bottom: 28px;
+  background: linear-gradient(180deg, var(--green-600), var(--green-300), var(--green-100));
+  border-radius: var(--radius-full);
+}
+
+.journey-step {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.journey-node {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: var(--white);
+  /* The 6px white ring masks the rail (and, in the circular form, the dashed
+     orbit) where it passes behind the disc. Same trick as .check-node. */
+  box-shadow: var(--shadow-green-sm), 0 0 0 6px var(--white);
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.journey-node-num {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--white);
+  border: 1.5px solid var(--green-200);
+  color: var(--green-700);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-black);
+  line-height: 1;
+}
+
+.journey-step-text {
+  flex: 1;
+  padding-top: var(--space-1);
+}
+
+.journey-step-label {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--lh-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.journey-step-detail {
+  font-size: var(--text-sm);
+  line-height: var(--lh-body);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: var(--measure-narrow);
+}
+
+/* Step 2 is the one prohibition in the set. Red disc, red chip edge, red label
+   — colour, the struck-through icon and the wording all carry the correction
+   together, so it does not depend on colour alone. Poster hues, untouched. */
+.journey-step--warn .journey-node {
+  background: linear-gradient(135deg, var(--red-600), var(--red-500));
+  box-shadow: var(--shadow-red-sm), 0 0 0 6px var(--white);
+}
+
+.journey-step--warn .journey-node-num {
+  border-color: var(--red-100);
+  color: var(--red-700);
+}
+
+.journey-step--warn .journey-step-label {
+  color: var(--red-700);
+}
+
+/* Pointer-only enhancement. Nothing is gated behind it: every label and detail
+   is already visible, so this only adds emphasis for a mouse user. Kept under
+   (hover: hover) because touch browsers latch :hover after a tap. */
+@media (hover: hover) {
+  .journey-step:hover .journey-node {
+    transform: scale(1.06);
+    box-shadow: var(--shadow-green-md), 0 0 0 6px var(--white);
+  }
+
+  .journey-step--warn:hover .journey-node {
+    box-shadow: var(--shadow-red-sm), 0 0 0 6px var(--white);
+  }
+}
+
+.journey-cta {
+  margin-top: var(--space-9);
+  padding: var(--space-7);
+  text-align: center;
+}
+
+.journey-cta-text {
+  font-size: var(--text-md);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+  max-width: var(--measure);
+  margin: 0 auto var(--space-6);
+}
+
+.journey-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: center;
 }
 
 /* ═══════════════════════════════════════════════
@@ -2530,6 +2745,21 @@ footer::after {
    ≤768px — PHONE
    ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  /* Journey vertical rhythm steps down one notch on phones. No font-size here —
+     the clamp() ramp owns sizing, and a fixed size inside a breakpoint cancels it. */
+  .journey-steps {
+    gap: var(--space-6);
+  }
+
+  .journey-hub {
+    margin-bottom: var(--space-7);
+  }
+
+  .journey-cta {
+    margin-top: var(--space-7);
+    padding: var(--space-6);
+  }
+
   /* LONGHANDS, not `padding: 0 var(--space-4)`. Three elements on this page
      carry .container AND a second class that sets vertical padding —
      .nav-container, .footer-grid and .footer-bottom — and the shorthand here
@@ -2739,6 +2969,164 @@ footer::after {
    without also being forced visible, a reader who has asked for less motion
    gets a blank page. That is why rule 3 comes with an explicit inventory.
    ═══════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────
+   THE DISPOSAL JOURNEY — CIRCULAR FORM
+
+   Layered on as a pure enhancement above the 1024px breakpoint that every
+   other multi-column layout on this page already collapses at. Below it the
+   vertical rail defined earlier stands unmodified.
+
+   The box is exactly 860 x 860 CSS px and the SVG viewBox is 0 0 860 860, so
+   one viewBox unit is one CSS pixel and the SVG coordinates and the CSS
+   coordinates are literally the same numbers — nothing has to be converted.
+   860 always fits: at >=1025px the container's inner width is at least
+   1025 - 48 = 977px.
+
+   Node points: angle = -90 + (n-1) * 360/7, clockwise from twelve o'clock,
+   x = 430 + 215*cos(angle), y = 430 + 215*sin(angle). Each block is offset by
+   half a disc (28px) so the disc centre lands exactly on its node point. The
+   set is bilaterally symmetric about x = 430, which is the cheapest available
+   proof the numbers were not mistyped: 2 mirrors 7, 3 mirrors 6, 4 mirrors 5.
+
+   Again: NO `transform` anywhere below. .reveal owns it.
+   ─────────────────────────────────────────────── */
+@media (min-width: 1025px) {
+
+  .journey-diagram {
+    width: 860px;
+    height: 860px;
+    max-width: none;
+  }
+
+  .journey-orbit {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .journey-orbit-disc {
+    fill: var(--green-50);
+  }
+
+  .journey-orbit-disc-ring {
+    fill: none;
+    stroke: var(--green-100);
+    stroke-width: 1;
+  }
+
+  /* 10 + 15.0164 = 25.01639, which repeats exactly 54 times around the
+     1350.885 circumference, so the dash pattern closes with no stub at the
+     seam. The ring is never animated — see the note in the reduced-motion
+     block about why a moving dash pattern was rejected. */
+  .journey-orbit-ring {
+    fill: none;
+    stroke: var(--green-200);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 10 15.0164;
+  }
+
+  .journey-orbit-arrows {
+    fill: var(--green-300);
+    stroke: none;
+  }
+
+  /* Centred by a full-size flex overlay rather than a translate, because this
+     element carries .reveal and a positioning transform would be clobbered. */
+  .journey-hub {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .journey-hub-inner {
+    max-width: 230px;
+  }
+
+  /* Must fill the 860px box: the steps are absolutely positioned against THIS
+     element, and as a plain block it would collapse to zero height — which
+     silently breaks step 1, the only one anchored with `bottom`. */
+  .journey-steps {
+    position: absolute;
+    inset: 0;
+    display: block;
+    gap: 0;
+  }
+
+  .journey-steps::before {
+    display: none;
+  }
+
+  .journey-step {
+    position: absolute;
+    gap: var(--space-3);
+  }
+
+  .journey-step-text {
+    padding-top: 0;
+  }
+
+  .journey-step-label {
+    font-size: var(--text-md);
+    margin-bottom: var(--space-1);
+  }
+
+  .journey-step-detail {
+    font-size: var(--text-xs);
+    max-width: none;
+  }
+
+  /* Four placement families. The disc is the first DOM child, so -reverse puts
+     it on the inner edge (nearest the circle) with no effect on reading order. */
+  .journey-step--top {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    width: 181px;
+  }
+
+  .journey-step--bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 181px;
+  }
+
+  .journey-step--right {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    width: 232px;
+  }
+
+  .journey-step--left {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    text-align: right;
+    width: 232px;
+  }
+
+  /* n=1  (430.000, 215.000) — block bottom edge = 215 + 28 = 243 from the top */
+  .journey-step[data-step="1"] { left: 339.5px; bottom: 617px; }
+  /* n=2  (598.094, 295.950) */
+  .journey-step[data-step="2"] { left: 570.1px; top: 267.9px; }
+  /* n=3  (639.610, 477.842) */
+  .journey-step[data-step="3"] { left: 611.6px; top: 449.8px; }
+  /* n=4  (523.285, 623.708) */
+  .journey-step[data-step="4"] { left: 432.8px; top: 595.7px; }
+  /* n=5  (336.715, 623.708) — mirror of 4 */
+  .journey-step[data-step="5"] { left: 246.2px; top: 595.7px; }
+  /* n=6  (220.390, 477.842) — mirror of 3 */
+  .journey-step[data-step="6"] { right: 611.6px; top: 449.8px; }
+  /* n=7  (261.906, 295.950) — mirror of 2 */
+  .journey-step[data-step="7"] { right: 570.1px; top: 267.9px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   /* ─── 1. GLOBAL CLAMP ───────────────────────────
@@ -2761,14 +3149,14 @@ footer::after {
 
   /* ─── 2. SMOOTH SCROLLING OFF ───────────────────
      `html { scroll-behavior: smooth }` in the base reset turns every one of the
-     nine in-page nav links into a long animated fly-past of the whole document,
+     21 in-page anchor links into a long animated fly-past of the whole document,
      which is the single most nauseating thing on the page for anyone with a
      vestibular disorder. Jump instead. */
   html {
     scroll-behavior: auto !important;
   }
 
-  /* ─── 3. THE REVEAL ENGINE — 32 .reveal elements ─
+  /* ─── 3. THE REVEAL ENGINE — 38 .reveal elements ─
      .reveal is opacity: 0 + translateY(20px) until app.js adds .visible.
      app.js has its own reduced-motion path and reveals everything immediately,
      but this rule must hold WITHOUT it: if JS is disabled, fails to parse, or
@@ -2776,7 +3164,7 @@ footer::after {
      computed state of nearly every content block on the page.
 
      So the base .reveal state is overridden directly — not merely un-animated —
-     and the container rule covers the five [data-reveal-children] blocks
+     and the container rule covers the six [data-reveal-children] blocks
      (.hero-grid, .amr-grid, .iec-grid, .vertical-roadmap-wrapper,
      .partners-logos-grid) whose children receive an inline transition-delay
      from app.js that inline styles would otherwise keep alive. */
