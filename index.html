@@ -55,6 +55,15 @@
           <li><a href="#milestones" data-i18n="nav.roadmap">Roadmap</a></li>
         </ul>
       </nav>
+
+      <!-- Sits OUTSIDE <nav>, which is a horizontal scroll strip on phones —
+           inside it the toggle would scroll away and be unreachable. -->
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-attr="aria-label:nav.language">
+        <button type="button" class="lang-btn is-active" data-lang="en" aria-pressed="true"
+          onclick="switchLang('en')">EN</button>
+        <button type="button" class="lang-btn" data-lang="mr" aria-pressed="false" lang="mr"
+          onclick="switchLang('mr')">मराठी</button>
+      </div>
     </div>
   </header>
 
@@ -676,7 +685,8 @@
         <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
           <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster1.modal.title,data-modal-desc:iec.poster1.modal.desc"
-            onclick="openPosterModal('assets/A3_Posters_page-0001.jpg', 'Do You Have Leftover or Expired Medicines at Home?', 'Official Public Health awareness poster detailing medicine collection boxes for safe antibiotic disposal.')">
+            data-modal-title="Do You Have Leftover or Expired Medicines at Home?" data-modal-desc="Official Public Health awareness poster detailing medicine collection boxes for safe antibiotic disposal."
+            onclick="openPosterModal(this, 'assets/A3_Posters_page-0001.jpg')">
             <img src="assets/web/A3_Posters_page-0001.webp" alt="Medicine Disposal Box Poster" class="poster-card-img"
               width="848" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:iec.poster1.image.alt">
             <div class="poster-overlay">
@@ -704,7 +714,8 @@
         <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
           <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster2.modal.title,data-modal-desc:iec.poster2.modal.desc"
-            onclick="openPosterModal('assets/A3_Posters_page-0002.jpg', 'Let\'s Dispose of Antibiotics Safely & Defeat AMR!', 'Official poster illustrating green collection box drop-offs for expired medicines.')">
+            data-modal-title="Let's Dispose of Antibiotics Safely &amp; Defeat AMR!" data-modal-desc="Official poster illustrating green collection box drop-offs for expired medicines."
+            onclick="openPosterModal(this, 'assets/A3_Posters_page-0002.jpg')">
             <img src="assets/web/A3_Posters_page-0002.webp" alt="Safe Disposal Poster" class="poster-card-img"
               width="848" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:iec.poster2.image.alt">
             <div class="poster-overlay">
@@ -733,7 +744,8 @@
         <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
           <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster3.modal.title,data-modal-desc:iec.poster3.modal.desc"
-            onclick="openPosterModal('assets/A3_Posters_page-0003.jpg', 'Not Feeling Better Quickly? (AMR 3 Key Questions)', 'Comprehensive 3-question visual guide explaining Antimicrobial Resistance causes and prevention.')">
+            data-modal-title="Not Feeling Better Quickly? (AMR 3 Key Questions)" data-modal-desc="Comprehensive 3-question visual guide explaining Antimicrobial Resistance causes and prevention."
+            onclick="openPosterModal(this, 'assets/A3_Posters_page-0003.jpg')">
             <img src="assets/web/A3_Posters_page-0003.webp" alt="AMR 3 Questions Poster" class="poster-card-img"
               width="848" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:iec.poster3.image.alt">
             <div class="poster-overlay">
@@ -761,7 +773,8 @@
         <div class="glass-card iec-card iec-poster-card reveal" data-category="flyer">
           <div class="iec-thumbnail poster-img-thumb" role="button" tabindex="0"
             data-i18n-attr="data-modal-title:iec.poster4.modal.title,data-modal-desc:iec.poster4.modal.desc"
-            onclick="openPosterModal('assets/A3_Posters_page-0004.jpg', 'What Can We Do to Prevent AMR?', 'Official guidelines poster outlining doctor-advised full antibiotic courses and safe disposal.')">
+            data-modal-title="What Can We Do to Prevent AMR?" data-modal-desc="Official guidelines poster outlining doctor-advised full antibiotic courses and safe disposal."
+            onclick="openPosterModal(this, 'assets/A3_Posters_page-0004.jpg')">
             <img src="assets/web/A3_Posters_page-0004.webp" alt="AMR Prevention Poster" class="poster-card-img"
               width="848" height="1200" loading="lazy" decoding="async" data-i18n-attr="alt:iec.poster4.image.alt">
             <div class="poster-overlay">
@@ -934,15 +947,18 @@
                   <img src="assets/web/events/national_consultation/1.webp" alt="National Consultation 1"
                     class="carousel-img active" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event1.image1.alt,data-modal-title:roadmap.event1.modal.title,data-modal-desc:roadmap.event1.modal.desc"
-                    onclick="openPosterModal('assets/events/national_consultation/1.jpg', 'National Consultative Meeting', 'Key stakeholders deliberating on systemic issues.', true)">
+                    data-modal-title="National Consultative Meeting" data-modal-desc="Key stakeholders deliberating on systemic issues."
+            onclick="openPosterModal(this, 'assets/events/national_consultation/1.jpg', true)">
                   <img src="assets/web/events/national_consultation/2.webp" alt="National Consultation 2"
                     class="carousel-img" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event1.image2.alt,data-modal-title:roadmap.event1.modal.title,data-modal-desc:roadmap.event1.modal.desc"
-                    onclick="openPosterModal('assets/events/national_consultation/2.jpg', 'National Consultative Meeting', 'Key stakeholders deliberating on systemic issues.', true)">
+                    data-modal-title="National Consultative Meeting" data-modal-desc="Key stakeholders deliberating on systemic issues."
+            onclick="openPosterModal(this, 'assets/events/national_consultation/2.jpg', true)">
                   <img src="assets/web/events/national_consultation/3.webp" alt="National Consultation 3"
                     class="carousel-img" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event1.image3.alt,data-modal-title:roadmap.event1.modal.title,data-modal-desc:roadmap.event1.modal.desc"
-                    onclick="openPosterModal('assets/events/national_consultation/3.jpg', 'National Consultative Meeting', 'Key stakeholders deliberating on systemic issues.', true)">
+                    data-modal-title="National Consultative Meeting" data-modal-desc="Key stakeholders deliberating on systemic issues."
+            onclick="openPosterModal(this, 'assets/events/national_consultation/3.jpg', true)">
                 </div>
                 <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-national', -1)"
                   aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
@@ -983,7 +999,8 @@
                   <img src="assets/web/events/kap_study/1.webp" alt="KAP Study Completed Report"
                     class="carousel-img active" width="1600" height="1200" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event2.image1.alt,data-modal-title:roadmap.event2.modal.title,data-modal-desc:roadmap.event2.modal.desc"
-                    onclick="openPosterModal('assets/events/kap_study/1.jpeg', 'KAP Study Completed', 'Households, pharmacists and care-providers surveyed to map systemic gaps.', true)">
+                    data-modal-title="KAP Study Completed" data-modal-desc="Households, pharmacists and care-providers surveyed to map systemic gaps."
+            onclick="openPosterModal(this, 'assets/events/kap_study/1.jpeg', true)">
                 </div>
               </div>
             </div>
@@ -1012,11 +1029,13 @@
                   <img src="assets/web/events/state_consultation/1.webp" alt="State-level Consultation"
                     class="carousel-img active" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event3.image1.alt,data-modal-title:roadmap.event3.modal1.title,data-modal-desc:roadmap.event3.modal1.desc"
-                    onclick="openPosterModal('assets/events/state_consultation/1.jpg', 'State-level Consultative Meetings', 'High-level state consultation bringing together healthcare leaders.', true)">
+                    data-modal-title="State-level Consultative Meetings" data-modal-desc="High-level state consultation bringing together healthcare leaders."
+            onclick="openPosterModal(this, 'assets/events/state_consultation/1.jpg', true)">
                   <img src="assets/web/events/report_dissemination/1.webp" alt="National Report Dissemination"
                     class="carousel-img" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event3.image2.alt,data-modal-title:roadmap.event3.modal2.title,data-modal-desc:roadmap.event3.modal2.desc"
-                    onclick="openPosterModal('assets/events/report_dissemination/1.jpeg', 'National Consultative Report Dissemination', 'Report formally presented to DHS Maharashtra and shared with all stakeholders.', true)">
+                    data-modal-title="National Consultative Report Dissemination" data-modal-desc="Report formally presented to DHS Maharashtra and shared with all stakeholders."
+            onclick="openPosterModal(this, 'assets/events/report_dissemination/1.jpeg', true)">
                 </div>
                 <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-state-consult', -1)"
                   aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
@@ -1056,15 +1075,18 @@
                   <img src="assets/web/events/state_stewardship/1.webp" alt="State Stewardship 1"
                     class="carousel-img active" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event4.image1.alt,data-modal-title:roadmap.event4.modal.title,data-modal-desc:roadmap.event4.modal.desc"
-                    onclick="openPosterModal('assets/events/state_stewardship/1.jpg', 'Statewide Antimicrobial Stewardship', 'Sensitizing health actors on AMS practices.', true)">
+                    data-modal-title="Statewide Antimicrobial Stewardship" data-modal-desc="Sensitizing health actors on AMS practices."
+            onclick="openPosterModal(this, 'assets/events/state_stewardship/1.jpg', true)">
                   <img src="assets/web/events/state_stewardship/2.webp" alt="State Stewardship 2" class="carousel-img"
                     width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event4.image2.alt,data-modal-title:roadmap.event4.modal.title,data-modal-desc:roadmap.event4.modal.desc"
-                    onclick="openPosterModal('assets/events/state_stewardship/2.jpg', 'Statewide Antimicrobial Stewardship', 'Sensitizing health actors on AMS practices.', true)">
+                    data-modal-title="Statewide Antimicrobial Stewardship" data-modal-desc="Sensitizing health actors on AMS practices."
+            onclick="openPosterModal(this, 'assets/events/state_stewardship/2.jpg', true)">
                   <img src="assets/web/events/state_stewardship/3.webp" alt="State Stewardship 3" class="carousel-img"
                     width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event4.image3.alt,data-modal-title:roadmap.event4.modal.title,data-modal-desc:roadmap.event4.modal.desc"
-                    onclick="openPosterModal('assets/events/state_stewardship/3.jpg', 'Statewide Antimicrobial Stewardship', 'Sensitizing health actors on AMS practices.', true)">
+                    data-modal-title="Statewide Antimicrobial Stewardship" data-modal-desc="Sensitizing health actors on AMS practices."
+            onclick="openPosterModal(this, 'assets/events/state_stewardship/3.jpg', true)">
                 </div>
                 <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-stewardship', -1)"
                   aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>
@@ -1106,19 +1128,23 @@
                   <img src="assets/web/events/innovation_challenge/1.webp" alt="Innovation Challenge 1"
                     class="carousel-img active" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event5.image1.alt,data-modal-title:roadmap.event5.modal.title,data-modal-desc:roadmap.event5.modal.desc1"
-                    onclick="openPosterModal('assets/events/innovation_challenge/1.jpg', 'Innovation Challenge & Jury Round', 'Open call for digital & social innovations.', true)">
+                    data-modal-title="Innovation Challenge &amp; Jury Round" data-modal-desc="Open call for digital &amp; social innovations."
+            onclick="openPosterModal(this, 'assets/events/innovation_challenge/1.jpg', true)">
                   <img src="assets/web/events/innovation_challenge/2.webp" alt="Innovation Challenge 2"
                     class="carousel-img" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event5.image2.alt,data-modal-title:roadmap.event5.modal.title,data-modal-desc:roadmap.event5.modal.desc2"
-                    onclick="openPosterModal('assets/events/innovation_challenge/2.jpg', 'Innovation Challenge & Jury Round', 'Jury evaluation process.', true)">
+                    data-modal-title="Innovation Challenge &amp; Jury Round" data-modal-desc="Jury evaluation process."
+            onclick="openPosterModal(this, 'assets/events/innovation_challenge/2.jpg', true)">
                   <img src="assets/web/events/innovation_challenge/3.webp" alt="Innovation Challenge 3"
                     class="carousel-img" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event5.image3.alt,data-modal-title:roadmap.event5.modal.title,data-modal-desc:roadmap.event5.modal.desc3"
-                    onclick="openPosterModal('assets/events/innovation_challenge/3.jpg', 'Innovation Challenge & Jury Round', 'Final jury round completion.', true)">
+                    data-modal-title="Innovation Challenge &amp; Jury Round" data-modal-desc="Final jury round completion."
+            onclick="openPosterModal(this, 'assets/events/innovation_challenge/3.jpg', true)">
                   <img src="assets/web/events/innovation_challenge/4.webp" alt="Innovation Challenge 4"
                     class="carousel-img" width="1600" height="1066" loading="lazy" decoding="async"
                     data-i18n-attr="alt:roadmap.event5.image4.alt,data-modal-title:roadmap.event5.modal.title,data-modal-desc:roadmap.event5.modal.desc4"
-                    onclick="openPosterModal('assets/events/innovation_challenge/4.jpg', 'Innovation Challenge & Jury Round', '2 digital & 1 social innovation selected.', true)">
+                    data-modal-title="Innovation Challenge &amp; Jury Round" data-modal-desc="2 digital &amp; 1 social innovation selected."
+            onclick="openPosterModal(this, 'assets/events/innovation_challenge/4.jpg', true)">
                 </div>
                 <button type="button" class="carousel-nav prev" onclick="moveCarousel('carousel-innovation', -1)"
                   aria-label="Previous image" data-i18n-attr="aria-label:common.carousel.prev">&lsaquo;</button>

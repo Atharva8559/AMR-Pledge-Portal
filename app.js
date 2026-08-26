@@ -20,9 +20,14 @@ function registerStrings(lang, strings) {
   if (lang && strings) I18N_LOADED[lang] = strings;
 }
 
-// Own-property check, so keys like "constructor" can't leak Object.prototype values
+// Own-property check, so keys like "constructor" can't leak Object.prototype
+// values. A key also only counts as translated when it holds a NON-EMPTY string:
+// that lets strings.mr.js ship half-finished, with untranslated entries sitting
+// as '' and the English simply staying put, instead of blanking those elements.
 function i18nHas(obj, key) {
-  return !!obj && Object.prototype.hasOwnProperty.call(obj, key);
+  if (!obj || !Object.prototype.hasOwnProperty.call(obj, key)) return false;
+  const value = obj[key];
+  return typeof value === 'string' && value.trim() !== '';
 }
 
 // data-i18n-attr="alt:hero.image.alt" — comma/semicolon separated for several attrs
@@ -173,7 +178,27 @@ document.addEventListener('DOMContentLoaded', () => {
   if (saved && saved !== 'en') setLanguage(saved);
 });
 
-// Make i18n globally accessible (Bucket 6 toggle calls these from an inline onclick)
+// ─── Language toggle ─────────────────────────────────────────────────────────
+function syncLangToggle() {
+  const buttons = document.querySelectorAll('.lang-btn');
+  buttons.forEach(function (btn) {
+    const on = btn.getAttribute('data-lang') === I18N.lang;
+    btn.classList.toggle('is-active', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}
+
+// setLanguage resolves whether or not the strings file loaded, and rejects
+// nothing — so the toggle is re-synced either way and can never be left showing
+// a language the page is not actually in.
+function switchLang(lang) {
+  Promise.resolve(setLanguage(lang)).then(syncLangToggle, syncLangToggle);
+}
+
+document.addEventListener('DOMContentLoaded', syncLangToggle);
+
+// Make i18n globally accessible (the toggle calls these from an inline onclick)
+window.switchLang = switchLang;
 window.setLanguage = setLanguage;
 window.registerStrings = registerStrings;
 window.t = t;
@@ -691,9 +716,17 @@ function webVersionOf(src) {
   return 'assets/web/' + src.slice('assets/'.length).replace(/\.[^./]+$/, '.webp');
 }
 
-function openPosterModal(imgSrc, title, desc, hideDownload) {
+// Called as openPosterModal(this, 'assets/…', hideDownload). The caption comes
+// from the trigger's data-modal-title / data-modal-desc attributes rather than
+// from arguments, because a string sitting inside an onclick cannot be reached
+// by the i18n runtime and so could never be translated.
+function openPosterModal(trigger, imgSrc, hideDownload) {
   const modal = document.getElementById('posterModal');
   if (!modal) return;
+
+  const el = trigger && trigger.getAttribute ? trigger : null;
+  const title = (el && el.getAttribute('data-modal-title')) || '';
+  const desc = (el && el.getAttribute('data-modal-desc')) || '';
 
   const img = document.getElementById('posterModalImg');
   const webSrc = webVersionOf(imgSrc);
