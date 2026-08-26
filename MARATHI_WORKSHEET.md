@@ -1,19 +1,21 @@
 # ACT4AMR — Marathi translation worksheet
 
 201 strings. Fill the **Marathi** column, then paste each value into the
-matching key in `strings.mr.js`. Anything left blank stays English on the page.
+matching key in `strings.mr.js`. Anything left blank stays English on the page,
+so this can be done a section at a time.
 
-Keep any `<strong>` tags. This is public-health guidance under government and
-partner branding, so it needs a Marathi speaker rather than machine translation.
+Keep any `<strong>` tags. This is public-health guidance published under
+government and partner branding, so it needs a Marathi speaker rather than
+machine translation.
 
-## meta
+## meta  (0/2 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `meta.title` | ACT4AMR \| Antimicrobial Resistance Campaign |  |
 | `meta.description` | Join the global fight against Antimicrobial Resistance (AMR). Take the pledge, access official public health IEC materials, listen to Dindi AMR songs, and track campaign milestones. Supported by NHM, PATH, CHRI & GSK. |  |
 
-## nav
+## nav  (0/8 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -24,8 +26,9 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `nav.iec` | IEC Materials |  |
 | `nav.quiz` | AMR Quiz |  |
 | `nav.roadmap` | Roadmap |  |
+| `nav.language` | Language |  |
 
-## pledge
+## pledge  (0/13 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -43,7 +46,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `pledge.share.save` | Save the image |  |
 | `pledge.card.alt` | A shareable ACT4AMR card listing the four promises: take antibiotics only when prescribed, finish every course, never share medicines, and take leftovers to the nearest health facility. |  |
 
-## hero
+## hero  (0/8 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -56,7 +59,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `hero.badge.label` | Then drop leftovers at your PHC |  |
 | `hero.image.alt` | AMR Illustration DNA and capsules |  |
 
-## about
+## about  (0/18 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -76,11 +79,10 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `about.card2.point4` | Rising Costs: Treatment & hospital expenses increase. |  |
 | `about.card2.point5` | Severe Risk: Risk of severe complications & mortality rises. |  |
 | `about.card3.title` | What Can We Do to Prevent AMR? |  |
-| `about.card3.point1` | Doctor's Advice Only: Take antibiotics strictly when prescribed by a certified doctor. |  |
-| `about.card3.point2` | Complete Full Course: Always finish the complete treatment course prescribed. |  |
-| `about.card3.point3` | Safe Medicine Drop-Off: Deposit leftover or expired medicines into designated collection boxes or nearby health centers. Safe disposal protects our environment and stops AMR! |  |
+| `about.card3.body` | Three things: take antibiotics only when a doctor prescribes them, finish every course, and never bin or flush what is left over. |  |
+| `about.card3.link` | See the seven steps for safe disposal |  |
 
-## narrative
+## narrative  (0/18 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -103,7 +105,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `narrative.bridge.text` | Two habits break this chain: finish every course your doctor prescribes, and never leave the leftovers lying around. |  |
 | `narrative.bridge.cta` | See what to do with leftovers |  |
 
-## journey
+## journey  (0/22 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -130,7 +132,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `journey.cta.pledge` | Take the pledge |  |
 | `journey.cta.poster` | See the official poster |  |
 
-## iec
+## iec  (0/26 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -161,7 +163,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `iec.video.play_label` | Play the official Dindi Song AMR awareness video |  |
 | `iec.video.poster.alt` | Dindi Song AMR awareness video title card |  |
 
-## common
+## common  (0/7 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -173,7 +175,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `common.carousel.slide_3` | Go to slide 3 |  |
 | `common.carousel.slide_4` | Go to slide 4 |  |
 
-## quiz
+## quiz  (0/11 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -189,7 +191,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `quiz.results.default_message` | Great job! |  |
 | `quiz.results.retake` | Retake Quiz |  |
 
-## roadmap
+## roadmap  (0/47 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -241,13 +243,13 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `roadmap.event5.image4.alt` | Innovation Challenge 4 |  |
 | `roadmap.event5.modal.desc4` | 2 digital & 1 social innovation selected. |  |
 
-## partners
+## partners  (0/1 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `partners.title` | OFFICIAL PUBLIC HEALTH & RESEARCH PARTNERS |  |
 
-## footer
+## footer  (0/16 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -268,7 +270,7 @@ partner branding, so it needs a Marathi speaker rather than machine translation.
 | `footer.social.linkedin.label` | LinkedIn |  |
 | `footer.social.github.label` | Github |  |
 
-## modal
+## modal  (0/4 done)
 
 | Key | English | Marathi |
 |---|---|---|

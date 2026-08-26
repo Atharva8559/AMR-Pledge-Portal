@@ -1,19 +1,21 @@
 // ── ACT4AMR — Marathi strings ────────────────────────────────────────────
 // FILL IN THE EMPTY QUOTES. The English above each line is the source text.
 //
-// Rules:
-//   • An entry left as '' is treated as NOT translated and the English shows
+//   • An entry left as '' counts as NOT translated and the English shows
 //     instead, so this file is safe to ship half-finished. Translate in any
-//     order and reload — each completed line goes live on its own.
+//     order — each completed line goes live on its own.
 //   • Keep the keys exactly as they are. Only the values change.
-//   • A few strings contain inline markup (<strong>…</strong>). Keep those tags
-//     in the Marathi or the emphasis is lost.
+//   • Some strings carry inline markup (<strong>…</strong>). Keep those tags in
+//     the Marathi or the emphasis is lost.
 //   • This is public-health guidance published under government and partner
 //     branding. It should be written or reviewed by a Marathi speaker, not
 //     machine-translated.
 //
-// Loaded lazily by app.js only when the reader switches to Marathi — English
-// costs zero bytes for this file.
+// Regenerate after markup changes with:  python3 tools/build-i18n.py
+// Existing translations are preserved.
+//
+// Loaded lazily by app.js only when the reader switches to Marathi, so English
+// never pays for this file.
 registerStrings('mr', {
 
   // ── meta ──────────────────────────────────────────────────────
@@ -37,6 +39,8 @@ registerStrings('mr', {
   'nav.quiz': '',
   // EN: Roadmap
   'nav.roadmap': '',
+  // EN: Language
+  'nav.language': '',
 
   // ── pledge ────────────────────────────────────────────────────
   // EN: # योग्य विल्हेवाट, AMR वर मात!
@@ -117,12 +121,10 @@ registerStrings('mr', {
   'about.card2.point5': '',
   // EN: What Can We Do to Prevent AMR?
   'about.card3.title': '',
-  // EN: Doctor's Advice Only: Take antibiotics strictly when prescribed by a certified doctor.
-  'about.card3.point1': '',
-  // EN: Complete Full Course: Always finish the complete treatment course prescribed.
-  'about.card3.point2': '',
-  // EN: Safe Medicine Drop-Off: Deposit leftover or expired medicines into designated collection boxes or nearby health centers. Safe disposal protects our environment and stops AMR!
-  'about.card3.point3': '',
+  // EN: Three things: take antibiotics only when a doctor prescribes them, finish every course, and never bin or flush what is left over.
+  'about.card3.body': '',
+  // EN: See the seven steps for safe disposal
+  'about.card3.link': '',
 
   // ── narrative ─────────────────────────────────────────────────
   // EN: Why It Happens
