@@ -692,24 +692,124 @@ nav ul li a:active {
   margin-right: auto;
 }
 
-.pledge-commitments-mini {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-8);
+/* The four promises. These are not decoration: tapping Pledge ticks them in
+   sequence, and because nothing is counted or stored, that sequence is the
+   entire confirmation the reader gets. */
+.pledge-commitments {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+  max-width: 520px;
+  margin: 0 auto var(--space-8);
+  padding: 0;
+  text-align: left;
 }
 
-.pledge-commitments-mini span {
-  padding: var(--space-2) var(--space-4);
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs);
+.pledge-commitment {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
   font-weight: var(--weight-medium);
-  line-height: var(--lh-tight);
-  color: rgba(255,255,255,0.85);
-  white-space: nowrap;
+  line-height: var(--lh-snug);
+  color: rgba(255, 255, 255, 0.88);
+  transition:
+    background var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.pledge-tick {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: transparent;
+  transition:
+    background var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.pledge-tick svg {
+  width: 15px;
+  height: 15px;
+}
+
+.pledge-commitment.is-kept {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--green-300);
+  color: var(--white);
+}
+
+.pledge-commitment.is-kept .pledge-tick {
+  background: var(--green-300);
+  border-color: var(--green-300);
+  color: var(--green-900);
+}
+
+/* Confirmation panel */
+/* Entrance is a keyframe that animates TRANSFORM ONLY — never opacity.
+   Two deliberate choices, both about never hiding content:
+   1. A keyframe, not an opacity:0 base plus a JS-toggled class, so the panel
+      does not wait on a callback that might not fire.
+   2. No opacity in the keyframe, so a paused, blocked or unsupported animation
+      leaves the panel fully READABLE and merely un-slid. An entrance that fades
+      up from opacity 0 is invisible for as long as it fails to advance, which
+      is the same trap that blanked the page before the .js-reveal gate. */
+.pledge-done {
+  max-width: 520px;
+  margin: 0 auto;
+  animation: pledgeDoneIn var(--dur-slow) var(--ease-out);
+}
+
+@keyframes pledgeDoneIn {
+  from { transform: translateY(12px); }
+  to { transform: translateY(0); }
+}
+
+.pledge-done-title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--lh-heading);
+  color: var(--white);
+  margin: 0 0 var(--space-2);
+}
+
+.pledge-done-note {
+  font-size: var(--text-sm);
+  line-height: var(--lh-body);
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 var(--space-6);
+}
+
+.pledge-card-frame {
+  margin: 0 auto var(--space-6);
+  max-width: 340px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.pledge-card-frame canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pledge-share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
 }
 
 /* Pledge Button */
@@ -774,30 +874,6 @@ nav ul li a:active {
   background: linear-gradient(135deg, var(--green-500), var(--green-600));
   box-shadow: var(--shadow-green-md);
   pointer-events: none;
-}
-
-/* Success Toast — carries the core instruction of the whole page ("take
-   leftovers to your nearest PHC or sub-centre"), so it is set at body size and
-   medium weight rather than as fine print. */
-.swachh-success-toast {
-  margin: 0 auto var(--space-6);
-  max-width: 480px;
-  padding: var(--space-3) var(--space-6);
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(78,206,170,0.3);
-  border-radius: var(--radius-md);
-  font-size: var(--text-base);
-  font-weight: var(--weight-medium);
-  line-height: var(--lh-body);
-  color: var(--green-200);
-  animation: toastSlideIn var(--dur-slow) var(--ease-out);
-}
-
-/* Rise and fade only. The old version scaled up from 0.95 on a spring curve,
-   which bounced — forbidden by the locked motion decision. */
-@keyframes toastSlideIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* The odometer counter that lived here was removed with the fabricated pledge
@@ -3038,8 +3114,8 @@ footer::after {
   .partners-logos-grid { gap: var(--space-4); }
   .partner-logo-img { height: 32px; }
 
-  .pledge-commitments-mini span {
-    padding: var(--space-1) var(--space-3);
+  .pledge-commitment {
+    padding: var(--space-2) var(--space-3);
   }
 
   .btn-swachh-pledge {
@@ -3409,7 +3485,6 @@ footer::after {
        floatBubble   infinite  .bubble ×5          → still, at rest position
        pulseDot      infinite  .pulse-dot          → a plain green dot
        badgeFloat    infinite  .floating-badge     → sits on the hero image
-       toastSlideIn  once      .swachh-success-toast → appears, does not slide
        modalSlideIn  once      .poster-modal-content → appears, does not rise
 
      The three infinite ones are the important ones: an endless loop is motion
@@ -3421,7 +3496,6 @@ footer::after {
   .bubble,
   .pulse-dot,
   .floating-badge,
-  .swachh-success-toast,
   .poster-modal-content {
     animation: none !important;
   }

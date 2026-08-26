@@ -77,12 +77,48 @@
             protect our healthcare system. Take action today and pledge to be the change.
           </p>
 
-          <div class="pledge-commitments-mini">
-            <span data-i18n="pledge.commitments.prescription">🛡️ Prescription Only</span>
-            <span data-i18n="pledge.commitments.full_course">💊 Complete Full Course</span>
-            <span data-i18n="pledge.commitments.no_sharing">🚫 No Sharing Medicines</span>
-            <span data-i18n="pledge.commitments.dropoff">🗑️ Safe Drop-Off Bins</span>
-          </div>
+          <!-- The four promises. They tick in sequence when the pledge is taken —
+               that sequence IS the confirmation, since there is no counter and
+               nothing is recorded anywhere. -->
+          <ul class="pledge-commitments" id="pledgeCommitments" role="list">
+            <li class="pledge-commitment">
+              <span class="pledge-tick" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7.5" />
+                </svg>
+              </span>
+              <span data-i18n="pledge.commitments.prescription">Take antibiotics only when a doctor prescribes
+                them</span>
+            </li>
+            <li class="pledge-commitment">
+              <span class="pledge-tick" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7.5" />
+                </svg>
+              </span>
+              <span data-i18n="pledge.commitments.full_course">Finish every course, even after feeling better</span>
+            </li>
+            <li class="pledge-commitment">
+              <span class="pledge-tick" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7.5" />
+                </svg>
+              </span>
+              <span data-i18n="pledge.commitments.no_sharing">Never share my medicines with anyone else</span>
+            </li>
+            <li class="pledge-commitment">
+              <span class="pledge-tick" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7.5" />
+                </svg>
+              </span>
+              <span data-i18n="pledge.commitments.dropoff">Take leftovers to my nearest PHC or sub-centre</span>
+            </li>
+          </ul>
 
           <!-- 1-Click Pledge Button -->
           <div class="pledge-btn-wrapper">
@@ -95,14 +131,26 @@
             </button>
           </div>
 
-          <!-- Success Notification -->
-          <div class="swachh-success-toast" id="swachhSuccessToast" role="status" style="display: none;"
-            data-i18n-html="pledge.toast.success">
-            <strong>Pledge taken.</strong> Finish every course your doctor prescribes, and take leftover or expired
-            medicines to your nearest PHC or sub-centre.
-          </div>
+          <!-- Confirmation. Hidden until the promise is made; nothing is sent or stored. -->
+          <div class="pledge-done" id="pledgeDone" hidden>
+            <p class="pledge-done-title" id="pledgeDoneTitle" role="status" data-i18n="pledge.done.title">Your promise
+              is made.</p>
+            <p class="pledge-done-note" data-i18n="pledge.done.note">Nothing was sent and nothing was saved — this
+              promise is yours. Pass it on so someone else makes it too.</p>
 
-          <!-- No pledge counter: pledges are a personal commitment, nothing is counted or stored. -->
+            <div class="pledge-card-frame">
+              <canvas id="pledgeCardCanvas" width="1080" height="1080" role="img"
+                data-i18n-attr="aria-label:pledge.card.alt"
+                aria-label="A shareable ACT4AMR card listing the four promises: take antibiotics only when prescribed, finish every course, never share medicines, and take leftovers to the nearest health facility."></canvas>
+            </div>
+
+            <div class="pledge-share-actions">
+              <button type="button" class="btn-primary" onclick="sharePledge()" data-i18n="pledge.share.whatsapp">Share
+                on WhatsApp</button>
+              <button type="button" class="btn-secondary" onclick="savePledgeCard()"
+                data-i18n="pledge.share.save">Save the image</button>
+            </div>
+          </div>
 
         </div>
       </div>
