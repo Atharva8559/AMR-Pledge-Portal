@@ -11,6 +11,27 @@
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23006857'/%3E%3Cpath d='M16 6l7 2.6v6.1c0 4.6-3 8.4-7 9.6-4-1.2-7-5-7-9.6V8.6z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M12.4 15.4l2.6 2.6 4.6-4.9' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
+
+  <!-- Progressive-enhancement gate for the scroll reveal. 46 content blocks carry
+       .reveal, which sets opacity: 0 until app.js adds .visible — so that hiding
+       must apply ONLY when JavaScript is genuinely running. Without this gate a
+       reader with JS off, or on a dropped connection where app.js never arrives,
+       gets an almost entirely blank page. The audience is on cheap Android over
+       slow data, so that is a likely outcome, not a hypothetical one.
+       Inline and first so it applies before paint and costs no extra request. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!root.classList) return;            // ancient browser: leave content visible
+      root.classList.add('js-reveal');
+      // app.js defines window.initScrollReveal. If it never loads — 404, parse
+      // error, connection dropped — un-hide everything rather than strand the
+      // reader on a blank page.
+      setTimeout(function () {
+        if (!window.initScrollReveal) root.classList.remove('js-reveal');
+      }, 2500);
+    })();
+  </script>
 </head>
 
 <body>
@@ -27,6 +48,7 @@
         <ul>
           <li><a href="#pledge" data-i18n="nav.pledge">Take Pledge</a></li>
           <li><a href="#about" data-i18n="nav.about">About AMR</a></li>
+          <li><a href="#how" data-i18n="nav.how">Why It Happens</a></li>
           <li><a href="#journey" data-i18n="nav.journey">Safe Disposal</a></li>
           <li><a href="#iec" data-i18n="nav.iec">IEC Materials</a></li>
           <li><a href="#quiz" data-i18n="nav.quiz">AMR Quiz</a></li>
@@ -229,6 +251,180 @@
 
 
 
+
+  <!-- How Resistance Happens — a sticky visual with six text beats scrolling past it.
+       Scene switching is driven by the existing IntersectionObserver, not a scroll
+       listener, so there is no per-frame work on a slow device. The six dish SVGs are
+       decoration; the story is carried entirely by the text, which is readable with
+       JavaScript off. -->
+  <section class="narrative-section" id="how" aria-labelledby="narrative-title">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-subtitle" data-i18n="narrative.subtitle">Why It Happens</span>
+        <h2 class="section-title" id="narrative-title" data-i18n="narrative.title">How Resistance Happens</h2>
+        <p class="section-desc" data-i18n="narrative.desc">The same mistake creates resistant bacteria and leaves
+          antibiotics sitting in your cupboard. Here is how, step by step.</p>
+      </div>
+
+      <div class="narrative" data-scene="1">
+
+        <!-- Sticky visual. Decorative: the story lives in the text beside it. -->
+        <div class="narrative-visual" aria-hidden="true">
+          <div class="narrative-dish">
+
+            <svg class="narrative-scene-art" data-art="1" viewBox="0 0 200 200">
+              <circle class="dish" cx="100" cy="100" r="86" />
+              <g class="germ germ--live">
+                <rect x="60" y="58" width="16" height="7" rx="3.5" transform="rotate(-24 68 61)" />
+                <rect x="104" y="52" width="16" height="7" rx="3.5" transform="rotate(31 112 55)" />
+                <rect x="132" y="86" width="16" height="7" rx="3.5" transform="rotate(-12 140 89)" />
+                <rect x="46" y="98" width="16" height="7" rx="3.5" transform="rotate(48 54 101)" />
+                <rect x="84" y="92" width="16" height="7" rx="3.5" transform="rotate(-40 92 95)" />
+                <rect x="118" y="124" width="16" height="7" rx="3.5" transform="rotate(22 126 127)" />
+                <rect x="66" y="132" width="16" height="7" rx="3.5" transform="rotate(-33 74 135)" />
+                <rect x="96" y="148" width="16" height="7" rx="3.5" transform="rotate(14 104 151)" />
+                <rect x="40" y="70" width="16" height="7" rx="3.5" transform="rotate(60 48 73)" />
+                <rect x="140" y="56" width="16" height="7" rx="3.5" transform="rotate(-52 148 59)" />
+              </g>
+            </svg>
+
+            <svg class="narrative-scene-art" data-art="2" viewBox="0 0 200 200">
+              <circle class="dish" cx="100" cy="100" r="86" />
+              <g class="germ germ--live">
+                <rect x="60" y="58" width="16" height="7" rx="3.5" transform="rotate(-24 68 61)" />
+                <rect x="104" y="52" width="16" height="7" rx="3.5" transform="rotate(31 112 55)" />
+                <rect x="132" y="86" width="16" height="7" rx="3.5" transform="rotate(-12 140 89)" />
+                <rect x="46" y="98" width="16" height="7" rx="3.5" transform="rotate(48 54 101)" />
+                <rect x="118" y="124" width="16" height="7" rx="3.5" transform="rotate(22 126 127)" />
+                <rect x="66" y="132" width="16" height="7" rx="3.5" transform="rotate(-33 74 135)" />
+                <rect x="40" y="70" width="16" height="7" rx="3.5" transform="rotate(60 48 73)" />
+                <rect x="140" y="56" width="16" height="7" rx="3.5" transform="rotate(-52 148 59)" />
+              </g>
+              <g class="pill">
+                <rect x="78" y="88" width="44" height="24" rx="12" />
+                <path class="pill-split" d="M100 88v24" />
+              </g>
+            </svg>
+
+            <svg class="narrative-scene-art" data-art="3" viewBox="0 0 200 200">
+              <circle class="dish" cx="100" cy="100" r="86" />
+              <g class="germ germ--fading">
+                <rect x="60" y="58" width="16" height="7" rx="3.5" transform="rotate(-24 68 61)" />
+                <rect x="104" y="52" width="16" height="7" rx="3.5" transform="rotate(31 112 55)" />
+                <rect x="46" y="98" width="16" height="7" rx="3.5" transform="rotate(48 54 101)" />
+                <rect x="140" y="56" width="16" height="7" rx="3.5" transform="rotate(-52 148 59)" />
+              </g>
+              <g class="germ germ--tough">
+                <rect x="132" y="86" width="16" height="7" rx="3.5" transform="rotate(-12 140 89)" />
+                <rect x="66" y="132" width="16" height="7" rx="3.5" transform="rotate(-33 74 135)" />
+              </g>
+              <g class="pill">
+                <rect x="78" y="88" width="44" height="24" rx="12" />
+                <path class="pill-split" d="M100 88v24" />
+              </g>
+            </svg>
+
+            <svg class="narrative-scene-art" data-art="4" viewBox="0 0 200 200">
+              <circle class="dish" cx="100" cy="100" r="86" />
+              <g class="germ germ--tough">
+                <rect x="132" y="86" width="16" height="7" rx="3.5" transform="rotate(-12 140 89)" />
+                <rect x="66" y="132" width="16" height="7" rx="3.5" transform="rotate(-33 74 135)" />
+              </g>
+              <g class="pill pill--stopped">
+                <rect x="78" y="88" width="44" height="24" rx="12" />
+                <path class="pill-split" d="M100 88v24" />
+              </g>
+            </svg>
+
+            <svg class="narrative-scene-art" data-art="5" viewBox="0 0 200 200">
+              <circle class="dish" cx="100" cy="100" r="86" />
+              <g class="germ germ--tough">
+                <rect x="132" y="86" width="16" height="7" rx="3.5" transform="rotate(-12 140 89)" />
+                <rect x="66" y="132" width="16" height="7" rx="3.5" transform="rotate(-33 74 135)" />
+                <rect x="96" y="60" width="16" height="7" rx="3.5" transform="rotate(18 104 63)" />
+                <rect x="52" y="86" width="16" height="7" rx="3.5" transform="rotate(-38 60 89)" />
+                <rect x="112" y="140" width="16" height="7" rx="3.5" transform="rotate(26 120 143)" />
+                <rect x="88" y="106" width="16" height="7" rx="3.5" transform="rotate(-16 96 109)" />
+              </g>
+            </svg>
+
+            <svg class="narrative-scene-art" data-art="6" viewBox="0 0 200 200">
+              <circle class="dish" cx="100" cy="100" r="86" />
+              <g class="germ germ--tough">
+                <rect x="60" y="58" width="16" height="7" rx="3.5" transform="rotate(-24 68 61)" />
+                <rect x="104" y="52" width="16" height="7" rx="3.5" transform="rotate(31 112 55)" />
+                <rect x="132" y="86" width="16" height="7" rx="3.5" transform="rotate(-12 140 89)" />
+                <rect x="46" y="98" width="16" height="7" rx="3.5" transform="rotate(48 54 101)" />
+                <rect x="118" y="124" width="16" height="7" rx="3.5" transform="rotate(22 126 127)" />
+                <rect x="66" y="132" width="16" height="7" rx="3.5" transform="rotate(-33 74 135)" />
+                <rect x="96" y="148" width="16" height="7" rx="3.5" transform="rotate(14 104 151)" />
+                <rect x="40" y="70" width="16" height="7" rx="3.5" transform="rotate(60 48 73)" />
+                <rect x="140" y="56" width="16" height="7" rx="3.5" transform="rotate(-52 148 59)" />
+                <rect x="88" y="106" width="16" height="7" rx="3.5" transform="rotate(-16 96 109)" />
+              </g>
+              <g class="pill pill--useless">
+                <rect x="78" y="88" width="44" height="24" rx="12" />
+                <path class="pill-split" d="M100 88v24" />
+              </g>
+              <path class="pill-strike" d="M56 144 144 56" />
+            </svg>
+
+          </div>
+          <p class="narrative-caption" data-scene-caption>
+            <span data-i18n="narrative.caption">Inside the body, over one course of antibiotics</span>
+          </p>
+        </div>
+
+        <!-- The story. Real text, in order, readable with JavaScript off. -->
+        <ol class="narrative-scenes" role="list">
+          <li class="narrative-scene reveal" data-scene-n="1">
+            <span class="narrative-scene-num" aria-hidden="true">1</span>
+            <h3 class="narrative-scene-title" data-i18n="narrative.s1.title">You fall ill</h3>
+            <p class="narrative-scene-body" data-i18n="narrative.s1.body">An infection takes hold and the bacteria
+              multiply quickly inside the body.</p>
+          </li>
+          <li class="narrative-scene reveal" data-scene-n="2">
+            <span class="narrative-scene-num" aria-hidden="true">2</span>
+            <h3 class="narrative-scene-title" data-i18n="narrative.s2.title">The doctor prescribes a course</h3>
+            <p class="narrative-scene-body" data-i18n="narrative.s2.body">Say five days. The dose and the length are
+              chosen to kill all of the bacteria, not most of them.</p>
+          </li>
+          <li class="narrative-scene reveal" data-scene-n="3">
+            <span class="narrative-scene-num" aria-hidden="true">3</span>
+            <h3 class="narrative-scene-title" data-i18n="narrative.s3.title">Day three: you feel better</h3>
+            <p class="narrative-scene-body" data-i18n="narrative.s3.body">The weakest bacteria die first. That is why
+              the symptoms fade well before the infection is actually gone.</p>
+          </li>
+          <li class="narrative-scene narrative-scene--turn reveal" data-scene-n="4">
+            <span class="narrative-scene-num" aria-hidden="true">4</span>
+            <h3 class="narrative-scene-title" data-i18n="narrative.s4.title">You stop taking it</h3>
+            <p class="narrative-scene-body" data-i18n="narrative.s4.body">The toughest bacteria are still alive — the
+              very ones the antibiotic struggled with most. And the rest of the strip stays in the cupboard.</p>
+          </li>
+          <li class="narrative-scene reveal" data-scene-n="5">
+            <span class="narrative-scene-num" aria-hidden="true">5</span>
+            <h3 class="narrative-scene-title" data-i18n="narrative.s5.title">The survivors multiply</h3>
+            <p class="narrative-scene-body" data-i18n="narrative.s5.body">With nothing left to stop them, the bacteria
+              that shrugged off the antibiotic take over.</p>
+          </li>
+          <li class="narrative-scene reveal" data-scene-n="6">
+            <span class="narrative-scene-num" aria-hidden="true">6</span>
+            <h3 class="narrative-scene-title" data-i18n="narrative.s6.title">Next time, the medicine fails</h3>
+            <p class="narrative-scene-body" data-i18n="narrative.s6.body">For you, and for anyone you pass the
+              infection to. That is antimicrobial resistance.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="glass-card narrative-bridge reveal">
+        <p class="narrative-bridge-text" data-i18n="narrative.bridge.text">Two habits break this chain: finish every
+          course your doctor prescribes, and never leave the leftovers lying around.</p>
+        <a class="btn-primary" href="#journey" data-i18n="narrative.bridge.cta">See what to do with leftovers</a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- The Disposal Journey — a circular cycle at >=1025px, a vertical stepped path below it.
        One set of seven <li>; only CSS differs between the two forms. -->
@@ -950,6 +1146,7 @@
         <h4 data-i18n="footer.nav.heading">Navigation</h4>
         <ul>
           <li><a href="#about" data-i18n="footer.nav.about">About AMR</a></li>
+          <li><a href="#how" data-i18n="footer.nav.how">Why It Happens</a></li>
           <li><a href="#journey" data-i18n="footer.nav.journey">Safe Disposal</a></li>
           <li><a href="#pledge" data-i18n="footer.nav.pledge">Take Pledge</a></li>
           <li><a href="#iec" data-i18n="footer.nav.iec">IEC Library</a></li>

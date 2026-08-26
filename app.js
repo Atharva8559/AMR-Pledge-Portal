@@ -757,6 +757,53 @@ setInterval(() => {
   // Exposed so later sections injected into the page can be picked up.
   window.initScrollReveal = start;
 
+  // ─── Narrative scene driver ───────────────────────────────────────────────
+  // Switches the sticky dish art as each story beat passes the middle of the
+  // viewport. An IntersectionObserver with a thin centre band, NOT a scroll
+  // listener: nothing runs per frame, which matters on the cheap Android this
+  // page targets.
+  //
+  // Degradations, both deliberate:
+  //   • no JS / no IntersectionObserver -> data-scene stays "1" in the markup,
+  //     so dish 1 shows and all six beats are readable. Nothing is hidden.
+  //   • reduced motion -> the scenes still track (this is state, not
+  //     decoration); only the cross-fade is clamped by the global rule.
+  let narrativeStarted = false;
+
+  function startNarrative() {
+    // Called immediately and again on DOMContentLoaded; without this guard the
+    // second call would build a second observer over the same six beats.
+    if (narrativeStarted) return;
+
+    const wrap = document.querySelector('.narrative');
+    if (!wrap || !('IntersectionObserver' in window)) return;
+
+    const scenes = wrap.querySelectorAll('.narrative-scene[data-scene-n]');
+    if (!scenes.length) return;
+
+    narrativeStarted = true;
+
+    const sceneObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        const n = entry.target.getAttribute('data-scene-n');
+        if (n) wrap.setAttribute('data-scene', n);
+      });
+    }, {
+      // Collapses the viewport to a band across its middle, so the active beat
+      // is whichever one the reader is actually looking at.
+      rootMargin: '-45% 0px -45% 0px',
+      threshold: 0
+    });
+
+    scenes.forEach(function (scene) { sceneObserver.observe(scene); });
+  }
+
+  startNarrative();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startNarrative);
+  }
+
   start();
   // Belt and braces: if this file is ever moved out of the end of <body>,
   // re-scan once the DOM is complete. Idempotent.
