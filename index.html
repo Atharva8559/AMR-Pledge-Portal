@@ -144,8 +144,15 @@
           <div class="pledge-done" id="pledgeDone" hidden>
             <p class="pledge-done-title" id="pledgeDoneTitle" role="status" data-i18n="pledge.done.title">Your promise
               is made.</p>
-            <p class="pledge-done-note" data-i18n="pledge.done.note">Nothing was sent and nothing was saved — this
-              promise is yours. Pass it on so someone else makes it too.</p>
+            <p class="pledge-done-note" data-i18n="pledge.done.note">Your promise is counted, but nothing about you
+              is — no name, no contact, nothing saved to this device. Pass it on so someone else makes it too.</p>
+
+            <!-- Stays hidden unless the counter endpoint returns a real total.
+                 No endpoint, or an unreachable one, means no number at all. -->
+            <div class="pledge-count" id="pledgeCount" hidden>
+              <span class="pledge-count-value" id="pledgeCountValue" role="status">—</span>
+              <span class="pledge-count-label" data-i18n="pledge.count.label">promises made so far</span>
+            </div>
 
             <div class="pledge-card-frame">
               <canvas id="pledgeCardCanvas" width="1080" height="1080" role="img"

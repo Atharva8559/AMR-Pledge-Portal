@@ -205,7 +205,94 @@ window.t = t;
 window.I18N = I18N;
 
 
-// 1-Click Pledge Action — a personal commitment, nothing is counted or stored
+// ─── Pledge counter ──────────────────────────────────────────────────────────
+// PASTE YOUR DEPLOYED ENDPOINT URL HERE. See tools/pledge-counter.gs for the
+// backend and the two-minute deploy steps.
+//
+// Leave it as '' and the counter simply does not appear — the pledge still
+// works exactly as before. That is the deliberate default: an unreachable or
+// unconfigured backend must never produce a number, because a wrong or stale
+// figure under government and partner branding is worse than no figure.
+//
+// The request fires ONLY when somebody pledges, never on page load, so the page
+// still makes zero third-party requests for an ordinary visitor. Nothing
+// personal is sent — the call carries no name, no identifier and no analytics.
+const PLEDGE_COUNTER_URL = '';
+
+// Ask the backend to record this pledge and return the new total.
+// Resolves to a number, or null if the counter is off or unreachable.
+function recordPledge() {
+  if (!PLEDGE_COUNTER_URL) return Promise.resolve(null);
+  if (typeof fetch !== 'function') return Promise.resolve(null);
+
+  // Never let a slow endpoint hold the confirmation hostage.
+  const timeout = new Promise(function (resolve) {
+    window.setTimeout(function () { resolve(null); }, 6000);
+  });
+
+  const request = fetch(PLEDGE_COUNTER_URL, {
+    method: 'POST',
+    // text/plain avoids a CORS preflight, which Apps Script handles poorly
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'pledge' })
+  })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (data) {
+      const n = data && Number(data.count);
+      return Number.isFinite(n) && n >= 0 ? n : null;
+    })
+    .catch(function () { return null; });   // offline, blocked, CORS — all the same here
+
+  return Promise.race([request, timeout]);
+}
+
+// Count up to the real total. Never invents intermediate precision: it walks
+// toward the true number and lands exactly on it.
+function showPledgeCount(total) {
+  const wrap = document.getElementById('pledgeCount');
+  const value = document.getElementById('pledgeCountValue');
+  if (!wrap || !value || total === null) return;
+
+  wrap.hidden = false;
+
+  const final = total.toLocaleString('en-IN');
+
+  // The true figure is painted immediately and is forced again by a timer below.
+  // The count-up is decoration layered on top of an already-correct display —
+  // never the thing responsible for producing it. Testing showed both failure
+  // modes this guards against: an unclamped frame timestamp undershooting to
+  // 12,445, and a stalled rAF leaving the display parked at 12,447, for a true
+  // 12,487. A counter that reads low is still a wrong number.
+  value.textContent = final;
+  if (pledgeReducedMotion()) return;
+
+  const DURATION = 900;
+  const start = performance.now();
+  const from = Math.max(0, total - Math.min(total, 40));
+  let settled = false;
+
+  function settle() {
+    if (settled) return;
+    settled = true;
+    value.textContent = final;
+  }
+
+  function step(now) {
+    if (settled) return;
+    const p = Math.min(1, Math.max(0, (now - start) / DURATION));
+    const eased = 1 - Math.pow(1 - p, 3);
+    value.textContent = Math.round(from + (total - from) * eased).toLocaleString('en-IN');
+    if (p < 1) window.requestAnimationFrame(step);
+    else settle();
+  }
+
+  window.requestAnimationFrame(step);
+  // Hard backstop: however the animation behaves or fails to behave, the real
+  // number is on screen by the time this fires.
+  window.setTimeout(settle, DURATION + 150);
+}
+
+// 1-Click Pledge Action — a personal commitment
 let hasSwachhPledged = false;
 
 function pledgeReducedMotion() {
@@ -240,6 +327,10 @@ function takeSwachhPledge() {
     }
   }
 
+  // Fire the counter request immediately, in parallel with the tick sequence,
+  // so the network round trip hides behind the animation instead of following it.
+  const counted = recordPledge();
+
   window.setTimeout(function () {
     if (!done) return;
     // Just unhide it. The CSS entrance is a keyframe that runs on its own, so
@@ -247,6 +338,9 @@ function takeSwachhPledge() {
     // panel would sit invisible and the pledge would appear to do nothing.
     done.hidden = false;
     drawPledgeCard();
+    // null means the counter is off or unreachable: show nothing rather than a
+    // number that might be wrong.
+    counted.then(showPledgeCount);
   }, step * items.length + 120);
 }
 

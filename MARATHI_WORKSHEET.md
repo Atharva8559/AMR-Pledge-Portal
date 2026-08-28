@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-201 strings. Fill the **Marathi** column, then paste each value into the
+202 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -28,7 +28,7 @@ machine translation.
 | `nav.roadmap` | Roadmap |  |
 | `nav.language` | Language |  |
 
-## pledge  (0/13 done)
+## pledge  (0/14 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -41,7 +41,8 @@ machine translation.
 | `pledge.commitments.dropoff` | Take leftovers to my nearest PHC or sub-centre |  |
 | `pledge.cta` | Pledge Now |  |
 | `pledge.done.title` | Your promise is made. |  |
-| `pledge.done.note` | Nothing was sent and nothing was saved — this promise is yours. Pass it on so someone else makes it too. |  |
+| `pledge.done.note` | Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device. Pass it on so someone else makes it too. |  |
+| `pledge.count.label` | promises made so far |  |
 | `pledge.share.whatsapp` | Share on WhatsApp |  |
 | `pledge.share.save` | Save the image |  |
 | `pledge.card.alt` | A shareable ACT4AMR card listing the four promises: take antibiotics only when prescribed, finish every course, never share medicines, and take leftovers to the nearest health facility. |  |

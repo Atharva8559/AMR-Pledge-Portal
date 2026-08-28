@@ -61,8 +61,10 @@ registerStrings('mr', {
   'pledge.cta': '',
   // EN: Your promise is made.
   'pledge.done.title': '',
-  // EN: Nothing was sent and nothing was saved — this promise is yours. Pass it on so someone else makes it too.
+  // EN: Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device. Pass it on so someone else makes it too.
   'pledge.done.note': '',
+  // EN: promises made so far
+  'pledge.count.label': '',
   // EN: Share on WhatsApp
   'pledge.share.whatsapp': '',
   // EN: Save the image
