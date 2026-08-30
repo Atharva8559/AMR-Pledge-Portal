@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-177 strings. Fill the **Marathi** column, then paste each value into the
+176 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -56,28 +56,27 @@ machine translation.
 | `hero.badge.label` | Then drop leftovers at your PHC |  |
 | `hero.image.alt` | AMR Illustration DNA and capsules |  |
 
-## about  (0/19 done)
+## about  (0/18 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `about.subtitle` | Understanding The Threat |  |
 | `about.title` | Not Feeling Better Quickly Despite Taking Medicines? |  |
-| `about.desc` | The reason could be Antimicrobial Resistance (AMR). Understand the key facts through these 3 essential campaign questions: |  |
-| `about.card1.title` | What is AMR? |  |
-| `about.card1.body` | When antibiotics lose their effectiveness against germs and bacteria, that condition is called Antimicrobial Resistance (AMR). |  |
-| `about.card1.stage1` | Germs cause an infection |  |
-| `about.card1.stage2` | The antibiotic kills the weak ones |  |
-| `about.card1.stage3` | The survivors multiply |  |
-| `about.card2.title` | Why is AMR Dangerous? |  |
-| `about.card2.risk1` | Medicines stop working |  |
-| `about.card2.risk2` | Illness lasts far longer |  |
-| `about.card2.risk3` | Treatment turns high-risk |  |
-| `about.card2.risk4` | Costs climb for the family |  |
-| `about.card2.risk5` | Common infections turn deadly |  |
-| `about.card3.title` | What Can We Do to Prevent AMR? |  |
-| `about.card3.act1` | Only on a doctor's prescription |  |
-| `about.card3.act2` | Finish every single course |  |
-| `about.card3.act3` | Never bin it or flush it |  |
+| `about.desc` | The reason could be Antimicrobial Resistance (AMR). Three facts worth knowing: |  |
+| `about.card1.headline` | AMR is when antibiotics lose their effectiveness. |  |
+| `about.card1.icon1` | Antibiotics |  |
+| `about.card1.icon2` | Resistant germs |  |
+| `about.card1.text` | The germs survive the treatment, multiply, and carry on causing infection — and the antibiotic that used to work no longer does. |  |
+| `about.card2.headline` | Common infections start turning deadly. |  |
+| `about.card2.icon1` | Common infection |  |
+| `about.card2.icon2` | Severe illness |  |
+| `about.card2.icon3` | Higher cost |  |
+| `about.card2.text` | Medicines stop working, so illness drags on, treatment gets riskier, and the bill for the family climbs. |  |
+| `about.card3.headline` | Use and dispose of medicine responsibly. |  |
+| `about.card3.tile1` | Only with a prescription |  |
+| `about.card3.tile2` | Finish every course |  |
+| `about.card3.tile3` | Never flush or bin old meds |  |
+| `about.card3.text` | Take antibiotics only when a doctor prescribes them, finish the full course even once you feel better, and take what is left over to a health facility rather than the bin. |  |
 | `about.card3.link` | See the seven steps for safe disposal |  |
 
 ## journey  (0/19 done)

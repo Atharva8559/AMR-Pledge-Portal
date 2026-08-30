@@ -87,38 +87,36 @@ registerStrings('mr', {
   'about.subtitle': '',
   // EN: Not Feeling Better Quickly Despite Taking Medicines?
   'about.title': '',
-  // EN: The reason could be Antimicrobial Resistance (AMR). Understand the key facts through these 3 essential campaign questions:
+  // EN: The reason could be Antimicrobial Resistance (AMR). Three facts worth knowing:
   'about.desc': '',
-  // EN: What is AMR?
-  'about.card1.title': '',
-  // EN: When antibiotics lose their effectiveness against germs and bacteria, that condition is called Antimicrobial Resistance (AMR).
-  'about.card1.body': '',
-  // EN: Germs cause an infection
-  'about.card1.stage1': '',
-  // EN: The antibiotic kills the weak ones
-  'about.card1.stage2': '',
-  // EN: The survivors multiply
-  'about.card1.stage3': '',
-  // EN: Why is AMR Dangerous?
-  'about.card2.title': '',
-  // EN: Medicines stop working
-  'about.card2.risk1': '',
-  // EN: Illness lasts far longer
-  'about.card2.risk2': '',
-  // EN: Treatment turns high-risk
-  'about.card2.risk3': '',
-  // EN: Costs climb for the family
-  'about.card2.risk4': '',
-  // EN: Common infections turn deadly
-  'about.card2.risk5': '',
-  // EN: What Can We Do to Prevent AMR?
-  'about.card3.title': '',
-  // EN: Only on a doctor's prescription
-  'about.card3.act1': '',
-  // EN: Finish every single course
-  'about.card3.act2': '',
-  // EN: Never bin it or flush it
-  'about.card3.act3': '',
+  // EN: AMR is when antibiotics lose their effectiveness.
+  'about.card1.headline': '',
+  // EN: Antibiotics
+  'about.card1.icon1': '',
+  // EN: Resistant germs
+  'about.card1.icon2': '',
+  // EN: The germs survive the treatment, multiply, and carry on causing infection — and the antibiotic that used to work no longer does.
+  'about.card1.text': '',
+  // EN: Common infections start turning deadly.
+  'about.card2.headline': '',
+  // EN: Common infection
+  'about.card2.icon1': '',
+  // EN: Severe illness
+  'about.card2.icon2': '',
+  // EN: Higher cost
+  'about.card2.icon3': '',
+  // EN: Medicines stop working, so illness drags on, treatment gets riskier, and the bill for the family climbs.
+  'about.card2.text': '',
+  // EN: Use and dispose of medicine responsibly.
+  'about.card3.headline': '',
+  // EN: Only with a prescription
+  'about.card3.tile1': '',
+  // EN: Finish every course
+  'about.card3.tile2': '',
+  // EN: Never flush or bin old meds
+  'about.card3.tile3': '',
+  // EN: Take antibiotics only when a doctor prescribes them, finish the full course even once you feel better, and take what is left over to a health facility rather than the bin.
+  'about.card3.text': '',
   // EN: See the seven steps for safe disposal
   'about.card3.link': '',
 
