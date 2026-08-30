@@ -29,8 +29,6 @@ registerStrings('mr', {
   'nav.pledge': '',
   // EN: About AMR
   'nav.about': '',
-  // EN: Why It Happens
-  'nav.how': '',
   // EN: Safe Disposal
   'nav.journey': '',
   // EN: IEC Materials
@@ -61,16 +59,10 @@ registerStrings('mr', {
   'pledge.cta': '',
   // EN: Your promise is made.
   'pledge.done.title': '',
-  // EN: Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device. Pass it on so someone else makes it too.
+  // EN: Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device.
   'pledge.done.note': '',
   // EN: promises made so far
   'pledge.count.label': '',
-  // EN: Share on WhatsApp
-  'pledge.share.whatsapp': '',
-  // EN: Save the image
-  'pledge.share.save': '',
-  // EN: A shareable ACT4AMR card listing the four promises: take antibiotics only when prescribed, finish every course, never share medicines, and take leftovers to the nearest health facility.
-  'pledge.card.alt': '',
 
   // ── hero ──────────────────────────────────────────────────────
   // EN: # योग्य विल्हेवाट, AMR वर मात! | Global Awareness Initiative
@@ -127,44 +119,6 @@ registerStrings('mr', {
   'about.card3.body': '',
   // EN: See the seven steps for safe disposal
   'about.card3.link': '',
-
-  // ── narrative ─────────────────────────────────────────────────
-  // EN: Why It Happens
-  'narrative.subtitle': '',
-  // EN: How Resistance Happens
-  'narrative.title': '',
-  // EN: The same mistake creates resistant bacteria and leaves antibiotics sitting in your cupboard. Here is how, step by step.
-  'narrative.desc': '',
-  // EN: Inside the body, over one course of antibiotics
-  'narrative.caption': '',
-  // EN: You fall ill
-  'narrative.s1.title': '',
-  // EN: An infection takes hold and the bacteria multiply quickly inside the body.
-  'narrative.s1.body': '',
-  // EN: The doctor prescribes a course
-  'narrative.s2.title': '',
-  // EN: Say five days. The dose and the length are chosen to kill all of the bacteria, not most of them.
-  'narrative.s2.body': '',
-  // EN: Day three: you feel better
-  'narrative.s3.title': '',
-  // EN: The weakest bacteria die first. That is why the symptoms fade well before the infection is actually gone.
-  'narrative.s3.body': '',
-  // EN: You stop taking it
-  'narrative.s4.title': '',
-  // EN: The toughest bacteria are still alive — the very ones the antibiotic struggled with most. And the rest of the strip stays in the cupboard.
-  'narrative.s4.body': '',
-  // EN: The survivors multiply
-  'narrative.s5.title': '',
-  // EN: With nothing left to stop them, the bacteria that shrugged off the antibiotic take over.
-  'narrative.s5.body': '',
-  // EN: Next time, the medicine fails
-  'narrative.s6.title': '',
-  // EN: For you, and for anyone you pass the infection to. That is antimicrobial resistance.
-  'narrative.s6.body': '',
-  // EN: Two habits break this chain: finish every course your doctor prescribes, and never leave the leftovers lying around.
-  'narrative.bridge.text': '',
-  // EN: See what to do with leftovers
-  'narrative.bridge.cta': '',
 
   // ── journey ───────────────────────────────────────────────────
   // EN: Safe Disposal
@@ -413,8 +367,6 @@ registerStrings('mr', {
   'footer.nav.heading': '',
   // EN: About AMR
   'footer.nav.about': '',
-  // EN: Why It Happens
-  'footer.nav.how': '',
   // EN: Safe Disposal
   'footer.nav.journey': '',
   // EN: Take Pledge

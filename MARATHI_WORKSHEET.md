@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-202 strings. Fill the **Marathi** column, then paste each value into the
+179 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -15,20 +15,19 @@ machine translation.
 | `meta.title` | ACT4AMR \| Antimicrobial Resistance Campaign |  |
 | `meta.description` | Join the global fight against Antimicrobial Resistance (AMR). Take the pledge, access official public health IEC materials, listen to Dindi AMR songs, and track campaign milestones. Supported by NHM, PATH, CHRI & GSK. |  |
 
-## nav  (0/8 done)
+## nav  (0/7 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `nav.pledge` | Take Pledge |  |
 | `nav.about` | About AMR |  |
-| `nav.how` | Why It Happens |  |
 | `nav.journey` | Safe Disposal |  |
 | `nav.iec` | IEC Materials |  |
 | `nav.quiz` | AMR Quiz |  |
 | `nav.roadmap` | Roadmap |  |
 | `nav.language` | Language |  |
 
-## pledge  (0/14 done)
+## pledge  (0/11 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -41,11 +40,8 @@ machine translation.
 | `pledge.commitments.dropoff` | Take leftovers to my nearest PHC or sub-centre |  |
 | `pledge.cta` | Pledge Now |  |
 | `pledge.done.title` | Your promise is made. |  |
-| `pledge.done.note` | Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device. Pass it on so someone else makes it too. |  |
+| `pledge.done.note` | Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device. |  |
 | `pledge.count.label` | promises made so far |  |
-| `pledge.share.whatsapp` | Share on WhatsApp |  |
-| `pledge.share.save` | Save the image |  |
-| `pledge.card.alt` | A shareable ACT4AMR card listing the four promises: take antibiotics only when prescribed, finish every course, never share medicines, and take leftovers to the nearest health facility. |  |
 
 ## hero  (0/8 done)
 
@@ -82,29 +78,6 @@ machine translation.
 | `about.card3.title` | What Can We Do to Prevent AMR? |  |
 | `about.card3.body` | Three things: take antibiotics only when a doctor prescribes them, finish every course, and never bin or flush what is left over. |  |
 | `about.card3.link` | See the seven steps for safe disposal |  |
-
-## narrative  (0/18 done)
-
-| Key | English | Marathi |
-|---|---|---|
-| `narrative.subtitle` | Why It Happens |  |
-| `narrative.title` | How Resistance Happens |  |
-| `narrative.desc` | The same mistake creates resistant bacteria and leaves antibiotics sitting in your cupboard. Here is how, step by step. |  |
-| `narrative.caption` | Inside the body, over one course of antibiotics |  |
-| `narrative.s1.title` | You fall ill |  |
-| `narrative.s1.body` | An infection takes hold and the bacteria multiply quickly inside the body. |  |
-| `narrative.s2.title` | The doctor prescribes a course |  |
-| `narrative.s2.body` | Say five days. The dose and the length are chosen to kill all of the bacteria, not most of them. |  |
-| `narrative.s3.title` | Day three: you feel better |  |
-| `narrative.s3.body` | The weakest bacteria die first. That is why the symptoms fade well before the infection is actually gone. |  |
-| `narrative.s4.title` | You stop taking it |  |
-| `narrative.s4.body` | The toughest bacteria are still alive — the very ones the antibiotic struggled with most. And the rest of the strip stays in the cupboard. |  |
-| `narrative.s5.title` | The survivors multiply |  |
-| `narrative.s5.body` | With nothing left to stop them, the bacteria that shrugged off the antibiotic take over. |  |
-| `narrative.s6.title` | Next time, the medicine fails |  |
-| `narrative.s6.body` | For you, and for anyone you pass the infection to. That is antimicrobial resistance. |  |
-| `narrative.bridge.text` | Two habits break this chain: finish every course your doctor prescribes, and never leave the leftovers lying around. |  |
-| `narrative.bridge.cta` | See what to do with leftovers |  |
 
 ## journey  (0/22 done)
 
@@ -250,14 +223,13 @@ machine translation.
 |---|---|---|
 | `partners.title` | OFFICIAL PUBLIC HEALTH & RESEARCH PARTNERS |  |
 
-## footer  (0/16 done)
+## footer  (0/15 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `footer.tagline` | Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by MH Public Health, NHM, CHRI, PATH & GSK. |  |
 | `footer.nav.heading` | Navigation |  |
 | `footer.nav.about` | About AMR |  |
-| `footer.nav.how` | Why It Happens |  |
 | `footer.nav.journey` | Safe Disposal |  |
 | `footer.nav.pledge` | Take Pledge |  |
 | `footer.nav.iec` | IEC Library |  |

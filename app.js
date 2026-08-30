@@ -217,7 +217,7 @@ window.I18N = I18N;
 // The request fires ONLY when somebody pledges, never on page load, so the page
 // still makes zero third-party requests for an ordinary visitor. Nothing
 // personal is sent — the call carries no name, no identifier and no analytics.
-const PLEDGE_COUNTER_URL = '';
+const PLEDGE_COUNTER_URL = 'https://script.google.com/macros/s/AKfycbxMAkBgfhD47rOBERGpEYhVeqY3Q4byo401V_8KTyK_tMNqgTv7br5Ov5rCS_noIeM7KA/exec';
 
 // Ask the backend to record this pledge and return the new total.
 // Resolves to a number, or null if the counter is off or unreachable.
@@ -337,199 +337,14 @@ function takeSwachhPledge() {
     // nothing here depends on requestAnimationFrame firing — if it did not, the
     // panel would sit invisible and the pledge would appear to do nothing.
     done.hidden = false;
-    drawPledgeCard();
     // null means the counter is off or unreachable: show nothing rather than a
     // number that might be wrong.
     counted.then(showPledgeCount);
   }, step * items.length + 120);
 }
 
-// ─── Shareable pledge card ───────────────────────────────────────────────────
-// Drawn entirely with canvas primitives and text. Deliberately NO drawImage:
-// pulling in a logo file taints the canvas on file://, and a tainted canvas
-// makes toDataURL throw — which would break "Save the image" for anyone opening
-// index.html directly instead of over a server.
-function roundRectPath(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-}
-
-function wrapText(ctx, text, maxWidth) {
-  const words = String(text).split(' ');
-  const lines = [];
-  let line = '';
-  words.forEach(function (word) {
-    const attempt = line ? line + ' ' + word : word;
-    if (ctx.measureText(attempt).width > maxWidth && line) {
-      lines.push(line);
-      line = word;
-    } else {
-      line = attempt;
-    }
-  });
-  if (line) lines.push(line);
-  return lines;
-}
-
-function drawPledgeCard() {
-  const canvas = document.getElementById('pledgeCardCanvas');
-  if (!canvas || !canvas.getContext) return;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
-
-  const W = canvas.width;
-  const H = canvas.height;
-  const FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Devanagari', 'Nirmala UI', Arial, sans-serif";
-
-  // Ground
-  const bg = ctx.createLinearGradient(0, 0, W, H);
-  bg.addColorStop(0, '#0D3B2E');
-  bg.addColorStop(1, '#006857');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, W, H);
-
-  // Card
-  const pad = 56;
-  ctx.fillStyle = '#FFFFFF';
-  roundRectPath(ctx, pad, pad, W - pad * 2, H - pad * 2, 44);
-  ctx.fill();
-
-  ctx.textAlign = 'center';
-
-  // Wordmark
-  ctx.font = '800 54px ' + FONT;
-  const act = 'ACT';
-  const amr = '4AMR';
-  const wAct = ctx.measureText(act).width;
-  const wAmr = ctx.measureText(amr).width;
-  const startX = W / 2 - (wAct + wAmr) / 2;
-  ctx.textAlign = 'left';
-  ctx.fillStyle = '#0D3B2E';
-  ctx.fillText(act, startX, 214);
-  ctx.fillStyle = '#F26522';
-  ctx.fillText(amr, startX + wAct, 214);
-  ctx.textAlign = 'center';
-
-  // Shield with a check
-  ctx.save();
-  ctx.translate(W / 2, 292);
-  ctx.scale(3.4, 3.4);
-  ctx.strokeStyle = '#006857';
-  ctx.lineWidth = 2;
-  ctx.lineJoin = 'round';
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-  ctx.moveTo(0, 10);
-  ctx.bezierCurveTo(6, 8, 8, 4, 8, 0);
-  ctx.lineTo(8, -7);
-  ctx.lineTo(0, -10);
-  ctx.lineTo(-8, -7);
-  ctx.lineTo(-8, 0);
-  ctx.bezierCurveTo(-8, 4, -6, 8, 0, 10);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(-3.6, -0.6);
-  ctx.lineTo(-1.1, 1.9);
-  ctx.lineTo(3.6, -2.9);
-  ctx.stroke();
-  ctx.restore();
-
-  // Headline
-  ctx.fillStyle = '#0F172A';
-  ctx.font = '800 62px ' + FONT;
-  ctx.fillText('I HAVE MADE', W / 2, 452);
-  ctx.fillText('THE PROMISE', W / 2, 520);
-
-  // The four promises. Everything below them is positioned RELATIVE to where
-  // this block actually ends — its height depends on how many lines each
-  // promise wraps to, which changes with the text and will change again in
-  // Marathi. Hard-coding what follows makes the hashtag collide with the last
-  // promise the moment any line wraps.
-  const promises = [
-    'Take antibiotics only when a doctor prescribes them',
-    'Finish every course, even after feeling better',
-    'Never share my medicines with anyone else',
-    'Take leftovers to my nearest PHC or sub-centre'
-  ];
-  const LINE_H = 38;
-  const PROMISE_GAP = 34;
-  ctx.textAlign = 'left';
-  let y = 612;
-  promises.forEach(function (line) {
-    ctx.strokeStyle = '#0E8A6E';
-    ctx.lineWidth = 6;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.beginPath();
-    ctx.moveTo(140, y - 10);
-    ctx.lineTo(158, y + 8);
-    ctx.lineTo(190, y - 26);
-    ctx.stroke();
-
-    ctx.fillStyle = '#334155';
-    ctx.font = '500 30px ' + FONT;
-    const wrapped = wrapText(ctx, line, W - 360);
-    wrapped.forEach(function (part, i) {
-      ctx.fillText(part, 220, y + i * LINE_H);
-    });
-    y += LINE_H * wrapped.length + PROMISE_GAP;
-  });
-
-  // y now sits one line-plus-gap below the final promise, which is the padding.
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#006857';
-  ctx.font = '700 36px ' + FONT;
-  ctx.fillText('# योग्य विल्हेवाट, AMR वर मात!', W / 2, y + 6);
-
-  // Partner strip as text — no logo files, so the canvas stays exportable
-  ctx.fillStyle = '#64748B';
-  ctx.font = '600 20px ' + FONT;
-  ctx.fillText('Public Health Dept, Maharashtra · NHM · CHRI · PATH · GSK', W / 2, y + 54);
-}
-
-function savePledgeCard() {
-  const canvas = document.getElementById('pledgeCardCanvas');
-  if (!canvas || !canvas.toDataURL) return;
-  try {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
-    link.download = 'ACT4AMR_My_Promise.png';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  } catch (err) {
-    console.warn('[pledge] card export failed', err);
-  }
-}
-
-function sharePledge() {
-  const message = 'I have promised to take antibiotics only when prescribed, finish every course, ' +
-    'and take leftover medicines to my nearest health facility. Antimicrobial resistance is stoppable. #ACT4AMR';
-  // A file:// path is meaningless to a recipient, so only pass a real web URL.
-  const onWeb = /^https?:/i.test(window.location.href);
-  const pageUrl = onWeb ? window.location.href.split('#')[0] : '';
-
-  if (navigator.share) {
-    const payload = { title: 'ACT4AMR', text: message };
-    if (pageUrl) payload.url = pageUrl;
-    navigator.share(payload).catch(function () { /* dismissed — not an error */ });
-    return;
-  }
-
-  const text = pageUrl ? message + ' ' + pageUrl : message;
-  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
-}
-
 // Make functions globally accessible
 window.takeSwachhPledge = takeSwachhPledge;
-window.savePledgeCard = savePledgeCard;
-window.sharePledge = sharePledge;
 
 
 // Quiz Questions (8 Educational Questions)
@@ -1090,53 +905,6 @@ setInterval(() => {
 
   // Exposed so later sections injected into the page can be picked up.
   window.initScrollReveal = start;
-
-  // ─── Narrative scene driver ───────────────────────────────────────────────
-  // Switches the sticky dish art as each story beat passes the middle of the
-  // viewport. An IntersectionObserver with a thin centre band, NOT a scroll
-  // listener: nothing runs per frame, which matters on the cheap Android this
-  // page targets.
-  //
-  // Degradations, both deliberate:
-  //   • no JS / no IntersectionObserver -> data-scene stays "1" in the markup,
-  //     so dish 1 shows and all six beats are readable. Nothing is hidden.
-  //   • reduced motion -> the scenes still track (this is state, not
-  //     decoration); only the cross-fade is clamped by the global rule.
-  let narrativeStarted = false;
-
-  function startNarrative() {
-    // Called immediately and again on DOMContentLoaded; without this guard the
-    // second call would build a second observer over the same six beats.
-    if (narrativeStarted) return;
-
-    const wrap = document.querySelector('.narrative');
-    if (!wrap || !('IntersectionObserver' in window)) return;
-
-    const scenes = wrap.querySelectorAll('.narrative-scene[data-scene-n]');
-    if (!scenes.length) return;
-
-    narrativeStarted = true;
-
-    const sceneObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        const n = entry.target.getAttribute('data-scene-n');
-        if (n) wrap.setAttribute('data-scene', n);
-      });
-    }, {
-      // Collapses the viewport to a band across its middle, so the active beat
-      // is whichever one the reader is actually looking at.
-      rootMargin: '-45% 0px -45% 0px',
-      threshold: 0
-    });
-
-    scenes.forEach(function (scene) { sceneObserver.observe(scene); });
-  }
-
-  startNarrative();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startNarrative);
-  }
 
   start();
   // Belt and braces: if this file is ever moved out of the end of <body>,
