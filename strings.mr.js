@@ -93,30 +93,32 @@ registerStrings('mr', {
   'about.card1.title': '',
   // EN: When antibiotics lose their effectiveness against germs and bacteria, that condition is called Antimicrobial Resistance (AMR).
   'about.card1.body': '',
-  // EN: 🧫 Germs
-  'about.card1.flow.germs': '',
-  // EN: 💊 Antibiotics
-  'about.card1.flow.antibiotics': '',
-  // EN: 🦠 Resistant Germs
-  'about.card1.flow.resistant_germs': '',
-  // EN: Over time, resistant germs multiply and standard medicines stop working completely.
-  'about.card1.subtext': '',
+  // EN: Germs cause an infection
+  'about.card1.stage1': '',
+  // EN: The antibiotic kills the weak ones
+  'about.card1.stage2': '',
+  // EN: The survivors multiply
+  'about.card1.stage3': '',
   // EN: Why is AMR Dangerous?
   'about.card2.title': '',
-  // EN: Medicines Become Ineffective: Standard drugs fail to cure common infections.
-  'about.card2.point1': '',
-  // EN: Prolonged Illness: Infections take much longer to recover.
-  'about.card2.point2': '',
-  // EN: Complex Treatments: Medical care & procedures become high-risk.
-  'about.card2.point3': '',
-  // EN: Rising Costs: Treatment & hospital expenses increase.
-  'about.card2.point4': '',
-  // EN: Severe Risk: Risk of severe complications & mortality rises.
-  'about.card2.point5': '',
+  // EN: Medicines stop working
+  'about.card2.risk1': '',
+  // EN: Illness lasts far longer
+  'about.card2.risk2': '',
+  // EN: Treatment turns high-risk
+  'about.card2.risk3': '',
+  // EN: Costs climb for the family
+  'about.card2.risk4': '',
+  // EN: Common infections turn deadly
+  'about.card2.risk5': '',
   // EN: What Can We Do to Prevent AMR?
   'about.card3.title': '',
-  // EN: Three things: take antibiotics only when a doctor prescribes them, finish every course, and never bin or flush what is left over.
-  'about.card3.body': '',
+  // EN: Only on a doctor's prescription
+  'about.card3.act1': '',
+  // EN: Finish every single course
+  'about.card3.act2': '',
+  // EN: Never bin it or flush it
+  'about.card3.act3': '',
   // EN: See the seven steps for safe disposal
   'about.card3.link': '',
 
@@ -159,12 +161,6 @@ registerStrings('mr', {
   'journey.step7.label': '',
   // EN: Antibiotics keep working for the next person who needs them — and the cycle starts again at home.
   'journey.step7.detail': '',
-  // EN: Do it today: take any leftover or expired medicines to your nearest PHC, sub-centre or government health facility, and ask the staff there.
-  'journey.cta.text': '',
-  // EN: Take the pledge
-  'journey.cta.pledge': '',
-  // EN: See the official poster
-  'journey.cta.poster': '',
 
   // ── iec ───────────────────────────────────────────────────────
   // EN: IEC Center

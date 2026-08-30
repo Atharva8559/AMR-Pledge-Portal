@@ -1289,60 +1289,10 @@ nav ul li a:active {
   margin-bottom: var(--space-4);
 }
 
-.poster-card-subtext {
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-  line-height: var(--lh-body);
-  font-style: italic;
-  margin-top: var(--space-3);
-}
-
-.germ-flow-step {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-  padding: var(--space-3) var(--space-4);
-  background: var(--green-50);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-semibold);
-  line-height: var(--lh-tight);
-  color: var(--green-800);
-}
-
-.poster-points-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.poster-points-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-2);
-  font-size: var(--text-base);
-  color: var(--text-secondary);
-  line-height: var(--lh-body);
-}
-
-/* The leading emoji tracks body size so the bullets stay optically aligned. */
-.poster-points-list li span {
-  font-size: var(--text-base);
-  line-height: var(--lh-body);
-  flex-shrink: 0;
-}
-
-/* Lead-in phrase inside each bullet — the only weight step available to
-   separate the label from its explanation. */
-.poster-points-list li strong,
+/* The bold lead-in inside body copy. */
 .poster-card-text strong {
   font-weight: var(--weight-bold);
   color: var(--text-primary);
-}
-
-.poster-points-list li div {
-  flex: 1;
 }
 
 /* Card 3 hands off to the Disposal Journey rather than repeating it. */
@@ -1371,6 +1321,203 @@ nav ul li a:active {
   .about-card-link:hover::after {
     transform: translateX(3px);
   }
+}
+
+/* ───────────────────────────────────────────────
+   ABOUT — DIAGRAMS
+
+   The three cards carry line-art SVG, not emoji. Emoji render as a different
+   typeface on every platform, cannot be recoloured to the campaign palette, and
+   are read aloud by screen readers as their unicode name, so they are marked
+   aria-hidden and the meaning lives in the adjacent text instead.
+   ─────────────────────────────────────────────── */
+
+/* Card 1 — germs, antibiotic, survivors. */
+.amr-flow {
+  margin: var(--space-5) 0 0;
+}
+
+.amr-flow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.flow-dish {
+  fill: var(--green-50);
+  stroke: var(--green-100);
+  stroke-width: 1.5;
+}
+
+.flow-germ rect {
+  fill: var(--green-500);
+}
+
+/* Dying, not gone: the reader should see the population thin out rather than
+   elements simply disappear between stages. */
+.flow-germ--dying rect {
+  fill: var(--green-200);
+}
+
+.flow-germ--tough rect {
+  fill: var(--red-500);
+}
+
+.flow-pill rect {
+  fill: var(--white);
+  stroke: var(--green-600);
+  stroke-width: 2;
+}
+
+.flow-pill path {
+  stroke: var(--green-600);
+  stroke-width: 2;
+  fill: none;
+}
+
+.flow-arrow path {
+  stroke: var(--green-300);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.amr-flow-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-snug);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Card 2 — an escalation. The connecting rail is what makes it read as one
+   chain of consequences rather than five unrelated bullets. */
+.risk-chain {
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+}
+
+.risk-chain::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--red-100), var(--red-400), var(--red-600));
+  border-radius: var(--radius-full);
+}
+
+.risk-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.risk-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--white);
+  border: 1.5px solid var(--red-100);
+  color: var(--red-500);
+}
+
+.risk-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.risk-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+}
+
+/* The end of the chain, weighted so the last consequence lands hardest. */
+.risk-step--severe .risk-icon {
+  background: var(--red-600);
+  border-color: var(--red-600);
+  color: var(--white);
+}
+
+.risk-step--severe .risk-label {
+  color: var(--red-700);
+  font-weight: var(--weight-bold);
+}
+
+/* Card 3 — the three actions. */
+.action-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-md);
+}
+
+.action-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--green-600);
+}
+
+.action-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.action-label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  line-height: var(--lh-snug);
+  color: var(--text-primary);
+}
+
+/* The one prohibition in the set reads red, matching step 2 of the Journey. */
+.action-item--warn {
+  background: var(--red-100);
+  border-color: var(--red-100);
+}
+
+.action-item--warn .action-icon {
+  color: var(--red-600);
+}
+
+.action-item--warn .action-label {
+  color: var(--red-700);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1563,28 +1710,6 @@ nav ul li a:active {
   .journey-step--warn:hover .journey-node {
     box-shadow: var(--shadow-red-sm), 0 0 0 6px var(--white);
   }
-}
-
-.journey-cta {
-  margin-top: var(--space-9);
-  padding: var(--space-7);
-  text-align: center;
-}
-
-.journey-cta-text {
-  font-size: var(--text-md);
-  font-weight: var(--weight-medium);
-  line-height: var(--lh-snug);
-  color: var(--text-primary);
-  max-width: var(--measure);
-  margin: 0 auto var(--space-6);
-}
-
-.journey-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  justify-content: center;
 }
 
 /* ═══════════════════════════════════════════════
@@ -2919,10 +3044,6 @@ footer::after {
     margin-bottom: var(--space-7);
   }
 
-  .journey-cta {
-    margin-top: var(--space-7);
-    padding: var(--space-6);
-  }
 
   /* LONGHANDS, not `padding: 0 var(--space-4)`. Three elements on this page
      carry .container AND a second class that sets vertical padding —

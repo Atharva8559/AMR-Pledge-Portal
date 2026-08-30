@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-179 strings. Fill the **Marathi** column, then paste each value into the
+177 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -56,7 +56,7 @@ machine translation.
 | `hero.badge.label` | Then drop leftovers at your PHC |  |
 | `hero.image.alt` | AMR Illustration DNA and capsules |  |
 
-## about  (0/18 done)
+## about  (0/19 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -65,21 +65,22 @@ machine translation.
 | `about.desc` | The reason could be Antimicrobial Resistance (AMR). Understand the key facts through these 3 essential campaign questions: |  |
 | `about.card1.title` | What is AMR? |  |
 | `about.card1.body` | When antibiotics lose their effectiveness against germs and bacteria, that condition is called Antimicrobial Resistance (AMR). |  |
-| `about.card1.flow.germs` | 🧫 Germs |  |
-| `about.card1.flow.antibiotics` | 💊 Antibiotics |  |
-| `about.card1.flow.resistant_germs` | 🦠 Resistant Germs |  |
-| `about.card1.subtext` | Over time, resistant germs multiply and standard medicines stop working completely. |  |
+| `about.card1.stage1` | Germs cause an infection |  |
+| `about.card1.stage2` | The antibiotic kills the weak ones |  |
+| `about.card1.stage3` | The survivors multiply |  |
 | `about.card2.title` | Why is AMR Dangerous? |  |
-| `about.card2.point1` | Medicines Become Ineffective: Standard drugs fail to cure common infections. |  |
-| `about.card2.point2` | Prolonged Illness: Infections take much longer to recover. |  |
-| `about.card2.point3` | Complex Treatments: Medical care & procedures become high-risk. |  |
-| `about.card2.point4` | Rising Costs: Treatment & hospital expenses increase. |  |
-| `about.card2.point5` | Severe Risk: Risk of severe complications & mortality rises. |  |
+| `about.card2.risk1` | Medicines stop working |  |
+| `about.card2.risk2` | Illness lasts far longer |  |
+| `about.card2.risk3` | Treatment turns high-risk |  |
+| `about.card2.risk4` | Costs climb for the family |  |
+| `about.card2.risk5` | Common infections turn deadly |  |
 | `about.card3.title` | What Can We Do to Prevent AMR? |  |
-| `about.card3.body` | Three things: take antibiotics only when a doctor prescribes them, finish every course, and never bin or flush what is left over. |  |
+| `about.card3.act1` | Only on a doctor's prescription |  |
+| `about.card3.act2` | Finish every single course |  |
+| `about.card3.act3` | Never bin it or flush it |  |
 | `about.card3.link` | See the seven steps for safe disposal |  |
 
-## journey  (0/22 done)
+## journey  (0/19 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -102,9 +103,6 @@ machine translation.
 | `journey.step6.detail` | It is disposed of through the health system, not left in a landfill or a water body. |  |
 | `journey.step7.label` | Soil and water stay clean |  |
 | `journey.step7.detail` | Antibiotics keep working for the next person who needs them — and the cycle starts again at home. |  |
-| `journey.cta.text` | Do it today: take any leftover or expired medicines to your nearest PHC, sub-centre or government health facility, and ask the staff there. |  |
-| `journey.cta.pledge` | Take the pledge |  |
-| `journey.cta.poster` | See the official poster |  |
 
 ## iec  (0/26 done)
 
