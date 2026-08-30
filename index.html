@@ -199,142 +199,37 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-subtitle" data-i18n="about.subtitle">Understanding The Threat</span>
-        <h2 class="section-title" data-i18n="about.title">Not Feeling Better Quickly Despite Taking Medicines?</h2>
-        <p class="section-desc" data-i18n-html="about.desc">The reason could be <strong>Antimicrobial Resistance
-            (AMR)</strong>. Three facts worth knowing:</p>
+        <!-- Visually hidden: the infographic below carries its own visible title, so
+             showing a second heading would say the same thing twice. The h2 stays in
+             the markup because the section's aria-labelledby points at it and the
+             document outline needs it. -->
+        <h2 class="section-title visually-hidden" id="about-title" data-i18n="about.title">Not Feeling Better Quickly
+          Despite Taking Medicines?</h2>
       </div>
 
-      <div class="threat-stack" data-reveal-children>
-
-        <!-- 1 — what resistance is -->
-        <article class="threat-card threat-card--fact reveal">
-          <span class="threat-num" aria-hidden="true">1</span>
-          <h3 class="threat-headline" data-i18n="about.card1.headline">AMR is when antibiotics lose their
-            effectiveness.</h3>
-          <div class="threat-body">
-            <div class="threat-icons">
-              <figure class="threat-figure">
-                <span class="threat-glyph threat-glyph--drug" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 24a8 8 0 0 1 8-8h6l-4.5 8 4.5 8h-6a8 8 0 0 1-8-8z" />
-                    <path d="M41 24a8 8 0 0 0-8-8h-6l4.5 8-4.5 8h6a8 8 0 0 0 8-8z" />
-                    <path d="M24.5 12.5 26 8" /><path d="M30 14 33 11" /><path d="M18 34 15.5 37.5" />
-                  </svg>
-                </span>
-                <figcaption data-i18n="about.card1.icon1">Antibiotics</figcaption>
-              </figure>
-              <figure class="threat-figure">
-                <span class="threat-glyph threat-glyph--germ" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="19" cy="19" r="8" />
-                    <path d="M19 8v3" /><path d="M19 27v3" /><path d="M8 19h3" /><path d="M27 19h3" />
-                    <path d="M11.2 11.2 13.4 13.4" /><path d="M24.6 24.6 26.8 26.8" />
-                    <path d="M26.8 11.2 24.6 13.4" /><path d="M13.4 24.6 11.2 26.8" />
-                    <circle cx="33" cy="32" r="6" />
-                    <path d="M33 23v2.5" /><path d="M33 38v2.5" /><path d="M24 32h2.5" /><path d="M39.5 32H42" />
-                  </svg>
-                </span>
-                <figcaption data-i18n="about.card1.icon2">Resistant germs</figcaption>
-              </figure>
-            </div>
-            <p class="threat-text" data-i18n="about.card1.text">The germs survive the treatment, multiply, and carry on
-              causing infection — and the antibiotic that used to work no longer does.</p>
-          </div>
-        </article>
-
-        <!-- 2 — why it matters -->
-        <article class="threat-card threat-card--danger reveal">
-          <span class="threat-num threat-num--danger" aria-hidden="true">2</span>
-          <h3 class="threat-headline threat-headline--danger" data-i18n="about.card2.headline">Common infections start
-            turning deadly.</h3>
-          <div class="threat-body">
-            <div class="threat-icons">
-              <figure class="threat-figure">
-                <span class="threat-glyph threat-glyph--mild" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="24" cy="24" r="6" />
-                    <circle cx="24" cy="24" r="13" stroke-dasharray="3 4" />
-                  </svg>
-                </span>
-                <figcaption data-i18n="about.card2.icon1">Common infection</figcaption>
-              </figure>
-              <figure class="threat-figure">
-                <span class="threat-glyph threat-glyph--severe" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="20" cy="21" r="9" />
-                    <circle cx="33" cy="31" r="6" />
-                    <circle cx="17" cy="35" r="4.5" />
-                    <path d="M20 10v-3" /><path d="M9.5 15 7 13" /><path d="M30.5 15 33 13" />
-                    <path d="M39 31h3" /><path d="M17 41.5V44" />
-                  </svg>
-                </span>
-                <figcaption data-i18n="about.card2.icon2">Severe illness</figcaption>
-              </figure>
-              <figure class="threat-figure">
-                <span class="threat-glyph threat-glyph--cost" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 38V27h34v11" /><path d="M7 38h34" /><path d="M7 27v-6" />
-                    <path d="M14 27v-4h13v4" />
-                    <path d="M27 17l6-6 4 4 7-7" /><path d="M39 8h5v5" />
-                  </svg>
-                </span>
-                <figcaption data-i18n="about.card2.icon3">Higher cost</figcaption>
-              </figure>
-            </div>
-            <p class="threat-text" data-i18n="about.card2.text">Medicines stop working, so illness drags on, treatment
-              gets riskier, and the bill for the family climbs.</p>
-          </div>
-        </article>
-
-        <!-- 3 — what to do -->
-        <article class="threat-card threat-card--act reveal">
-          <span class="threat-num" aria-hidden="true">3</span>
-          <h3 class="threat-headline" data-i18n="about.card3.headline">Use and dispose of medicine responsibly.</h3>
-          <div class="threat-tiles">
-            <figure class="threat-tile">
-              <span class="threat-glyph threat-glyph--drug" aria-hidden="true">
-                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 18h16v22a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2z" />
-                  <rect x="12" y="11" width="20" height="7" rx="2" />
-                  <path d="M19 25h6" /><path d="M22 25v10" /><path d="M22 30h3" />
-                  <circle cx="35" cy="35" r="7" /><path d="M32 35l2.2 2.2 4.3-4.6" />
-                </svg>
-              </span>
-              <figcaption data-i18n="about.card3.tile1">Only with a prescription</figcaption>
-            </figure>
-            <figure class="threat-tile">
-              <span class="threat-glyph threat-glyph--drug" aria-hidden="true">
-                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="6" y="10" width="18" height="28" rx="3" />
-                  <path d="M12 17h1" /><path d="M18 17h1" /><path d="M12 24h1" /><path d="M18 24h1" />
-                  <path d="M12 31h1" /><path d="M18 31h1" />
-                  <path d="M29 24h8" /><path d="M34 20l4 4-4 4" />
-                  <path d="M42 33l-4-4 4-4" />
-                </svg>
-              </span>
-              <figcaption data-i18n="about.card3.tile2">Finish every course</figcaption>
-            </figure>
-            <figure class="threat-tile threat-tile--warn">
-              <span class="threat-glyph threat-glyph--stop" aria-hidden="true">
-                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 16h20" />
-                  <path d="M17 16v20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V16" />
-                  <path d="M20.5 16v-4h7v4" />
-                  <circle cx="24" cy="24" r="19" />
-                  <path d="M10.5 37.5 37.5 10.5" />
-                </svg>
-              </span>
-              <figcaption data-i18n="about.card3.tile3">Never flush or bin old meds</figcaption>
-            </figure>
-          </div>
-          <p class="threat-text threat-text--full" data-i18n="about.card3.text">Take antibiotics only when a doctor
-            prescribes them, finish the full course even once you feel better, and take what is left over to a health
-            facility rather than the bin.</p>
-          <a class="about-card-link" href="#journey" data-i18n="about.card3.link">See the seven steps for safe
-            disposal</a>
-        </article>
-
-      </div>
+      <!-- The whole explanation is one supplied infographic. Everything it says is
+           repeated in .about-figure-text below, which is visually hidden but read by
+           screen readers and translated by the Marathi toggle — text baked into a
+           raster is invisible to both. -->
+      <figure class="about-figure reveal">
+        <img src="assets/web/about/understanding_amr.webp" width="1000" height="1589" loading="lazy"
+          decoding="async" class="about-figure-img" data-i18n-attr="alt:about.figure.alt"
+          alt="Infographic: Why isn't your medicine working? Understanding AMR."
+          data-modal-title="Understanding Antimicrobial Resistance"
+          data-modal-desc="Antimicrobial Resistance occurs when medicines no longer kill germs, making common infections harder to treat and more dangerous."
+          onclick="openPosterModal(this, 'assets/about/understanding_amr.png', true)" role="button" tabindex="0">
+        <figcaption class="about-figure-text">
+          <p data-i18n="about.fig.intro">Antimicrobial Resistance happens when medicines no longer kill germs, which
+            makes common infections harder to treat and more dangerous.</p>
+          <p data-i18n="about.fig.q1">What is AMR? A germ meets an antibiotic, the germ evolves to resist it, and the
+            medicine stops working.</p>
+          <p data-i18n="about.fig.q2">Why is AMR dangerous? Recovery takes longer, the risk of death rises, and
+            treatment costs more.</p>
+          <p data-i18n="about.fig.q3">How can we stop AMR? Take antibiotics only when a doctor prescribes them and
+            always finish the full course. Drop leftover or expired antibiotics at a designated collection point rather
+            than in the bin, to protect the environment.</p>
+        </figcaption>
+      </figure>
     </div>
   </section>
 

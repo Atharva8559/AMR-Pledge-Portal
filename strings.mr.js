@@ -87,38 +87,16 @@ registerStrings('mr', {
   'about.subtitle': '',
   // EN: Not Feeling Better Quickly Despite Taking Medicines?
   'about.title': '',
-  // EN: The reason could be Antimicrobial Resistance (AMR). Three facts worth knowing:
-  'about.desc': '',
-  // EN: AMR is when antibiotics lose their effectiveness.
-  'about.card1.headline': '',
-  // EN: Antibiotics
-  'about.card1.icon1': '',
-  // EN: Resistant germs
-  'about.card1.icon2': '',
-  // EN: The germs survive the treatment, multiply, and carry on causing infection — and the antibiotic that used to work no longer does.
-  'about.card1.text': '',
-  // EN: Common infections start turning deadly.
-  'about.card2.headline': '',
-  // EN: Common infection
-  'about.card2.icon1': '',
-  // EN: Severe illness
-  'about.card2.icon2': '',
-  // EN: Higher cost
-  'about.card2.icon3': '',
-  // EN: Medicines stop working, so illness drags on, treatment gets riskier, and the bill for the family climbs.
-  'about.card2.text': '',
-  // EN: Use and dispose of medicine responsibly.
-  'about.card3.headline': '',
-  // EN: Only with a prescription
-  'about.card3.tile1': '',
-  // EN: Finish every course
-  'about.card3.tile2': '',
-  // EN: Never flush or bin old meds
-  'about.card3.tile3': '',
-  // EN: Take antibiotics only when a doctor prescribes them, finish the full course even once you feel better, and take what is left over to a health facility rather than the bin.
-  'about.card3.text': '',
-  // EN: See the seven steps for safe disposal
-  'about.card3.link': '',
+  // EN: Antimicrobial Resistance happens when medicines no longer kill germs, which makes common infections harder to treat and more dangerous.
+  'about.fig.intro': '',
+  // EN: What is AMR? A germ meets an antibiotic, the germ evolves to resist it, and the medicine stops working.
+  'about.fig.q1': '',
+  // EN: Why is AMR dangerous? Recovery takes longer, the risk of death rises, and treatment costs more.
+  'about.fig.q2': '',
+  // EN: How can we stop AMR? Take antibiotics only when a doctor prescribes them and always finish the full course. Drop leftover or expired antibiotics at a designated collection point rather than in the bin, to protect the environment.
+  'about.fig.q3': '',
+  // EN: Infographic: Why isn't your medicine working? Understanding AMR.
+  'about.figure.alt': '',
 
   // ── journey ───────────────────────────────────────────────────
   // EN: Safe Disposal

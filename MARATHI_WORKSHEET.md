@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-176 strings. Fill the **Marathi** column, then paste each value into the
+165 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -56,28 +56,17 @@ machine translation.
 | `hero.badge.label` | Then drop leftovers at your PHC |  |
 | `hero.image.alt` | AMR Illustration DNA and capsules |  |
 
-## about  (0/18 done)
+## about  (0/7 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `about.subtitle` | Understanding The Threat |  |
 | `about.title` | Not Feeling Better Quickly Despite Taking Medicines? |  |
-| `about.desc` | The reason could be Antimicrobial Resistance (AMR). Three facts worth knowing: |  |
-| `about.card1.headline` | AMR is when antibiotics lose their effectiveness. |  |
-| `about.card1.icon1` | Antibiotics |  |
-| `about.card1.icon2` | Resistant germs |  |
-| `about.card1.text` | The germs survive the treatment, multiply, and carry on causing infection — and the antibiotic that used to work no longer does. |  |
-| `about.card2.headline` | Common infections start turning deadly. |  |
-| `about.card2.icon1` | Common infection |  |
-| `about.card2.icon2` | Severe illness |  |
-| `about.card2.icon3` | Higher cost |  |
-| `about.card2.text` | Medicines stop working, so illness drags on, treatment gets riskier, and the bill for the family climbs. |  |
-| `about.card3.headline` | Use and dispose of medicine responsibly. |  |
-| `about.card3.tile1` | Only with a prescription |  |
-| `about.card3.tile2` | Finish every course |  |
-| `about.card3.tile3` | Never flush or bin old meds |  |
-| `about.card3.text` | Take antibiotics only when a doctor prescribes them, finish the full course even once you feel better, and take what is left over to a health facility rather than the bin. |  |
-| `about.card3.link` | See the seven steps for safe disposal |  |
+| `about.fig.intro` | Antimicrobial Resistance happens when medicines no longer kill germs, which makes common infections harder to treat and more dangerous. |  |
+| `about.fig.q1` | What is AMR? A germ meets an antibiotic, the germ evolves to resist it, and the medicine stops working. |  |
+| `about.fig.q2` | Why is AMR dangerous? Recovery takes longer, the risk of death rises, and treatment costs more. |  |
+| `about.fig.q3` | How can we stop AMR? Take antibiotics only when a doctor prescribes them and always finish the full course. Drop leftover or expired antibiotics at a designated collection point rather than in the bin, to protect the environment. |  |
+| `about.figure.alt` | Infographic: Why isn't your medicine working? Understanding AMR. |  |
 
 ## journey  (0/19 done)
 
