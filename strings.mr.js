@@ -87,16 +87,20 @@ registerStrings('mr', {
   'about.subtitle': '',
   // EN: Not Feeling Better Quickly Despite Taking Medicines?
   'about.title': '',
-  // EN: Antimicrobial Resistance happens when medicines no longer kill germs, which makes common infections harder to treat and more dangerous.
-  'about.fig.intro': '',
-  // EN: What is AMR? A germ meets an antibiotic, the germ evolves to resist it, and the medicine stops working.
-  'about.fig.q1': '',
-  // EN: Why is AMR dangerous? Recovery takes longer, the risk of death rises, and treatment costs more.
-  'about.fig.q2': '',
-  // EN: How can we stop AMR? Take antibiotics only when a doctor prescribes them and always finish the full course. Drop leftover or expired antibiotics at a designated collection point rather than in the bin, to protect the environment.
-  'about.fig.q3': '',
-  // EN: Infographic: Why isn't your medicine working? Understanding AMR.
-  'about.figure.alt': '',
+  // EN: What is AMR? Antimicrobial Resistance occurs when medicines no longer kill germs, making common infections harder to treat and more dangerous. A germ meets an antibiotic, the germ evolves to resist it, and the medicine is rendered ineffective.
+  'about.card1.body': '',
+  // EN: Why is AMR dangerous? It makes infections harder to treat and can lead to severe consequences: longer recovery times, an increased risk of death, higher treatment costs, economic burden on families and society, and a threat to future generations.
+  'about.card2.body': '',
+  // EN: What can we do to prevent AMR? Small actions today, healthier tomorrow. Take antibiotics only when prescribed by a doctor and always complete the full course. Dispose of medicines safely. Drop leftover or expired antibiotics at a designated collection centre to protect the environment. See the seven steps for safe disposal.
+  'about.card3.body': '',
+  // EN: Card 1, What is AMR? Germs meet an antibiotic, evolve to resist it, and the medicine stops working.
+  'about.card1.alt': '',
+  // EN: Card 2, Why is AMR dangerous? Longer recovery, higher risk of death, higher costs, economic burden and a threat to future generations.
+  'about.card2.alt': '',
+  // EN: What can we do to prevent AMR? See the seven steps for safe disposal
+  'about.card3.link_label': '',
+  // EN: Card 3, What can we do to prevent AMR? Take antibiotics only as prescribed, finish the course, and drop leftovers at a collection centre.
+  'about.card3.alt': '',
 
   // ── journey ───────────────────────────────────────────────────
   // EN: Safe Disposal

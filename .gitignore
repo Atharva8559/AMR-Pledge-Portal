@@ -26,6 +26,3 @@ assets/video/dindi_song_540p.m4v
 
 # Build/scratch output
 /.perf/
-
-# Source infographic. The web and full-res copies live under assets/.
-/About AMR/

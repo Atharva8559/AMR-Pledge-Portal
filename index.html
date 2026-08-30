@@ -199,37 +199,64 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-subtitle" data-i18n="about.subtitle">Understanding The Threat</span>
-        <!-- Visually hidden: the infographic below carries its own visible title, so
-             showing a second heading would say the same thing twice. The h2 stays in
-             the markup because the section's aria-labelledby points at it and the
-             document outline needs it. -->
-        <h2 class="section-title visually-hidden" id="about-title" data-i18n="about.title">Not Feeling Better Quickly
-          Despite Taking Medicines?</h2>
+        <h2 class="section-title" id="about-title" data-i18n="about.title">Not Feeling Better Quickly Despite Taking
+          Medicines?</h2>
       </div>
 
-      <!-- The whole explanation is one supplied infographic. Everything it says is
-           repeated in .about-figure-text below, which is visually hidden but read by
-           screen readers and translated by the Marathi toggle — text baked into a
-           raster is invisible to both. -->
-      <figure class="about-figure reveal">
-        <img src="assets/web/about/understanding_amr.webp" width="1000" height="1589" loading="lazy"
-          decoding="async" class="about-figure-img" data-i18n-attr="alt:about.figure.alt"
-          alt="Infographic: Why isn't your medicine working? Understanding AMR."
-          data-modal-title="Understanding Antimicrobial Resistance"
-          data-modal-desc="Antimicrobial Resistance occurs when medicines no longer kill germs, making common infections harder to treat and more dangerous."
-          onclick="openPosterModal(this, 'assets/about/understanding_amr.png', true)" role="button" tabindex="0">
-        <figcaption class="about-figure-text">
-          <p data-i18n="about.fig.intro">Antimicrobial Resistance happens when medicines no longer kill germs, which
-            makes common infections harder to treat and more dangerous.</p>
-          <p data-i18n="about.fig.q1">What is AMR? A germ meets an antibiotic, the germ evolves to resist it, and the
-            medicine stops working.</p>
-          <p data-i18n="about.fig.q2">Why is AMR dangerous? Recovery takes longer, the risk of death rises, and
-            treatment costs more.</p>
-          <p data-i18n="about.fig.q3">How can we stop AMR? Take antibiotics only when a doctor prescribes them and
-            always finish the full course. Drop leftover or expired antibiotics at a designated collection point rather
-            than in the bin, to protect the environment.</p>
-        </figcaption>
-      </figure>
+      <!-- Three supplied card images. Each one's text is baked into the raster, so
+           it is invisible to screen readers and untranslatable by the Marathi
+           toggle — every card repeats its content in a visually hidden block. -->
+      <div class="about-cards" data-reveal-children>
+
+        <figure class="about-card reveal">
+          <img src="assets/web/about/amr_card1.webp" width="395" height="499" loading="lazy" decoding="async"
+            class="about-card-img" role="button" tabindex="0"
+            data-i18n-attr="alt:about.card1.alt"
+            alt="Card 1, What is AMR? Germs meet an antibiotic, evolve to resist it, and the medicine stops working."
+            data-modal-title="What is AMR?"
+            data-modal-desc="Antimicrobial Resistance occurs when medicines no longer kill germs, making common infections harder to treat and more dangerous."
+            onclick="openPosterModal(this, 'assets/about/amr_card1.png', true)">
+          <figcaption class="about-card-text">
+            <p data-i18n="about.card1.body">What is AMR? Antimicrobial Resistance occurs when medicines no longer kill
+              germs, making common infections harder to treat and more dangerous. A germ meets an antibiotic, the germ
+              evolves to resist it, and the medicine is rendered ineffective.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="about-card reveal">
+          <img src="assets/web/about/amr_card2.webp" width="412" height="516" loading="lazy" decoding="async"
+            class="about-card-img" role="button" tabindex="0"
+            data-i18n-attr="alt:about.card2.alt"
+            alt="Card 2, Why is AMR dangerous? Longer recovery, higher risk of death, higher costs, economic burden and a threat to future generations."
+            data-modal-title="Why is AMR Dangerous?"
+            data-modal-desc="Antimicrobial Resistance makes infections harder to treat and can lead to severe consequences."
+            onclick="openPosterModal(this, 'assets/about/amr_card2.png', true)">
+          <figcaption class="about-card-text">
+            <p data-i18n="about.card2.body">Why is AMR dangerous? It makes infections harder to treat and can lead to
+              severe consequences: longer recovery times, an increased risk of death, higher treatment costs, economic
+              burden on families and society, and a threat to future generations.</p>
+          </figcaption>
+        </figure>
+
+        <!-- Card 3's image carries a painted-on "See the seven steps" link. Pixels
+             cannot be clicked, so the whole card is the real link to #journey —
+             otherwise the affordance is a promise the page does not keep. -->
+        <figure class="about-card">
+          <a class="about-card-link reveal" href="#journey" data-i18n-attr="aria-label:about.card3.link_label"
+            aria-label="What can we do to prevent AMR? See the seven steps for safe disposal">
+            <img src="assets/web/about/amr_card3.webp" width="433" height="512" loading="lazy" decoding="async"
+              class="about-card-img" data-i18n-attr="alt:about.card3.alt"
+              alt="Card 3, What can we do to prevent AMR? Take antibiotics only as prescribed, finish the course, and drop leftovers at a collection centre.">
+          </a>
+          <figcaption class="about-card-text">
+            <p data-i18n="about.card3.body">What can we do to prevent AMR? Small actions today, healthier tomorrow.
+              Take antibiotics only when prescribed by a doctor and always complete the full course. Dispose of
+              medicines safely. Drop leftover or expired antibiotics at a designated collection centre to protect the
+              environment. See the seven steps for safe disposal.</p>
+          </figcaption>
+        </figure>
+
+      </div>
     </div>
   </section>
 

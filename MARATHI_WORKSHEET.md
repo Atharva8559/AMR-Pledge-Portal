@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-165 strings. Fill the **Marathi** column, then paste each value into the
+167 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -56,17 +56,19 @@ machine translation.
 | `hero.badge.label` | Then drop leftovers at your PHC |  |
 | `hero.image.alt` | AMR Illustration DNA and capsules |  |
 
-## about  (0/7 done)
+## about  (0/9 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `about.subtitle` | Understanding The Threat |  |
 | `about.title` | Not Feeling Better Quickly Despite Taking Medicines? |  |
-| `about.fig.intro` | Antimicrobial Resistance happens when medicines no longer kill germs, which makes common infections harder to treat and more dangerous. |  |
-| `about.fig.q1` | What is AMR? A germ meets an antibiotic, the germ evolves to resist it, and the medicine stops working. |  |
-| `about.fig.q2` | Why is AMR dangerous? Recovery takes longer, the risk of death rises, and treatment costs more. |  |
-| `about.fig.q3` | How can we stop AMR? Take antibiotics only when a doctor prescribes them and always finish the full course. Drop leftover or expired antibiotics at a designated collection point rather than in the bin, to protect the environment. |  |
-| `about.figure.alt` | Infographic: Why isn't your medicine working? Understanding AMR. |  |
+| `about.card1.body` | What is AMR? Antimicrobial Resistance occurs when medicines no longer kill germs, making common infections harder to treat and more dangerous. A germ meets an antibiotic, the germ evolves to resist it, and the medicine is rendered ineffective. |  |
+| `about.card2.body` | Why is AMR dangerous? It makes infections harder to treat and can lead to severe consequences: longer recovery times, an increased risk of death, higher treatment costs, economic burden on families and society, and a threat to future generations. |  |
+| `about.card3.body` | What can we do to prevent AMR? Small actions today, healthier tomorrow. Take antibiotics only when prescribed by a doctor and always complete the full course. Dispose of medicines safely. Drop leftover or expired antibiotics at a designated collection centre to protect the environment. See the seven steps for safe disposal. |  |
+| `about.card1.alt` | Card 1, What is AMR? Germs meet an antibiotic, evolve to resist it, and the medicine stops working. |  |
+| `about.card2.alt` | Card 2, Why is AMR dangerous? Longer recovery, higher risk of death, higher costs, economic burden and a threat to future generations. |  |
+| `about.card3.link_label` | What can we do to prevent AMR? See the seven steps for safe disposal |  |
+| `about.card3.alt` | Card 3, What can we do to prevent AMR? Take antibiotics only as prescribed, finish the course, and drop leftovers at a collection centre. |  |
 
 ## journey  (0/19 done)
 

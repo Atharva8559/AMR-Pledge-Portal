@@ -1207,44 +1207,60 @@ nav ul li a:active {
 /* ═══════════════════════════════════════════════
    ABOUT — UNDERSTANDING THE THREAT
 
-   One supplied infographic carries this whole section. Its text is baked into
-   the raster, which makes it invisible to screen readers and untranslatable by
-   the Marathi toggle — the visually hidden .about-figure-text restores both
-   without changing anything on screen.
+   Three supplied card images. They arrive with their own border, number badge
+   and title already drawn, and their surrounding tone is within two values of
+   --gray-50, so they sit straight on the section with no CSS card chrome — a
+   border or shadow added here would read as a second frame around the first.
+
+   Their text is baked into the raster, which makes it invisible to screen
+   readers and untranslatable by the Marathi toggle. .about-card-text repeats
+   every card in full, off-screen, with its own i18n key.
    ═══════════════════════════════════════════════ */
 .about {
   background: var(--gray-50);
 }
 
-.about-figure {
-  margin: 0 auto;
-  max-width: 780px;
+.about-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  justify-items: center;
 }
 
-.about-figure-img {
+.about-card {
+  margin: 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.about-card-img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-default);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.about-card > .about-card-img {
   cursor: zoom-in;
-  transition:
-    box-shadow var(--dur-base) var(--ease-out),
-    transform var(--dur-base) var(--ease-out);
+}
+
+/* Card 3 only: the image has a "See the seven steps" link painted into it, and
+   pixels cannot be clicked, so the card itself carries the real link. */
+.about-card-link {
+  display: block;
+  border-radius: var(--radius-md);
 }
 
 @media (hover: hover) {
-  .about-figure-img:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+  .about-card-img:hover {
+    transform: translateY(-3px);
   }
 }
 
 /* Off-screen but still in the accessibility tree and still walked by the i18n
    runtime. NOT display:none, which would remove it from both. */
-.visually-hidden,
-.about-figure-text {
+.about-card-text {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1255,6 +1271,18 @@ nav ul li a:active {
   clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
+}
+
+@media (min-width: 860px) {
+  .about-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+    align-items: start;
+  }
+
+  .about-card {
+    max-width: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -3180,7 +3208,7 @@ footer::after {
 
      So the base .reveal state is overridden directly — not merely un-animated —
      and the container rule covers the six [data-reveal-children] blocks
-     (.hero-grid, .iec-grid, .vertical-roadmap-wrapper,
+     (.hero-grid, .about-cards, .iec-grid, .vertical-roadmap-wrapper,
      .partners-logos-grid) whose children receive an inline transition-delay
      from app.js that inline styles would otherwise keep alive. */
   .reveal,
