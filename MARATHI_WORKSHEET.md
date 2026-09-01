@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-171 strings. Fill the **Marathi** column, then paste each value into the
+170 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -27,7 +27,7 @@ machine translation.
 | `nav.roadmap` | Roadmap | वाटचाल |
 | `nav.language` | Language | भाषा |
 
-## pledge  (11/11 done)
+## pledge  (10/10 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -40,7 +40,6 @@ machine translation.
 | `pledge.commitments.dropoff` | Take leftovers to my nearest PHC or sub-centre | उरलेली औषधे जवळच्या प्राथमिक आरोग्य केंद्रात किंवा उपकेंद्रात नेईन |
 | `pledge.cta` | Pledge Now | आता प्रतिज्ञा घ्या |
 | `pledge.done.title` | Your promise is made. | तुमचे वचन नोंदवले गेले. |
-| `pledge.done.note` | Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device. | तुमचे वचन मोजले जाते, पण तुमची कोणतीही माहिती नाही — नाव नाही, संपर्क नाही, या उपकरणावर काहीही साठवले जात नाही. |
 | `pledge.count.label` | promises made so far | आतापर्यंत दिलेली वचने |
 
 ## hero  (8/8 done)

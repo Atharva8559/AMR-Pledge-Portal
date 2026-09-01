@@ -832,13 +832,6 @@ nav ul li a:active {
   margin: 0 0 var(--space-2);
 }
 
-.pledge-done-note {
-  font-size: var(--text-sm);
-  line-height: var(--lh-body);
-  color: rgba(255, 255, 255, 0.72);
-  margin: 0 0 var(--space-6);
-}
-
 /* Only ever rendered with a real total from the backend — see PLEDGE_COUNTER_URL
    in app.js. If the endpoint is missing or unreachable this stays [hidden]. */
 .pledge-count {

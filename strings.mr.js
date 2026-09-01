@@ -72,8 +72,6 @@ registerStrings('mr', {
   'pledge.cta': 'आता प्रतिज्ञा घ्या',
   // EN: Your promise is made.
   'pledge.done.title': 'तुमचे वचन नोंदवले गेले.',
-  // EN: Your promise is counted, but nothing about you is — no name, no contact, nothing saved to this device.
-  'pledge.done.note': 'तुमचे वचन मोजले जाते, पण तुमची कोणतीही माहिती नाही — नाव नाही, संपर्क नाही, या उपकरणावर काहीही साठवले जात नाही.',
   // EN: promises made so far
   'pledge.count.label': 'आतापर्यंत दिलेली वचने',
 
