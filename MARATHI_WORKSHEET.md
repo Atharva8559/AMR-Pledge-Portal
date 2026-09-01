@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-168 strings. Fill the **Marathi** column, then paste each value into the
+160 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -41,19 +41,6 @@ machine translation.
 | `pledge.cta` | Pledge Now | आता प्रतिज्ञा घ्या |
 | `pledge.done.title` | Your promise is made. | तुमचे वचन नोंदवले गेले. |
 | `pledge.count.label` | promises made so far | आतापर्यंत दिलेली वचने |
-
-## hero  (8/8 done)
-
-| Key | English | Marathi |
-|---|---|---|
-| `hero.tagline` | # योग्य विल्हेवाट, AMR वर मात! \| Global Awareness Initiative | # योग्य विल्हेवाट, AMR वर मात! \| जागतिक जनजागृती उपक्रम |
-| `hero.title` | Defeating the Silent Pandemic: Antimicrobial Resistance | मूक महामारीचा पराभव: <span>प्रतिजैविक प्रतिरोध</span> |
-| `hero.body` | Antimicrobial Resistance (AMR) occurs when bacteria and pathogens mutate and no longer respond to antibiotics. In partnership with Public Health Departments, CHRI, PATH, and GSK, we empower communities to dispose of expired medicines safely and pledge responsible antibiotic usage. | जीवाणू आणि रोगजंतू बदल घडवून प्रतिजैविकांना प्रतिसाद देणे थांबवतात, तेव्हा प्रतिजैविक प्रतिरोध (AMR) निर्माण होतो. सार्वजनिक आरोग्य विभाग, CHRI, PATH आणि GSK यांच्या भागीदारीत आम्ही समुदायांना मुदतबाह्य औषधांची सुरक्षित विल्हेवाट लावण्यासाठी आणि प्रतिजैविकांचा जबाबदार वापर करण्याची प्रतिज्ञा घेण्यासाठी सक्षम करतो. |
-| `hero.cta.posters` | Explore Official Posters | अधिकृत पोस्टर पहा |
-| `hero.cta.learn` | Learn About AMR | AMR विषयी जाणून घ्या |
-| `hero.badge.title` | Finish the Course | कोर्स पूर्ण करा |
-| `hero.badge.label` | Then drop leftovers at your PHC | मग उरलेली औषधे आरोग्य केंद्रात द्या |
-| `hero.image.alt` | AMR Illustration DNA and capsules | AMR चित्रण — डीएनए आणि कॅप्सूल |
 
 ## about  (13/13 done)
 

@@ -75,24 +75,6 @@ registerStrings('mr', {
   // EN: promises made so far
   'pledge.count.label': 'आतापर्यंत दिलेली वचने',
 
-  // ── hero ──────────────────────────────────────────────────────
-  // EN: # योग्य विल्हेवाट, AMR वर मात! | Global Awareness Initiative
-  'hero.tagline': '# योग्य विल्हेवाट, AMR वर मात! | जागतिक जनजागृती उपक्रम',
-  // EN: Defeating the Silent Pandemic: Antimicrobial Resistance
-  'hero.title': 'मूक महामारीचा पराभव: <span>प्रतिजैविक प्रतिरोध</span>',
-  // EN: Antimicrobial Resistance (AMR) occurs when bacteria and pathogens mutate and no longer respond to antibiotics. In partnership with Public Health Departments, CHRI, PATH, and GSK, we empower communities to dispose of expired medicines safely and pledge responsible antibiotic usage.
-  'hero.body': 'जीवाणू आणि रोगजंतू बदल घडवून प्रतिजैविकांना प्रतिसाद देणे थांबवतात, तेव्हा प्रतिजैविक प्रतिरोध (AMR) निर्माण होतो. सार्वजनिक आरोग्य विभाग, CHRI, PATH आणि GSK यांच्या भागीदारीत आम्ही समुदायांना मुदतबाह्य औषधांची सुरक्षित विल्हेवाट लावण्यासाठी आणि प्रतिजैविकांचा जबाबदार वापर करण्याची प्रतिज्ञा घेण्यासाठी सक्षम करतो.',
-  // EN: Explore Official Posters
-  'hero.cta.posters': 'अधिकृत पोस्टर पहा',
-  // EN: Learn About AMR
-  'hero.cta.learn': 'AMR विषयी जाणून घ्या',
-  // EN: Finish the Course
-  'hero.badge.title': 'कोर्स पूर्ण करा',
-  // EN: Then drop leftovers at your PHC
-  'hero.badge.label': 'मग उरलेली औषधे आरोग्य केंद्रात द्या',
-  // EN: AMR Illustration DNA and capsules
-  'hero.image.alt': 'AMR चित्रण — डीएनए आणि कॅप्सूल',
-
   // ── about ─────────────────────────────────────────────────────
   // EN: Understanding The Threat
   'about.subtitle': 'धोका समजून घ्या',
