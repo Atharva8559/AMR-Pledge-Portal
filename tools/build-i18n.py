@@ -103,7 +103,20 @@ def main():
 
     out = io.StringIO()
     out.write("""// ── ACT4AMR — Marathi strings ────────────────────────────────────────────
-// FILL IN THE EMPTY QUOTES. The English above each line is the source text.
+//
+//  ⚠  MACHINE-DRAFTED, NOT REVIEWED BY A MARATHI SPEAKER  ⚠
+//
+//  Every value below was drafted by Claude and has NOT been checked by a native
+//  speaker or a clinician. This page publishes public-health guidance under the
+//  Public Health Department, NHM, CHRI, PATH and GSK names. Wrong wording on how
+//  to take or dispose of antibiotics is a safety problem, not a typo.
+//
+//  HAVE A MARATHI SPEAKER REVIEW THIS FILE BEFORE THE PAGE GOES PUBLIC.
+//  Pay closest attention to: pledge.commitments.*, journey.step*.detail,
+//  about.card*.body and hero.body — those carry the actual medical instruction.
+//
+// ─────────────────────────────────────────────────────────────────────────
+// The English above each line is the source text.
 //
 //   • An entry left as '' counts as NOT translated and the English shows
 //     instead, so this file is safe to ship half-finished. Translate in any
