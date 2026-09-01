@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-170 strings. Fill the **Marathi** column, then paste each value into the
+168 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -73,7 +73,7 @@ machine translation.
 | `about.card3.link_label` | What can we do to prevent AMR? See the seven steps for safe disposal | AMR रोखण्यासाठी आपण काय करू शकतो? सुरक्षित विल्हेवाटीचे सात टप्पे पहा |
 | `about.card3.alt` | Card 3, What can we do to prevent AMR? Take antibiotics only as prescribed, finish the course, and drop leftovers at a collection centre. | कार्ड ३, AMR रोखण्यासाठी काय करावे? डॉक्टरांच्या सल्ल्यानेच प्रतिजैविके घ्या, कोर्स पूर्ण करा आणि उरलेली औषधे संकलन केंद्रात द्या. |
 
-## journey  (19/19 done)
+## journey  (17/17 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -82,20 +82,18 @@ machine translation.
 | `journey.desc` | Seven steps that take a leftover tablet from your shelf to safe destruction — and keep antibiotics working for everyone. | तुमच्या कपाटातील उरलेली गोळी सुरक्षित नाशापर्यंत नेणारे सात टप्पे — जेणेकरून प्रतिजैविके सर्वांसाठी परिणामकारक राहतील. |
 | `journey.hub.hashtag` | # योग्य विल्हेवाट, AMR वर मात! | # योग्य विल्हेवाट, AMR वर मात! |
 | `journey.hub.line` | Safe disposal, every single time | दरवेळी सुरक्षित विल्हेवाट |
-| `journey.step1.label` | Leftover medicines at home | घरातील उरलेली औषधे |
+| `journey.step1.label` | Leftover antibiotics at home | घरात उरलेली प्रतिजैविके |
 | `journey.step1.detail` | Unfinished or expired tablets, syrups and capsules are still sitting in the house. | अर्धवट राहिलेल्या किंवा मुदतबाह्य गोळ्या, सिरप आणि कॅप्सूल घरातच पडून राहतात. |
-| `journey.step2.label` | Never bin it or flush it | कचऱ्यात टाकू नका, वाहून जाऊ देऊ नका |
+| `journey.step2.label` | Never throw in household garbage or flush it | घरातील कचऱ्यात टाकू नका किंवा वाहून जाऊ देऊ नका |
 | `journey.step2.detail` | Thrown in the bin or flushed away, medicines reach soil and water. Safe disposal exists to stop exactly that. | कचऱ्यात टाकलेली किंवा संडासात वाहून गेलेली औषधे माती आणि पाण्यात मिसळतात. नेमके तेच थांबवण्यासाठी सुरक्षित विल्हेवाट आहे. |
-| `journey.step3.label` | Take them to your PHC | आरोग्य केंद्रात न्या |
-| `journey.step3.detail` | Carry them to your nearest PHC, sub-centre or government health facility. | ती जवळच्या प्राथमिक आरोग्य केंद्रात, उपकेंद्रात किंवा शासकीय आरोग्य संस्थेत घेऊन जा. |
-| `journey.step4.label` | Hand them over | कर्मचाऱ्यांकडे सुपूर्द करा |
-| `journey.step4.detail` | Give them to the staff, or put them in the medicine collection box if there is one. | ती तेथील कर्मचाऱ्यांना द्या, किंवा औषध संकलन पेटी असल्यास त्यात टाका. |
-| `journey.step5.label` | Staff collect and seal them | कर्मचारी ती जमा करून बंद करतात |
-| `journey.step5.detail` | Health staff take charge of what is handed in and store it safely until it is taken for disposal. | जमा झालेली औषधे आरोग्य कर्मचारी ताब्यात घेतात आणि विल्हेवाटीसाठी नेईपर्यंत सुरक्षित ठेवतात. |
-| `journey.step6.label` | Destroyed the safe way | सुरक्षित पद्धतीने नष्ट |
-| `journey.step6.detail` | It is disposed of through the health system, not left in a landfill or a water body. | त्यांची विल्हेवाट आरोग्य यंत्रणेमार्फत लावली जाते; कचराभूमीत किंवा पाण्यात सोडली जात नाहीत. |
-| `journey.step7.label` | Soil and water stay clean | माती आणि पाणी स्वच्छ राहते |
-| `journey.step7.detail` | Antibiotics keep working for the next person who needs them — and the cycle starts again at home. | गरज असलेल्या पुढच्या व्यक्तीसाठी प्रतिजैविके परिणामकारक राहतात — आणि हे चक्र पुन्हा घरातून सुरू होते. |
+| `journey.step3.label` | Return to the designated collection sites- at the nearest health facilities, pharmacy stores or residential societies | निर्धारित संकलन केंद्रात परत करा — जवळचे आरोग्य केंद्र, औषध दुकान किंवा निवासी संस्था |
+| `journey.step3.detail` | Speak to the health staff or site volunteer for safe disposal of antibiotics. | प्रतिजैविकांच्या सुरक्षित विल्हेवाटीसाठी तेथील आरोग्य कर्मचारी किंवा स्वयंसेवकाशी बोला. |
+| `journey.step4.label` | Waste Pick up and collection through authorised channel | अधिकृत यंत्रणेमार्फत कचरा उचल आणि संकलन |
+| `journey.step4.detail` | Authorised waste treatment agency collects and transports the waste to a centralised site for disposal. | अधिकृत कचरा प्रक्रिया संस्था हा कचरा गोळा करून विल्हेवाटीसाठी केंद्रीय ठिकाणी नेते. |
+| `journey.step5.label` | Scientific disposal | शास्त्रीय पद्धतीने विल्हेवाट |
+| `journey.step5.detail` | Waste disposed of in compliance with Pollution Control Board norms helps divert harmful antibiotic residues from entering the environment. | प्रदूषण नियंत्रण मंडळाच्या निकषांनुसार विल्हेवाट लावल्याने प्रतिजैविकांचे हानिकारक अवशेष पर्यावरणात मिसळण्यापासून रोखले जातात. |
+| `journey.step6.label` | Soil and water ecosystems stay clean | माती आणि पाण्याची परिसंस्था स्वच्छ राहते |
+| `journey.step6.detail` | Effectiveness of antibiotics is preserved for future generations- and the cycle starts again at home. | पुढील पिढ्यांसाठी प्रतिजैविकांची परिणामकारकता टिकून राहते — आणि हे चक्र पुन्हा घरातून सुरू होते. |
 
 ## iec  (26/26 done)
 

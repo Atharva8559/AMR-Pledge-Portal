@@ -3027,11 +3027,30 @@ footer::after {
 
    Again: NO `transform` anywhere below. .reveal owns it.
    ─────────────────────────────────────────────── */
-@media (min-width: 1025px) {
+/* ───────────────────────────────────────────────
+   THE DISPOSAL JOURNEY — CIRCULAR FORM
+
+   Six nodes. Recomputed from scratch when the copy changed from seven steps to
+   six: the old positions were seven-node angles, which left an empty wedge in
+   the upper left and pointed the arrows at nothing.
+
+   The box is 960 x 960 CSS px against a 0 0 960 960 viewBox, so one viewBox
+   unit is one CSS pixel and the SVG and CSS share the same numbers. It is
+   bigger than the seven-node version was because the labels are now full
+   sentences rather than three-word phrases, and they need the room.
+
+   Node points: angle = -90 + (n-1)*60, clockwise from twelve o'clock,
+   x = 480 + 240*cos(angle), y = 480 + 240*sin(angle). Each block is offset by
+   half a disc (28px) so the disc centre lands exactly on its node point.
+   Symmetric about x = 480: n2 mirrors n6, n3 mirrors n5.
+
+   Still no `transform` anywhere below — .reveal owns it.
+   ─────────────────────────────────────────────── */
+@media (min-width: 1100px) {
 
   .journey-diagram {
-    width: 860px;
-    height: 860px;
+    width: 960px;
+    height: 960px;
     max-width: none;
   }
 
@@ -3054,16 +3073,14 @@ footer::after {
     stroke-width: 1;
   }
 
-  /* 10 + 15.0164 = 25.01639, which repeats exactly 54 times around the
-     1350.885 circumference, so the dash pattern closes with no stub at the
-     seam. The ring is never animated — see the note in the reduced-motion
-     block about why a moving dash pattern was rejected. */
+  /* 10 + 15.13274 = 25.13274, which repeats exactly 60 times around the
+     1507.9645 circumference, so the dash pattern closes with no stub. */
   .journey-orbit-ring {
     fill: none;
     stroke: var(--green-200);
     stroke-width: 3;
     stroke-linecap: round;
-    stroke-dasharray: 10 15.0164;
+    stroke-dasharray: 10 15.13274;
   }
 
   .journey-orbit-arrows {
@@ -3071,8 +3088,8 @@ footer::after {
     stroke: none;
   }
 
-  /* Centred by a full-size flex overlay rather than a translate, because this
-     element carries .reveal and a positioning transform would be clobbered. */
+  /* Centred by a full-size flex overlay, not a translate: this element carries
+     .reveal and a positioning transform would be clobbered. */
   .journey-hub {
     position: absolute;
     inset: 0;
@@ -3081,12 +3098,12 @@ footer::after {
   }
 
   .journey-hub-inner {
-    max-width: 230px;
+    max-width: 250px;
   }
 
-  /* Must fill the 860px box: the steps are absolutely positioned against THIS
-     element, and as a plain block it would collapse to zero height — which
-     silently breaks step 1, the only one anchored with `bottom`. */
+  /* Must fill the box: the steps position against THIS element, and as a plain
+     block it would collapse to zero height, breaking the one anchored by
+     `bottom`. */
   .journey-steps {
     position: absolute;
     inset: 0;
@@ -3101,6 +3118,7 @@ footer::after {
   .journey-step {
     position: absolute;
     gap: var(--space-3);
+    width: 290px;
   }
 
   .journey-step-text {
@@ -3109,7 +3127,7 @@ footer::after {
 
   .journey-step-label {
     font-size: var(--text-md);
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
   }
 
   .journey-step-detail {
@@ -3118,49 +3136,43 @@ footer::after {
   }
 
   /* Four placement families. The disc is the first DOM child, so -reverse puts
-     it on the inner edge (nearest the circle) with no effect on reading order. */
+     it on the inner edge, nearest the circle, with no effect on reading order. */
   .journey-step--top {
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
-    width: 181px;
   }
 
   .journey-step--bottom {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 181px;
   }
 
   .journey-step--right {
     flex-direction: row;
     align-items: flex-start;
     text-align: left;
-    width: 232px;
   }
 
   .journey-step--left {
     flex-direction: row-reverse;
     align-items: flex-start;
     text-align: right;
-    width: 232px;
   }
 
-  /* n=1  (430.000, 215.000) — block bottom edge = 215 + 28 = 243 from the top */
-  .journey-step[data-step="1"] { left: 339.5px; bottom: 617px; }
-  /* n=2  (598.094, 295.950) */
-  .journey-step[data-step="2"] { left: 570.1px; top: 267.9px; }
-  /* n=3  (639.610, 477.842) */
-  .journey-step[data-step="3"] { left: 611.6px; top: 449.8px; }
-  /* n=4  (523.285, 623.708) */
-  .journey-step[data-step="4"] { left: 432.8px; top: 595.7px; }
-  /* n=5  (336.715, 623.708) — mirror of 4 */
-  .journey-step[data-step="5"] { left: 246.2px; top: 595.7px; }
-  /* n=6  (220.390, 477.842) — mirror of 3 */
-  .journey-step[data-step="6"] { right: 611.6px; top: 449.8px; }
-  /* n=7  (261.906, 295.950) — mirror of 2 */
-  .journey-step[data-step="7"] { right: 570.1px; top: 267.9px; }
+  /* n=1  (480.00, 240.00) — block bottom edge sits at 240 + 28 = 268 from the top */
+  .journey-step[data-step="1"] { left: 335.0px; bottom: 692.0px; }
+  /* n=2  (687.85, 360.00) */
+  .journey-step[data-step="2"] { left: 659.8px; top: 332.0px; }
+  /* n=3  (687.85, 600.00) */
+  .journey-step[data-step="3"] { left: 659.8px; top: 572.0px; }
+  /* n=4  (480.00, 720.00) */
+  .journey-step[data-step="4"] { left: 335.0px; top: 692.0px; }
+  /* n=5  (272.15, 600.00) — mirror of 3 */
+  .journey-step[data-step="5"] { right: 659.8px; top: 572.0px; }
+  /* n=6  (272.15, 360.00) — mirror of 2 */
+  .journey-step[data-step="6"] { right: 659.8px; top: 332.0px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

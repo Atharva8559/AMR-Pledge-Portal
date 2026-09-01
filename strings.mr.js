@@ -132,34 +132,30 @@ registerStrings('mr', {
   'journey.hub.hashtag': '# योग्य विल्हेवाट, AMR वर मात!',
   // EN: Safe disposal, every single time
   'journey.hub.line': 'दरवेळी सुरक्षित विल्हेवाट',
-  // EN: Leftover medicines at home
-  'journey.step1.label': 'घरातील उरलेली औषधे',
+  // EN: Leftover antibiotics at home
+  'journey.step1.label': 'घरात उरलेली प्रतिजैविके',
   // EN: Unfinished or expired tablets, syrups and capsules are still sitting in the house.
   'journey.step1.detail': 'अर्धवट राहिलेल्या किंवा मुदतबाह्य गोळ्या, सिरप आणि कॅप्सूल घरातच पडून राहतात.',
-  // EN: Never bin it or flush it
-  'journey.step2.label': 'कचऱ्यात टाकू नका, वाहून जाऊ देऊ नका',
+  // EN: Never throw in household garbage or flush it
+  'journey.step2.label': 'घरातील कचऱ्यात टाकू नका किंवा वाहून जाऊ देऊ नका',
   // EN: Thrown in the bin or flushed away, medicines reach soil and water. Safe disposal exists to stop exactly that.
   'journey.step2.detail': 'कचऱ्यात टाकलेली किंवा संडासात वाहून गेलेली औषधे माती आणि पाण्यात मिसळतात. नेमके तेच थांबवण्यासाठी सुरक्षित विल्हेवाट आहे.',
-  // EN: Take them to your PHC
-  'journey.step3.label': 'आरोग्य केंद्रात न्या',
-  // EN: Carry them to your nearest PHC, sub-centre or government health facility.
-  'journey.step3.detail': 'ती जवळच्या प्राथमिक आरोग्य केंद्रात, उपकेंद्रात किंवा शासकीय आरोग्य संस्थेत घेऊन जा.',
-  // EN: Hand them over
-  'journey.step4.label': 'कर्मचाऱ्यांकडे सुपूर्द करा',
-  // EN: Give them to the staff, or put them in the medicine collection box if there is one.
-  'journey.step4.detail': 'ती तेथील कर्मचाऱ्यांना द्या, किंवा औषध संकलन पेटी असल्यास त्यात टाका.',
-  // EN: Staff collect and seal them
-  'journey.step5.label': 'कर्मचारी ती जमा करून बंद करतात',
-  // EN: Health staff take charge of what is handed in and store it safely until it is taken for disposal.
-  'journey.step5.detail': 'जमा झालेली औषधे आरोग्य कर्मचारी ताब्यात घेतात आणि विल्हेवाटीसाठी नेईपर्यंत सुरक्षित ठेवतात.',
-  // EN: Destroyed the safe way
-  'journey.step6.label': 'सुरक्षित पद्धतीने नष्ट',
-  // EN: It is disposed of through the health system, not left in a landfill or a water body.
-  'journey.step6.detail': 'त्यांची विल्हेवाट आरोग्य यंत्रणेमार्फत लावली जाते; कचराभूमीत किंवा पाण्यात सोडली जात नाहीत.',
-  // EN: Soil and water stay clean
-  'journey.step7.label': 'माती आणि पाणी स्वच्छ राहते',
-  // EN: Antibiotics keep working for the next person who needs them — and the cycle starts again at home.
-  'journey.step7.detail': 'गरज असलेल्या पुढच्या व्यक्तीसाठी प्रतिजैविके परिणामकारक राहतात — आणि हे चक्र पुन्हा घरातून सुरू होते.',
+  // EN: Return to the designated collection sites- at the nearest health facilities, pharmacy stores or residential societies
+  'journey.step3.label': 'निर्धारित संकलन केंद्रात परत करा — जवळचे आरोग्य केंद्र, औषध दुकान किंवा निवासी संस्था',
+  // EN: Speak to the health staff or site volunteer for safe disposal of antibiotics.
+  'journey.step3.detail': 'प्रतिजैविकांच्या सुरक्षित विल्हेवाटीसाठी तेथील आरोग्य कर्मचारी किंवा स्वयंसेवकाशी बोला.',
+  // EN: Waste Pick up and collection through authorised channel
+  'journey.step4.label': 'अधिकृत यंत्रणेमार्फत कचरा उचल आणि संकलन',
+  // EN: Authorised waste treatment agency collects and transports the waste to a centralised site for disposal.
+  'journey.step4.detail': 'अधिकृत कचरा प्रक्रिया संस्था हा कचरा गोळा करून विल्हेवाटीसाठी केंद्रीय ठिकाणी नेते.',
+  // EN: Scientific disposal
+  'journey.step5.label': 'शास्त्रीय पद्धतीने विल्हेवाट',
+  // EN: Waste disposed of in compliance with Pollution Control Board norms helps divert harmful antibiotic residues from entering the environment.
+  'journey.step5.detail': 'प्रदूषण नियंत्रण मंडळाच्या निकषांनुसार विल्हेवाट लावल्याने प्रतिजैविकांचे हानिकारक अवशेष पर्यावरणात मिसळण्यापासून रोखले जातात.',
+  // EN: Soil and water ecosystems stay clean
+  'journey.step6.label': 'माती आणि पाण्याची परिसंस्था स्वच्छ राहते',
+  // EN: Effectiveness of antibiotics is preserved for future generations- and the cycle starts again at home.
+  'journey.step6.detail': 'पुढील पिढ्यांसाठी प्रतिजैविकांची परिणामकारकता टिकून राहते — आणि हे चक्र पुन्हा घरातून सुरू होते.',
 
   // ── iec ───────────────────────────────────────────────────────
   // EN: IEC Center
