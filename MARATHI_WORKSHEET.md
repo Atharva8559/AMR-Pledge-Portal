@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-160 strings. Fill the **Marathi** column, then paste each value into the
+187 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -33,11 +33,11 @@ machine translation.
 |---|---|---|
 | `pledge.hashtag` | # योग्य विल्हेवाट, AMR वर मात! | # योग्य विल्हेवाट, AMR वर मात! |
 | `pledge.title` | WE INVITE EVERY CITIZEN TO MAKE A PROMISE | आम्ही प्रत्येक नागरिकाला वचन देण्याचे आवाहन करतो |
-| `pledge.desc` | Not just a hashtag — a personal commitment to safeguard antibiotics, practice safe medicine disposal, and protect our healthcare system. Take action today and pledge to be the change. | हा केवळ हॅशटॅग नाही — प्रतिजैविकांचे रक्षण करण्याचे, औषधांची सुरक्षित विल्हेवाट लावण्याचे आणि आपल्या आरोग्यव्यवस्थेचे संरक्षण करण्याचे हे वैयक्तिक वचन आहे. आजच कृती करा आणि बदलाचा भाग होण्याची प्रतिज्ञा घ्या. |
+| `pledge.desc` | Not just a hashtag — a personal commitment to ensure rational use and safe disposal of antibiotics to protect the environment and save our future generations from Antimicrobial Resistance. Take the pledge today to be the change. | हा केवळ हॅशटॅग नाही — प्रतिजैविकांचे रक्षण करण्याचे, औषधांची सुरक्षित विल्हेवाट लावण्याचे आणि आपल्या आरोग्यव्यवस्थेचे संरक्षण करण्याचे हे वैयक्तिक वचन आहे. आजच कृती करा आणि बदलाचा भाग होण्याची प्रतिज्ञा घ्या. |
 | `pledge.commitments.prescription` | Take antibiotics only when a doctor prescribes them | डॉक्टरांनी लिहून दिल्यावरच प्रतिजैविके घेईन |
 | `pledge.commitments.full_course` | Finish every course, even after feeling better | बरे वाटले तरी संपूर्ण कोर्स पूर्ण करेन |
 | `pledge.commitments.no_sharing` | Never share my medicines with anyone else | माझी औषधे कधीही दुसऱ्याला देणार नाही |
-| `pledge.commitments.dropoff` | Take leftovers to my nearest PHC or sub-centre | उरलेली औषधे जवळच्या प्राथमिक आरोग्य केंद्रात किंवा उपकेंद्रात नेईन |
+| `pledge.commitments.dropoff` | Return leftovers to the nearest health facility, chemist store or designated collection site for safe disposal | उरलेली औषधे जवळच्या प्राथमिक आरोग्य केंद्रात किंवा उपकेंद्रात नेईन |
 | `pledge.cta` | Pledge Now | आता प्रतिज्ञा घ्या |
 | `pledge.done.title` | Your promise is made. | तुमचे वचन नोंदवले गेले. |
 | `pledge.count.label` | promises made so far | आतापर्यंत दिलेली वचने |
@@ -113,7 +113,7 @@ machine translation.
 | `iec.video.play_label` | Play the official Dindi Song AMR awareness video | अधिकृत दिंडी गीत AMR जनजागृती व्हिडिओ चालवा |
 | `iec.video.poster.alt` | Dindi Song AMR awareness video title card | दिंडी गीत AMR जनजागृती व्हिडिओचे शीर्षक कार्ड |
 
-## common  (7/7 done)
+## common  (12/12 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -124,6 +124,11 @@ machine translation.
 | `common.carousel.slide_2` | Go to slide 2 | चित्र २ वर जा |
 | `common.carousel.slide_3` | Go to slide 3 | चित्र ३ वर जा |
 | `common.carousel.slide_4` | Go to slide 4 | चित्र ४ वर जा |
+| `common.carousel.slide_5` | Go to slide 5 | चित्र ५ वर जा |
+| `common.carousel.slide_6` | Go to slide 6 | चित्र ६ वर जा |
+| `common.carousel.slide_7` | Go to slide 7 | चित्र ७ वर जा |
+| `common.carousel.slide_8` | Go to slide 8 | चित्र ८ वर जा |
+| `common.carousel.slide_9` | Go to slide 9 | चित्र ९ वर जा |
 
 ## quiz  (11/11 done)
 
@@ -141,14 +146,14 @@ machine translation.
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
 
-## roadmap  (47/47 done)
+## roadmap  (69/69 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `roadmap.subtitle` | Project Milestones | प्रकल्पाचे टप्पे |
 | `roadmap.title` | Campaign Event Roadmap | मोहिमेच्या कार्यक्रमांची वाटचाल |
 | `roadmap.desc` | Interactive chronological timeline documenting key consultative meetings, research studies, state stewardship workshops, and innovation challenges across Maharashtra. | महाराष्ट्रभरातील महत्त्वाच्या सल्लामसलत बैठका, संशोधन अभ्यास, राज्यस्तरीय स्टुअर्डशिप कार्यशाळा आणि नवोपक्रम स्पर्धांची कालानुक्रमे नोंद. |
-| `roadmap.badge.date_range` | JAN 2026 – MAY 2026 | जानेवारी २०२६ – मे २०२६ |
+| `roadmap.badge.date_range` | JAN 2026 – JUL 2026 | जानेवारी २०२६ – जुलै २०२६ |
 | `roadmap.event1.date` | Jan 2026 | जानेवारी २०२६ |
 | `roadmap.event1.title` | National Consultative Meeting | राष्ट्रीय सल्लामसलत बैठक |
 | `roadmap.event1.desc` | Key stakeholders deliberated on systemic issues and policy challenges around safe antibiotic disposal and suggested potential solutions. Report published. | प्रतिजैविकांच्या सुरक्षित विल्हेवाटीसंबंधी व्यवस्थात्मक अडचणी व धोरणात्मक आव्हानांवर प्रमुख भागधारकांनी चर्चा करून संभाव्य उपाय सुचवले. अहवाल प्रकाशित. |
@@ -164,6 +169,9 @@ machine translation.
 | `roadmap.event5.date` | May 2026 | मे २०२६ |
 | `roadmap.event5.title` | Innovation Challenge Launched | नवोपक्रम स्पर्धा सुरू |
 | `roadmap.event5.desc` | Open call for digital & social innovations amplified through partner networks. Multidisciplinary jury panel completed evaluations, selecting 2 digital solutions and 1 social innovation for state implementation. | भागीदार संस्थांच्या माध्यमातून डिजिटल व सामाजिक नवोपक्रमांसाठी खुले आवाहन. बहुविद्याशाखीय परीक्षक मंडळाने मूल्यांकन पूर्ण करून राज्यात राबवण्यासाठी २ डिजिटल उपाय आणि १ सामाजिक नवोपक्रम निवडला. |
+| `roadmap.event6.date` | Jul 2026 | जुलै २०२६ |
+| `roadmap.event6.title` | District Workshop and Bin Placement Initiative Launched — Pune | जिल्हा कार्यशाळा आणि पेटी उभारणी उपक्रम सुरू — पुणे |
+| `roadmap.event6.desc` | A district-level workshop brought together medical officers, municipal officials, and pharmacy association representatives to strengthen awareness on safe antibiotic disposal and AMR prevention. Following the workshop, dedicated antibiotic disposal bins were installed at strategic locations across Pune Municipal Corporation (PMC) to enable safe collection and disposal of unused and expired antibiotics. | सुरक्षित प्रतिजैविक विल्हेवाट आणि AMR प्रतिबंधाबाबत जागरूकता वाढवण्यासाठी वैद्यकीय अधिकारी, महापालिका अधिकारी आणि औषध विक्रेता संघटनेचे प्रतिनिधी यांना एकत्र आणणारी जिल्हास्तरीय कार्यशाळा झाली. कार्यशाळेनंतर, न वापरलेल्या आणि मुदतबाह्य प्रतिजैविकांचे सुरक्षित संकलन व विल्हेवाट शक्य व्हावी यासाठी पुणे महानगरपालिका (PMC) क्षेत्रातील निवडक ठिकाणी स्वतंत्र प्रतिजैविक विल्हेवाट पेट्या बसवण्यात आल्या. |
 | `roadmap.event1.image1.alt` | National Consultation 1 | राष्ट्रीय सल्लामसलत १ |
 | `roadmap.event1.modal.title` | National Consultative Meeting | राष्ट्रीय सल्लामसलत बैठक |
 | `roadmap.event1.modal.desc` | Key stakeholders deliberating on systemic issues. | व्यवस्थात्मक अडचणींवर चर्चा करणारे प्रमुख भागधारक. |
@@ -192,6 +200,25 @@ machine translation.
 | `roadmap.event5.modal.desc3` | Final jury round completion. | अंतिम परीक्षक फेरी पूर्ण. |
 | `roadmap.event5.image4.alt` | Innovation Challenge 4 | नवोपक्रम स्पर्धा ४ |
 | `roadmap.event5.modal.desc4` | 2 digital & 1 social innovation selected. | २ डिजिटल आणि १ सामाजिक नवोपक्रम निवडले. |
+| `roadmap.event6.image1.alt` | Workshop opening address beside the district sensitisation workshop banner | जिल्हा संवेदनशीलता कार्यशाळेच्या फलकाशेजारी उद्घाटनपर भाषण |
+| `roadmap.event6.modal.title` | District Workshop and Bin Placement — Pune | जिल्हा कार्यशाळा आणि पेटी उभारणी — पुणे |
+| `roadmap.event6.modal.desc1` | A district-level sensitisation workshop on safe disposal of unused and expired antibiotics. | न वापरलेल्या आणि मुदतबाह्य प्रतिजैविकांच्या सुरक्षित विल्हेवाटीवरील जिल्हास्तरीय संवेदनशीलता कार्यशाळा. |
+| `roadmap.event6.image2.alt` | Medical officers, municipal officials and pharmacy representatives attending the workshop | कार्यशाळेस उपस्थित वैद्यकीय अधिकारी, महापालिका अधिकारी आणि औषध विक्रेता प्रतिनिधी |
+| `roadmap.event6.modal.desc2` | Medical officers, municipal officials and pharmacy association representatives at the workshop. | कार्यशाळेस उपस्थित वैद्यकीय अधिकारी, महापालिका अधिकारी आणि औषध विक्रेता संघटनेचे प्रतिनिधी. |
+| `roadmap.event6.image3.alt` | Officials on stage holding the campaign posters at the launch | उद्घाटनप्रसंगी मंचावर मोहिमेची पोस्टर प्रकाशित करताना अधिकारी |
+| `roadmap.event6.modal.desc3` | Campaign materials released at the district workshop. | जिल्हा कार्यशाळेत मोहिमेचे साहित्य प्रकाशित करण्यात आले. |
+| `roadmap.event6.image4.alt` | Health staff beside a newly installed antibiotic disposal bin | नव्याने बसवलेल्या प्रतिजैविक विल्हेवाट पेटीशेजारी आरोग्य कर्मचारी |
+| `roadmap.event6.modal.desc4` | An antibiotic disposal bin installed at a Pune Municipal Corporation facility. | पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी. |
+| `roadmap.event6.image5.alt` | Facility staff standing with a green antibiotic disposal bin | हिरव्या प्रतिजैविक विल्हेवाट पेटीसह केंद्रातील कर्मचारी |
+| `roadmap.event6.modal.desc5` | An antibiotic disposal bin installed at a Pune Municipal Corporation facility. | पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी. |
+| `roadmap.event6.image6.alt` | Staff at a health facility with a green antibiotic disposal bin | आरोग्य केंद्रात हिरव्या प्रतिजैविक विल्हेवाट पेटीसह कर्मचारी |
+| `roadmap.event6.modal.desc6` | An antibiotic disposal bin installed at a Pune Municipal Corporation facility. | पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी. |
+| `roadmap.event6.image7.alt` | Antibiotic disposal bin placed in a facility dressing room | केंद्रातील ड्रेसिंग रूममध्ये ठेवलेली प्रतिजैविक विल्हेवाट पेटी |
+| `roadmap.event6.modal.desc7` | An antibiotic disposal bin installed at a Pune Municipal Corporation facility. | पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी. |
+| `roadmap.event6.image8.alt` | Disposal bin installed beneath a Marathi awareness poster in a corridor | मराठी जनजागृती फलकाखाली बसवलेली विल्हेवाट पेटी |
+| `roadmap.event6.modal.desc8` | A disposal bin placed beside campaign awareness material. | मोहिमेच्या जनजागृती साहित्याशेजारी ठेवलेली विल्हेवाट पेटी. |
+| `roadmap.event6.image9.alt` | A person placing unused medicines into the green antibiotic disposal bin | हिरव्या प्रतिजैविक विल्हेवाट पेटीत न वापरलेली औषधे टाकताना व्यक्ती |
+| `roadmap.event6.modal.desc9` | Unused and expired antibiotics being deposited into a collection bin. | न वापरलेली आणि मुदतबाह्य प्रतिजैविके संकलन पेटीत टाकली जात आहेत. |
 
 ## partners  (1/1 done)
 

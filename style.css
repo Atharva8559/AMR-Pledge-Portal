@@ -2059,11 +2059,15 @@ nav ul li a:active {
    belongs to exactly one dot, and none of them overlap. Tighten this gap and
    neighbouring targets start stealing each other's taps — which is worse than
    the small targets this replaced, because the wrong slide appears. */
+/* Wraps because the dot count is driven by content, not by design: each dot
+   occupies a 44px hit area, so nine of them need 372px and would push past a
+   360px screen on a single row. */
 .carousel-dots {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-6) var(--space-6);
   padding: 0;
 }
 

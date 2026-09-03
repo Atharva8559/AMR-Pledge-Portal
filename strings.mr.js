@@ -58,7 +58,7 @@ registerStrings('mr', {
   'pledge.hashtag': '# योग्य विल्हेवाट, AMR वर मात!',
   // EN: WE INVITE EVERY CITIZEN TO MAKE A PROMISE
   'pledge.title': 'आम्ही प्रत्येक नागरिकाला वचन देण्याचे आवाहन करतो',
-  // EN: Not just a hashtag — a personal commitment to safeguard antibiotics, practice safe medicine disposal, and protect our healthcare system. Take action today and pledge to be the change.
+  // EN: Not just a hashtag — a personal commitment to ensure rational use and safe disposal of antibiotics to protect the environment and save our future generations from Antimicrobial Resistance. Take the pledge today to be the change.
   'pledge.desc': 'हा केवळ हॅशटॅग नाही — प्रतिजैविकांचे रक्षण करण्याचे, औषधांची सुरक्षित विल्हेवाट लावण्याचे आणि आपल्या आरोग्यव्यवस्थेचे संरक्षण करण्याचे हे वैयक्तिक वचन आहे. आजच कृती करा आणि बदलाचा भाग होण्याची प्रतिज्ञा घ्या.',
   // EN: Take antibiotics only when a doctor prescribes them
   'pledge.commitments.prescription': 'डॉक्टरांनी लिहून दिल्यावरच प्रतिजैविके घेईन',
@@ -66,7 +66,7 @@ registerStrings('mr', {
   'pledge.commitments.full_course': 'बरे वाटले तरी संपूर्ण कोर्स पूर्ण करेन',
   // EN: Never share my medicines with anyone else
   'pledge.commitments.no_sharing': 'माझी औषधे कधीही दुसऱ्याला देणार नाही',
-  // EN: Take leftovers to my nearest PHC or sub-centre
+  // EN: Return leftovers to the nearest health facility, chemist store or designated collection site for safe disposal
   'pledge.commitments.dropoff': 'उरलेली औषधे जवळच्या प्राथमिक आरोग्य केंद्रात किंवा उपकेंद्रात नेईन',
   // EN: Pledge Now
   'pledge.cta': 'आता प्रतिज्ञा घ्या',
@@ -208,6 +208,16 @@ registerStrings('mr', {
   'common.carousel.slide_3': 'चित्र ३ वर जा',
   // EN: Go to slide 4
   'common.carousel.slide_4': 'चित्र ४ वर जा',
+  // EN: Go to slide 5
+  'common.carousel.slide_5': 'चित्र ५ वर जा',
+  // EN: Go to slide 6
+  'common.carousel.slide_6': 'चित्र ६ वर जा',
+  // EN: Go to slide 7
+  'common.carousel.slide_7': 'चित्र ७ वर जा',
+  // EN: Go to slide 8
+  'common.carousel.slide_8': 'चित्र ८ वर जा',
+  // EN: Go to slide 9
+  'common.carousel.slide_9': 'चित्र ९ वर जा',
 
   // ── quiz ──────────────────────────────────────────────────────
   // EN: Interactive Learning
@@ -240,8 +250,8 @@ registerStrings('mr', {
   'roadmap.title': 'मोहिमेच्या कार्यक्रमांची वाटचाल',
   // EN: Interactive chronological timeline documenting key consultative meetings, research studies, state stewardship workshops, and innovation challenges across Maharashtra.
   'roadmap.desc': 'महाराष्ट्रभरातील महत्त्वाच्या सल्लामसलत बैठका, संशोधन अभ्यास, राज्यस्तरीय स्टुअर्डशिप कार्यशाळा आणि नवोपक्रम स्पर्धांची कालानुक्रमे नोंद.',
-  // EN: JAN 2026 – MAY 2026
-  'roadmap.badge.date_range': 'जानेवारी २०२६ – मे २०२६',
+  // EN: JAN 2026 – JUL 2026
+  'roadmap.badge.date_range': 'जानेवारी २०२६ – जुलै २०२६',
   // EN: Jan 2026
   'roadmap.event1.date': 'जानेवारी २०२६',
   // EN: National Consultative Meeting
@@ -272,6 +282,12 @@ registerStrings('mr', {
   'roadmap.event5.title': 'नवोपक्रम स्पर्धा सुरू',
   // EN: Open call for digital & social innovations amplified through partner networks. Multidisciplinary jury panel completed evaluations, selecting 2 digital solutions and 1 social innovation for state implementation.
   'roadmap.event5.desc': 'भागीदार संस्थांच्या माध्यमातून डिजिटल व सामाजिक नवोपक्रमांसाठी खुले आवाहन. बहुविद्याशाखीय परीक्षक मंडळाने मूल्यांकन पूर्ण करून राज्यात राबवण्यासाठी २ डिजिटल उपाय आणि १ सामाजिक नवोपक्रम निवडला.',
+  // EN: Jul 2026
+  'roadmap.event6.date': 'जुलै २०२६',
+  // EN: District Workshop and Bin Placement Initiative Launched — Pune
+  'roadmap.event6.title': 'जिल्हा कार्यशाळा आणि पेटी उभारणी उपक्रम सुरू — पुणे',
+  // EN: A district-level workshop brought together medical officers, municipal officials, and pharmacy association representatives to strengthen awareness on safe antibiotic disposal and AMR prevention. Following the workshop, dedicated antibiotic disposal bins were installed at strategic locations across Pune Municipal Corporation (PMC) to enable safe collection and disposal of unused and expired antibiotics.
+  'roadmap.event6.desc': 'सुरक्षित प्रतिजैविक विल्हेवाट आणि AMR प्रतिबंधाबाबत जागरूकता वाढवण्यासाठी वैद्यकीय अधिकारी, महापालिका अधिकारी आणि औषध विक्रेता संघटनेचे प्रतिनिधी यांना एकत्र आणणारी जिल्हास्तरीय कार्यशाळा झाली. कार्यशाळेनंतर, न वापरलेल्या आणि मुदतबाह्य प्रतिजैविकांचे सुरक्षित संकलन व विल्हेवाट शक्य व्हावी यासाठी पुणे महानगरपालिका (PMC) क्षेत्रातील निवडक ठिकाणी स्वतंत्र प्रतिजैविक विल्हेवाट पेट्या बसवण्यात आल्या.',
   // EN: National Consultation 1
   'roadmap.event1.image1.alt': 'राष्ट्रीय सल्लामसलत १',
   // EN: National Consultative Meeting
@@ -328,6 +344,44 @@ registerStrings('mr', {
   'roadmap.event5.image4.alt': 'नवोपक्रम स्पर्धा ४',
   // EN: 2 digital & 1 social innovation selected.
   'roadmap.event5.modal.desc4': '२ डिजिटल आणि १ सामाजिक नवोपक्रम निवडले.',
+  // EN: Workshop opening address beside the district sensitisation workshop banner
+  'roadmap.event6.image1.alt': 'जिल्हा संवेदनशीलता कार्यशाळेच्या फलकाशेजारी उद्घाटनपर भाषण',
+  // EN: District Workshop and Bin Placement — Pune
+  'roadmap.event6.modal.title': 'जिल्हा कार्यशाळा आणि पेटी उभारणी — पुणे',
+  // EN: A district-level sensitisation workshop on safe disposal of unused and expired antibiotics.
+  'roadmap.event6.modal.desc1': 'न वापरलेल्या आणि मुदतबाह्य प्रतिजैविकांच्या सुरक्षित विल्हेवाटीवरील जिल्हास्तरीय संवेदनशीलता कार्यशाळा.',
+  // EN: Medical officers, municipal officials and pharmacy representatives attending the workshop
+  'roadmap.event6.image2.alt': 'कार्यशाळेस उपस्थित वैद्यकीय अधिकारी, महापालिका अधिकारी आणि औषध विक्रेता प्रतिनिधी',
+  // EN: Medical officers, municipal officials and pharmacy association representatives at the workshop.
+  'roadmap.event6.modal.desc2': 'कार्यशाळेस उपस्थित वैद्यकीय अधिकारी, महापालिका अधिकारी आणि औषध विक्रेता संघटनेचे प्रतिनिधी.',
+  // EN: Officials on stage holding the campaign posters at the launch
+  'roadmap.event6.image3.alt': 'उद्घाटनप्रसंगी मंचावर मोहिमेची पोस्टर प्रकाशित करताना अधिकारी',
+  // EN: Campaign materials released at the district workshop.
+  'roadmap.event6.modal.desc3': 'जिल्हा कार्यशाळेत मोहिमेचे साहित्य प्रकाशित करण्यात आले.',
+  // EN: Health staff beside a newly installed antibiotic disposal bin
+  'roadmap.event6.image4.alt': 'नव्याने बसवलेल्या प्रतिजैविक विल्हेवाट पेटीशेजारी आरोग्य कर्मचारी',
+  // EN: An antibiotic disposal bin installed at a Pune Municipal Corporation facility.
+  'roadmap.event6.modal.desc4': 'पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी.',
+  // EN: Facility staff standing with a green antibiotic disposal bin
+  'roadmap.event6.image5.alt': 'हिरव्या प्रतिजैविक विल्हेवाट पेटीसह केंद्रातील कर्मचारी',
+  // EN: An antibiotic disposal bin installed at a Pune Municipal Corporation facility.
+  'roadmap.event6.modal.desc5': 'पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी.',
+  // EN: Staff at a health facility with a green antibiotic disposal bin
+  'roadmap.event6.image6.alt': 'आरोग्य केंद्रात हिरव्या प्रतिजैविक विल्हेवाट पेटीसह कर्मचारी',
+  // EN: An antibiotic disposal bin installed at a Pune Municipal Corporation facility.
+  'roadmap.event6.modal.desc6': 'पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी.',
+  // EN: Antibiotic disposal bin placed in a facility dressing room
+  'roadmap.event6.image7.alt': 'केंद्रातील ड्रेसिंग रूममध्ये ठेवलेली प्रतिजैविक विल्हेवाट पेटी',
+  // EN: An antibiotic disposal bin installed at a Pune Municipal Corporation facility.
+  'roadmap.event6.modal.desc7': 'पुणे महानगरपालिकेच्या केंद्रात बसवलेली प्रतिजैविक विल्हेवाट पेटी.',
+  // EN: Disposal bin installed beneath a Marathi awareness poster in a corridor
+  'roadmap.event6.image8.alt': 'मराठी जनजागृती फलकाखाली बसवलेली विल्हेवाट पेटी',
+  // EN: A disposal bin placed beside campaign awareness material.
+  'roadmap.event6.modal.desc8': 'मोहिमेच्या जनजागृती साहित्याशेजारी ठेवलेली विल्हेवाट पेटी.',
+  // EN: A person placing unused medicines into the green antibiotic disposal bin
+  'roadmap.event6.image9.alt': 'हिरव्या प्रतिजैविक विल्हेवाट पेटीत न वापरलेली औषधे टाकताना व्यक्ती',
+  // EN: Unused and expired antibiotics being deposited into a collection bin.
+  'roadmap.event6.modal.desc9': 'न वापरलेली आणि मुदतबाह्य प्रतिजैविके संकलन पेटीत टाकली जात आहेत.',
 
   // ── partners ──────────────────────────────────────────────────
   // EN: OFFICIAL PUBLIC HEALTH & RESEARCH PARTNERS
