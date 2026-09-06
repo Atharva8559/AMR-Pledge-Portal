@@ -1,19 +1,24 @@
 # Source and working material — none of it is served.
-About AMR/
-Branding/
-District Workshop and Bin Placement Initiative Launched -Pune/
-Innovation Challenge/
-KAP Study Completed /
-Logos/
-National Consultation Meeting/
-Poster/
-Report dissemination/
-State Stewardship/
-State-level Consultation/
+#
+# EVERY DIRECTORY PATTERN IS ANCHORED WITH A LEADING SLASH so it matches only at
+# the repo root. Unanchored, "Logos/" matches a directory of that name at ANY
+# depth, which silently excluded assets/web/logos/ too and 404'd all six partner
+# logos on the first deploy while every other asset served fine.
+/About AMR/
+/Branding/
+/District Workshop and Bin Placement Initiative Launched -Pune/
+/Innovation Challenge/
+/KAP Study Completed /
+/Logos/
+/National Consultation Meeting/
+/Poster/
+/Report dissemination/
+/State Stewardship/
+/State-level Consultation/
 
 # Build tooling and the translation worksheet
-tools/
-MARATHI_WORKSHEET.md
+/tools/
+/MARATHI_WORKSHEET.md
 
 # The 380 MB video master. The page uses the YouTube facade.
 *.MP4
