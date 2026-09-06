@@ -1,0 +1,21 @@
+# Source and working material — none of it is served.
+About AMR/
+Branding/
+District Workshop and Bin Placement Initiative Launched -Pune/
+Innovation Challenge/
+KAP Study Completed /
+Logos/
+National Consultation Meeting/
+Poster/
+Report dissemination/
+State Stewardship/
+State-level Consultation/
+
+# Build tooling and the translation worksheet
+tools/
+MARATHI_WORKSHEET.md
+
+# The 380 MB video master. The page uses the YouTube facade.
+*.MP4
+
+.DS_Store
