@@ -505,7 +505,7 @@ function selectOption(btnElement, isCorrect, fact) {
 
     feedback.className = 'quiz-feedback success';
     feedback.style.display = 'block';
-    feedback.innerHTML = `<strong style="color: #065f46; display: block; margin-bottom: 0.25rem;">✅ Correct!</strong> ${escapeHTML(fact)}`;
+    feedback.innerHTML = `<strong style="color: #065f46; display: block; margin-bottom: 0.25rem;">Correct!</strong> ${escapeHTML(fact)}`;
   } else {
     btnElement.classList.add('incorrect');
 
@@ -517,7 +517,7 @@ function selectOption(btnElement, isCorrect, fact) {
 
     feedback.className = 'quiz-feedback error';
     feedback.style.display = 'block';
-    feedback.innerHTML = `<strong style="color: #991b1b; display: block; margin-bottom: 0.25rem;">💡 Good to know</strong> ${escapeHTML(fact)}`;
+    feedback.innerHTML = `<strong style="color: #991b1b; display: block; margin-bottom: 0.25rem;">Good to know</strong> ${escapeHTML(fact)}`;
   }
 
   document.getElementById('quizNavBtn').style.display = 'inline-flex';
@@ -547,12 +547,12 @@ function showQuizResults() {
 
   const pct = quizScore / QUIZ_QUESTIONS.length;
   let title = "";
-  let emoji = "";
+  let badgeSvg = "";
   let messageText = "";
   let tips = [];
 
   if (pct >= 0.8) {
-    emoji = "🏆";
+    badgeSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>`;
     title = "AMR Champion!";
     messageText = "Brilliant! You really know your stuff. You're ready to spread the word and protect your community.";
     tips = [
@@ -561,7 +561,7 @@ function showQuizResults() {
       "Never share or self-prescribe antibiotics."
     ];
   } else if (pct >= 0.5) {
-    emoji = "🛡️";
+    badgeSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#006857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
     title = "AMR Aware";
     messageText = "Nice work — you've got a solid grip on the basics. Just a few gaps to close and you'll be a champion!";
     tips = [
@@ -570,7 +570,7 @@ function showQuizResults() {
       "Ask your pharmacist about safe disposal."
     ];
   } else {
-    emoji = "🌱";
+    badgeSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#26a98b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
     title = "AMR Newcomer";
     messageText = "Great start! Every expert begins somewhere. Here are the key things worth remembering.";
     tips = [
@@ -580,7 +580,7 @@ function showQuizResults() {
     ];
   }
 
-  if (medal) medal.innerText = emoji;
+  if (medal) medal.innerHTML = badgeSvg;
   if (msg) {
     msg.innerHTML = `<strong style="font-size: 1.3rem; color: #0f172a; display: block; margin-bottom: 0.5rem;">${title}</strong><span style="font-size: 0.95rem; color: #475569;">${messageText}</span>`;
   }
@@ -588,9 +588,9 @@ function showQuizResults() {
   if (tipsBox) {
     tipsBox.innerHTML = `
       <div class="quiz-tips-container">
-        <p class="tips-heading">💡 Keep these key takeaways in mind:</p>
+        <p class="tips-heading">Keep these key takeaways in mind:</p>
         <ul class="tips-list">
-          ${tips.map(t => `<li><span class="tip-check">✓</span> ${escapeHTML(t)}</li>`).join('')}
+          ${tips.map(t => `<li><span class="tip-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> ${escapeHTML(t)}</li>`).join('')}
         </ul>
       </div>
     `;

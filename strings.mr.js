@@ -32,8 +32,8 @@
 registerStrings('mr', {
 
   // ── meta ──────────────────────────────────────────────────────
-  // EN: ACT4AMR | Antimicrobial Resistance Campaign
-  'meta.title': 'ACT4AMR | प्रतिजैविक प्रतिरोध मोहीम',
+  // EN: DISPOSEFORHEALTH | Antimicrobial Resistance Campaign
+  'meta.title': 'DISPOSEFORHEALTH | प्रतिजैविक प्रतिरोध मोहीम',
   // EN: Join the global fight against Antimicrobial Resistance (AMR). Take the pledge, access official public health IEC materials, listen to Dindi AMR songs, and track campaign milestones. Supported by NHM, PATH, CHRI & GSK.
   'meta.description': 'प्रतिजैविक प्रतिरोधाविरुद्धच्या (AMR) जागतिक लढ्यात सहभागी व्हा. प्रतिज्ञा घ्या, अधिकृत सार्वजनिक आरोग्य IEC साहित्य पहा, दिंडी AMR गीत ऐका आणि मोहिमेचे टप्पे जाणून घ्या. NHM, PATH, CHRI आणि GSK यांच्या सहकार्याने.',
 
@@ -146,8 +146,8 @@ registerStrings('mr', {
   'iec.title': 'माहिती, शिक्षण आणि संवाद साहित्य',
   // EN: Explore official public health posters, guidelines, and broadcast spots created in collaboration with MH Public Health, NHM, CHRI, PATH, and GSK.
   'iec.desc': 'महाराष्ट्र सार्वजनिक आरोग्य विभाग, NHM, CHRI, PATH आणि GSK यांच्या सहकार्याने तयार केलेली अधिकृत सार्वजनिक आरोग्य पोस्टर, मार्गदर्शक सूचना आणि प्रसारण साहित्य पहा.',
-  // EN: 🔍 View Poster
-  'iec.card.view_poster': '🔍 पोस्टर पहा',
+  // EN: View Poster
+  'iec.card.view_poster': 'पोस्टर पहा',
   // EN: Do You Have Leftover or Expired Medicines at Home?
   'iec.poster1.title': 'तुमच्या घरी उरलेली किंवा मुदतबाह्य औषधे आहेत का?',
   // EN: Let's Dispose of Antibiotics Safely & Defeat AMR!
@@ -156,8 +156,8 @@ registerStrings('mr', {
   'iec.poster3.title': 'लवकर बरे वाटत नाही? (AMR चे ३ महत्त्वाचे प्रश्न)',
   // EN: What Can We Do to Prevent AMR?
   'iec.poster4.title': 'AMR रोखण्यासाठी आपण काय करू शकतो?',
-  // EN: 🎬 Official Campaign Video
-  'iec.video.badge': '🎬 अधिकृत मोहीम व्हिडिओ',
+  // EN: Official Campaign Video
+  'iec.video.badge': 'अधिकृत मोहीम व्हिडिओ',
   // EN: Official Dindi Song AMR Awareness Video
   'iec.video.title': 'अधिकृत दिंडी गीत AMR जनजागृती व्हिडिओ',
   // EN: Playable campaign video featuring the official public health awareness Dindi Song promoting safe medicine collection box drop-offs.
@@ -410,8 +410,8 @@ registerStrings('mr', {
   'footer.resources.who': 'WHO AMR पोर्टल',
   // EN: CDC Drug Resistance Info
   'footer.resources.cdc': 'CDC औषध प्रतिरोध माहिती',
-  // EN: © 2026 ACT4AMR Project | Public Health Department Maharashtra, NHM, CHRI, PATH & GSK Collaboration.
-  'footer.copyright': '© २०२६ ACT4AMR प्रकल्प | सार्वजनिक आरोग्य विभाग महाराष्ट्र, NHM, CHRI, PATH आणि GSK यांचे सहकार्य.',
+  // EN: © 2026 DISPOSEFORHEALTH Project | Public Health Department Maharashtra, NHM, CHRI, PATH & GSK Collaboration.
+  'footer.copyright': '© २०२६ DISPOSEFORHEALTH प्रकल्प | सार्वजनिक आरोग्य विभाग महाराष्ट्र, NHM, CHRI, PATH आणि GSK यांचे सहकार्य.',
   // EN: Twitter
   'footer.social.twitter.label': 'ट्विटर',
   // EN: LinkedIn

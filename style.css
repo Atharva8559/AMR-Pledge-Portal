@@ -561,43 +561,29 @@ header.scrolled {
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
   text-decoration: none;
-  /* The wordmark is 36px of art sitting inside a 64px bar, so the link itself
-     measured 36px tall and was the shortest control in the header. min-height
-     costs nothing visually — the art stays where it was and the extra 4px top
-     and bottom are transparent — but the link now clears 44px. */
   min-height: var(--tap-min);
-  /* Invisible on a transparent element — it exists so the focus ring rounds
-     off instead of boxing the wordmark in a hard rectangle. */
   border-radius: var(--radius-sm);
-}
-
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--green-600), var(--green-700));
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-md);
-  font-weight: var(--weight-black);
-  letter-spacing: var(--tracking-tight);
-  line-height: 1;
+  flex-shrink: 0;
 }
 
 .logo-text {
-  font-size: var(--text-xl);
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
   font-weight: var(--weight-black);
   color: var(--green-800);
   letter-spacing: var(--tracking-tighter);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .logo-text span {
   color: var(--orange-600);
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.05rem;
+  }
 }
 
 nav ul {
@@ -640,6 +626,143 @@ nav ul li a {
 nav ul li a:active {
   color: var(--green-700);
   background-color: var(--green-100);
+}
+
+/* ═══════════════════════════════════════════════
+   HERO WATCH & ANIMATED VIDEO BANNER
+   ═══════════════════════════════════════════════ */
+.hero-watch-section {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  min-height: calc(100dvh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #072b22 0%, #005647 45%, #0d4638 100%);
+  padding: 2rem 0;
+  overflow: hidden;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+
+.hero-watch-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.hero-watch-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-watch-logo-col {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-logo-card {
+  position: relative;
+  padding: 1.25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.02) 70%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s ease;
+}
+
+@media (hover: hover) {
+  .main-logo-card:hover {
+    transform: scale(1.03);
+  }
+}
+
+.main-logo-img {
+  max-width: 100%;
+  width: auto;
+  max-height: 380px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+}
+
+.hero-watch-video-col {
+  flex: 1 1 56%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.watch-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 0.45rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.live-red-dot {
+  width: 14px;
+  height: 14px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ef4444;
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.hero-video-card {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2);
+  background: #000;
+}
+
+.hero-video-player {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .hero-watch-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .hero-watch-video-col {
+    align-items: center;
+    width: 100%;
+  }
+  .main-logo-img {
+    max-height: 280px;
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -1861,12 +1984,12 @@ nav ul li a:active {
 
 .vertical-roadmap-wrapper {
   position: relative;
-  padding-left: 140px;
+  padding-left: 90px;
 }
 
 .vertical-roadmap-track {
   position: absolute;
-  left: 140px;
+  left: 90px;
   top: 0;
   bottom: 0;
   width: 3px;
@@ -1876,19 +1999,19 @@ nav ul li a:active {
 
 .roadmap-event-item {
   display: flex;
-  align-items: flex-start;
-  margin-bottom: var(--space-7);
+  align-items: stretch;
+  margin-bottom: var(--space-8);
   position: relative;
 }
 
 .event-left-col {
-  width: 120px;
+  width: 75px;
   flex-shrink: 0;
   text-align: right;
-  padding-right: 20px;
-  padding-top: var(--space-5);
+  padding-right: 12px;
+  padding-top: var(--space-4);
   position: absolute;
-  left: -140px;
+  left: -90px;
 }
 
 .event-date-pill {
@@ -1908,7 +2031,7 @@ nav ul li a:active {
 .event-node {
   position: absolute;
   left: -8px;
-  top: 1rem;
+  top: 1.25rem;
   z-index: 2;
 }
 
@@ -1929,9 +2052,9 @@ nav ul li a:active {
 
 .event-right-card {
   flex: 1;
-  margin-left: 28px;
-  padding: var(--space-4) var(--space-5);
-  border-left: 3px solid var(--green-600);
+  margin-left: 24px;
+  padding: var(--space-5) var(--space-6);
+  border-left: 4px solid var(--green-600);
 }
 
 @media (hover: hover) {
@@ -1942,27 +2065,33 @@ nav ul li a:active {
 
 .event-card-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-  align-items: start;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-6);
+  align-items: center;
 }
 
-/* Was 0.92rem — below body size for a heading. Now a clear step above the
-   description it introduces, in both size and weight. */
+.event-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-1) 0;
+}
+
 .event-text-content h3.event-title {
-  font-size: var(--text-md);
+  font-size: var(--text-xl);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-snug);
   line-height: var(--lh-heading);
   color: var(--gray-900);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 .event-desc {
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: var(--weight-normal);
-  color: var(--text-secondary);
+  color: var(--gray-700);
   line-height: var(--lh-body);
+  max-width: none;
 }
 
 /* Carousel */
