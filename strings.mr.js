@@ -44,6 +44,8 @@ registerStrings('mr', {
   'nav.about': 'AMR विषयी',
   // EN: Safe Disposal
   'nav.journey': 'सुरक्षित विल्हेवाट',
+  // EN: Find Bins
+  'nav.bins': 'डिसपोजल बिन्स',
   // EN: IEC Materials
   'nav.iec': 'IEC साहित्य',
   // EN: AMR Quiz
