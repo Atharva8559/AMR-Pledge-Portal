@@ -1,73 +1,101 @@
 /**
- * ACT4AMR — pledge counter backend (Google Apps Script)
+ * DISPOSEFORHEALTH — counter backend (Google Apps Script)
  *
- * A real count. It stores ONE number and nothing else: no names, no contact
- * details, no IP addresses, no analytics. There is nothing here that could
- * identify a person, which is the point — the page asks for a promise, not for
- * personal data.
+ * Tracks TWO independent numbers:
+ *   • Pledge completions   → stored under PLEDGE_KEY, returned as { count: N }
+ *   • Quiz completions     → stored under QUIZ_KEY,   returned as { quiz_count: N }
  *
- * ─── DEPLOY (about two minutes, no signup beyond a Google account) ───────────
+ * Nothing else is stored — no names, no contact details, no IP addresses.
  *
- *  1. Go to https://script.google.com and click "New project".
- *  2. Delete whatever is in Code.gs and paste this whole file in.
- *  3. Click Deploy ▸ New deployment.
- *  4. Click the gear next to "Select type" and choose "Web app".
- *  5. Set:  Execute as        →  Me
- *           Who has access    →  Anyone
- *     ("Anyone" means anyone can increment the counter. It does NOT give anyone
- *      access to your Google account or Drive.)
- *  6. Click Deploy, authorise when prompted, and copy the Web app URL. It looks
- *     like  https://script.google.com/macros/s/AKfyc.../exec
- *  7. Paste that URL into PLEDGE_COUNTER_URL near the top of app.js.
+ * ─── DEPLOY / REDEPLOY ───────────────────────────────────────────────────────
  *
- * To check the current total in a browser, open the same URL directly — a plain
- * GET returns the count without incrementing it.
+ *  First-time deploy:
+ *   1. Go to https://script.google.com → New project.
+ *   2. Replace Code.gs with this file.
+ *   3. Deploy ▸ New deployment ▸ Type = Web app.
+ *      Execute as: Me   |   Who has access: Anyone
+ *   4. Copy the Web app URL and paste it into PLEDGE_COUNTER_URL in app.js.
  *
- * ─── STARTING FROM A REAL NUMBER ────────────────────────────────────────────
- * If the campaign already has a genuine pledge total from before this page
- * existed, set STARTING_COUNT to it and say so publicly. Do NOT put a made-up
- * number here to make the page look busier — that is exactly the fabricated
- * statistic this project removed once already.
+ *  Updating an existing deployment (what you need to do now):
+ *   1. Open your existing project at https://script.google.com.
+ *   2. Replace the script with this file and click Save.
+ *   3. Deploy ▸ Manage deployments ▸ Edit (pencil) the live deployment.
+ *   4. Change "Version" to "New version" and click Deploy.
+ *      *** The URL stays exactly the same — no changes needed in app.js. ***
+ *
+ * ─── GET request ─────────────────────────────────────────────────────────────
+ * Returns both totals without incrementing either:
+ *   { "count": 42, "quiz_count": 17 }
+ *
+ * ─── POST request ─────────────────────────────────────────────────────────────
+ * Body must be JSON with an "action" field:
+ *   { "action": "pledge" }        → increments pledge counter, returns { "count": N }
+ *   { "action": "quiz_complete" } → increments quiz counter,  returns { "quiz_count": N }
+ *
+ * ─── STARTING COUNTS ─────────────────────────────────────────────────────────
+ * If the campaign already has genuine pledge totals from before this script,
+ * set STARTING_PLEDGE_COUNT to that real number. Never invent a number.
  */
 
-var STARTING_COUNT = 0;      // only ever a real, defensible figure
-var COUNTER_KEY = 'act4amr_pledge_count';
+var STARTING_PLEDGE_COUNT = 0;   // only ever a real, defensible figure
+var STARTING_QUIZ_COUNT   = 0;
 
-/** Plain GET: report the count. Never increments, so refreshes cannot inflate it. */
+var PLEDGE_KEY = 'dfh_pledge_count';
+var QUIZ_KEY   = 'dfh_quiz_count';
+
+// ─── GET: report both counters, never increment ───────────────────────────────
 function doGet() {
-  return jsonResponse({ count: readCount() });
+  return jsonResponse({
+    count:      readCount(PLEDGE_KEY, STARTING_PLEDGE_COUNT),
+    quiz_count: readCount(QUIZ_KEY,   STARTING_QUIZ_COUNT)
+  });
 }
 
-/** POST from the page: record one pledge and return the new total. */
+// ─── POST: route by action field ─────────────────────────────────────────────
 function doPost(e) {
-  var count = increment();
-  return jsonResponse({ count: count });
+  var body   = {};
+  var action = 'pledge';   // safe default: legacy callers that omit action still increment pledges
+
+  try {
+    body   = JSON.parse(e.postData.contents);
+    action = (body.action || 'pledge').toString().trim().toLowerCase();
+  } catch (err) { /* malformed body: treat as pledge */ }
+
+  if (action === 'quiz_complete') {
+    var quizTotal = incrementCounter(QUIZ_KEY, STARTING_QUIZ_COUNT);
+    return jsonResponse({ quiz_count: quizTotal });
+  }
+
+  // Default: 'pledge'
+  var pledgeTotal = incrementCounter(PLEDGE_KEY, STARTING_PLEDGE_COUNT);
+  return jsonResponse({ count: pledgeTotal });
 }
 
-function readCount() {
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function readCount(key, startingValue) {
   var props = PropertiesService.getScriptProperties();
-  var raw = props.getProperty(COUNTER_KEY);
-  if (raw === null) return STARTING_COUNT;
+  var raw   = props.getProperty(key);
+  if (raw === null) return startingValue;
   var n = parseInt(raw, 10);
-  return isNaN(n) ? STARTING_COUNT : n;
+  return isNaN(n) ? startingValue : n;
 }
 
 /**
- * Increment under a lock. Without it two pledges landing in the same moment
- * both read the same value and one of them is silently lost — rare, but it
- * makes the number quietly wrong, which is the one thing it must not be.
+ * Increment under a lock. Without it two requests arriving simultaneously both
+ * read the same value and one increment is silently lost.
  */
-function increment() {
+function incrementCounter(key, startingValue) {
   var lock = LockService.getScriptLock();
   try {
     lock.waitLock(5000);
   } catch (err) {
-    return readCount();               // busy: report, do not guess
+    return readCount(key, startingValue);   // busy — report current, don't guess
   }
   try {
     var props = PropertiesService.getScriptProperties();
-    var next = readCount() + 1;
-    props.setProperty(COUNTER_KEY, String(next));
+    var next  = readCount(key, startingValue) + 1;
+    props.setProperty(key, String(next));
     return next;
   } finally {
     lock.releaseLock();
