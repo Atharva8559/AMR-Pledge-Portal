@@ -1304,11 +1304,10 @@ function initBinsMap() {
     scrollWheelZoom: false
   });
 
-  // CartoDB Voyager tiles (crisp, high-DPI vector raster tiles, zero CORS / 403 blocks)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  // ESRI World Street Map tiles — 100% Free, NO API key required, NO watermark, reliable CDN
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 19,
-    subdomains: 'abcd',
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>'
+    attribution: 'Map &copy; <a href="https://www.esri.com/" target="_blank">Esri</a> & contributors'
   }).addTo(_binsMap);
 
   // Render all 22 bin markers
