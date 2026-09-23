@@ -1029,112 +1029,222 @@ window.shareCertificate    = shareCertificate;
 var BIN_LOCATIONS = [
   {
     id: 1,
-    name: 'Sassoon General Hospital',
-    address: 'Near Pune Railway Station, Pune 411001',
-    phone: '020-26128000',
-    type: 'District Hospital',
-    lat: 18.5204,
-    lng: 73.8567,
+    name: 'Primary Health Centre, Umbraj',
+    address: 'Umbraj, Karad, Satara District',
+    type: 'Primary Health Centre',
+    lat: 17.40131571,
+    lng: 74.09911338, // Corrected from 28.09911338 typo in sheet to 74.09911338 (exact Umbraj PHC, Satara)
     hours: '24 / 7',
     open: true
   },
   {
     id: 2,
-    name: 'YCM Hospital Pimpri',
-    address: 'Sant Tukaram Nagar, Pimpri-Chinchwad 411018',
-    phone: '020-27425543',
-    type: 'Government Hospital',
-    lat: 18.6278,
-    lng: 73.8031,
-    hours: 'Mon–Sat  8 AM–8 PM',
+    name: 'Sub Center Charegon',
+    address: 'Charegaon, Karad, Satara District',
+    type: 'Health Sub-Centre',
+    lat: 17.37350313,
+    lng: 74.07137492,
+    hours: 'Mon–Sat  9 AM–5 PM',
     open: true
   },
   {
     id: 3,
-    name: 'Aundh District Hospital',
-    address: 'Aundh, Pune 411007',
-    phone: '020-25880416',
-    type: 'District Hospital',
-    lat: 18.5574,
-    lng: 73.8076,
+    name: 'Sub Center Vahagaon',
+    address: 'Vahagaon, Karad, Satara District',
+    type: 'Health Sub-Centre',
+    lat: 17.33350192,
+    lng: 74.1484364,
     hours: 'Mon–Sat  9 AM–5 PM',
     open: true
   },
   {
     id: 4,
-    name: 'Hadapsar Primary Health Centre',
-    address: 'Hadapsar, Pune 411028',
-    phone: '020-26874123',
+    name: 'Primary Health Centre, Indoli',
+    address: 'Indoli, Karad, Satara District',
     type: 'Primary Health Centre',
-    lat: 18.5018,
-    lng: 73.9392,
-    hours: 'Mon–Sat  8 AM–4 PM',
+    lat: 17.4388846,
+    lng: 74.0779735,
+    hours: '24 / 7',
     open: true
   },
   {
     id: 5,
-    name: 'Yerawada Primary Health Centre',
-    address: 'Yerawada, Pune 411006',
-    phone: '020-26685041',
+    name: 'Primary Health Centre, Sakharwadi',
+    address: 'Sakharwadi, Phaltan, Satara District',
     type: 'Primary Health Centre',
-    lat: 18.5527,
-    lng: 73.8985,
-    hours: 'Mon–Sat  8 AM–4 PM',
+    lat: 18.05508028,
+    lng: 74.34017207,
+    hours: '24 / 7',
     open: true
   },
   {
     id: 6,
-    name: 'Civil Hospital Nashik',
-    address: 'Civil Hospital Road, Nashik 422001',
-    phone: '0253-2577700',
-    type: 'District Hospital',
-    lat: 20.0041,
-    lng: 73.7841,
+    name: 'Primary Healthcare Center Limb',
+    address: 'Limb, Satara District',
+    type: 'Primary Health Centre',
+    lat: 17.789294,
+    lng: 74.013379,
     hours: '24 / 7',
     open: true
   },
   {
     id: 7,
-    name: 'Ghati Hospital (GMC Aurangabad)',
-    address: 'Government Medical College, Aurangabad 431001',
-    phone: '0240-2402081',
-    type: 'Medical College Hospital',
-    lat: 19.8762,
-    lng: 75.3433,
-    hours: '24 / 7',
+    name: 'Maalgaon Sab Centre - Limb PHC',
+    address: 'Maalgaon, Satara District',
+    type: 'Health Sub-Centre',
+    lat: 17.814277,
+    lng: 74.040257,
+    hours: 'Mon–Sat  9 AM–5 PM',
     open: true
   },
   {
     id: 8,
-    name: 'Civil Hospital Solapur',
-    address: 'Solapur 413003',
-    phone: '0217-2312626',
-    type: 'District Hospital',
-    lat: 17.6868,
-    lng: 75.9120,
-    hours: 'Mon–Sat  8 AM–8 PM',
+    name: 'Kshetramahuli PHC',
+    address: 'Kshetramahuli, Satara District',
+    type: 'Primary Health Centre',
+    lat: 17.6937957,
+    lng: 74.07497305,
+    hours: '24 / 7',
     open: true
   },
   {
     id: 9,
-    name: 'Kalyan District Hospital',
-    address: 'Netaji Subhash Road, Kalyan 421301',
-    phone: '0251-2311321',
-    type: 'District Hospital',
-    lat: 19.2452,
-    lng: 73.1355,
+    name: 'Khed Subcentre, Kshetramahuli PHC',
+    address: 'Khed, Satara District',
+    type: 'Health Sub-Centre',
+    lat: 17.702862,
+    lng: 74.036412,
     hours: 'Mon–Sat  9 AM–5 PM',
     open: true
   },
   {
     id: 10,
-    name: 'Government Medical College Nagpur',
-    address: 'Medical Square, Nagpur 440003',
-    phone: '0712-2700444',
-    type: 'Medical College Hospital',
-    lat: 21.1458,
-    lng: 79.0882,
-    hours: '24 / 7',
+    name: 'Genaba Tukaram Mhaske, UPHC',
+    address: 'Pimpri-Chinchwad, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.60740599,
+    lng: 73.86589781,
+    hours: 'Mon–Sat  8 AM–8 PM',
+    open: true
+  },
+  {
+    id: 11,
+    name: 'Kai. Sadashiv Kawade, UPHC',
+    address: 'Ghorpadi, Pune Cantonment Area, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.5188839,
+    lng: 73.90633868,
+    hours: 'Mon–Sat  8 AM–8 PM',
+    open: true
+  },
+  {
+    id: 12,
+    name: 'Kai. Bapusaheb Kawade, UPHC',
+    address: 'Kalyani Nagar / Yerawada, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.54006309,
+    lng: 73.89862541,
+    hours: 'Mon–Sat  8 AM–8 PM',
+    open: true
+  },
+  {
+    id: 13,
+    name: 'Laxmi Township Phase III',
+    address: 'Laxmi Township, Pune',
+    type: 'Residential Drop-off Point',
+    lat: 18.57886019,
+    lng: 73.87411668,
+    hours: 'Open 24/7 for Residents & Public',
+    open: true
+  },
+  {
+    id: 14,
+    name: 'Laxmi Township Phase I',
+    address: 'Laxmi Township, Pune',
+    type: 'Residential Drop-off Point',
+    lat: 18.57766674,
+    lng: 73.87361229,
+    hours: 'Open 24/7 for Residents & Public',
+    open: true
+  },
+  {
+    id: 15,
+    name: 'Kai. Baburao Genba Shewale, UPHC',
+    address: 'Aundh, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.56296296,
+    lng: 73.83270059,
+    hours: 'Mon–Sat  8 AM–8 PM',
+    open: true
+  },
+  {
+    id: 16,
+    name: 'Mahesh Paradise CHS',
+    address: 'Baner / Balewadi, Pune',
+    type: 'Residential Drop-off Point',
+    lat: 18.56733782,
+    lng: 73.80446784,
+    hours: 'Open 24/7 for Residents & Public',
+    open: true
+  },
+  {
+    id: 17,
+    name: 'Kumar Prerana CHS',
+    address: 'Baner, Pune',
+    type: 'Residential Drop-off Point',
+    lat: 18.56612983,
+    lng: 73.80257968,
+    hours: 'Open 24/7 for Residents & Public',
+    open: true
+  },
+  {
+    id: 18,
+    name: 'Gold Coast CHS',
+    address: 'Baner / Pashan, Pune',
+    type: 'Residential Drop-off Point',
+    lat: 18.55184947,
+    lng: 73.80121422,
+    hours: 'Open 24/7 for Residents & Public',
+    open: true
+  },
+  {
+    id: 19,
+    name: 'Elite Garden CHS',
+    address: 'Baner, Pune',
+    type: 'Residential Drop-off Point',
+    lat: 18.5656172,
+    lng: 73.80614498,
+    hours: 'Open 24/7 for Residents & Public',
+    open: true
+  },
+  {
+    id: 20,
+    name: 'Kai Dashrath Baliram Bhangire UPHC',
+    address: 'Mohammadwadi, Hadapsar, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.46750975,
+    lng: 73.92011332,
+    hours: 'Mon–Sat  8 AM–8 PM',
+    open: true
+  },
+  {
+    id: 21,
+    name: 'Thor Yugpurush Raja Shivchhatrapati UPHC',
+    address: 'Upper Indira Nagar, Bibwewadi, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.46307818,
+    lng: 73.86786235,
+    hours: 'Mon–Sat  8 AM–8 PM',
+    open: true
+  },
+  {
+    id: 22,
+    name: 'Shree Sadguru Shankar Maharaj UPHC',
+    address: 'Dhankawadi, Pune',
+    type: 'Urban Primary Health Centre',
+    lat: 18.46935465,
+    lng: 73.86292403,
+    hours: 'Mon–Sat  8 AM–8 PM',
     open: true
   }
 ];
@@ -1186,22 +1296,27 @@ function initBinsMap() {
     return;
   }
 
-  // Create Leaflet map centered on Maharashtra by default
+  // Create Leaflet map centered across Pune & Satara region
   _binsMap = L.map('binsMap', {
-    center: [18.8, 74.8],
-    zoom: 7,
+    center: [18.0, 73.95],
+    zoom: 9,
     zoomControl: true,
     scrollWheelZoom: false
   });
 
-  // OpenStreetMap base tiles
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // CartoDB Voyager tiles (crisp, high-DPI vector raster tiles, zero CORS / 403 blocks)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
+    subdomains: 'abcd',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>'
   }).addTo(_binsMap);
 
-  // Render initial bin markers
+  // Render all 22 bin markers
   renderBinMarkers(BIN_LOCATIONS);
+
+  // Fit bounds to show all 22 disposal locations nicely framed
+  var allPoints = BIN_LOCATIONS.map(function (loc) { return [loc.lat, loc.lng]; });
+  _binsMap.fitBounds(allPoints, { padding: [35, 35] });
 
   // Invalidate map size once container is fully sized
   window.setTimeout(function () {

@@ -586,36 +586,55 @@ header.scrolled {
   }
 }
 
-nav ul {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-
-/* Flex rather than block purely so min-height can centre the label: a block
-   would grow the box to 44px and leave the text pinned to the top of it.
-   Height comes from min-height, not from padding, so the label keeps its
-   original optical position inside the pill. */
-nav ul li a {
+nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: var(--tap-min);
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--text-sm);
+  flex: 1 1 auto;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav ul li {
+  flex: 0 0 auto;
+}
+
+/* Single-line, evenly spaced, perfectly vertically aligned nav items */
+nav ul li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.86rem;
   font-weight: var(--weight-medium);
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
+  white-space: nowrap;
+  line-height: 1;
+  text-decoration: none;
   transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-/* ─── Why every :hover in this file is gated ─────
-   A touch browser fires :hover on tap and then LEAVES IT ON until the next tap
-   somewhere else. Ungated, a Maharashtra reader on a phone — most of this
-   audience — taps a card and it stays lifted and shadowed behind them, which
-   reads as a rendering fault. So: pointer decoration lives inside
-   @media (hover: hover); anything a touch user must see lives outside it, and
-   the press feedback is :active, which fires correctly on every input type. */
+@media (max-width: 1200px) and (min-width: 769px) {
+  nav ul {
+    gap: 2px;
+  }
+  nav ul li a {
+    padding: 0.35rem 0.45rem;
+    font-size: 0.8rem;
+  }
+}
+
 @media (hover: hover) {
   nav ul li a:hover {
     color: var(--green-600);
