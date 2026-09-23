@@ -1192,15 +1192,20 @@ nav ul li a:active {
   background: var(--white);
 }
 
-.journey-diagram {
-  position: relative;
-  max-width: 720px;
+/* ─── Journey image wrapper ─── */
+.journey-image-wrap {
+  max-width: 900px;
   margin-inline: auto;
+  text-align: center;
 }
 
-/* Decoration only; the circular form switches it on. */
-.journey-orbit {
-  display: none;
+.journey-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  transition: opacity 0.3s ease;
 }
 
 .journey-hub {

@@ -129,6 +129,16 @@ function readRememberedLang() {
   try { return localStorage.getItem(I18N_LANG_KEY); } catch (e) { return null; }
 }
 
+// ─── Journey image language swap ─────────────────────────────────────────────
+// Reads data-src-{lang} from #journey-img and updates its src.
+// Falls back to data-src-en when no match.
+function updateJourneyImage(lang) {
+  const img = document.getElementById('journey-img');
+  if (!img) return;
+  const src = img.getAttribute('data-src-' + lang) || img.getAttribute('data-src-en');
+  if (src) img.src = src;
+}
+
 async function setLanguage(lang) {
   if (!lang || lang === I18N.lang) return;
 
@@ -139,6 +149,7 @@ async function setLanguage(lang) {
     I18N.strings = null;
     rememberLang('en');
     document.documentElement.setAttribute('lang', 'en');
+    updateJourneyImage('en');
     return;
   }
 
@@ -162,6 +173,7 @@ async function setLanguage(lang) {
   applyI18n();
   rememberLang(lang);
   document.documentElement.setAttribute('lang', lang);
+  updateJourneyImage(lang);
 }
 
 // Current translation for a key, falling back to the cached inline English
