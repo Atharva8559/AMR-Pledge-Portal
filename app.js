@@ -621,42 +621,56 @@ function restartQuiz() {
 }
 
 // ─── Quiz completion counter ──────────────────────────────────────────────────
-// Posts { action:'quiz_complete' } to the same Google Apps Script endpoint.
-// The Apps Script handler needs a matching 'else if' for 'quiz_complete' that
-// increments a separate cell and returns { quiz_count: <total> }.
-// Falls back gracefully: if the endpoint is absent, unreachable, or returns no
-// quiz_count field, the counter element simply stays hidden.
-function recordQuizCompletion() {
-  if (!PLEDGE_COUNTER_URL) return Promise.resolve(null);
-  if (typeof fetch !== 'function') return Promise.resolve(null);
+// Increments a localStorage counter immediately so the count always displays
+// even without a server. Also posts to the Google Apps Script endpoint; if it
+// returns { quiz_count: N } that authoritative figure overrides the local one.
+var QUIZ_COMPLETIONS_KEY = 'dfh_quiz_completions';
 
-  const timeout = new Promise(function (resolve) {
-    window.setTimeout(function () { resolve(null); }, 6000);
+function recordQuizCompletion() {
+  // Always increment locally first
+  var localCount = 1;
+  try {
+    localCount = parseInt(localStorage.getItem(QUIZ_COMPLETIONS_KEY) || '0', 10) + 1;
+    localStorage.setItem(QUIZ_COMPLETIONS_KEY, String(localCount));
+  } catch (e) { /* localStorage blocked: count from 1 */ }
+
+  // Try server too; use local count as the fallback in every failure path
+  if (!PLEDGE_COUNTER_URL || typeof fetch !== 'function') {
+    return Promise.resolve(localCount);
+  }
+
+  var timeout = new Promise(function (resolve) {
+    window.setTimeout(function () { resolve(localCount); }, 6000);
   });
 
-  const request = fetch(PLEDGE_COUNTER_URL, {
+  var request = fetch(PLEDGE_COUNTER_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
     body: JSON.stringify({ action: 'quiz_complete' })
   })
     .then(function (res) { return res.ok ? res.json() : null; })
     .then(function (data) {
-      const n = data && Number(data.quiz_count);
-      return Number.isFinite(n) && n >= 0 ? n : null;
+      var n = data && Number(data.quiz_count);
+      return (Number.isFinite(n) && n >= 0) ? n : localCount;
     })
-    .catch(function () { return null; });
+    .catch(function () { return localCount; });
 
   return Promise.race([request, timeout]);
 }
 
 function showQuizCompletionCount(total) {
-  const wrap  = document.getElementById('quizCompletionCount');
-  const value = document.getElementById('quizCompletionValue');
-  if (!wrap || !value || total === null) return;
+  var wrap  = document.getElementById('quizCompletionCount');
+  var value = document.getElementById('quizCompletionValue');
+  // Guard: only hide if total is explicitly null/undefined (not 0)
+  if (!wrap || !value || total == null) return;
 
   wrap.hidden = false;
-  const final = total.toLocaleString('en-IN');
-  let current = Math.max(0, total - Math.min(total, 60));
+  var final = Number(total).toLocaleString('en-IN');
+
+  // If count is 1 or very small, skip the count-up animation
+  if (total <= 1) { value.textContent = final; return; }
+
+  var current = Math.max(0, total - Math.min(total, 60));
   function step() {
     current = Math.min(total, current + (Math.ceil((total - current) / 8) || 1));
     value.textContent = current.toLocaleString('en-IN');
@@ -927,44 +941,74 @@ function drawCertCanvas(name, city, logo) {
   ctx.fillText('PLEDGE', sx, sy + 3);
   ctx.fillText('TAKER', sx, sy + 20);
 
-  // ── Cache data URL ──
-  _certDataUrl = canvas.toDataURL('image/png');
+  // ── Cache data URL (wrapped in try-catch: canvas.toDataURL may throw if the
+  //    canvas is "tainted" by a cross-origin image in stricter browser contexts) ──
+  try {
+    _certDataUrl = canvas.toDataURL('image/png');
+  } catch (e) {
+    console.warn('[cert] toDataURL failed (tainted canvas?). Redrawing without logo.', e);
+    // Redraw without the logo so the canvas is clean, then retry
+    drawCertCanvas(name, city, null);
+  }
 }
 
 function downloadCertificate() {
-  if (!_certDataUrl) return;
+  var canvas = document.getElementById('certCanvas');
+  if (!canvas) return;
+
+  // Try to get a data URL from the canvas directly each time (more reliable than the
+  // cached value; also refreshes if the canvas was redrawn without a logo)
+  var dataUrl;
+  try {
+    dataUrl = canvas.toDataURL('image/png');
+  } catch (e) {
+    // Canvas tainted — redraw without logo then retry
+    var nm = (document.getElementById('certName').value || '').trim();
+    var ct = (document.getElementById('certCity').value || '').trim();
+    drawCertCanvas(nm, ct, null);
+    try { dataUrl = canvas.toDataURL('image/png'); } catch (e2) {
+      console.warn('[cert] download failed — canvas still tainted', e2);
+      return;
+    }
+  }
+
   var nameVal = ((document.getElementById('certName').value || 'certificate').trim()).replace(/\s+/g, '_');
   var a = document.createElement('a');
-  a.href = _certDataUrl;
+  a.href = dataUrl;
   a.download = 'AMR_Pledge_Certificate_' + nameVal + '.png';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
 }
 
 function shareCertificate() {
-  if (!_certDataUrl || typeof navigator.share !== 'function') return;
+  if (typeof navigator.share !== 'function') return;
+  var canvas = document.getElementById('certCanvas');
+  if (!canvas) return;
   var nameVal = (document.getElementById('certName').value || '').trim();
 
-  // Convert data-URL to Blob so we can share the file
-  fetch(_certDataUrl)
-    .then(function (r) { return r.blob(); })
-    .then(function (blob) {
-      var file = new File([blob], 'AMR_Pledge_Certificate.png', { type: 'image/png' });
-      var shareData = {
-        title: 'My AMR Pledge Certificate',
-        text: nameVal
-          ? nameVal + ' has pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness'
-          : 'I have pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness'
-      };
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        shareData.files = [file];
-      } else {
-        shareData.url = window.location.href;
-      }
-      return navigator.share(shareData);
-    })
-    .catch(function (err) {
-      if (err && err.name !== 'AbortError') console.warn('[cert] share failed:', err);
-    });
+  var shareText = nameVal
+    ? nameVal + ' has pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness'
+    : 'I have pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness';
+
+  // Use canvas.toBlob() — avoids the data-URL intermediary and works in more contexts
+  canvas.toBlob(function (blob) {
+    if (!blob) {
+      // Fallback: share URL only
+      navigator.share({ title: 'My AMR Pledge Certificate', text: shareText, url: window.location.href })
+        .catch(function (err) { if (err.name !== 'AbortError') console.warn('[cert] share failed', err); });
+      return;
+    }
+    var file = new File([blob], 'AMR_Pledge_Certificate.png', { type: 'image/png' });
+    var shareData = { title: 'My AMR Pledge Certificate', text: shareText };
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      shareData.files = [file];
+    } else {
+      shareData.url = window.location.href;
+    }
+    navigator.share(shareData)
+      .catch(function (err) { if (err.name !== 'AbortError') console.warn('[cert] share failed', err); });
+  }, 'image/png');
 }
 
 // Export to window (all called from inline onclick attributes)

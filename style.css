@@ -3261,6 +3261,8 @@ footer::after {
   background: rgba(0,0,0,0.72);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+  /* Never intercept clicks — the .cert-modal overlay handles close-on-outside-click */
+  pointer-events: none;
 }
 
 .cert-modal-dialog {
@@ -3529,6 +3531,9 @@ footer::after {
   border: 1px solid var(--green-100);
   border-radius: var(--radius-lg);
 }
+
+/* [hidden] must win over display:flex — without this the counter is always visible */
+.quiz-completion-count[hidden] { display: none !important; }
 
 .quiz-completion-value {
   font-size: var(--text-3xl);
