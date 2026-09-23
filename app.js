@@ -708,20 +708,38 @@ function buildCertificate() {
   }
   if (errEl) errEl.hidden = true;
 
-  // Flip to preview step immediately so the user sees something happening
+  // Flip to preview step
   document.getElementById('certFormStep').hidden = true;
   document.getElementById('certPreviewStep').hidden = false;
 
-  // Hide share button on browsers that don't support the Web Share API
+  // Scroll the modal dialog back to top so the user sees the preview header first
+  var dialog = document.querySelector('.cert-modal-dialog');
+  if (dialog) dialog.scrollTop = 0;
+
+  // Show/hide share button based on Web Share API support
   var shareBtn = document.getElementById('certShareBtn');
   if (shareBtn) shareBtn.style.display = (typeof navigator.share === 'function') ? '' : 'none';
 
-  // Load the campaign logo, then draw
+  // Show a quick "Generating…" placeholder on the canvas while the logo loads
+  var canvas = document.getElementById('certCanvas');
+  if (canvas) {
+    canvas.width = 600; canvas.height = 424;
+    var pCtx = canvas.getContext('2d');
+    pCtx.fillStyle = '#f4faf8';
+    pCtx.fillRect(0, 0, 600, 424);
+    pCtx.fillStyle = '#006857';
+    pCtx.font = 'bold 20px Arial, sans-serif';
+    pCtx.textAlign = 'center';
+    pCtx.fillText('Generating your certificate…', 300, 212);
+  }
+
+  // Load the campaign logo then draw the full certificate
   var logo = new Image();
-  logo.onload = function () { drawCertCanvas(name, city, logo); };
+  logo.onload  = function () { drawCertCanvas(name, city, logo); };
   logo.onerror = function () { drawCertCanvas(name, city, null); };
   logo.src = 'Main.png';
 }
+
 
 // ── Canvas renderer ────────────────────────────────────────────────────────────
 function drawCertCanvas(name, city, logo) {

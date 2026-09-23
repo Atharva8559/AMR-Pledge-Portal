@@ -3265,6 +3265,7 @@ footer::after {
 
 .cert-modal-dialog {
   position: relative;
+  z-index: 1;          /* must sit above .cert-modal-backdrop (z-index: 0) */
   background: var(--white);
   border-radius: 20px;
   width: 100%;
@@ -3307,6 +3308,9 @@ footer::after {
 }
 
 .cert-step { display: flex; flex-direction: column; }
+
+/* [hidden] must win over display:flex — without this BOTH steps render at once */
+.cert-step[hidden] { display: none !important; }
 
 /* Step header banner */
 .cert-step-header {
