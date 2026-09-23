@@ -607,12 +607,355 @@ function showQuizResults() {
       </div>
     `;
   }
+
+  // Record completion and show live count
+  recordQuizCompletion().then(showQuizCompletionCount);
 }
 
 
 function restartQuiz() {
+  // Reset completion counter display when quiz is retaken
+  const countWrap = document.getElementById('quizCompletionCount');
+  if (countWrap) countWrap.hidden = true;
   initQuiz();
 }
+
+// ─── Quiz completion counter ──────────────────────────────────────────────────
+// Posts { action:'quiz_complete' } to the same Google Apps Script endpoint.
+// The Apps Script handler needs a matching 'else if' for 'quiz_complete' that
+// increments a separate cell and returns { quiz_count: <total> }.
+// Falls back gracefully: if the endpoint is absent, unreachable, or returns no
+// quiz_count field, the counter element simply stays hidden.
+function recordQuizCompletion() {
+  if (!PLEDGE_COUNTER_URL) return Promise.resolve(null);
+  if (typeof fetch !== 'function') return Promise.resolve(null);
+
+  const timeout = new Promise(function (resolve) {
+    window.setTimeout(function () { resolve(null); }, 6000);
+  });
+
+  const request = fetch(PLEDGE_COUNTER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'quiz_complete' })
+  })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (data) {
+      const n = data && Number(data.quiz_count);
+      return Number.isFinite(n) && n >= 0 ? n : null;
+    })
+    .catch(function () { return null; });
+
+  return Promise.race([request, timeout]);
+}
+
+function showQuizCompletionCount(total) {
+  const wrap  = document.getElementById('quizCompletionCount');
+  const value = document.getElementById('quizCompletionValue');
+  if (!wrap || !value || total === null) return;
+
+  wrap.hidden = false;
+  const final = total.toLocaleString('en-IN');
+  let current = Math.max(0, total - Math.min(total, 60));
+  function step() {
+    current = Math.min(total, current + (Math.ceil((total - current) / 8) || 1));
+    value.textContent = current.toLocaleString('en-IN');
+    if (current < total) requestAnimationFrame(step);
+    else value.textContent = final;
+  }
+  requestAnimationFrame(step);
+}
+
+// ─── Certificate Generation ───────────────────────────────────────────────────
+// Cached data-URL written by drawCertCanvas; read by downloadCertificate / shareCertificate.
+let _certDataUrl = null;
+
+function openCertModal() {
+  const modal = document.getElementById('certModal');
+  if (!modal) return;
+  modal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  // Return to form step each time the modal reopens
+  document.getElementById('certFormStep').hidden = false;
+  document.getElementById('certPreviewStep').hidden = true;
+  window.setTimeout(function () {
+    const inp = document.getElementById('certName');
+    if (inp) inp.focus();
+  }, 80);
+}
+
+function closeCertModal() {
+  const modal = document.getElementById('certModal');
+  if (!modal) return;
+  modal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function backToCertForm() {
+  document.getElementById('certFormStep').hidden = false;
+  document.getElementById('certPreviewStep').hidden = true;
+}
+
+// Called by the Generate Certificate button
+function buildCertificate() {
+  const name = (document.getElementById('certName').value || '').trim();
+  const city = (document.getElementById('certCity').value || '').trim();
+  const errEl = document.getElementById('certFormError');
+
+  if (!name || !city) {
+    if (errEl) errEl.hidden = false;
+    return;
+  }
+  if (errEl) errEl.hidden = true;
+
+  // Flip to preview step immediately so the user sees something happening
+  document.getElementById('certFormStep').hidden = true;
+  document.getElementById('certPreviewStep').hidden = false;
+
+  // Hide share button on browsers that don't support the Web Share API
+  var shareBtn = document.getElementById('certShareBtn');
+  if (shareBtn) shareBtn.style.display = (typeof navigator.share === 'function') ? '' : 'none';
+
+  // Load the campaign logo, then draw
+  var logo = new Image();
+  logo.onload = function () { drawCertCanvas(name, city, logo); };
+  logo.onerror = function () { drawCertCanvas(name, city, null); };
+  logo.src = 'Main.png';
+}
+
+// ── Canvas renderer ────────────────────────────────────────────────────────────
+function drawCertCanvas(name, city, logo) {
+  var canvas = document.getElementById('certCanvas');
+  if (!canvas) return;
+
+  var W = 1200, H = 848;
+  canvas.width = W;
+  canvas.height = H;
+  var ctx = canvas.getContext('2d');
+
+  // ── Palette ──
+  var GREEN      = '#006857';
+  var DARK_GREEN = '#00403a';
+  var GOLD       = '#c9a227';
+  var LIGHT_BG   = '#f4faf8';
+  var TEXT_DARK  = '#1a2e24';
+  var TEXT_MID   = '#3d5a4f';
+  var TEXT_LIGHT = '#6b8a7e';
+
+  // ── Background ──
+  ctx.fillStyle = LIGHT_BG;
+  ctx.fillRect(0, 0, W, H);
+
+  // ── Outer green border ──
+  ctx.strokeStyle = GREEN;
+  ctx.lineWidth = 14;
+  ctx.strokeRect(7, 7, W - 14, H - 14);
+
+  // ── Inner gold border ──
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 2.5;
+  ctx.strokeRect(22, 22, W - 44, H - 44);
+
+  // ── Corner squares ──
+  var cs = 12;
+  ctx.fillStyle = GOLD;
+  [[22,22],[W-22-cs,22],[22,H-22-cs],[W-22-cs,H-22-cs]].forEach(function(c){
+    ctx.fillRect(c[0], c[1], cs, cs);
+  });
+
+  // ── Header gradient ──
+  var headerH = 190;
+  var grad = ctx.createLinearGradient(0, 0, W, headerH);
+  grad.addColorStop(0, DARK_GREEN);
+  grad.addColorStop(1, GREEN);
+  ctx.fillStyle = grad;
+  ctx.fillRect(7, 7, W - 14, headerH);
+
+  // Campaign org line
+  ctx.fillStyle = 'rgba(255,255,255,0.55)';
+  ctx.font = '600 13px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.letterSpacing = '3px';
+  ctx.fillText('D I S P O S E F O R H E A L T H', W / 2, 50);
+  ctx.letterSpacing = '';
+
+  // Main title
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 54px "Palatino Linotype", Palatino, Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Certificate of Pledge', W / 2, 118);
+
+  // Gold rule under title
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(W/2-200, 134); ctx.lineTo(W/2+200, 134); ctx.stroke();
+
+  // Subtitle
+  ctx.fillStyle = 'rgba(255,255,255,0.8)';
+  ctx.font = 'italic 18px Georgia, serif';
+  ctx.fillText('Antimicrobial Resistance Awareness Campaign · Maharashtra', W / 2, 165);
+
+  // ── Body: certifies that ──
+  ctx.fillStyle = TEXT_MID;
+  ctx.font = 'italic 23px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('This certifies that', W / 2, 245);
+
+  // ── Name (auto-scale to fit) ──
+  var fontSize = 68;
+  ctx.font = 'bold ' + fontSize + 'px "Palatino Linotype", Palatino, Georgia, serif';
+  while (ctx.measureText(name).width > W - 180 && fontSize > 30) {
+    fontSize -= 2;
+    ctx.font = 'bold ' + fontSize + 'px "Palatino Linotype", Palatino, Georgia, serif';
+  }
+  ctx.fillStyle = GREEN;
+  ctx.textAlign = 'center';
+  ctx.fillText(name, W / 2, 324);
+
+  // Gold underline under name
+  var nw = ctx.measureText(name).width;
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(W/2 - nw/2, 336); ctx.lineTo(W/2 + nw/2, 336); ctx.stroke();
+
+  // ── City · Date ──
+  var dateStr = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+  ctx.fillStyle = TEXT_MID;
+  ctx.font = '22px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('from ' + city + '   \u00B7   ' + dateStr, W / 2, 376);
+
+  // ── Has pledged to ──
+  ctx.fillStyle = TEXT_DARK;
+  ctx.font = 'italic 20px Georgia, serif';
+  ctx.fillText('has solemnly pledged to:', W / 2, 418);
+
+  // Light horizontal rule
+  ctx.strokeStyle = 'rgba(0,104,87,0.18)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(60, 433); ctx.lineTo(W-60, 433); ctx.stroke();
+
+  // ── Commitment items ──
+  var commitments = [
+    'Take antibiotics only when prescribed by a qualified doctor',
+    'Complete every antibiotic course, even when feeling better',
+    'Never share medicines with any other person',
+    'Return leftover antibiotics to the nearest health facility or disposal site'
+  ];
+  var lineH = 52, startY = 464, blockX = 130;
+
+  commitments.forEach(function (text, i) {
+    var y = startY + i * lineH;
+
+    // Filled circle bullet
+    ctx.fillStyle = GREEN;
+    ctx.beginPath();
+    ctx.arc(blockX, y - 5, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Checkmark inside circle
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(blockX - 5.5, y - 5);
+    ctx.lineTo(blockX - 1.5, y);
+    ctx.lineTo(blockX + 6, y - 9);
+    ctx.stroke();
+    ctx.lineCap = 'butt';
+    ctx.lineJoin = 'miter';
+
+    // Commitment text
+    ctx.fillStyle = TEXT_DARK;
+    ctx.font = '18px Arial, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(text, blockX + 28, y + 1);
+  });
+
+  // ── Bottom separator ──
+  ctx.strokeStyle = 'rgba(0,104,87,0.18)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(60, 680); ctx.lineTo(W-60, 680); ctx.stroke();
+
+  // ── Logo (Main.png) ──
+  if (logo && logo.naturalWidth) {
+    var maxLH = 72, maxLW = 220;
+    var ratio = Math.min(maxLW / logo.naturalWidth, maxLH / logo.naturalHeight);
+    var lW = logo.naturalWidth * ratio;
+    var lH = logo.naturalHeight * ratio;
+    ctx.drawImage(logo, 80, 694, lW, lH);
+  }
+
+  // Campaign attribution
+  ctx.fillStyle = TEXT_LIGHT;
+  ctx.font = '13px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('DISPOSEFORHEALTH · Safe Antibiotic Disposal Campaign · Maharashtra', W / 2, 704);
+  ctx.fillText('Supported by NHM, PATH, CHRI & GSK', W / 2, 723);
+
+  // ── Seal (right side) ──
+  var sx = W - 130, sy = 735;
+  ctx.strokeStyle = GREEN;
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(sx, sy, 76, 0, Math.PI * 2); ctx.stroke();
+  ctx.strokeStyle = GOLD;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(sx, sy, 64, 0, Math.PI * 2); ctx.stroke();
+  ctx.fillStyle = GREEN;
+  ctx.font = 'bold 14px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('AMR', sx, sy - 14);
+  ctx.fillText('PLEDGE', sx, sy + 3);
+  ctx.fillText('TAKER', sx, sy + 20);
+
+  // ── Cache data URL ──
+  _certDataUrl = canvas.toDataURL('image/png');
+}
+
+function downloadCertificate() {
+  if (!_certDataUrl) return;
+  var nameVal = ((document.getElementById('certName').value || 'certificate').trim()).replace(/\s+/g, '_');
+  var a = document.createElement('a');
+  a.href = _certDataUrl;
+  a.download = 'AMR_Pledge_Certificate_' + nameVal + '.png';
+  a.click();
+}
+
+function shareCertificate() {
+  if (!_certDataUrl || typeof navigator.share !== 'function') return;
+  var nameVal = (document.getElementById('certName').value || '').trim();
+
+  // Convert data-URL to Blob so we can share the file
+  fetch(_certDataUrl)
+    .then(function (r) { return r.blob(); })
+    .then(function (blob) {
+      var file = new File([blob], 'AMR_Pledge_Certificate.png', { type: 'image/png' });
+      var shareData = {
+        title: 'My AMR Pledge Certificate',
+        text: nameVal
+          ? nameVal + ' has pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness'
+          : 'I have pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness'
+      };
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        shareData.files = [file];
+      } else {
+        shareData.url = window.location.href;
+      }
+      return navigator.share(shareData);
+    })
+    .catch(function (err) {
+      if (err && err.name !== 'AbortError') console.warn('[cert] share failed:', err);
+    });
+}
+
+// Export to window (all called from inline onclick attributes)
+window.openCertModal       = openCertModal;
+window.closeCertModal      = closeCertModal;
+window.buildCertificate    = buildCertificate;
+window.backToCertForm      = backToCertForm;
+window.downloadCertificate = downloadCertificate;
+window.shareCertificate    = shareCertificate;
 
 // Utility function to escape HTML
 function escapeHTML(str) {
