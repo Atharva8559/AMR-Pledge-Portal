@@ -1019,6 +1019,285 @@ window.backToCertForm      = backToCertForm;
 window.downloadCertificate = downloadCertificate;
 window.shareCertificate    = shareCertificate;
 
+// ─── Disposal Bins Map ───────────────────────────────────────────────────────
+// Sample NHM-approved disposal locations across Maharashtra.
+// Replace or extend BIN_LOCATIONS with verified coordinates from your NHM data.
+
+var BIN_LOCATIONS = [
+  {
+    id: 1, name: 'Sassoon General Hospital',
+    address: 'Near Pune Railway Station, Pune 411001',
+    phone: '020-26128000', type: 'District Hospital',
+    lat: 18.5204, lng: 73.8567,
+    hours: '24 / 7', open: true
+  },
+  {
+    id: 2, name: 'YCM Hospital Pimpri',
+    address: 'Sant Tukaram Nagar, Pimpri-Chinchwad 411018',
+    phone: '020-27425543', type: 'Government Hospital',
+    lat: 18.6278, lng: 73.8031,
+    hours: 'Mon–Sat  8 AM–8 PM', open: true
+  },
+  {
+    id: 3, name: 'Aundh District Hospital',
+    address: 'Aundh, Pune 411007',
+    phone: '020-25880416', type: 'District Hospital',
+    lat: 18.5574, lng: 73.8076,
+    hours: 'Mon–Sat  9 AM–5 PM', open: true
+  },
+  {
+    id: 4, name: 'Hadapsar Primary Health Centre',
+    address: 'Hadapsar, Pune 411028',
+    phone: '020-26874123', type: 'Primary Health Centre',
+    lat: 18.5018, lng: 73.9392,
+    hours: 'Mon–Sat  8 AM–4 PM', open: false
+  },
+  {
+    id: 5, name: 'Yerawada Primary Health Centre',
+    address: 'Yerawada, Pune 411006',
+    phone: '020-26685041', type: 'Primary Health Centre',
+    lat: 18.5527, lng: 73.8985,
+    hours: 'Mon–Sat  8 AM–4 PM', open: true
+  },
+  {
+    id: 6, name: 'Civil Hospital Nashik',
+    address: 'Civil Hospital Road, Nashik 422001',
+    phone: '0253-2577700', type: 'District Hospital',
+    lat: 20.0041, lng: 73.7841,
+    hours: '24 / 7', open: true
+  },
+  {
+    id: 7, name: 'Ghati Hospital (GMC Aurangabad)',
+    address: 'Government Medical College, Aurangabad 431001',
+    phone: '0240-2402081', type: 'Medical College Hospital',
+    lat: 19.8762, lng: 75.3433,
+    hours: '24 / 7', open: true
+  },
+  {
+    id: 8, name: 'Civil Hospital Solapur',
+    address: 'Solapur 413003',
+    phone: '0217-2312626', type: 'District Hospital',
+    lat: 17.6868, lng: 75.9120,
+    hours: 'Mon–Sat  8 AM–8 PM', open: true
+  },
+  {
+    id: 9, name: 'Kalyan District Hospital',
+    address: 'Netaji Subhash Road, Kalyan 421301',
+    phone: '0251-2311321', type: 'District Hospital',
+    lat: 19.2452, lng: 73.1355,
+    hours: 'Mon–Sat  9 AM–5 PM', open: false
+  },
+  {
+    id: 10, name: 'Government Medical College Nagpur',
+    address: 'Medical Square, Nagpur 440003',
+    phone: '0712-2700444', type: 'Medical College Hospital',
+    lat: 21.1458, lng: 79.0882,
+    hours: '24 / 7', open: true
+  }
+];
+
+var _binsMap        = null;   // Leaflet map instance
+var _binsMarkers    = {};     // id → Leaflet marker
+var _binsActiveId   = null;   // currently highlighted location id
+var _binsFiltered   = BIN_LOCATIONS.slice();
+
+function initBinsMap() {
+  var mapEl = document.getElementById('binsMap');
+  if (!mapEl || typeof L === 'undefined') return;
+
+  // Centre map on Maharashtra
+  _binsMap = L.map('binsMap', {
+    center: [19.0, 75.7],
+    zoom: 7,
+    zoomControl: true,
+    scrollWheelZoom: false   // don't hijack page scroll
+  });
+
+  // Dark CartoDB tiles — match the site's moody green palette
+  L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    {
+      attribution: '&copy; <a href="https://carto.com/" target="_blank">CARTO</a> | &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OSM</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }
+  ).addTo(_binsMap);
+
+  // Place markers
+  BIN_LOCATIONS.forEach(function (loc) {
+    var marker = L.marker([loc.lat, loc.lng], {
+      icon: makeBinIcon(false),
+      title: loc.name
+    }).addTo(_binsMap);
+
+    marker.bindPopup(makeBinPopupHTML(loc), {
+      maxWidth: 260,
+      className: 'bin-popup-wrap'
+    });
+
+    marker.on('click', function () { activateBin(loc.id, false); });
+    _binsMarkers[loc.id] = marker;
+  });
+
+  // Render sidebar cards
+  renderBinCards(BIN_LOCATIONS);
+}
+
+// ── SVG pin icon ──────────────────────────────────────────────────────────────
+function makeBinIcon(active) {
+  var fill   = active ? '#00875f' : '#006857';
+  var shadow = active ? '0 4px 12px rgba(0,135,95,0.5)' : '0 2px 6px rgba(0,0,0,0.4)';
+  var html = '<div class="bin-marker-pin' + (active ? ' is-active' : '') + '">' +
+    '<svg width="32" height="42" viewBox="0 0 32 42" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M16 1C8.82 1 3 6.82 3 14c0 8.84 13 27 13 27S29 22.84 29 14C29 6.82 23.18 1 16 1z"' +
+        ' fill="' + fill + '" style="filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35))"/>' +
+      '<circle cx="16" cy="14" r="7" fill="white"/>' +
+      // Bin cross icon inside circle
+      '<path d="M13 11h6M14 11V10h4v1M13 12h6l-.8 6h-4.4L13 12z"' +
+        ' stroke="' + fill + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>' +
+  '</div>';
+  return L.divIcon({
+    className: '',
+    html: html,
+    iconSize: [32, 42],
+    iconAnchor: [16, 42],
+    popupAnchor: [0, -44]
+  });
+}
+
+// ── Popup HTML ────────────────────────────────────────────────────────────────
+function makeBinPopupHTML(loc) {
+  var mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + loc.lat + ',' + loc.lng;
+  return '<div class="bin-popup">' +
+    '<div class="bin-popup-name">' + escapeHTML(loc.name) + '</div>' +
+    '<div class="bin-popup-type">' + escapeHTML(loc.type) + '</div>' +
+    '<div class="bin-popup-address">' + escapeHTML(loc.address) + '</div>' +
+    '<div class="bin-popup-footer">' +
+      '<span class="bin-popup-status bin-popup-status--' + (loc.open ? 'open' : 'closed') + '">' +
+        (loc.open ? 'Open' : 'Closed') +
+      '</span>' +
+      '<a class="bin-popup-link" href="' + mapsUrl + '" target="_blank" rel="noopener noreferrer">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+        'Get Directions' +
+      '</a>' +
+    '</div>' +
+  '</div>';
+}
+
+// ── Sidebar card HTML ─────────────────────────────────────────────────────────
+function renderBinCards(locations) {
+  var list = document.getElementById('binsList');
+  var meta = document.getElementById('binsResultsMeta');
+  if (!list) return;
+
+  if (meta) {
+    meta.textContent = locations.length + ' location' + (locations.length !== 1 ? 's' : '') + ' found';
+  }
+
+  if (locations.length === 0) {
+    list.innerHTML = '<div class="bins-empty">No locations match your search.</div>';
+    return;
+  }
+
+  list.innerHTML = locations.map(function (loc) {
+    var mapsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + loc.lat + ',' + loc.lng;
+    return '<div class="bin-card" id="bin-card-' + loc.id + '" role="listitem" tabindex="0"' +
+      ' onclick="activateBin(' + loc.id + ', true)"' +
+      ' onkeydown="if(event.key===\'Enter\'||event.key===\' \')activateBin(' + loc.id + ',true)">' +
+        '<div class="bin-card-header">' +
+          '<div class="bin-card-name">' + escapeHTML(loc.name) + '</div>' +
+          '<span class="bin-badge ' + (loc.open ? 'bin-badge--open' : 'bin-badge--closed') + '">' +
+            (loc.open ? 'Open' : 'Closed') +
+          '</span>' +
+        '</div>' +
+        '<div class="bin-card-type">' + escapeHTML(loc.type) + '</div>' +
+        '<div class="bin-card-address">' + escapeHTML(loc.address) + '</div>' +
+        '<div class="bin-card-footer">' +
+          '<span class="bin-card-hours">' +
+            '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+            escapeHTML(loc.hours) +
+          '</span>' +
+          '<a class="bin-card-directions" href="' + mapsUrl + '" target="_blank" rel="noopener noreferrer"' +
+            ' onclick="event.stopPropagation()">' +
+            '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+            'Directions' +
+          '</a>' +
+        '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ── Activate (highlight card + pan map) ───────────────────────────────────────
+function activateBin(id, panMap) {
+  // Deactivate previous
+  if (_binsActiveId !== null) {
+    var prevCard = document.getElementById('bin-card-' + _binsActiveId);
+    if (prevCard) prevCard.classList.remove('is-active');
+    var prevMarker = _binsMarkers[_binsActiveId];
+    if (prevMarker) prevMarker.setIcon(makeBinIcon(false));
+  }
+
+  _binsActiveId = id;
+  var loc = BIN_LOCATIONS.find(function (l) { return l.id === id; });
+  if (!loc) return;
+
+  // Highlight card
+  var card = document.getElementById('bin-card-' + id);
+  if (card) {
+    card.classList.add('is-active');
+    card.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  // Highlight & open marker popup
+  var marker = _binsMarkers[id];
+  if (marker && _binsMap) {
+    marker.setIcon(makeBinIcon(true));
+    if (panMap) {
+      _binsMap.setView([loc.lat, loc.lng], 13, { animate: true });
+    }
+    marker.openPopup();
+  }
+}
+
+// ── Search / filter ────────────────────────────────────────────────────────────
+function filterBins(query) {
+  var q = (query || '').toLowerCase().trim();
+  _binsFiltered = q
+    ? BIN_LOCATIONS.filter(function (l) {
+        return l.name.toLowerCase().includes(q) ||
+               l.address.toLowerCase().includes(q) ||
+               l.type.toLowerCase().includes(q);
+      })
+    : BIN_LOCATIONS.slice();
+
+  renderBinCards(_binsFiltered);
+
+  // Show only filtered markers on the map
+  BIN_LOCATIONS.forEach(function (loc) {
+    var marker = _binsMarkers[loc.id];
+    if (!marker || !_binsMap) return;
+    var visible = _binsFiltered.some(function (l) { return l.id === loc.id; });
+    if (visible) {
+      if (!_binsMap.hasLayer(marker)) marker.addTo(_binsMap);
+    } else {
+      if (_binsMap.hasLayer(marker)) _binsMap.removeLayer(marker);
+    }
+  });
+}
+
+// Export filterBins so the inline oninput can reach it
+window.filterBins  = filterBins;
+window.activateBin = activateBin;
+
+// Initialise after DOM is ready (guarded: Leaflet may not be loaded yet in older browsers)
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.getElementById('binsMap')) {
+    // Small timeout so Leaflet CSS has applied before map measures its container
+    window.setTimeout(initBinsMap, 80);
+  }
+});
+
 // Utility function to escape HTML
 function escapeHTML(str) {
   return str.replace(/[&<>'"]/g,
