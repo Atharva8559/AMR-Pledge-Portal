@@ -129,14 +129,21 @@ function readRememberedLang() {
   try { return localStorage.getItem(I18N_LANG_KEY); } catch (e) { return null; }
 }
 
-// ─── Journey image language swap ─────────────────────────────────────────────
-// Reads data-src-{lang} from #journey-img and updates its src.
-// Falls back to data-src-en when no match.
+// ─── Image language swap ─────────────────────────────────────────────────────
+// Reads data-src-{lang} from any <img> element (e.g. #journey-img, About AMR cards)
+// and updates its src attribute. Falls back to data-src-en.
+function updateLanguageImages(lang) {
+  const targetLang = lang || I18N.lang || 'en';
+  document.querySelectorAll('img[data-src-en]').forEach(function (img) {
+    const src = img.getAttribute('data-src-' + targetLang) || img.getAttribute('data-src-en');
+    if (src && img.getAttribute('src') !== src) {
+      img.src = src;
+    }
+  });
+}
+
 function updateJourneyImage(lang) {
-  const img = document.getElementById('journey-img');
-  if (!img) return;
-  const src = img.getAttribute('data-src-' + lang) || img.getAttribute('data-src-en');
-  if (src) img.src = src;
+  updateLanguageImages(lang);
 }
 
 async function setLanguage(lang) {
@@ -149,7 +156,7 @@ async function setLanguage(lang) {
     I18N.strings = null;
     rememberLang('en');
     document.documentElement.setAttribute('lang', 'en');
-    updateJourneyImage('en');
+    updateLanguageImages('en');
     return;
   }
 
@@ -173,7 +180,7 @@ async function setLanguage(lang) {
   applyI18n();
   rememberLang(lang);
   document.documentElement.setAttribute('lang', lang);
-  updateJourneyImage(lang);
+  updateLanguageImages(lang);
 }
 
 // Current translation for a key, falling back to the cached inline English
@@ -187,7 +194,11 @@ function t(key) {
 // Re-apply a remembered non-English choice. English (the default) does nothing.
 document.addEventListener('DOMContentLoaded', () => {
   const saved = readRememberedLang();
-  if (saved && saved !== 'en') setLanguage(saved);
+  if (saved && saved !== 'en') {
+    setLanguage(saved);
+  } else {
+    updateLanguageImages('en');
+  }
 });
 
 // ─── Language toggle ─────────────────────────────────────────────────────────
@@ -1599,18 +1610,22 @@ function openPosterModal(trigger, imgSrc, hideDownload) {
   const title = (el && el.getAttribute('data-modal-title')) || '';
   const desc = (el && el.getAttribute('data-modal-desc')) || '';
 
+  // Use active image src if trigger is or contains an img (respects Marathi toggle)
+  const activeImg = el && (el.tagName === 'IMG' ? el : el.querySelector('img'));
+  const effectiveSrc = (activeImg && activeImg.getAttribute('src')) ? activeImg.getAttribute('src') : imgSrc;
+
   const img = document.getElementById('posterModalImg');
-  const webSrc = webVersionOf(imgSrc);
+  const webSrc = webVersionOf(effectiveSrc);
   // If a WebP is ever missing, show the original rather than a broken image
-  img.onerror = webSrc === imgSrc ? null : function () { img.onerror = null; img.src = imgSrc; };
+  img.onerror = webSrc === effectiveSrc ? null : function () { img.onerror = null; img.src = effectiveSrc; };
   img.src = webSrc;
 
   document.getElementById('posterModalTitle').innerText = title;
   document.getElementById('posterModalDesc').innerText = desc;
   const dlBtn = document.getElementById('posterModalDownloadBtn');
   if (dlBtn) {
-    const ext = (imgSrc.match(/\.[^./]+$/) || ['.jpg'])[0];
-    dlBtn.href = imgSrc;
+    const ext = (effectiveSrc.match(/\.[^./]+$/) || ['.jpg'])[0];
+    dlBtn.href = effectiveSrc;
     dlBtn.setAttribute('download', title.replace(/[^a-zA-Z0-9]/g, '_') + ext);
     dlBtn.style.display = hideDownload ? 'none' : 'flex';
   }
