@@ -3777,6 +3777,40 @@ footer::after {
   padding-left: 0.75rem;
 }
 
+/* ── Contact Note Below Map ──────────────────────────────────── */
+.bins-contact-note {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.25rem;
+  background: #ffffff;
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-md, 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 104, 87, 0.04);
+}
+
+.bins-contact-note svg {
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+
+.bins-contact-note a {
+  color: var(--green-700);
+  font-weight: var(--weight-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.bins-contact-note a:hover {
+  color: var(--green-800);
+}
+
 /* ── User Location Pulsing Marker ────────────────────────────── */
 .user-loc-marker {
   position: relative;

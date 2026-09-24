@@ -46,6 +46,7 @@ registerStrings('mr', {
   'nav.journey': 'सुरक्षित विल्हेवाट',
   // EN: Find Bins
   'nav.bins': 'डिसपोजल बिन्स',
+  'bins.contact': 'अधिक माहितीसाठी, कृपया आम्हाला <a href="mailto:amrchallenge.chri@gmail.com">amrchallenge.chri@gmail.com</a> वर ईमेल करा.',
   // EN: IEC Materials
   'nav.iec': 'IEC साहित्य',
   // EN: AMR Quiz
