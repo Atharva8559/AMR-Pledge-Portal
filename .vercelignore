@@ -18,7 +18,8 @@
 /tools/
 /MARATHI_WORKSHEET.md
 
-# The 380 MB video master. The page uses the YouTube facade.
-*.MP4
+# The 380 MB video master.
+/Dindi_Song_AMR.MP4
+!Animated video/animated_video.mp4
 
 .DS_Store

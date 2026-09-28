@@ -3,8 +3,8 @@
 
 # Large source video (380 MB) — kept on disk, served via YouTube + a compressed
 # local fallback. The raw master is deliberately not tracked.
-Dindi_Song_AMR.MP4
-*.MP4
+/Dindi_Song_AMR.MP4
+!Animated video/animated_video.mp4
 
 # Intermediate video encodes. Only the chosen fallback is tracked; the discarded
 # rungs of the quality ladder are not.
