@@ -4,14 +4,12 @@
 # the repo root. Unanchored, "Logos/" matches a directory of that name at ANY
 # depth, which silently excluded assets/web/logos/ too and 404'd all six partner
 # logos on the first deploy while every other asset served fine.
-/About AMR/
 /Branding/
 /District Workshop and Bin Placement Initiative Launched -Pune/
 /Innovation Challenge/
 /KAP Study Completed /
 /Logos/
 /National Consultation Meeting/
-/Poster/
 /Report dissemination/
 /State Stewardship/
 /State-level Consultation/
