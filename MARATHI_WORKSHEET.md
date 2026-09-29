@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-187 strings. Fill the **Marathi** column, then paste each value into the
+184 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -12,20 +12,27 @@ machine translation.
 
 | Key | English | Marathi |
 |---|---|---|
-| `meta.title` | ACT4AMR \| Antimicrobial Resistance Campaign | ACT4AMR \| प्रतिजैविक प्रतिरोध मोहीम |
+| `meta.title` | DISPOSEFORHEALTH \| Antimicrobial Resistance Campaign | DISPOSEFORHEALTH \| प्रतिजैविक प्रतिरोध मोहीम |
 | `meta.description` | Join the global fight against Antimicrobial Resistance (AMR). Take the pledge, access official public health IEC materials, listen to Dindi AMR songs, and track campaign milestones. Supported by NHM, PATH, CHRI & GSK. | प्रतिजैविक प्रतिरोधाविरुद्धच्या (AMR) जागतिक लढ्यात सहभागी व्हा. प्रतिज्ञा घ्या, अधिकृत सार्वजनिक आरोग्य IEC साहित्य पहा, दिंडी AMR गीत ऐका आणि मोहिमेचे टप्पे जाणून घ्या. NHM, PATH, CHRI आणि GSK यांच्या सहकार्याने. |
 
-## nav  (7/7 done)
+## nav  (8/8 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `nav.pledge` | Take Pledge | प्रतिज्ञा घ्या |
 | `nav.about` | About AMR | AMR विषयी |
 | `nav.journey` | Safe Disposal | सुरक्षित विल्हेवाट |
+| `nav.bins` | Find Bins | डिसपोजल बिन्स |
 | `nav.iec` | IEC Materials | IEC साहित्य |
 | `nav.quiz` | AMR Quiz | AMR प्रश्नमंजुषा |
 | `nav.roadmap` | Roadmap | वाटचाल |
 | `nav.language` | Language | भाषा |
+
+## hero  (1/1 done)
+
+| Key | English | Marathi |
+|---|---|---|
+| `hero.watch` | WATCH | पहा |
 
 ## pledge  (10/10 done)
 
@@ -60,27 +67,19 @@ machine translation.
 | `about.card3.link_label` | What can we do to prevent AMR? See the seven steps for safe disposal | AMR रोखण्यासाठी आपण काय करू शकतो? सुरक्षित विल्हेवाटीचे सात टप्पे पहा |
 | `about.card3.alt` | Card 3, What can we do to prevent AMR? Take antibiotics only as prescribed, finish the course, and drop leftovers at a collection centre. | कार्ड ३, AMR रोखण्यासाठी काय करावे? डॉक्टरांच्या सल्ल्यानेच प्रतिजैविके घ्या, कोर्स पूर्ण करा आणि उरलेली औषधे संकलन केंद्रात द्या. |
 
-## journey  (17/17 done)
+## journey  (3/3 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `journey.subtitle` | Safe Disposal | सुरक्षित विल्हेवाट |
 | `journey.title` | The Disposal Journey | विल्हेवाटीचा प्रवास |
 | `journey.desc` | Seven steps that take a leftover tablet from your shelf to safe destruction — and keep antibiotics working for everyone. | तुमच्या कपाटातील उरलेली गोळी सुरक्षित नाशापर्यंत नेणारे सात टप्पे — जेणेकरून प्रतिजैविके सर्वांसाठी परिणामकारक राहतील. |
-| `journey.hub.hashtag` | # योग्य विल्हेवाट, AMR वर मात! | # योग्य विल्हेवाट, AMR वर मात! |
-| `journey.hub.line` | Safe disposal, every single time | दरवेळी सुरक्षित विल्हेवाट |
-| `journey.step1.label` | Leftover antibiotics at home | घरात उरलेली प्रतिजैविके |
-| `journey.step1.detail` | Unfinished or expired tablets, syrups and capsules are still sitting in the house. | अर्धवट राहिलेल्या किंवा मुदतबाह्य गोळ्या, सिरप आणि कॅप्सूल घरातच पडून राहतात. |
-| `journey.step2.label` | Never throw in household garbage or flush it | घरातील कचऱ्यात टाकू नका किंवा वाहून जाऊ देऊ नका |
-| `journey.step2.detail` | Thrown in the bin or flushed away, medicines reach soil and water. Safe disposal exists to stop exactly that. | कचऱ्यात टाकलेली किंवा संडासात वाहून गेलेली औषधे माती आणि पाण्यात मिसळतात. नेमके तेच थांबवण्यासाठी सुरक्षित विल्हेवाट आहे. |
-| `journey.step3.label` | Return to the designated collection sites- at the nearest health facilities, pharmacy stores or residential societies | निर्धारित संकलन केंद्रात परत करा — जवळचे आरोग्य केंद्र, औषध दुकान किंवा निवासी संस्था |
-| `journey.step3.detail` | Speak to the health staff or site volunteer for safe disposal of antibiotics. | प्रतिजैविकांच्या सुरक्षित विल्हेवाटीसाठी तेथील आरोग्य कर्मचारी किंवा स्वयंसेवकाशी बोला. |
-| `journey.step4.label` | Waste Pick up and collection through authorised channel | अधिकृत यंत्रणेमार्फत कचरा उचल आणि संकलन |
-| `journey.step4.detail` | Authorised waste treatment agency collects and transports the waste to a centralised site for disposal. | अधिकृत कचरा प्रक्रिया संस्था हा कचरा गोळा करून विल्हेवाटीसाठी केंद्रीय ठिकाणी नेते. |
-| `journey.step5.label` | Scientific disposal | शास्त्रीय पद्धतीने विल्हेवाट |
-| `journey.step5.detail` | Waste disposed of in compliance with Pollution Control Board norms helps divert harmful antibiotic residues from entering the environment. | प्रदूषण नियंत्रण मंडळाच्या निकषांनुसार विल्हेवाट लावल्याने प्रतिजैविकांचे हानिकारक अवशेष पर्यावरणात मिसळण्यापासून रोखले जातात. |
-| `journey.step6.label` | Soil and water ecosystems stay clean | माती आणि पाण्याची परिसंस्था स्वच्छ राहते |
-| `journey.step6.detail` | Effectiveness of antibiotics is preserved for future generations- and the cycle starts again at home. | पुढील पिढ्यांसाठी प्रतिजैविकांची परिणामकारकता टिकून राहते — आणि हे चक्र पुन्हा घरातून सुरू होते. |
+
+## bins  (1/1 done)
+
+| Key | English | Marathi |
+|---|---|---|
+| `bins.contact` | For more information, please email us at amrchallenge.chri@gmail.com. | अधिक माहितीसाठी, कृपया आम्हाला <a href="mailto:amrchallenge.chri@gmail.com">amrchallenge.chri@gmail.com</a> वर ईमेल करा. |
 
 ## iec  (26/26 done)
 
@@ -89,12 +88,12 @@ machine translation.
 | `iec.subtitle` | IEC Center | IEC केंद्र |
 | `iec.title` | Information, Education, & Communication Materials | माहिती, शिक्षण आणि संवाद साहित्य |
 | `iec.desc` | Explore official public health posters, guidelines, and broadcast spots created in collaboration with MH Public Health, NHM, CHRI, PATH, and GSK. | महाराष्ट्र सार्वजनिक आरोग्य विभाग, NHM, CHRI, PATH आणि GSK यांच्या सहकार्याने तयार केलेली अधिकृत सार्वजनिक आरोग्य पोस्टर, मार्गदर्शक सूचना आणि प्रसारण साहित्य पहा. |
-| `iec.card.view_poster` | 🔍 View Poster | 🔍 पोस्टर पहा |
+| `iec.card.view_poster` | View Poster | पोस्टर पहा |
 | `iec.poster1.title` | Do You Have Leftover or Expired Medicines at Home? | तुमच्या घरी उरलेली किंवा मुदतबाह्य औषधे आहेत का? |
 | `iec.poster2.title` | Let's Dispose of Antibiotics Safely & Defeat AMR! | प्रतिजैविकांची सुरक्षित विल्हेवाट लावूया आणि AMR वर मात करूया! |
 | `iec.poster3.title` | Not Feeling Better Quickly? (AMR 3 Key Questions) | लवकर बरे वाटत नाही? (AMR चे ३ महत्त्वाचे प्रश्न) |
 | `iec.poster4.title` | What Can We Do to Prevent AMR? | AMR रोखण्यासाठी आपण काय करू शकतो? |
-| `iec.video.badge` | 🎬 Official Campaign Video | 🎬 अधिकृत मोहीम व्हिडिओ |
+| `iec.video.badge` | Official Campaign Video | अधिकृत मोहीम व्हिडिओ |
 | `iec.video.title` | Official Dindi Song AMR Awareness Video | अधिकृत दिंडी गीत AMR जनजागृती व्हिडिओ |
 | `iec.video.desc` | Playable campaign video featuring the official public health awareness Dindi Song promoting safe medicine collection box drop-offs. | औषध संकलन पेटीत सुरक्षित विल्हेवाटीचा संदेश देणारे अधिकृत सार्वजनिक आरोग्य दिंडी गीत असलेला मोहीम व्हिडिओ. |
 | `iec.video.watch_youtube` | Watch on YouTube | YouTube वर पहा |
@@ -146,7 +145,7 @@ machine translation.
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
 
-## roadmap  (69/69 done)
+## roadmap  (77/77 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -180,6 +179,14 @@ machine translation.
 | `roadmap.event2.image1.alt` | KAP Study Completed Report | KAP अभ्यास पूर्ण अहवाल |
 | `roadmap.event2.modal.title` | KAP Study Completed | KAP अभ्यास पूर्ण |
 | `roadmap.event2.modal.desc` | Households, pharmacists and care-providers surveyed to map systemic gaps. | व्यवस्थात्मक त्रुटी समजून घेण्यासाठी कुटुंबे, औषध विक्रेते आणि आरोग्यसेवा पुरवठादारांचे सर्वेक्षण. |
+| `roadmap.event2.image2.alt` | KAP Study Community Household Survey Vaduth | KAP अभ्यास कुटुंब सर्वेक्षण - वडूथ |
+| `roadmap.event2.modal.desc2` | Door-to-door surveying on medicine usage and disposal habits in Vaduth, Maharashtra. | वडूथ येथे सुरक्षित विल्हेवाटीबाबत घरोघरी सर्वेक्षण. |
+| `roadmap.event2.image3.alt` | KAP Study District Health Consultation Satara | KAP अभ्यास जिल्हा आरोग्य अधिकारी बैठक - सातारा |
+| `roadmap.event2.modal.desc3` | Consultative discussion with the District Health Officer at Zilla Parishad Satara. | जिल्हा परिषद सातारा आरोग्य विभागासोबत सल्लामसलत बैठक. |
+| `roadmap.event2.image4.alt` | KAP Study Facility Stock Assessment | KAP अभ्यास आरोग्य केंद्र औषध साठा पाहणी |
+| `roadmap.event2.modal.desc4` | Reviewing pharmacy stock registers and medicine dispensing records at healthcare facilities. | आरोग्य केंद्रातील औषध साठा आणि वितरण नोंदींची पाहणी. |
+| `roadmap.event2.image5.alt` | KAP Study ASHA Health Workers Focus Group Shivathar | KAP अभ्यास आशा सेविका चर्चासत्र - शिवथर |
+| `roadmap.event2.modal.desc5` | Interactive orientation and feedback session with community ASHA health workers in Shivathar. | शिवथर येथे आशा आरोग्य सेविकांसोबत गटचर्चा व मार्गदर्शन. |
 | `roadmap.event3.image1.alt` | State-level Consultation | राज्यस्तरीय सल्लामसलत |
 | `roadmap.event3.modal1.title` | State-level Consultative Meetings | राज्यस्तरीय सल्लामसलत बैठका |
 | `roadmap.event3.modal1.desc` | High-level state consultation bringing together healthcare leaders. | आरोग्य क्षेत्रातील नेत्यांना एकत्र आणणारी उच्चस्तरीय राज्य बैठक. |
@@ -241,7 +248,7 @@ machine translation.
 | `footer.resources.heading` | Resources & Partners | संसाधने आणि भागीदार |
 | `footer.resources.who` | WHO AMR Portal | WHO AMR पोर्टल |
 | `footer.resources.cdc` | CDC Drug Resistance Info | CDC औषध प्रतिरोध माहिती |
-| `footer.copyright` | © 2026 ACT4AMR Project \| Public Health Department Maharashtra, NHM, CHRI, PATH & GSK Collaboration. | © २०२६ ACT4AMR प्रकल्प \| सार्वजनिक आरोग्य विभाग महाराष्ट्र, NHM, CHRI, PATH आणि GSK यांचे सहकार्य. |
+| `footer.copyright` | © 2026 DISPOSEFORHEALTH Project \| Public Health Department Maharashtra, NHM, CHRI, PATH & GSK Collaboration. | © २०२६ DISPOSEFORHEALTH प्रकल्प \| सार्वजनिक आरोग्य विभाग महाराष्ट्र, NHM, CHRI, PATH आणि GSK यांचे सहकार्य. |
 | `footer.social.twitter.label` | Twitter | ट्विटर |
 | `footer.social.linkedin.label` | LinkedIn | लिंक्डइन |
 | `footer.social.github.label` | Github | गिटहब |

@@ -1686,9 +1686,8 @@ function setCarouselSlide(carouselId, slideIndex) {
 
 // Auto-advance multi-image event carousels every 4.5 seconds
 setInterval(() => {
-  // Multi-image carousels only. carousel-kap has a single slide and
-  // carousel-state-consult is driven by its own controls.
-  const carousels = ['carousel-national', 'carousel-stewardship', 'carousel-innovation', 'carousel-pune'];
+  // Multi-image carousels only. carousel-state-consult is driven by its own controls.
+  const carousels = ['carousel-national', 'carousel-kap', 'carousel-stewardship', 'carousel-innovation', 'carousel-pune'];
   carousels.forEach(id => {
     moveCarousel(id, 1);
   });

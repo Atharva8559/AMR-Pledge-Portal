@@ -46,7 +46,6 @@ registerStrings('mr', {
   'nav.journey': 'सुरक्षित विल्हेवाट',
   // EN: Find Bins
   'nav.bins': 'डिसपोजल बिन्स',
-  'bins.contact': 'अधिक माहितीसाठी, कृपया आम्हाला <a href="mailto:amrchallenge.chri@gmail.com">amrchallenge.chri@gmail.com</a> वर ईमेल करा.',
   // EN: IEC Materials
   'nav.iec': 'IEC साहित्य',
   // EN: AMR Quiz
@@ -55,6 +54,10 @@ registerStrings('mr', {
   'nav.roadmap': 'वाटचाल',
   // EN: Language
   'nav.language': 'भाषा',
+
+  // ── hero ──────────────────────────────────────────────────────
+  // EN: WATCH
+  'hero.watch': 'पहा',
 
   // ── pledge ────────────────────────────────────────────────────
   // EN: # योग्य विल्हेवाट, AMR वर मात!
@@ -113,34 +116,10 @@ registerStrings('mr', {
   'journey.title': 'विल्हेवाटीचा प्रवास',
   // EN: Seven steps that take a leftover tablet from your shelf to safe destruction — and keep antibiotics working for everyone.
   'journey.desc': 'तुमच्या कपाटातील उरलेली गोळी सुरक्षित नाशापर्यंत नेणारे सात टप्पे — जेणेकरून प्रतिजैविके सर्वांसाठी परिणामकारक राहतील.',
-  // EN: # योग्य विल्हेवाट, AMR वर मात!
-  'journey.hub.hashtag': '# योग्य विल्हेवाट, AMR वर मात!',
-  // EN: Safe disposal, every single time
-  'journey.hub.line': 'दरवेळी सुरक्षित विल्हेवाट',
-  // EN: Leftover antibiotics at home
-  'journey.step1.label': 'घरात उरलेली प्रतिजैविके',
-  // EN: Unfinished or expired tablets, syrups and capsules are still sitting in the house.
-  'journey.step1.detail': 'अर्धवट राहिलेल्या किंवा मुदतबाह्य गोळ्या, सिरप आणि कॅप्सूल घरातच पडून राहतात.',
-  // EN: Never throw in household garbage or flush it
-  'journey.step2.label': 'घरातील कचऱ्यात टाकू नका किंवा वाहून जाऊ देऊ नका',
-  // EN: Thrown in the bin or flushed away, medicines reach soil and water. Safe disposal exists to stop exactly that.
-  'journey.step2.detail': 'कचऱ्यात टाकलेली किंवा संडासात वाहून गेलेली औषधे माती आणि पाण्यात मिसळतात. नेमके तेच थांबवण्यासाठी सुरक्षित विल्हेवाट आहे.',
-  // EN: Return to the designated collection sites- at the nearest health facilities, pharmacy stores or residential societies
-  'journey.step3.label': 'निर्धारित संकलन केंद्रात परत करा — जवळचे आरोग्य केंद्र, औषध दुकान किंवा निवासी संस्था',
-  // EN: Speak to the health staff or site volunteer for safe disposal of antibiotics.
-  'journey.step3.detail': 'प्रतिजैविकांच्या सुरक्षित विल्हेवाटीसाठी तेथील आरोग्य कर्मचारी किंवा स्वयंसेवकाशी बोला.',
-  // EN: Waste Pick up and collection through authorised channel
-  'journey.step4.label': 'अधिकृत यंत्रणेमार्फत कचरा उचल आणि संकलन',
-  // EN: Authorised waste treatment agency collects and transports the waste to a centralised site for disposal.
-  'journey.step4.detail': 'अधिकृत कचरा प्रक्रिया संस्था हा कचरा गोळा करून विल्हेवाटीसाठी केंद्रीय ठिकाणी नेते.',
-  // EN: Scientific disposal
-  'journey.step5.label': 'शास्त्रीय पद्धतीने विल्हेवाट',
-  // EN: Waste disposed of in compliance with Pollution Control Board norms helps divert harmful antibiotic residues from entering the environment.
-  'journey.step5.detail': 'प्रदूषण नियंत्रण मंडळाच्या निकषांनुसार विल्हेवाट लावल्याने प्रतिजैविकांचे हानिकारक अवशेष पर्यावरणात मिसळण्यापासून रोखले जातात.',
-  // EN: Soil and water ecosystems stay clean
-  'journey.step6.label': 'माती आणि पाण्याची परिसंस्था स्वच्छ राहते',
-  // EN: Effectiveness of antibiotics is preserved for future generations- and the cycle starts again at home.
-  'journey.step6.detail': 'पुढील पिढ्यांसाठी प्रतिजैविकांची परिणामकारकता टिकून राहते — आणि हे चक्र पुन्हा घरातून सुरू होते.',
+
+  // ── bins ──────────────────────────────────────────────────────
+  // EN: For more information, please email us at amrchallenge.chri@gmail.com.
+  'bins.contact': 'अधिक माहितीसाठी, कृपया आम्हाला <a href="mailto:amrchallenge.chri@gmail.com">amrchallenge.chri@gmail.com</a> वर ईमेल करा.',
 
   // ── iec ───────────────────────────────────────────────────────
   // EN: IEC Center
@@ -307,6 +286,22 @@ registerStrings('mr', {
   'roadmap.event2.modal.title': 'KAP अभ्यास पूर्ण',
   // EN: Households, pharmacists and care-providers surveyed to map systemic gaps.
   'roadmap.event2.modal.desc': 'व्यवस्थात्मक त्रुटी समजून घेण्यासाठी कुटुंबे, औषध विक्रेते आणि आरोग्यसेवा पुरवठादारांचे सर्वेक्षण.',
+  // EN: KAP Study Community Household Survey Vaduth
+  'roadmap.event2.image2.alt': 'KAP अभ्यास कुटुंब सर्वेक्षण - वडूथ',
+  // EN: Door-to-door surveying on medicine usage and disposal habits in Vaduth, Maharashtra.
+  'roadmap.event2.modal.desc2': 'वडूथ येथे सुरक्षित विल्हेवाटीबाबत घरोघरी सर्वेक्षण.',
+  // EN: KAP Study District Health Consultation Satara
+  'roadmap.event2.image3.alt': 'KAP अभ्यास जिल्हा आरोग्य अधिकारी बैठक - सातारा',
+  // EN: Consultative discussion with the District Health Officer at Zilla Parishad Satara.
+  'roadmap.event2.modal.desc3': 'जिल्हा परिषद सातारा आरोग्य विभागासोबत सल्लामसलत बैठक.',
+  // EN: KAP Study Facility Stock Assessment
+  'roadmap.event2.image4.alt': 'KAP अभ्यास आरोग्य केंद्र औषध साठा पाहणी',
+  // EN: Reviewing pharmacy stock registers and medicine dispensing records at healthcare facilities.
+  'roadmap.event2.modal.desc4': 'आरोग्य केंद्रातील औषध साठा आणि वितरण नोंदींची पाहणी.',
+  // EN: KAP Study ASHA Health Workers Focus Group Shivathar
+  'roadmap.event2.image5.alt': 'KAP अभ्यास आशा सेविका चर्चासत्र - शिवथर',
+  // EN: Interactive orientation and feedback session with community ASHA health workers in Shivathar.
+  'roadmap.event2.modal.desc5': 'शिवथर येथे आशा आरोग्य सेविकांसोबत गटचर्चा व मार्गदर्शन.',
   // EN: State-level Consultation
   'roadmap.event3.image1.alt': 'राज्यस्तरीय सल्लामसलत',
   // EN: State-level Consultative Meetings
