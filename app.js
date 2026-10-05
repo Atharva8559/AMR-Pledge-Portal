@@ -1693,6 +1693,98 @@ setInterval(() => {
   });
 }, 4500);
 
+// ─── Quotes & Testimonials Carousel ───
+let testimonialInterval = null;
+
+function moveTestimonial(direction) {
+  const track = document.getElementById('testimonialsTrack');
+  if (!track) return;
+  const slides = track.querySelectorAll('.testimonial-slide');
+  if (slides.length <= 1) return;
+
+  let currentIndex = 0;
+  slides.forEach((slide, idx) => {
+    if (slide.classList.contains('active')) currentIndex = idx;
+  });
+
+  let nextIndex = currentIndex + direction;
+  if (nextIndex < 0) nextIndex = slides.length - 1;
+  if (nextIndex >= slides.length) nextIndex = 0;
+
+  setTestimonialSlide(nextIndex);
+}
+
+function setTestimonialSlide(slideIndex) {
+  const track = document.getElementById('testimonialsTrack');
+  if (!track) return;
+  const slides = track.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('#testimonialDots .dot');
+
+  slides.forEach((slide, idx) => {
+    slide.classList.toggle('active', idx === slideIndex);
+  });
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === slideIndex);
+    dot.setAttribute('aria-current', idx === slideIndex ? 'true' : 'false');
+  });
+}
+
+function startTestimonialTimer() {
+  stopTestimonialTimer();
+  const track = document.getElementById('testimonialsTrack');
+  if (!track) return;
+  const slides = track.querySelectorAll('.testimonial-slide');
+  if (slides.length <= 1) return;
+  testimonialInterval = setInterval(() => {
+    moveTestimonial(1);
+  }, 7000);
+}
+
+function stopTestimonialTimer() {
+  if (testimonialInterval) {
+    clearInterval(testimonialInterval);
+    testimonialInterval = null;
+  }
+}
+
+window.moveTestimonial = moveTestimonial;
+window.setTestimonialSlide = setTestimonialSlide;
+
+(function initTestimonialsCarousel() {
+  const init = () => {
+    const slider = document.getElementById('testimonialsSlider');
+    if (!slider) return;
+
+    slider.addEventListener('mouseenter', stopTestimonialTimer);
+    slider.addEventListener('mouseleave', startTestimonialTimer);
+    slider.addEventListener('focusin', stopTestimonialTimer);
+    slider.addEventListener('focusout', startTestimonialTimer);
+
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      stopTestimonialTimer();
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        moveTestimonial(diff > 0 ? 1 : -1);
+      }
+      startTestimonialTimer();
+    }, { passive: true });
+
+    startTestimonialTimer();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
 // ─── Sticky Header Scroll Shadow Effect ───
 (function () {
   const header = document.querySelector('header');

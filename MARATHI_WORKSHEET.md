@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-184 strings. Fill the **Marathi** column, then paste each value into the
+195 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -15,7 +15,7 @@ machine translation.
 | `meta.title` | DISPOSEFORHEALTH \| Antimicrobial Resistance Campaign | DISPOSEFORHEALTH \| प्रतिजैविक प्रतिरोध मोहीम |
 | `meta.description` | Join the global fight against Antimicrobial Resistance (AMR). Take the pledge, access official public health IEC materials, listen to Dindi AMR songs, and track campaign milestones. Supported by NHM, PATH, CHRI & GSK. | प्रतिजैविक प्रतिरोधाविरुद्धच्या (AMR) जागतिक लढ्यात सहभागी व्हा. प्रतिज्ञा घ्या, अधिकृत सार्वजनिक आरोग्य IEC साहित्य पहा, दिंडी AMR गीत ऐका आणि मोहिमेचे टप्पे जाणून घ्या. NHM, PATH, CHRI आणि GSK यांच्या सहकार्याने. |
 
-## nav  (8/8 done)
+## nav  (9/9 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -25,6 +25,7 @@ machine translation.
 | `nav.bins` | Find Bins | डिसपोजल बिन्स |
 | `nav.iec` | IEC Materials | IEC साहित्य |
 | `nav.quiz` | AMR Quiz | AMR प्रश्नमंजुषा |
+| `nav.testimonials` | Testimonials | तज्ज्ञांचे विचार |
 | `nav.roadmap` | Roadmap | वाटचाल |
 | `nav.language` | Language | भाषा |
 
@@ -117,8 +118,8 @@ machine translation.
 | Key | English | Marathi |
 |---|---|---|
 | `common.download` | Download | डाउनलोड करा |
-| `common.carousel.prev` | Previous image | मागील चित्र |
-| `common.carousel.next` | Next image | पुढील चित्र |
+| `common.carousel.prev` | Previous quote | मागील चित्र |
+| `common.carousel.next` | Next quote | पुढील चित्र |
 | `common.carousel.slide_1` | Go to slide 1 | चित्र १ वर जा |
 | `common.carousel.slide_2` | Go to slide 2 | चित्र २ वर जा |
 | `common.carousel.slide_3` | Go to slide 3 | चित्र ३ वर जा |
@@ -144,6 +145,21 @@ machine translation.
 | `quiz.results.score_label` | Score | गुण |
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
+
+## testimonials  (10/10 done)
+
+| Key | English | Marathi |
+|---|---|---|
+| `testimonials.subtitle` | Expert Perspectives | तज्ज्ञांचे दृष्टिकोन |
+| `testimonials.title` | Quotes & Testimonials | विचार व प्रतिक्रिया |
+| `testimonials.desc` | Guidance and insights from leading medical educators, pharmacologists, and public health champions on safe antibiotic disposal. | प्रतिजैविकांच्या सुरक्षित विल्हेवाटीबाबत नामांकित वैद्यकीय शिक्षक, औषधशास्त्रज्ञ आणि सार्वजनिक आरोग्य धुरीणांचे बहुमूल्य मार्गदर्शन. |
+| `testimonials.badge` | Expert Voice | तज्ज्ञांचे मार्गदर्शन |
+| `testimonials.quote1` | “The fight against antimicrobial resistance begins not only in hospitals, but in every home. Every unused or expired antibiotic disposed of responsibly is one less risk to our health and environment. Let us make safe disposal a habit today—so that effective antibiotics remain available for tomorrow.” | “प्रतिजैविक प्रतिकारशक्तीविरुद्धचा लढा केवळ रुग्णालयांमध्येच नाही, तर प्रत्येक घरात सुरू होतो. जबाबदारीने विल्हेवाट लावलेले प्रत्येक न वापरलेले किंवा मुदतबाह्य प्रतिजैविक हे आपल्या आरोग्यासाठी आणि पर्यावरणासाठी एक धोका कमी करते. चला, सुरक्षित विल्हेवाट लावण्याची सवय आजच अंगीकारूया — जेणेकरून उद्यासाठी प्रभावी प्रतिजैविके उपलब्ध राहतील.” |
+| `testimonials.author1.name` | Professor Y. K. Gupta | प्रा. वाय. के. गुप्ता |
+| `testimonials.author1.role1` | Principal Advisor India Strategy Development (GARDP) | मुख्य सल्लागार, इंडिया स्ट्रॅटेजी डेव्हलपमेंट (GARDP) |
+| `testimonials.author1.role2` | President, AIIMS - Kalyani | अध्यक्ष, एम्स (AIIMS) - कल्याणी |
+| `testimonials.author1.role3` | Former President of AIIMS Bhopal and AIIMS Jammu | माजी अध्यक्ष, एम्स भोपाळ आणि एम्स जम्मू |
+| `testimonials.author1.role4` | Ex-Dean, AIIMS Delhi | माजी अधिष्ठाता (Dean), एम्स नवी दिल्ली |
 
 ## roadmap  (77/77 done)
 

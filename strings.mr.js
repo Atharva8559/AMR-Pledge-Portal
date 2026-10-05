@@ -50,6 +50,8 @@ registerStrings('mr', {
   'nav.iec': 'IEC साहित्य',
   // EN: AMR Quiz
   'nav.quiz': 'AMR प्रश्नमंजुषा',
+  // EN: Testimonials
+  'nav.testimonials': 'तज्ज्ञांचे विचार',
   // EN: Roadmap
   'nav.roadmap': 'वाटचाल',
   // EN: Language
@@ -178,9 +180,9 @@ registerStrings('mr', {
   // ── common ────────────────────────────────────────────────────
   // EN: Download
   'common.download': 'डाउनलोड करा',
-  // EN: Previous image
+  // EN: Previous quote
   'common.carousel.prev': 'मागील चित्र',
-  // EN: Next image
+  // EN: Next quote
   'common.carousel.next': 'पुढील चित्र',
   // EN: Go to slide 1
   'common.carousel.slide_1': 'चित्र १ वर जा',
@@ -224,6 +226,28 @@ registerStrings('mr', {
   'quiz.results.default_message': 'छान काम!',
   // EN: Retake Quiz
   'quiz.results.retake': 'पुन्हा प्रश्नमंजुषा द्या',
+
+  // ── testimonials ──────────────────────────────────────────────
+  // EN: Expert Perspectives
+  'testimonials.subtitle': 'तज्ज्ञांचे दृष्टिकोन',
+  // EN: Quotes & Testimonials
+  'testimonials.title': 'विचार व प्रतिक्रिया',
+  // EN: Guidance and insights from leading medical educators, pharmacologists, and public health champions on safe antibiotic disposal.
+  'testimonials.desc': 'प्रतिजैविकांच्या सुरक्षित विल्हेवाटीबाबत नामांकित वैद्यकीय शिक्षक, औषधशास्त्रज्ञ आणि सार्वजनिक आरोग्य धुरीणांचे बहुमूल्य मार्गदर्शन.',
+  // EN: Expert Voice
+  'testimonials.badge': 'तज्ज्ञांचे मार्गदर्शन',
+  // EN: “The fight against antimicrobial resistance begins not only in hospitals, but in every home. Every unused or expired antibiotic disposed of responsibly is one less risk to our health and environment. Let us make safe disposal a habit today—so that effective antibiotics remain available for tomorrow.”
+  'testimonials.quote1': '“प्रतिजैविक प्रतिकारशक्तीविरुद्धचा लढा केवळ रुग्णालयांमध्येच नाही, तर प्रत्येक घरात सुरू होतो. जबाबदारीने विल्हेवाट लावलेले प्रत्येक न वापरलेले किंवा मुदतबाह्य प्रतिजैविक हे आपल्या आरोग्यासाठी आणि पर्यावरणासाठी एक धोका कमी करते. चला, सुरक्षित विल्हेवाट लावण्याची सवय आजच अंगीकारूया — जेणेकरून उद्यासाठी प्रभावी प्रतिजैविके उपलब्ध राहतील.”',
+  // EN: Professor Y. K. Gupta
+  'testimonials.author1.name': 'प्रा. वाय. के. गुप्ता',
+  // EN: Principal Advisor India Strategy Development (GARDP)
+  'testimonials.author1.role1': 'मुख्य सल्लागार, इंडिया स्ट्रॅटेजी डेव्हलपमेंट (GARDP)',
+  // EN: President, AIIMS - Kalyani
+  'testimonials.author1.role2': 'अध्यक्ष, एम्स (AIIMS) - कल्याणी',
+  // EN: Former President of AIIMS Bhopal and AIIMS Jammu
+  'testimonials.author1.role3': 'माजी अध्यक्ष, एम्स भोपाळ आणि एम्स जम्मू',
+  // EN: Ex-Dean, AIIMS Delhi
+  'testimonials.author1.role4': 'माजी अधिष्ठाता (Dean), एम्स नवी दिल्ली',
 
   // ── roadmap ───────────────────────────────────────────────────
   // EN: Project Milestones
