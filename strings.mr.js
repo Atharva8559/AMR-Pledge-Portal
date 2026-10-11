@@ -116,8 +116,6 @@ registerStrings('mr', {
   'journey.subtitle': 'सुरक्षित विल्हेवाट',
   // EN: The Disposal Journey
   'journey.title': 'विल्हेवाटीचा प्रवास',
-  // EN: Seven steps that take a leftover tablet from your shelf to safe destruction — and keep antibiotics working for everyone.
-  'journey.desc': 'तुमच्या कपाटातील उरलेली गोळी सुरक्षित नाशापर्यंत नेणारे सात टप्पे — जेणेकरून प्रतिजैविके सर्वांसाठी परिणामकारक राहतील.',
 
   // ── bins ──────────────────────────────────────────────────────
   // EN: For more information, please email us at amrchallenge.chri@gmail.com.
@@ -128,8 +126,6 @@ registerStrings('mr', {
   'iec.subtitle': 'IEC केंद्र',
   // EN: Information, Education, & Communication Materials
   'iec.title': 'माहिती, शिक्षण आणि संवाद साहित्य',
-  // EN: Explore official public health posters, guidelines, and broadcast spots created in collaboration with MH Public Health, NHM, CHRI, PATH, and GSK.
-  'iec.desc': 'महाराष्ट्र सार्वजनिक आरोग्य विभाग, NHM, CHRI, PATH आणि GSK यांच्या सहकार्याने तयार केलेली अधिकृत सार्वजनिक आरोग्य पोस्टर, मार्गदर्शक सूचना आणि प्रसारण साहित्य पहा.',
   // EN: View Poster
   'iec.card.view_poster': 'पोस्टर पहा',
   // EN: Do You Have Leftover or Expired Medicines at Home?
@@ -208,8 +204,6 @@ registerStrings('mr', {
   'quiz.subtitle': 'संवादात्मक शिक्षण',
   // EN: Test Your AMR Knowledge
   'quiz.title': 'तुमचे AMR ज्ञान तपासा',
-  // EN: Test your know-how on antibiotics & safe disposal — and find out your awareness level across 8 quick questions!
-  'quiz.desc': 'प्रतिजैविके आणि सुरक्षित विल्हेवाटीविषयीचे तुमचे ज्ञान तपासा — ८ झटपट प्रश्नांतून तुमची जागरूकता किती आहे ते जाणून घ्या!',
   // EN: Question 1 of 8
   'quiz.meta.question_progress': 'प्रश्न <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum">8</span>',
   // EN: Score: 0/8
@@ -232,8 +226,6 @@ registerStrings('mr', {
   'testimonials.subtitle': 'तज्ज्ञांचे दृष्टिकोन',
   // EN: Quotes & Testimonials
   'testimonials.title': 'विचार व प्रतिक्रिया',
-  // EN: Guidance and insights from leading medical educators, pharmacologists, and public health champions on safe antibiotic disposal.
-  'testimonials.desc': 'प्रतिजैविकांच्या सुरक्षित विल्हेवाटीबाबत नामांकित वैद्यकीय शिक्षक, औषधशास्त्रज्ञ आणि सार्वजनिक आरोग्य धुरीणांचे बहुमूल्य मार्गदर्शन.',
   // EN: Expert Voice
   'testimonials.badge': 'तज्ज्ञांचे मार्गदर्शन',
   // EN: “The fight against antimicrobial resistance begins not only in hospitals, but in every home. Every unused or expired antibiotic disposed of responsibly is one less risk to our health and environment. Let us make safe disposal a habit today—so that effective antibiotics remain available for tomorrow.”
@@ -254,8 +246,6 @@ registerStrings('mr', {
   'roadmap.subtitle': 'प्रकल्पाचे टप्पे',
   // EN: Campaign Event Roadmap
   'roadmap.title': 'मोहिमेच्या कार्यक्रमांची वाटचाल',
-  // EN: Interactive chronological timeline documenting key consultative meetings, research studies, state stewardship workshops, and innovation challenges across Maharashtra.
-  'roadmap.desc': 'महाराष्ट्रभरातील महत्त्वाच्या सल्लामसलत बैठका, संशोधन अभ्यास, राज्यस्तरीय स्टुअर्डशिप कार्यशाळा आणि नवोपक्रम स्पर्धांची कालानुक्रमे नोंद.',
   // EN: JAN 2026 – JUL 2026
   'roadmap.badge.date_range': 'जानेवारी २०२६ – जुलै २०२६',
   // EN: Jan 2026

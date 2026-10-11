@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-195 strings. Fill the **Marathi** column, then paste each value into the
+190 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -68,13 +68,12 @@ machine translation.
 | `about.card3.link_label` | What can we do to prevent AMR? See the seven steps for safe disposal | AMR रोखण्यासाठी आपण काय करू शकतो? सुरक्षित विल्हेवाटीचे सात टप्पे पहा |
 | `about.card3.alt` | Card 3, What can we do to prevent AMR? Take antibiotics only as prescribed, finish the course, and drop leftovers at a collection centre. | कार्ड ३, AMR रोखण्यासाठी काय करावे? डॉक्टरांच्या सल्ल्यानेच प्रतिजैविके घ्या, कोर्स पूर्ण करा आणि उरलेली औषधे संकलन केंद्रात द्या. |
 
-## journey  (3/3 done)
+## journey  (2/2 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `journey.subtitle` | Safe Disposal | सुरक्षित विल्हेवाट |
 | `journey.title` | The Disposal Journey | विल्हेवाटीचा प्रवास |
-| `journey.desc` | Seven steps that take a leftover tablet from your shelf to safe destruction — and keep antibiotics working for everyone. | तुमच्या कपाटातील उरलेली गोळी सुरक्षित नाशापर्यंत नेणारे सात टप्पे — जेणेकरून प्रतिजैविके सर्वांसाठी परिणामकारक राहतील. |
 
 ## bins  (1/1 done)
 
@@ -82,13 +81,12 @@ machine translation.
 |---|---|---|
 | `bins.contact` | For more information, please email us at amrchallenge.chri@gmail.com. | अधिक माहितीसाठी, कृपया आम्हाला <a href="mailto:amrchallenge.chri@gmail.com">amrchallenge.chri@gmail.com</a> वर ईमेल करा. |
 
-## iec  (26/26 done)
+## iec  (25/25 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `iec.subtitle` | IEC Center | IEC केंद्र |
 | `iec.title` | Information, Education, & Communication Materials | माहिती, शिक्षण आणि संवाद साहित्य |
-| `iec.desc` | Explore official public health posters, guidelines, and broadcast spots created in collaboration with MH Public Health, NHM, CHRI, PATH, and GSK. | महाराष्ट्र सार्वजनिक आरोग्य विभाग, NHM, CHRI, PATH आणि GSK यांच्या सहकार्याने तयार केलेली अधिकृत सार्वजनिक आरोग्य पोस्टर, मार्गदर्शक सूचना आणि प्रसारण साहित्य पहा. |
 | `iec.card.view_poster` | View Poster | पोस्टर पहा |
 | `iec.poster1.title` | Do You Have Leftover or Expired Medicines at Home? | तुमच्या घरी उरलेली किंवा मुदतबाह्य औषधे आहेत का? |
 | `iec.poster2.title` | Let's Dispose of Antibiotics Safely & Defeat AMR! | प्रतिजैविकांची सुरक्षित विल्हेवाट लावूया आणि AMR वर मात करूया! |
@@ -130,13 +128,12 @@ machine translation.
 | `common.carousel.slide_8` | Go to slide 8 | चित्र ८ वर जा |
 | `common.carousel.slide_9` | Go to slide 9 | चित्र ९ वर जा |
 
-## quiz  (11/11 done)
+## quiz  (10/10 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `quiz.subtitle` | Interactive Learning | संवादात्मक शिक्षण |
 | `quiz.title` | Test Your AMR Knowledge | तुमचे AMR ज्ञान तपासा |
-| `quiz.desc` | Test your know-how on antibiotics & safe disposal — and find out your awareness level across 8 quick questions! | प्रतिजैविके आणि सुरक्षित विल्हेवाटीविषयीचे तुमचे ज्ञान तपासा — ८ झटपट प्रश्नांतून तुमची जागरूकता किती आहे ते जाणून घ्या! |
 | `quiz.meta.question_progress` | Question 1 of 8 | प्रश्न <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum">8</span> |
 | `quiz.meta.score` | Score: 0/8 | गुण: <span id="quizScore">0</span>/<span id="totalQuizMax">8</span> |
 | `quiz.question.loading` | Loading question... | प्रश्न येत आहे... |
@@ -146,13 +143,12 @@ machine translation.
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
 
-## testimonials  (10/10 done)
+## testimonials  (9/9 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `testimonials.subtitle` | Expert Perspectives | तज्ज्ञांचे दृष्टिकोन |
 | `testimonials.title` | Quotes & Testimonials | विचार व प्रतिक्रिया |
-| `testimonials.desc` | Guidance and insights from leading medical educators, pharmacologists, and public health champions on safe antibiotic disposal. | प्रतिजैविकांच्या सुरक्षित विल्हेवाटीबाबत नामांकित वैद्यकीय शिक्षक, औषधशास्त्रज्ञ आणि सार्वजनिक आरोग्य धुरीणांचे बहुमूल्य मार्गदर्शन. |
 | `testimonials.badge` | Expert Voice | तज्ज्ञांचे मार्गदर्शन |
 | `testimonials.quote1` | “The fight against antimicrobial resistance begins not only in hospitals, but in every home. Every unused or expired antibiotic disposed of responsibly is one less risk to our health and environment. Let us make safe disposal a habit today—so that effective antibiotics remain available for tomorrow.” | “प्रतिजैविक प्रतिकारशक्तीविरुद्धचा लढा केवळ रुग्णालयांमध्येच नाही, तर प्रत्येक घरात सुरू होतो. जबाबदारीने विल्हेवाट लावलेले प्रत्येक न वापरलेले किंवा मुदतबाह्य प्रतिजैविक हे आपल्या आरोग्यासाठी आणि पर्यावरणासाठी एक धोका कमी करते. चला, सुरक्षित विल्हेवाट लावण्याची सवय आजच अंगीकारूया — जेणेकरून उद्यासाठी प्रभावी प्रतिजैविके उपलब्ध राहतील.” |
 | `testimonials.author1.name` | Professor Y. K. Gupta | प्रा. वाय. के. गुप्ता |
@@ -161,13 +157,12 @@ machine translation.
 | `testimonials.author1.role3` | Former President of AIIMS Bhopal and AIIMS Jammu | माजी अध्यक्ष, एम्स भोपाळ आणि एम्स जम्मू |
 | `testimonials.author1.role4` | Ex-Dean, AIIMS Delhi | माजी अधिष्ठाता (Dean), एम्स नवी दिल्ली |
 
-## roadmap  (77/77 done)
+## roadmap  (76/76 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `roadmap.subtitle` | Project Milestones | प्रकल्पाचे टप्पे |
 | `roadmap.title` | Campaign Event Roadmap | मोहिमेच्या कार्यक्रमांची वाटचाल |
-| `roadmap.desc` | Interactive chronological timeline documenting key consultative meetings, research studies, state stewardship workshops, and innovation challenges across Maharashtra. | महाराष्ट्रभरातील महत्त्वाच्या सल्लामसलत बैठका, संशोधन अभ्यास, राज्यस्तरीय स्टुअर्डशिप कार्यशाळा आणि नवोपक्रम स्पर्धांची कालानुक्रमे नोंद. |
 | `roadmap.badge.date_range` | JAN 2026 – JUL 2026 | जानेवारी २०२६ – जुलै २०२६ |
 | `roadmap.event1.date` | Jan 2026 | जानेवारी २०२६ |
 | `roadmap.event1.title` | National Consultative Meeting | राष्ट्रीय सल्लामसलत बैठक |

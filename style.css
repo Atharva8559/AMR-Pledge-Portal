@@ -1111,6 +1111,10 @@ nav ul li a:active {
   line-height: var(--lh-body);
 }
 
+.section-header > *:last-child {
+  margin-bottom: 0;
+}
+
 /* ═══════════════════════════════════════════════
    ABOUT — UNDERSTANDING THE THREAT
 
