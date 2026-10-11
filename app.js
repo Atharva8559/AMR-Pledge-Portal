@@ -157,6 +157,7 @@ async function setLanguage(lang) {
     rememberLang('en');
     document.documentElement.setAttribute('lang', 'en');
     updateLanguageImages('en');
+    updateQuizLanguage('en');
     return;
   }
 
@@ -181,6 +182,7 @@ async function setLanguage(lang) {
   rememberLang(lang);
   document.documentElement.setAttribute('lang', lang);
   updateLanguageImages(lang);
+  updateQuizLanguage(lang);
 }
 
 // Current translation for a key, falling back to the cached inline English
@@ -370,137 +372,239 @@ function takeSwachhPledge() {
 window.takeSwachhPledge = takeSwachhPledge;
 
 
-// Quiz Questions (8 Educational Questions)
-const QUIZ_QUESTIONS = [
-  {
-    q: "What does AMR — antimicrobial resistance — actually mean?",
-    options: [
-      { text: "Your body becomes resistant to medicines", isCorrect: false },
-      { text: "Germs change so antibiotics stop working against them", isCorrect: true },
-      { text: "You become allergic to antibiotics", isCorrect: false },
-      { text: "Antibiotics expire and lose strength", isCorrect: false }
-    ],
-    fact: "It's the germs — not you — that change. When bacteria survive antibiotics, those tougher germs spread and the medicine stops working."
-  },
-  {
-    q: "You have a common cold or the flu. Will antibiotics help you recover?",
-    options: [
-      { text: "Yes, they speed up recovery", isCorrect: false },
-      { text: "Yes, but only the strong ones", isCorrect: false },
-      { text: "No — colds and flu are caused by viruses", isCorrect: true },
-      { text: "Only if you take them for 3 days", isCorrect: false }
-    ],
-    fact: "Antibiotics fight bacteria, not viruses. Taking them for a cold or flu won't help and only fuels resistance."
-  },
-  {
-    q: "Your doctor gave you a 5-day antibiotic course. You feel better on day 3. What should you do?",
-    options: [
-      { text: "Stop — you're already better", isCorrect: false },
-      { text: "Save the rest for next time you're sick", isCorrect: false },
-      { text: "Finish the full course as prescribed", isCorrect: true },
-      { text: "Take a double dose to finish faster", isCorrect: false }
-    ],
-    fact: "Stopping early lets the stronger germs survive and come back tougher. Always finish exactly as your doctor prescribed."
-  },
-  {
-    q: "You have leftover antibiotics at home. Where do they belong?",
-    options: [
-      { text: "Flush them down the toilet", isCorrect: false },
-      { text: "Throw them loose in the household bin", isCorrect: false },
-      { text: "Take them to a pharmacy or medicine take-back point", isCorrect: true },
-      { text: "Keep them for emergencies", isCorrect: false }
-    ],
-    fact: "Safe take-back keeps medicines out of water and soil. Ask your pharmacist where you can return unused antibiotics."
-  },
-  {
-    q: "Why is flushing medicines down the toilet or drain harmful?",
-    options: [
-      { text: "It clogs the pipes", isCorrect: false },
-      { text: "Drugs reach rivers and soil, breeding resistant germs", isCorrect: true },
-      { text: "It's actually a safe way to dispose of them", isCorrect: false },
-      { text: "It wastes water", isCorrect: false }
-    ],
-    fact: "Flushed antibiotics enter water and soil, where they push germs to become resistant — affecting everyone downstream."
-  },
-  {
-    q: "Your cousin has the same symptoms you had. Should you share your leftover antibiotics?",
-    options: [
-      { text: "Yes, it saves a doctor's visit", isCorrect: false },
-      { text: "Yes, if it's the same illness", isCorrect: false },
-      { text: "No — never share or self-prescribe antibiotics", isCorrect: true },
-      { text: "Only half the dose to be safe", isCorrect: false }
-    ],
-    fact: "Same symptoms don't mean the same cause. Sharing antibiotics can be useless or harmful — always see a doctor."
-  },
-  {
-    q: "You're unsure how to dispose of old medicines safely. Who's the best person to ask?",
-    options: [
-      { text: "A neighbour who takes the same pills", isCorrect: false },
-      { text: "Your local pharmacist or healthcare worker", isCorrect: true },
-      { text: "Social media groups", isCorrect: false },
-      { text: "No one — just guess", isCorrect: false }
-    ],
-    fact: "Pharmacists and health workers are trained on safe disposal and take-back. They're your go-to source."
-  },
-  {
-    q: "What's one simple everyday action that helps fight AMR?",
-    options: [
-      { text: "Take antibiotics whenever you feel slightly unwell", isCorrect: false },
-      { text: "Demand antibiotics from every doctor visit", isCorrect: false },
-      { text: "Only use antibiotics when a doctor prescribes them", isCorrect: true },
-      { text: "Stockpile antibiotics at home", isCorrect: false }
-    ],
-    fact: "Using antibiotics only when truly needed — and only as prescribed — is the single biggest thing you can do."
-  }
-];
+// Quiz Questions (8 Educational Questions in English & Marathi)
+const QUIZ_QUESTIONS = {
+  en: [
+    {
+      q: "What does AMR — antimicrobial resistance — actually mean?",
+      options: [
+        { text: "Your body becomes resistant to medicines", isCorrect: false },
+        { text: "Germs change so antibiotics stop working against them", isCorrect: true },
+        { text: "You become allergic to antibiotics", isCorrect: false },
+        { text: "Antibiotics expire and lose strength", isCorrect: false }
+      ],
+      fact: "It's the germs — not you — that change. When bacteria survive antibiotics, those tougher germs spread and the medicine stops working."
+    },
+    {
+      q: "You have a common cold or the flu. Will antibiotics help you recover?",
+      options: [
+        { text: "Yes, they speed up recovery", isCorrect: false },
+        { text: "Yes, but only the strong ones", isCorrect: false },
+        { text: "No — colds and flu are caused by viruses", isCorrect: true },
+        { text: "Only if you take them for 3 days", isCorrect: false }
+      ],
+      fact: "Antibiotics fight bacteria, not viruses. Taking them for a cold or flu won't help and only fuels resistance."
+    },
+    {
+      q: "Your doctor gave you a 5-day antibiotic course. You feel better on day 3. What should you do?",
+      options: [
+        { text: "Stop — you're already better", isCorrect: false },
+        { text: "Save the rest for next time you're sick", isCorrect: false },
+        { text: "Finish the full course as prescribed", isCorrect: true },
+        { text: "Take a double dose to finish faster", isCorrect: false }
+      ],
+      fact: "Stopping early lets the stronger germs survive and come back tougher. Always finish exactly as your doctor prescribed."
+    },
+    {
+      q: "You have leftover antibiotics at home. Where do they belong?",
+      options: [
+        { text: "Flush them down the toilet", isCorrect: false },
+        { text: "Throw them loose in the household bin", isCorrect: false },
+        { text: "Take them to a pharmacy or medicine take-back point", isCorrect: true },
+        { text: "Keep them for emergencies", isCorrect: false }
+      ],
+      fact: "Safe take-back keeps medicines out of water and soil. Ask your pharmacist where you can return unused antibiotics."
+    },
+    {
+      q: "Why is flushing medicines down the toilet or drain harmful?",
+      options: [
+        { text: "It clogs the pipes", isCorrect: false },
+        { text: "Drugs reach rivers and soil, breeding resistant germs", isCorrect: true },
+        { text: "It's actually a safe way to dispose of them", isCorrect: false },
+        { text: "It wastes water", isCorrect: false }
+      ],
+      fact: "Flushed antibiotics enter water and soil, where they push germs to become resistant — affecting everyone downstream."
+    },
+    {
+      q: "Your cousin has the same symptoms you had. Should you share your leftover antibiotics?",
+      options: [
+        { text: "Yes, it saves a doctor's visit", isCorrect: false },
+        { text: "Yes, if it's the same illness", isCorrect: false },
+        { text: "No — never share or self-prescribe antibiotics", isCorrect: true },
+        { text: "Only half the dose to be safe", isCorrect: false }
+      ],
+      fact: "Same symptoms don't mean the same cause. Sharing antibiotics can be useless or harmful — always see a doctor."
+    },
+    {
+      q: "You're unsure how to dispose of old medicines safely. Who's the best person to ask?",
+      options: [
+        { text: "A neighbour who takes the same pills", isCorrect: false },
+        { text: "Your local pharmacist or healthcare worker", isCorrect: true },
+        { text: "Social media groups", isCorrect: false },
+        { text: "No one — just guess", isCorrect: false }
+      ],
+      fact: "Pharmacists and health workers are trained on safe disposal and take-back. They're your go-to source."
+    },
+    {
+      q: "What's one simple everyday action that helps fight AMR?",
+      options: [
+        { text: "Take antibiotics whenever you feel slightly unwell", isCorrect: false },
+        { text: "Demand antibiotics from every doctor visit", isCorrect: false },
+        { text: "Only use antibiotics when a doctor prescribes them", isCorrect: true },
+        { text: "Stockpile antibiotics at home", isCorrect: false }
+      ],
+      fact: "Using antibiotics only when truly needed — and only as prescribed — is the single biggest thing you can do."
+    }
+  ],
+  mr: [
+    {
+      q: "AMR — म्हणजेच प्रतिजैविक प्रतिकारशक्ती (Antimicrobial Resistance) म्हणजे नेमके काय?",
+      options: [
+        { text: "आपले शरीर औषधांना प्रतिकार करू लागते", isCorrect: false },
+        { text: "जंतूंमध्ये बदल होतो ज्यामुळे प्रतिजैविके त्यांच्याविरुद्ध निष्प्रभ ठरतात", isCorrect: true },
+        { text: "तुम्हाला प्रतिजैविकांची ॲलर्जी होते", isCorrect: false },
+        { text: "प्रतिजैविके मुदतबाह्य होऊन त्यांची ताकद संपते", isCorrect: false }
+      ],
+      fact: "बदल तुमच्या शरीरात नाही तर जंतूंमध्ये होतो. जेव्हा जिवाणू प्रतिजैविकांमधून वाचतात, तेव्हा ते अधिक ताकदीने पसरतात आणि औषधे निष्प्रभ ठरतात."
+    },
+    {
+      q: "तुम्हाला सामान्य सर्दी किंवा फ्लू झाला आहे. प्रतिजैविके तुम्हाला बरे करण्यास मदत करतील का?",
+      options: [
+        { text: "होय, त्यामुळे लवकर आराम मिळतो", isCorrect: false },
+        { text: "होय, पण फक्त तीव्र प्रतिजैविके", isCorrect: false },
+        { text: "नाही — सर्दी आणि फ्लू हे विषाणूंमुळे (व्हायरस) होतात", isCorrect: true },
+        { text: "फक्त ३ दिवस घेतले तरच", isCorrect: false }
+      ],
+      fact: "प्रतिजैविके जिवाणूंविरुद्ध (बॅक्टेरिया) लढतात, विषाणूंविरुद्ध नाही. सर्दी किंवा फ्लूसाठी प्रतिजैविके घेतल्याने काहीही फायदा होत नाही, उलट प्रतिकारशक्ती वाढते."
+    },
+    {
+      q: "डॉक्टरांनी तुम्हाला ५ दिवसांचा प्रतिजैविक कोर्स दिला. ३ ऱ्या दिवशीच बरे वाटू लागले, तर काय करावे?",
+      options: [
+        { text: "औषध घेणे थांबवा — तुम्हाला आधीच बरे वाटले आहे", isCorrect: false },
+        { text: "उरलेली औषधे पुढच्या वेळी आजारी पडल्यावर वापरण्यासाठी ठेवा", isCorrect: false },
+        { text: "डॉक्टरांनी सांगितल्यानुसार संपूर्ण कोर्स पूर्ण करा", isCorrect: true },
+        { text: "कोर्स लवकर संपवण्यासाठी दुप्पट डोस घ्या", isCorrect: false }
+      ],
+      fact: "औषध अर्धवट सोडल्यास अधिक घातक जंतू जिवंत राहतात आणि पुन्हा बळावतात. डॉक्टरांनी सांगितल्यानुसार संपूर्ण कोर्स नेहमी पूर्ण करा."
+    },
+    {
+      q: "तुमच्याकडे घरात उरलेली प्रतिजैविके आहेत. ती कुठे दिली पाहिजेत?",
+      options: [
+        { text: "टॉयलेटमध्ये किंवा बेसिनमध्ये वाहून द्या", isCorrect: false },
+        { text: "घरातील कचराकुंडीत उघडी फेकून द्या", isCorrect: false },
+        { text: "औषध दुकानात किंवा निर्धारित संकलन केंद्रात (Take-back point) जमा करा", isCorrect: true },
+        { text: "भविष्यातील आणीबाणीसाठी जपून ठेवा", isCorrect: false }
+      ],
+      fact: "सुरक्षित विल्हेवाटीमुळे औषधे पाणी आणि मातीत मिसळत नाहीत. न वापरलेली प्रतिजैविके कुठे जमा करायची हे तुमच्या फार्मासिस्टला विचारा."
+    },
+    {
+      q: "औषधे टॉयलेटमध्ये किंवा नाल्यात वाहून देणे हानिकारक का आहे?",
+      options: [
+        { text: "यामुळे पाईप चोक होतात", isCorrect: false },
+        { text: "औषधे नद्या आणि मातीत पोहोचतात, ज्यामुळे प्रतिरोधक जंतू तयार होतात", isCorrect: true },
+        { text: "विल्हेवाट लावण्याची ही प्रत्यक्षात सुरक्षित पद्धत आहे", isCorrect: false },
+        { text: "यामुळे पाण्याचा अपव्यय होतो", isCorrect: false }
+      ],
+      fact: "वाहून दिलेली प्रतिजैविके पाणी आणि मातीत मिसळतात, जिथे ती जंतूंना प्रतिरोधक बनण्यास भाग पाडतात — याचा दुष्परिणाम सर्वांवर होतो."
+    },
+    {
+      q: "तुमच्या नातेवाईकाला तुमच्यासारखीच लक्षणे आहेत. तुम्ही तुमची उरलेली प्रतिजैविके त्यांना द्यावीत का?",
+      options: [
+        { text: "होय, यामुळे डॉक्टरांकडे जाण्याचा खर्च व वेळ वाचतो", isCorrect: false },
+        { text: "होय, जर तोच आजार असेल तर", isCorrect: false },
+        { text: "नाही — प्रतिजैविके कधीही दुसऱ्याला देऊ नका किंवा परस्पर घेऊ नका", isCorrect: true },
+        { text: "सुरक्षिततेसाठी फक्त अर्धाच डोस द्यावा", isCorrect: false }
+      ],
+      fact: "सारखी लक्षणे असली तरी आजाराचे कारण वेगळे असू शकते. प्रतिजैविके वाटून घेणे निरुपयोगी किंवा धोकादायक ठरू शकते — नेहमी डॉक्टरांचा सल्ला घ्या."
+    },
+    {
+      q: "जुन्या औषधांची सुरक्षित विल्हेवाट कशी लावावी याबद्दल शंका असल्यास, कोणाला विचारणे योग्य ठरेल?",
+      options: [
+        { text: "तीच औषधे घेणाऱ्या शेजाऱ्याला", isCorrect: false },
+        { text: "तुमचे स्थानिक फार्मासिस्ट (औषध विक्रेते) किंवा आरोग्य कर्मचारी", isCorrect: true },
+        { text: "सोशल मीडिया ग्रुप्सवर", isCorrect: false },
+        { text: "कोणालाही नाही — स्वतः अंदाज लावावा", isCorrect: false }
+      ],
+      fact: "फार्मासिस्ट आणि आरोग्य कर्मचाऱ्यांना सुरक्षित विल्हेवाटीचे प्रशिक्षण दिलेले असते. ते तुमच्या मार्गदर्शनाचे उत्तम स्रोत आहेत."
+    },
+    {
+      q: "AMR विरुद्ध लढण्यासाठी दररोज करता येणारी एक साधी कृती कोणती?",
+      options: [
+        { text: "थोडेसे अस्वस्थ वाटले तरी प्रतिजैविके घेणे", isCorrect: false },
+        { text: "डॉक्टरांकडे गेल्यावर प्रत्येक वेळी प्रतिजैविकांची मागणी करणे", isCorrect: false },
+        { text: "फक्त डॉक्टरांनी लिहून दिली असतील तरच प्रतिजैविके वापरणे", isCorrect: true },
+        { text: "घरामध्ये प्रतिजैविकांचा साठा करून ठेवणे", isCorrect: false }
+      ],
+      fact: "प्रतिजैविके जेव्हा खरोखर आवश्यक असतील आणि डॉक्टरांनी सांगितली असतील तेव्हाच वापरणे — हे आपण करू शकणारे सर्वात मोठे योगदान आहे."
+    }
+  ]
+};
 
+function getQuizQuestions() {
+  const lang = (window.I18N && window.I18N.lang) || 'en';
+  return QUIZ_QUESTIONS[lang] || QUIZ_QUESTIONS.en;
+}
 
 let currentQuizIndex = 0;
 let quizScore = 0;
 let optionSelected = false;
+let selectedOptionIndex = -1;
 
 // DOM Load Setup
 document.addEventListener("DOMContentLoaded", () => {
   initQuiz();
 });
 
-
-
 // Quiz Functions
 function initQuiz() {
   currentQuizIndex = 0;
   quizScore = 0;
   optionSelected = false;
+  selectedOptionIndex = -1;
 
-  document.getElementById('quizResults').style.display = 'none';
-  document.getElementById('quiz-question-box').style.display = 'block';
+  const resDiv = document.getElementById('quizResults');
+  if (resDiv) resDiv.style.display = 'none';
+  const qBox = document.getElementById('quiz-question-box');
+  if (qBox) qBox.style.display = 'block';
 
   loadQuizQuestion();
 }
 
 function loadQuizQuestion() {
-  optionSelected = false;
-  document.getElementById('quizNavBtn').style.display = 'none';
-  document.getElementById('quizFeedback').style.display = 'none';
+  const navBtn = document.getElementById('quizNavBtn');
+  if (navBtn) navBtn.style.display = selectedOptionIndex !== -1 ? 'inline-flex' : 'none';
+  const feedback = document.getElementById('quizFeedback');
+  if (feedback && selectedOptionIndex === -1) feedback.style.display = 'none';
 
-  const qObj = QUIZ_QUESTIONS[currentQuizIndex];
-  const progressPercent = ((currentQuizIndex + 1) / QUIZ_QUESTIONS.length) * 100;
-  document.getElementById('quizProgress').style.width = `${progressPercent}%`;
+  const questions = getQuizQuestions();
+  if (currentQuizIndex >= questions.length) {
+    showQuizResults();
+    return;
+  }
+
+  const qObj = questions[currentQuizIndex];
+  const progressPercent = ((currentQuizIndex + 1) / questions.length) * 100;
+  const progressElem = document.getElementById('quizProgress');
+  if (progressElem) progressElem.style.width = `${progressPercent}%`;
 
   const curNum = document.getElementById('currentQuestionNum');
   if (curNum) curNum.innerText = currentQuizIndex + 1;
   const totNum = document.getElementById('totalQuestionsNum');
-  if (totNum) totNum.innerText = QUIZ_QUESTIONS.length;
+  if (totNum) totNum.innerText = questions.length;
 
   const scoreElem = document.getElementById('quizScore');
   if (scoreElem) scoreElem.innerText = quizScore;
   const totMax = document.getElementById('totalQuizMax');
-  if (totMax) totMax.innerText = QUIZ_QUESTIONS.length;
+  if (totMax) totMax.innerText = questions.length;
 
-  document.getElementById('questionText').innerText = qObj.q;
+  const qText = document.getElementById('questionText');
+  if (qText) qText.innerText = qObj.q;
 
   const optionsBox = document.getElementById('optionsBox');
+  if (!optionsBox) return;
   optionsBox.innerHTML = '';
+
+  const isMr = (window.I18N && window.I18N.lang === 'mr');
 
   qObj.options.forEach((opt, idx) => {
     const optBtn = document.createElement('button');
@@ -509,46 +613,79 @@ function loadQuizQuestion() {
       <span class="option-indicator">${String.fromCharCode(65 + idx)}</span>
       <span>${escapeHTML(opt.text)}</span>
     `;
-    optBtn.onclick = () => selectOption(optBtn, opt.isCorrect, qObj.fact);
+
+    if (selectedOptionIndex !== -1) {
+      if (idx === selectedOptionIndex) {
+        optBtn.classList.add(opt.isCorrect ? 'correct' : 'incorrect');
+      } else if (opt.isCorrect) {
+        optBtn.classList.add('correct');
+      }
+    }
+
+    optBtn.onclick = () => selectOption(optBtn, opt.isCorrect, qObj.fact, idx);
     optionsBox.appendChild(optBtn);
   });
+
+  if (selectedOptionIndex !== -1 && feedback) {
+    const selectedOpt = qObj.options[selectedOptionIndex];
+    const isCorrect = selectedOpt && selectedOpt.isCorrect;
+    feedback.className = `quiz-feedback ${isCorrect ? 'success' : 'error'}`;
+    feedback.style.display = 'block';
+    const label = isCorrect ? (isMr ? 'बरोबर!' : 'Correct!') : (isMr ? 'महत्त्वाची माहिती:' : 'Good to know');
+    const color = isCorrect ? '#065f46' : '#991b1b';
+    feedback.innerHTML = `<strong style="color: ${color}; display: block; margin-bottom: 0.25rem;">${label}</strong> ${escapeHTML(qObj.fact)}`;
+  }
 }
 
-function selectOption(btnElement, isCorrect, fact) {
+function selectOption(btnElement, isCorrect, fact, optIdx) {
   if (optionSelected) return;
   optionSelected = true;
+  selectedOptionIndex = optIdx;
 
   const options = document.querySelectorAll('.quiz-option');
   const feedback = document.getElementById('quizFeedback');
+  const isMr = (window.I18N && window.I18N.lang === 'mr');
 
   if (isCorrect) {
     btnElement.classList.add('correct');
     quizScore += 1;
-    document.getElementById('quizScore').innerText = quizScore;
+    const scoreElem = document.getElementById('quizScore');
+    if (scoreElem) scoreElem.innerText = quizScore;
 
-    feedback.className = 'quiz-feedback success';
-    feedback.style.display = 'block';
-    feedback.innerHTML = `<strong style="color: #065f46; display: block; margin-bottom: 0.25rem;">Correct!</strong> ${escapeHTML(fact)}`;
+    if (feedback) {
+      feedback.className = 'quiz-feedback success';
+      feedback.style.display = 'block';
+      const label = isMr ? 'बरोबर!' : 'Correct!';
+      feedback.innerHTML = `<strong style="color: #065f46; display: block; margin-bottom: 0.25rem;">${label}</strong> ${escapeHTML(fact)}`;
+    }
   } else {
     btnElement.classList.add('incorrect');
 
-    const qObj = QUIZ_QUESTIONS[currentQuizIndex];
+    const questions = getQuizQuestions();
+    const qObj = questions[currentQuizIndex];
     const correctIdx = qObj.options.findIndex(o => o.isCorrect);
-    if (correctIdx !== -1) {
+    if (correctIdx !== -1 && options[correctIdx]) {
       options[correctIdx].classList.add('correct');
     }
 
-    feedback.className = 'quiz-feedback error';
-    feedback.style.display = 'block';
-    feedback.innerHTML = `<strong style="color: #991b1b; display: block; margin-bottom: 0.25rem;">Good to know</strong> ${escapeHTML(fact)}`;
+    if (feedback) {
+      feedback.className = 'quiz-feedback error';
+      feedback.style.display = 'block';
+      const label = isMr ? 'महत्त्वाची माहिती:' : 'Good to know';
+      feedback.innerHTML = `<strong style="color: #991b1b; display: block; margin-bottom: 0.25rem;">${label}</strong> ${escapeHTML(fact)}`;
+    }
   }
 
-  document.getElementById('quizNavBtn').style.display = 'inline-flex';
+  const navBtn = document.getElementById('quizNavBtn');
+  if (navBtn) navBtn.style.display = 'inline-flex';
 }
 
 function nextQuestion() {
   currentQuizIndex += 1;
-  if (currentQuizIndex < QUIZ_QUESTIONS.length) {
+  selectedOptionIndex = -1;
+  optionSelected = false;
+  const questions = getQuizQuestions();
+  if (currentQuizIndex < questions.length) {
     loadQuizQuestion();
   } else {
     showQuizResults();
@@ -556,19 +693,28 @@ function nextQuestion() {
 }
 
 function showQuizResults() {
-  document.getElementById('quiz-question-box').style.display = 'none';
+  const qBox = document.getElementById('quiz-question-box');
+  if (qBox) qBox.style.display = 'none';
   const resultsDiv = document.getElementById('quizResults');
-  resultsDiv.style.display = 'flex';
-  resultsDiv.style.flexDirection = 'column';
-  resultsDiv.style.alignItems = 'center';
+  if (resultsDiv) {
+    resultsDiv.style.display = 'flex';
+    resultsDiv.style.flexDirection = 'column';
+    resultsDiv.style.alignItems = 'center';
+  }
 
-  document.getElementById('scoreCircle').innerHTML = `${quizScore}/${QUIZ_QUESTIONS.length}<span>Score</span>`;
+  const questions = getQuizQuestions();
+  const isMr = (window.I18N && window.I18N.lang === 'mr');
+
+  const scoreCircle = document.getElementById('scoreCircle');
+  if (scoreCircle) {
+    scoreCircle.innerHTML = `${quizScore}/${questions.length}<span>${isMr ? 'गुण' : 'Score'}</span>`;
+  }
 
   const msg = document.getElementById('quizResultsMessage');
   const medal = document.getElementById('quizMedal');
   const tipsBox = document.getElementById('quizTipsBox');
 
-  const pct = quizScore / QUIZ_QUESTIONS.length;
+  const pct = quizScore / questions.length;
   let title = "";
   let badgeSvg = "";
   let messageText = "";
@@ -576,27 +722,45 @@ function showQuizResults() {
 
   if (pct >= 0.8) {
     badgeSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>`;
-    title = "AMR Champion!";
-    messageText = "Brilliant! You really know your stuff. You're ready to spread the word and protect your community.";
-    tips = [
+    title = isMr ? "AMR चॅम्पियन!" : "AMR Champion!";
+    messageText = isMr
+      ? "उत्कृष्ट! तुम्हाला या विषयाची सखोल माहिती आहे. तुम्ही इतरांमध्ये जनजागृती करण्यासाठी सज्ज आहात."
+      : "Brilliant! You really know your stuff. You're ready to spread the word and protect your community.";
+    tips = isMr ? [
+      "मित्रांना सांगा: प्रतिजैविके सर्दी किंवा फ्लूवर काम करत नाहीत.",
+      "न वापरलेली औषधे फार्मसी किंवा संकलन केंद्रात परत करा.",
+      "प्रतिजैविके कधीही दुसऱ्याला देऊ नका किंवा स्वतःहून घेऊ नका."
+    ] : [
       "Tell a friend: antibiotics don't work on colds or flu.",
       "Return unused medicines to a pharmacy take-back point.",
       "Never share or self-prescribe antibiotics."
     ];
   } else if (pct >= 0.5) {
     badgeSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#006857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
-    title = "AMR Aware";
-    messageText = "Nice work — you've got a solid grip on the basics. Just a few gaps to close and you'll be a champion!";
-    tips = [
+    title = isMr ? "AMR जागरूक" : "AMR Aware";
+    messageText = isMr
+      ? "छान प्रयत्न — तुम्हाला मूलभूत गोष्टींची चांगली समज आहे. थोडे अधिक जाणून घेतल्यास तुम्ही चॅम्पियन व्हाल!"
+      : "Nice work — you've got a solid grip on the basics. Just a few gaps to close and you'll be a champion!";
+    tips = isMr ? [
+      "डॉक्टरांनी सांगितल्यानुसार संपूर्ण कोर्स नेहमी पूर्ण करा.",
+      "औषधे कधीही वाहून देऊ नका — सुरक्षित संकलन केंद्रात द्या.",
+      "सुरक्षित विल्हेवाटीबाबत तुमच्या फार्मासिस्टचा सल्ला घ्या."
+    ] : [
       "Always finish your full antibiotic course as prescribed.",
       "Never flush medicines — use safe disposal instead.",
       "Ask your pharmacist about safe disposal."
     ];
   } else {
     badgeSvg = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#26a98b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
-    title = "AMR Newcomer";
-    messageText = "Great start! Every expert begins somewhere. Here are the key things worth remembering.";
-    tips = [
+    title = isMr ? "AMR नवशिकाऊ" : "AMR Newcomer";
+    messageText = isMr
+      ? "चांगली सुरुवात! प्रत्येक तज्ज्ञाची सुरुवात कुठूनतरी होते. या महत्त्वाच्या गोष्टी नेहमी लक्षात ठेवा."
+      : "Great start! Every expert begins somewhere. Here are the key things worth remembering.";
+    tips = isMr ? [
+      "प्रतिजैविके जिवाणूंविरुद्ध लढतात — सर्दी, फ्लू किंवा विषाणूंविरुद्ध नाही.",
+      "फक्त डॉक्टरांच्या सल्ल्यानेच प्रतिजैविके वापरा.",
+      "उरलेली औषधे जवळच्या आरोग्य केंद्रात जमा करा, कचऱ्यात किंवा टॉयलेटमध्ये टाकू नका."
+    ] : [
       "Antibiotics fight bacteria — not colds, flu, or viruses.",
       "Only use antibiotics when a doctor prescribes them.",
       "Take leftover medicines to nearest health facility, never the bin or toilet."
@@ -609,9 +773,10 @@ function showQuizResults() {
   }
 
   if (tipsBox) {
+    const tipsHeading = isMr ? "या महत्त्वाच्या गोष्टी नेहमी लक्षात ठेवा:" : "Keep these key takeaways in mind:";
     tipsBox.innerHTML = `
       <div class="quiz-tips-container">
-        <p class="tips-heading">Keep these key takeaways in mind:</p>
+        <p class="tips-heading">${tipsHeading}</p>
         <ul class="tips-list">
           ${tips.map(t => `<li><span class="tip-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> ${escapeHTML(t)}</li>`).join('')}
         </ul>
@@ -623,6 +788,15 @@ function showQuizResults() {
   recordQuizCompletion().then(showQuizCompletionCount);
 }
 
+function updateQuizLanguage(lang) {
+  const resultsDiv = document.getElementById('quizResults');
+  const questionBox = document.getElementById('quiz-question-box');
+  if (resultsDiv && resultsDiv.style.display !== 'none' && resultsDiv.style.display !== '') {
+    showQuizResults();
+  } else if (questionBox) {
+    loadQuizQuestion();
+  }
+}
 
 function restartQuiz() {
   // Reset completion counter display when quiz is retaken
@@ -630,6 +804,10 @@ function restartQuiz() {
   if (countWrap) countWrap.hidden = true;
   initQuiz();
 }
+
+window.restartQuiz = restartQuiz;
+window.nextQuestion = nextQuestion;
+window.initQuiz = initQuiz;
 
 // ─── Quiz completion counter ──────────────────────────────────────────────────
 // Increments a localStorage counter immediately so the count always displays

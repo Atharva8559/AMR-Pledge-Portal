@@ -208,8 +208,6 @@ registerStrings('mr', {
   'quiz.meta.question_progress': 'प्रश्न <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum">8</span>',
   // EN: Score: 0/8
   'quiz.meta.score': 'गुण: <span id="quizScore">0</span>/<span id="totalQuizMax">8</span>',
-  // EN: Loading question...
-  'quiz.question.loading': 'प्रश्न येत आहे...',
   // EN: Next Question
   'quiz.nav.next': 'पुढील प्रश्न',
   // EN: Quiz Completed!

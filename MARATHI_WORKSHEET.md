@@ -1,6 +1,6 @@
 # ACT4AMR — Marathi translation worksheet
 
-190 strings. Fill the **Marathi** column, then paste each value into the
+189 strings. Fill the **Marathi** column, then paste each value into the
 matching key in `strings.mr.js`. Anything left blank stays English on the page,
 so this can be done a section at a time.
 
@@ -128,7 +128,7 @@ machine translation.
 | `common.carousel.slide_8` | Go to slide 8 | चित्र ८ वर जा |
 | `common.carousel.slide_9` | Go to slide 9 | चित्र ९ वर जा |
 
-## quiz  (10/10 done)
+## quiz  (9/9 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -136,7 +136,6 @@ machine translation.
 | `quiz.title` | Test Your AMR Knowledge | तुमचे AMR ज्ञान तपासा |
 | `quiz.meta.question_progress` | Question 1 of 8 | प्रश्न <span id="currentQuestionNum">1</span> / <span id="totalQuestionsNum">8</span> |
 | `quiz.meta.score` | Score: 0/8 | गुण: <span id="quizScore">0</span>/<span id="totalQuizMax">8</span> |
-| `quiz.question.loading` | Loading question... | प्रश्न येत आहे... |
 | `quiz.nav.next` | Next Question | पुढील प्रश्न |
 | `quiz.results.heading` | Quiz Completed! | प्रश्नमंजुषा पूर्ण झाली! |
 | `quiz.results.score_label` | Score | गुण |
