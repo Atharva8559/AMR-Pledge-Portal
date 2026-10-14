@@ -997,24 +997,19 @@ function drawCertCanvas(name, city, logo) {
   ctx.font = '600 13px Arial, sans-serif';
   ctx.textAlign = 'center';
   ctx.letterSpacing = '3px';
-  ctx.fillText('D I S P O S E F O R H E A L T H', W / 2, 50);
+  ctx.fillText('D I S P O S E F O R H E A L T H', W / 2, 58);
   ctx.letterSpacing = '';
 
   // Main title
   ctx.fillStyle = '#ffffff';
   ctx.font = 'bold 54px "Palatino Linotype", Palatino, Georgia, serif';
   ctx.textAlign = 'center';
-  ctx.fillText('Certificate of Pledge', W / 2, 118);
+  ctx.fillText('Certificate of Pledge', W / 2, 126);
 
   // Gold rule under title
   ctx.strokeStyle = GOLD;
   ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(W/2-200, 134); ctx.lineTo(W/2+200, 134); ctx.stroke();
-
-  // Subtitle
-  ctx.fillStyle = 'rgba(255,255,255,0.8)';
-  ctx.font = 'italic 18px Georgia, serif';
-  ctx.fillText('Antimicrobial Resistance Awareness Campaign · Maharashtra', W / 2, 165);
+  ctx.beginPath(); ctx.moveTo(W/2-200, 142); ctx.lineTo(W/2+200, 142); ctx.stroke();
 
   // ── Body: certifies that ──
   ctx.fillStyle = TEXT_MID;
@@ -1087,9 +1082,9 @@ function drawCertCanvas(name, city, logo) {
     ctx.lineCap = 'butt';
     ctx.lineJoin = 'miter';
 
-    // Commitment text
+    // Commitment text (last point in bold)
     ctx.fillStyle = TEXT_DARK;
-    ctx.font = '18px Arial, sans-serif';
+    ctx.font = (i === commitments.length - 1) ? 'bold 18px Arial, sans-serif' : '18px Arial, sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(text, blockX + 28, y + 1);
   });
@@ -1105,30 +1100,14 @@ function drawCertCanvas(name, city, logo) {
     var ratio = Math.min(maxLW / logo.naturalWidth, maxLH / logo.naturalHeight);
     var lW = logo.naturalWidth * ratio;
     var lH = logo.naturalHeight * ratio;
-    ctx.drawImage(logo, 80, 694, lW, lH);
+    ctx.drawImage(logo, 80, 700, lW, lH);
   }
 
   // Campaign attribution
   ctx.fillStyle = TEXT_LIGHT;
-  ctx.font = '13px Arial, sans-serif';
+  ctx.font = '14px Arial, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('DISPOSEFORHEALTH · Safe Antibiotic Disposal Campaign · Maharashtra', W / 2, 704);
-  ctx.fillText('Supported by NHM, PATH, CHRI & GSK', W / 2, 723);
-
-  // ── Seal (right side) ──
-  var sx = W - 130, sy = 735;
-  ctx.strokeStyle = GREEN;
-  ctx.lineWidth = 3;
-  ctx.beginPath(); ctx.arc(sx, sy, 76, 0, Math.PI * 2); ctx.stroke();
-  ctx.strokeStyle = GOLD;
-  ctx.lineWidth = 1.5;
-  ctx.beginPath(); ctx.arc(sx, sy, 64, 0, Math.PI * 2); ctx.stroke();
-  ctx.fillStyle = GREEN;
-  ctx.font = 'bold 14px Arial, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('AMR', sx, sy - 14);
-  ctx.fillText('PLEDGE', sx, sy + 3);
-  ctx.fillText('TAKER', sx, sy + 20);
+  ctx.fillText('DISPOSEFORHEALTH · Safe Antibiotic Disposal Campaign · Maharashtra', W / 2, 742);
 
   // ── Cache data URL (wrapped in try-catch: canvas.toDataURL may throw if the
   //    canvas is "tainted" by a cross-origin image in stricter browser contexts) ──
