@@ -1055,7 +1055,7 @@ function drawCertCanvas(name, city, logo) {
   var commitments = [
     'Take antibiotics only when prescribed by a qualified doctor',
     'Complete every antibiotic course, even when feeling better',
-    'Never share medicines with any other person',
+    'Never share antibiotics with any other person',
     'Return leftover antibiotics to the nearest health facility or disposal site'
   ];
   var lineH = 52, startY = 464, blockX = 130;
