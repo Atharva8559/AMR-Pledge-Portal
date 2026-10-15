@@ -252,8 +252,8 @@ registerStrings('mr', {
   'roadmap.subtitle': 'प्रकल्पाचे टप्पे',
   // EN: Campaign Event Roadmap
   'roadmap.title': 'मोहिमेच्या कार्यक्रमांची वाटचाल',
-  // EN: JAN 2026 – JUL 2026
-  'roadmap.badge.date_range': 'जानेवारी २०२६ – जुलै २०२६',
+  // EN: JAN 2026 – AUG 2026
+  'roadmap.badge.date_range': 'जानेवारी २०२६ – ऑगस्ट २०२६',
   // EN: Jan 2026
   'roadmap.event1.date': 'जानेवारी २०२६',
   // EN: National Consultative Meeting
@@ -400,6 +400,37 @@ registerStrings('mr', {
   'roadmap.event6.image9.alt': 'हिरव्या प्रतिजैविक विल्हेवाट पेटीत न वापरलेली औषधे टाकताना व्यक्ती',
   // EN: Unused and expired antibiotics being deposited into a collection bin.
   'roadmap.event6.modal.desc9': 'न वापरलेली आणि मुदतबाह्य प्रतिजैविके संकलन पेटीत टाकली जात आहेत.',
+
+  // EN: Aug 2026
+  'roadmap.event7.date': 'ऑगस्ट २०२६',
+  // EN: District Workshop and Bin Placement Initiative Launched — Satara
+  'roadmap.event7.title': 'जिल्हा कार्यशाळा आणि पेटी उभारणी उपक्रम सुरू — सातारा',
+  // EN: Key district stakeholders convened to discuss implementation strategies...
+  'roadmap.event7.desc': 'सातारा जिल्ह्यात सुरक्षित प्रतिजैविक विल्हेवाट पद्धतींना प्रोत्साहन देण्यासाठी आणि अंमलबजावणीच्या धोरणांवर चर्चा करण्यासाठी प्रमुख जिल्हास्तरीय भागधारक एकत्र आले. समुदायस्तरीय कृतीला पाठबळ देण्यासाठी, निवडक आरोग्य सुविधा आणि सार्वजनिक ठिकाणी सुरक्षित विल्हेवाट पेट्या बसवण्यात आल्या, ज्यामुळे सुरक्षित औषध विल्हेवाटीची सुविधा उपलब्ध झाली आणि पर्यावरणीय प्रदूषणाचा धोका कमी झाला.',
+  // EN: Release of campaign awareness posters and safe disposal materials at Satara workshop
+  'roadmap.event7.image1.alt': 'सातारा कार्यशाळेत जनजागृती भित्तीपत्रके आणि सुरक्षित विल्हेवाट साहित्याचे विमोचन',
+  // EN: District Workshop and Bin Placement — Satara
+  'roadmap.event7.modal.title': 'जिल्हा कार्यशाळा आणि पेटी उभारणी — सातारा',
+  // EN: Release of campaign awareness posters and safe disposal IEC materials by district leaders.
+  'roadmap.event7.modal.desc1': 'जिल्हास्तरीय मान्यवरांच्या हस्ते जनजागृती भित्तीपत्रके आणि सुरक्षित विल्हेवाट माहिती साहित्याचे विमोचन.',
+  // EN: Senior health leader addressing the district sensitization workshop from the podium
+  'roadmap.event7.image2.alt': 'वरिष्ठ आरोग्य अधिकाऱ्यांचे जिल्हा संवेदीकरण कार्यशाळेत व्यासपीठावरून मार्गदर्शन',
+  'roadmap.event7.modal.desc2': 'वरिष्ठ आरोग्य अधिकाऱ्यांचे जिल्हा संवेदीकरण कार्यशाळेत व्यासपीठावरून मार्गदर्शन.',
+  // EN: District health stakeholder discussing implementation strategies for safe medicine disposal
+  'roadmap.event7.image3.alt': 'सुरक्षित औषध विल्हेवाटीच्या अंमलबजावणी धोरणांवर जिल्हास्तरीय भागधारकांचे मार्गदर्शन',
+  'roadmap.event7.modal.desc3': 'सुरक्षित औषध विल्हेवाटीच्या अंमलबजावणी धोरणांवर जिल्हास्तरीय भागधारकांचे मार्गदर्शन.',
+  // EN: Public health expert presenting on unused and expired antibiotic disposal methods
+  'roadmap.event7.image4.alt': 'न वापरलेली आणि मुदतबाह्य प्रतिजैविके विल्हेवाट पद्धतींवर सार्वजनिक आरोग्य तज्ज्ञांचे सादरीकरण',
+  'roadmap.event7.modal.desc4': 'न वापरलेली आणि मुदतबाह्य प्रतिजैविके विल्हेवाट पद्धतींवर सार्वजनिक आरोग्य तज्ज्ञांचे सादरीकरण.',
+  // EN: Group photo of participating medical officers, health officials, and partners at the Satara workshop
+  'roadmap.event7.image5.alt': 'सातारा कार्यशाळेत सहभागी वैद्यकीय अधिकारी, आरोग्य कर्मचारी आणि प्रतिनिधींचे समूह छायाचित्र',
+  'roadmap.event7.modal.desc5': 'सातारा कार्यशाळेत सहभागी वैद्यकीय अधिकारी, आरोग्य कर्मचारी आणि प्रतिनिधींचे समूह छायाचित्र.',
+  // EN: Senior healthcare official delivering key insights on AMR containment and community stewardship
+  'roadmap.event7.image6.alt': 'AMR नियंत्रणावर वरिष्ठ आरोग्य अधिकाऱ्यांचे महत्त्वपूर्ण मार्गदर्शन',
+  'roadmap.event7.modal.desc6': 'AMR नियंत्रणावर वरिष्ठ आरोग्य अधिकाऱ्यांचे महत्त्वपूर्ण मार्गदर्शन.',
+  // EN: Presentation on district disposal bin placement initiative and safe collection mechanisms
+  'roadmap.event7.image7.alt': 'जिल्हा विल्हेवाट डबा उपक्रम आणि सुरक्षित संकलन यंत्रणेवर सादरीकरण',
+  'roadmap.event7.modal.desc7': 'जिल्हा विल्हेवाट डबा उपक्रम आणि सुरक्षित संकलन यंत्रणेवर सादरीकरण.',
 
   // ── partners ──────────────────────────────────────────────────
   // EN: OFFICIAL PUBLIC HEALTH & RESEARCH PARTNERS

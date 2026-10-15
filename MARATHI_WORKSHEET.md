@@ -166,7 +166,7 @@ machine translation.
 |---|---|---|
 | `roadmap.subtitle` | Project Milestones | प्रकल्पाचे टप्पे |
 | `roadmap.title` | Campaign Event Roadmap | मोहिमेच्या कार्यक्रमांची वाटचाल |
-| `roadmap.badge.date_range` | JAN 2026 – JUL 2026 | जानेवारी २०२६ – जुलै २०२६ |
+| `roadmap.badge.date_range` | JAN 2026 – AUG 2026 | जानेवारी २०२६ – ऑगस्ट २०२६ |
 | `roadmap.event1.date` | Jan 2026 | जानेवारी २०२६ |
 | `roadmap.event1.title` | National Consultative Meeting | राष्ट्रीय सल्लामसलत बैठक |
 | `roadmap.event1.desc` | Key stakeholders deliberated on systemic issues and policy challenges around safe antibiotic disposal and suggested potential solutions. Report published. | प्रतिजैविकांच्या सुरक्षित विल्हेवाटीसंबंधी व्यवस्थात्मक अडचणी व धोरणात्मक आव्हानांवर प्रमुख भागधारकांनी चर्चा करून संभाव्य उपाय सुचवले. अहवाल प्रकाशित. |
@@ -240,6 +240,24 @@ machine translation.
 | `roadmap.event6.modal.desc8` | A disposal bin placed beside campaign awareness material. | मोहिमेच्या जनजागृती साहित्याशेजारी ठेवलेली विल्हेवाट पेटी. |
 | `roadmap.event6.image9.alt` | A person placing unused medicines into the green antibiotic disposal bin | हिरव्या प्रतिजैविक विल्हेवाट पेटीत न वापरलेली औषधे टाकताना व्यक्ती |
 | `roadmap.event6.modal.desc9` | Unused and expired antibiotics being deposited into a collection bin. | न वापरलेली आणि मुदतबाह्य प्रतिजैविके संकलन पेटीत टाकली जात आहेत. |
+| `roadmap.event7.date` | Aug 2026 | ऑगस्ट २०२६ |
+| `roadmap.event7.title` | District Workshop and Bin Placement Initiative Launched — Satara | जिल्हा कार्यशाळा आणि पेटी उभारणी उपक्रम सुरू — सातारा |
+| `roadmap.event7.desc` | Key district stakeholders convened to discuss implementation strategies and promote safe antibiotic disposal practices across Satara. To support community action, antibiotic disposal bins were subsequently placed at selected healthcare facilities and public access points, improving access to safe medicine disposal and reducing environmental contamination risks. | सातारा जिल्ह्यात सुरक्षित प्रतिजैविक विल्हेवाट पद्धतींना प्रोत्साहन देण्यासाठी आणि अंमलबजावणीच्या धोरणांवर चर्चा करण्यासाठी प्रमुख जिल्हास्तरीय भागधारक एकत्र आले. समुदायस्तरीय कृतीला पाठबळ देण्यासाठी, निवडक आरोग्य सुविधा आणि सार्वजनिक ठिकाणी सुरक्षित विल्हेवाट पेट्या बसवण्यात आल्या, ज्यामुळे सुरक्षित औषध विल्हेवाटीची सुविधा उपलब्ध झाली आणि पर्यावरणीय प्रदूषणाचा धोका कमी झाला. |
+| `roadmap.event7.image1.alt` | Release of campaign awareness posters and safe disposal materials at Satara workshop | सातारा कार्यशाळेत जनजागृती भित्तीपत्रके आणि सुरक्षित विल्हेवाट साहित्याचे विमोचन |
+| `roadmap.event7.modal.title` | District Workshop and Bin Placement — Satara | जिल्हा कार्यशाळा आणि पेटी उभारणी — सातारा |
+| `roadmap.event7.modal.desc1` | Release of campaign awareness posters and safe disposal IEC materials by district leaders. | जिल्हास्तरीय मान्यवरांच्या हस्ते जनजागृती भित्तीपत्रके आणि सुरक्षित विल्हेवाट माहिती साहित्याचे विमोचन. |
+| `roadmap.event7.image2.alt` | Senior health leader addressing the district sensitization workshop from the podium | वरिष्ठ आरोग्य अधिकाऱ्यांचे जिल्हा संवेदीकरण कार्यशाळेत व्यासपीठावरून मार्गदर्शन |
+| `roadmap.event7.modal.desc2` | Senior health leader addressing the district sensitization workshop from the podium. | वरिष्ठ आरोग्य अधिकाऱ्यांचे जिल्हा संवेदीकरण कार्यशाळेत व्यासपीठावरून मार्गदर्शन. |
+| `roadmap.event7.image3.alt` | District health stakeholder discussing implementation strategies for safe medicine disposal | सुरक्षित औषध विल्हेवाटीच्या अंमलबजावणी धोरणांवर जिल्हास्तरीय भागधारकांचे मार्गदर्शन |
+| `roadmap.event7.modal.desc3` | District health stakeholder discussing implementation strategies for safe medicine disposal. | सुरक्षित औषध विल्हेवाटीच्या अंमलबजावणी धोरणांवर जिल्हास्तरीय भागधारकांचे मार्गदर्शन. |
+| `roadmap.event7.image4.alt` | Public health expert presenting on unused and expired antibiotic disposal methods | न वापरलेली आणि मुदतबाह्य प्रतिजैविके विल्हेवाट पद्धतींवर सार्वजनिक आरोग्य तज्ज्ञांचे सादरीकरण |
+| `roadmap.event7.modal.desc4` | Public health expert presenting on unused and expired antibiotic disposal methods. | न वापरलेली आणि मुदतबाह्य प्रतिजैविके विल्हेवाट पद्धतींवर सार्वजनिक आरोग्य तज्ज्ञांचे सादरीकरण. |
+| `roadmap.event7.image5.alt` | Group photo of participating medical officers, health officials, and partners at the Satara workshop | सातारा कार्यशाळेत सहभागी वैद्यकीय अधिकारी, आरोग्य कर्मचारी आणि प्रतिनिधींचे समूह छायाचित्र |
+| `roadmap.event7.modal.desc5` | Participating medical officers, health officials, and partners at the Satara workshop. | सातारा कार्यशाळेत सहभागी वैद्यकीय अधिकारी, आरोग्य कर्मचारी आणि प्रतिनिधींचे समूह छायाचित्र. |
+| `roadmap.event7.image6.alt` | Senior healthcare official delivering key insights on AMR containment and community stewardship | AMR नियंत्रणावर वरिष्ठ आरोग्य अधिकाऱ्यांचे महत्त्वपूर्ण मार्गदर्शन |
+| `roadmap.event7.modal.desc6` | Senior healthcare official delivering key insights on AMR containment and community stewardship. | AMR नियंत्रणावर वरिष्ठ आरोग्य अधिकाऱ्यांचे महत्त्वपूर्ण मार्गदर्शन. |
+| `roadmap.event7.image7.alt` | Presentation on district disposal bin placement initiative and safe collection mechanisms | जिल्हा विल्हेवाट डबा उपक्रम आणि सुरक्षित संकलन यंत्रणेवर सादरीकरण |
+| `roadmap.event7.modal.desc7` | Presentation on district disposal bin placement initiative and safe collection mechanisms. | जिल्हा विल्हेवाट डबा उपक्रम आणि सुरक्षित संकलन यंत्रणेवर सादरीकरण. |
 
 ## partners  (1/1 done)
 
