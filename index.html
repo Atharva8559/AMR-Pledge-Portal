@@ -739,7 +739,7 @@
           <div class="testimonials-track" id="testimonialsTrack">
 
             <!-- Testimonial Slide 1: Prof. Y. K. Gupta -->
-            <div class="testimonial-slide active" role="group" aria-roledescription="slide" aria-label="Slide 1 of 1">
+            <div class="testimonial-slide active" role="group" aria-roledescription="slide" aria-label="Slide 1 of 2">
               <div class="testimonial-card">
                 <div class="quote-mark-icon" aria-hidden="true">
                   <svg width="52" height="52" viewBox="0 0 24 24" fill="currentColor">
@@ -788,6 +788,50 @@
               </div>
             </div>
 
+            <!-- Testimonial Slide 2: Dr Bassem Zayed -->
+            <div class="testimonial-slide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 2">
+              <div class="testimonial-card">
+                <div class="quote-mark-icon" aria-hidden="true">
+                  <svg width="52" height="52" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  </svg>
+                </div>
+                <div class="testimonial-grid">
+                  <div class="testimonial-expert-col">
+                    <div class="expert-photo-frame">
+                      <picture>
+                        <source srcset="assets/web/testimonials/dr_bassem_zayed.webp" type="image/webp">
+                        <img src="assets/testimonials/dr_bassem_zayed.jpg" alt="Dr Bassem Zayed"
+                          class="expert-photo" width="323" height="430" loading="lazy" decoding="async">
+                      </picture>
+                    </div>
+                    <div class="expert-badge">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <polyline points="9 12 11 14 15 10" />
+                      </svg>
+                      <span data-i18n="testimonials.badge">Expert Voice</span>
+                    </div>
+                  </div>
+
+                  <div class="testimonial-content-col">
+                    <blockquote class="testimonial-quote">
+                      <p data-i18n="testimonials.quote2">“Antimicrobial resistance is one of the most pressing public health challenges of our time, and addressing it requires action beyond healthcare settings. Effective AMR containment requires a whole-of-society approach that combines awareness, stewardship, and responsible disposal practices. The Maharashtra initiative is an important example of how partnerships between government, communities, and development organizations can translate AMR commitments into tangible action. Together, we can strengthen public understanding and protect the effectiveness of life-saving antimicrobials.”</p>
+                    </blockquote>
+                    <div class="testimonial-author">
+                      <h3 class="author-name" data-i18n="testimonials.author2.name">Dr Bassem Zayed</h3>
+                      <ul class="author-roles">
+                        <li data-i18n="testimonials.author2.role1">Unit Head &amp; Regional Advisor, Antimicrobial Resistance (AMR)</li>
+                        <li data-i18n="testimonials.author2.role2">Health System Department (HSD)</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -811,6 +855,8 @@
         <div class="testimonial-dots" id="testimonialDots">
           <button type="button" class="dot active" onclick="setTestimonialSlide(0)" aria-label="Go to slide 1"
             aria-current="true" data-i18n-attr="aria-label:common.carousel.slide_1"></button>
+          <button type="button" class="dot" onclick="setTestimonialSlide(1)" aria-label="Go to slide 2"
+            aria-current="false" data-i18n-attr="aria-label:common.carousel.slide_2"></button>
         </div>
       </div>
     </div>
