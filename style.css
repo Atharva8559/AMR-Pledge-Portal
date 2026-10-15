@@ -2154,6 +2154,13 @@ nav ul li a:active {
   line-height: 1.25;
 }
 
+.author-designation {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
 .author-roles {
   list-style: none;
   margin: 0;
@@ -2264,6 +2271,9 @@ nav ul li a:active {
     gap: 1.5rem;
   }
   .testimonial-quote p {
+    text-align: center;
+  }
+  .author-designation {
     text-align: center;
   }
   .author-roles li {

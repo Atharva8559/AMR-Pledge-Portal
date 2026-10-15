@@ -230,6 +230,8 @@ registerStrings('mr', {
   'testimonials.quote1': '“प्रतिजैविक प्रतिकारशक्तीविरुद्धचा लढा केवळ रुग्णालयांमध्येच नाही, तर प्रत्येक घरात सुरू होतो. जबाबदारीने विल्हेवाट लावलेले प्रत्येक न वापरलेले किंवा मुदतबाह्य प्रतिजैविक हे आपल्या आरोग्यासाठी आणि पर्यावरणासाठी एक धोका कमी करते. चला, सुरक्षित विल्हेवाट लावण्याची सवय आजच अंगीकारूया — जेणेकरून उद्यासाठी प्रभावी प्रतिजैविके उपलब्ध राहतील.”',
   // EN: Professor Y. K. Gupta
   'testimonials.author1.name': 'प्रा. वाय. के. गुप्ता',
+  // EN: President, AIIMS - Kalyani. Principal Advisor India Strategy Development (GARDP). Former President of AIIMS Bhopal and AIIMS Jammu. Ex-Dean, AIIMS Delhi.
+  'testimonials.author1.designation': 'अध्यक्ष, एम्स (AIIMS) - कल्याणी. मुख्य सल्लागार, इंडिया स्ट्रॅटेजी डेव्हलपमेंट (GARDP). माजी अध्यक्ष, एम्स भोपाळ आणि एम्स जम्मू. माजी अधिष्ठाता (Dean), एम्स नवी दिल्ली.',
   // EN: Principal Advisor India Strategy Development (GARDP)
   'testimonials.author1.role1': 'मुख्य सल्लागार, इंडिया स्ट्रॅटेजी डेव्हलपमेंट (GARDP)',
   // EN: President, AIIMS - Kalyani
@@ -242,6 +244,8 @@ registerStrings('mr', {
   'testimonials.quote2': '“प्रतिजैविक प्रतिकारशक्ती (AMR) हे आपल्या काळातील सर्वात गंभीर सार्वजनिक आरोग्य आव्हानांपैकी एक आहे आणि त्यावर मात करण्यासाठी आरोग्य यंत्रणेच्या पलीकडे जाऊन कृती करणे आवश्यक आहे. AMR च्या प्रभावी नियंत्रणासाठी संपूर्ण समाजाचा सहभाग आवश्यक आहे, ज्यामध्ये जनजागृती, सुयोग्य वापर आणि जबाबदार विल्हेवाट यांचा समावेश होतो. महाराष्ट्र उपक्रम हे शासन, समुदाय आणि विकास संस्थांमधील भागीदारी AMR वरील वचनबद्धतेला प्रत्यक्ष कृतीत कसे रूपांतरित करू शकते याचे एक महत्त्वाचे उदाहरण आहे. एकत्रितपणे, आपण जनजागृती अधिक बळकट करू शकतो आणि जीवनरक्षक प्रतिजैविकांची परिणामकारकता टिकवून ठेवू शकतो.”',
   // EN: Dr Bassem Zayed
   'testimonials.author2.name': 'डॉ. बास्सेम झायेद',
+  // EN: Unit Head & Regional Advisor, Antimicrobial Resistance (AMR), Health System Department (HSD).
+  'testimonials.author2.designation': 'युनिट हेड आणि प्रादेशिक सल्लागार, रोगाणूरोधक प्रतिकारशक्ती (AMR), आरोग्य प्रणाली विभाग (HSD).',
   // EN: Unit Head & Regional Advisor, Antimicrobial Resistance (AMR)
   'testimonials.author2.role1': 'युनिट हेड आणि प्रादेशिक सल्लागार, रोगाणूरोधक प्रतिकारशक्ती (AMR)',
   // EN: Health System Department (HSD)
