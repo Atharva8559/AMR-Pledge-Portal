@@ -919,9 +919,9 @@ function buildCertificate() {
   var dialog = document.querySelector('.cert-modal-dialog');
   if (dialog) dialog.scrollTop = 0;
 
-  // Show/hide share button based on Web Share API support
+  // Show share button (supports Web Share or clipboard fallback)
   var shareBtn = document.getElementById('certShareBtn');
-  if (shareBtn) shareBtn.style.display = (typeof navigator.share === 'function') ? '' : 'none';
+  if (shareBtn) shareBtn.style.display = '';
 
   // Show a quick "Generating…" placeholder on the canvas while the template loads
   var canvas = document.getElementById('certCanvas');
@@ -957,7 +957,12 @@ function getCertTemplate(callback) {
     console.warn('[cert] Failed to load certificate template image.');
     callback(null);
   };
-  img.src = 'assets/certificate_template.png';
+  // Use data URI if available from assets/cert_template_data.js to prevent tainted canvas on file://
+  if (typeof window !== 'undefined' && window._CERT_TEMPLATE_DATA_URI) {
+    img.src = window._CERT_TEMPLATE_DATA_URI;
+  } else {
+    img.src = 'assets/certificate_template.png';
+  }
 }
 
 // Kick off template preloading immediately
@@ -1035,27 +1040,55 @@ function downloadCertificate() {
   var canvas = document.getElementById('certCanvas');
   if (!canvas) return;
 
-  var dataUrl = _certDataUrl;
-  if (!dataUrl) {
-    try {
-      dataUrl = canvas.toDataURL('image/png');
-    } catch (e) {
-      console.warn('[cert] download failed to get dataUrl', e);
-      return;
+  var nameVal = ((document.getElementById('certName').value || 'certificate').trim()).replace(/\s+/g, '_');
+  var filename = 'AMR_Pledge_Certificate_' + nameVal + '.png';
+
+  function triggerDownload(url, isBlob) {
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    if (isBlob) {
+      setTimeout(function () { URL.revokeObjectURL(url); }, 5000);
     }
   }
 
-  var nameVal = ((document.getElementById('certName').value || 'certificate').trim()).replace(/\s+/g, '_');
-  var a = document.createElement('a');
-  a.href = dataUrl;
-  a.download = 'AMR_Pledge_Certificate_' + nameVal + '.png';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  // Try blob download first (most reliable across all protocols including file://)
+  if (canvas.toBlob) {
+    try {
+      canvas.toBlob(function (blob) {
+        if (blob) {
+          triggerDownload(URL.createObjectURL(blob), true);
+        } else {
+          fallbackDataUrl();
+        }
+      }, 'image/png');
+      return;
+    } catch (e) {
+      console.warn('[cert] toBlob failed, trying dataUrl fallback', e);
+    }
+  }
+
+  fallbackDataUrl();
+
+  function fallbackDataUrl() {
+    var dataUrl = _certDataUrl;
+    if (!dataUrl) {
+      try {
+        dataUrl = canvas.toDataURL('image/png');
+      } catch (e) {
+        console.warn('[cert] download failed to get dataUrl', e);
+      }
+    }
+    if (dataUrl) {
+      triggerDownload(dataUrl, false);
+    }
+  }
 }
 
 function shareCertificate() {
-  if (typeof navigator.share !== 'function') return;
   var canvas = document.getElementById('certCanvas');
   if (!canvas) return;
   var nameVal = (document.getElementById('certName').value || '').trim();
@@ -1064,24 +1097,60 @@ function shareCertificate() {
     ? nameVal + ' has pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness'
     : 'I have pledged to fight Antimicrobial Resistance! #DisposeForHealth #AMRAwareness';
 
-  // Use canvas.toBlob() — avoids the data-URL intermediary and works in more contexts
-  canvas.toBlob(function (blob) {
-    if (!blob) {
-      // Fallback: share URL only
-      navigator.share({ title: 'My AMR Pledge Certificate', text: shareText, url: window.location.href })
-        .catch(function (err) { if (err.name !== 'AbortError') console.warn('[cert] share failed', err); });
-      return;
+  var shareBtn = document.getElementById('certShareBtn');
+
+  function showShareFeedback(msg) {
+    if (!shareBtn) return;
+    var origHTML = shareBtn.innerHTML;
+    shareBtn.textContent = msg;
+    setTimeout(function () {
+      shareBtn.innerHTML = origHTML;
+    }, 2500);
+  }
+
+  // If Web Share API is available, share file or link
+  if (navigator.share) {
+    if (canvas.toBlob) {
+      try {
+        canvas.toBlob(function (blob) {
+          if (blob && navigator.canShare) {
+            try {
+              var file = new File([blob], 'AMR_Pledge_Certificate.png', { type: 'image/png' });
+              if (navigator.canShare({ files: [file] })) {
+                navigator.share({ title: 'My AMR Pledge Certificate', text: shareText, files: [file] })
+                  .catch(function (err) {
+                    if (err && err.name !== 'AbortError') fallbackShare();
+                  });
+                return;
+              }
+            } catch (e) {}
+          }
+          navigator.share({ title: 'My AMR Pledge Certificate', text: shareText, url: window.location.href })
+            .catch(function (err) {
+              if (err && err.name !== 'AbortError') fallbackShare();
+            });
+        }, 'image/png');
+        return;
+      } catch (e) {}
     }
-    var file = new File([blob], 'AMR_Pledge_Certificate.png', { type: 'image/png' });
-    var shareData = { title: 'My AMR Pledge Certificate', text: shareText };
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      shareData.files = [file];
+  }
+
+  fallbackShare();
+
+  function fallbackShare() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      var shareUrl = window.location.href.startsWith('http') ? (' ' + window.location.href) : '';
+      navigator.clipboard.writeText(shareText + shareUrl)
+        .then(function () {
+          showShareFeedback('Pledge Copied!');
+        })
+        .catch(function () {
+          downloadCertificate();
+        });
     } else {
-      shareData.url = window.location.href;
+      downloadCertificate();
     }
-    navigator.share(shareData)
-      .catch(function (err) { if (err.name !== 'AbortError') console.warn('[cert] share failed', err); });
-  }, 'image/png');
+  }
 }
 
 // Export to window (all called from inline onclick attributes)
