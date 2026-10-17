@@ -923,200 +923,111 @@ function buildCertificate() {
   var shareBtn = document.getElementById('certShareBtn');
   if (shareBtn) shareBtn.style.display = (typeof navigator.share === 'function') ? '' : 'none';
 
-  // Show a quick "Generating…" placeholder on the canvas while the logo loads
+  // Show a quick "Generating…" placeholder on the canvas while the template loads
   var canvas = document.getElementById('certCanvas');
   if (canvas) {
-    canvas.width = 600; canvas.height = 424;
+    canvas.width = 1200; canvas.height = 848;
     var pCtx = canvas.getContext('2d');
     pCtx.fillStyle = '#f4faf8';
-    pCtx.fillRect(0, 0, 600, 424);
+    pCtx.fillRect(0, 0, 1200, 848);
     pCtx.fillStyle = '#006857';
-    pCtx.font = 'bold 20px Arial, sans-serif';
+    pCtx.font = 'bold 24px Arial, sans-serif';
     pCtx.textAlign = 'center';
-    pCtx.fillText('Generating your certificate…', 300, 212);
+    pCtx.fillText('Generating your certificate…', 600, 424);
   }
 
-  // Load the campaign logo then draw the full certificate
-  var logo = new Image();
-  logo.onload  = function () { drawCertCanvas(name, city, logo); };
-  logo.onerror = function () { drawCertCanvas(name, city, null); };
-  logo.src = 'Main.png';
+  getCertTemplate(function (tpl) {
+    drawCertCanvas(name, city, tpl);
+  });
 }
 
+// ── Preload certificate template image ─────────────────────────────────────────
+var _certTemplateImg = null;
+function getCertTemplate(callback) {
+  if (_certTemplateImg && _certTemplateImg.complete && _certTemplateImg.naturalWidth) {
+    callback(_certTemplateImg);
+    return;
+  }
+  var img = new Image();
+  img.onload = function () {
+    _certTemplateImg = img;
+    callback(img);
+  };
+  img.onerror = function () {
+    console.warn('[cert] Failed to load certificate template image.');
+    callback(null);
+  };
+  img.src = 'assets/certificate_template.png';
+}
 
-// ── Canvas renderer ────────────────────────────────────────────────────────────
-function drawCertCanvas(name, city, logo) {
+// Kick off template preloading immediately
+if (typeof window !== 'undefined') {
+  getCertTemplate(function () {});
+}
+
+// ── Canvas renderer using certificate.pdf template ─────────────────────────────
+function drawCertCanvas(name, city, tpl) {
   var canvas = document.getElementById('certCanvas');
   if (!canvas) return;
 
-  var W = 1200, H = 848;
+  var W = 2400, H = 1696;
   canvas.width = W;
   canvas.height = H;
   var ctx = canvas.getContext('2d');
 
-  // ── Palette ──
-  var GREEN      = '#006857';
-  var DARK_GREEN = '#00403a';
-  var GOLD       = '#c9a227';
-  var LIGHT_BG   = '#f4faf8';
-  var TEXT_DARK  = '#1a2e24';
-  var TEXT_MID   = '#3d5a4f';
-  var TEXT_LIGHT = '#6b8a7e';
+  if (tpl && tpl.naturalWidth) {
+    ctx.drawImage(tpl, 0, 0, W, H);
+  } else {
+    // Fallback if template is loading or missing
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+  }
 
-  // ── Background ──
-  ctx.fillStyle = LIGHT_BG;
-  ctx.fillRect(0, 0, W, H);
+  // ── Draw Participant Name ──
+  // The template features a designated red line at y=584, centered at x=1203
+  var centerX = 1203;
+  var lineY = 584;
 
-  // ── Outer green border ──
-  ctx.strokeStyle = GREEN;
-  ctx.lineWidth = 14;
-  ctx.strokeRect(7, 7, W - 14, H - 14);
-
-  // ── Inner gold border ──
-  ctx.strokeStyle = GOLD;
-  ctx.lineWidth = 2.5;
-  ctx.strokeRect(22, 22, W - 44, H - 44);
-
-  // ── Corner squares ──
-  var cs = 12;
-  ctx.fillStyle = GOLD;
-  [[22,22],[W-22-cs,22],[22,H-22-cs],[W-22-cs,H-22-cs]].forEach(function(c){
-    ctx.fillRect(c[0], c[1], cs, cs);
-  });
-
-  // ── Header gradient ──
-  var headerH = 190;
-  var grad = ctx.createLinearGradient(0, 0, W, headerH);
-  grad.addColorStop(0, DARK_GREEN);
-  grad.addColorStop(1, GREEN);
-  ctx.fillStyle = grad;
-  ctx.fillRect(7, 7, W - 14, headerH);
-
-  // Campaign org line
-  ctx.fillStyle = 'rgba(255,255,255,0.55)';
-  ctx.font = '600 13px Arial, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.letterSpacing = '3px';
-  ctx.fillText('D I S P O S E F O R H E A L T H', W / 2, 58);
-  ctx.letterSpacing = '';
-
-  // Main title
-  ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 54px "Palatino Linotype", Palatino, Georgia, serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('Certificate of Pledge', W / 2, 126);
-
-  // Gold rule under title
-  ctx.strokeStyle = GOLD;
-  ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(W/2-200, 142); ctx.lineTo(W/2+200, 142); ctx.stroke();
-
-  // ── Body: certifies that ──
-  ctx.fillStyle = TEXT_MID;
-  ctx.font = 'italic 23px Georgia, serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('This certifies that', W / 2, 245);
-
-  // ── Name (auto-scale to fit) ──
-  var fontSize = 68;
-  ctx.font = 'bold ' + fontSize + 'px "Palatino Linotype", Palatino, Georgia, serif';
-  while (ctx.measureText(name).width > W - 180 && fontSize > 30) {
+  var fontSize = 76;
+  ctx.font = 'bold ' + fontSize + 'px "Georgia", "Palatino Linotype", Palatino, serif';
+  var maxNameWidth = 980;
+  while (ctx.measureText(name).width > maxNameWidth && fontSize > 32) {
     fontSize -= 2;
-    ctx.font = 'bold ' + fontSize + 'px "Palatino Linotype", Palatino, Georgia, serif';
-  }
-  ctx.fillStyle = GREEN;
-  ctx.textAlign = 'center';
-  ctx.fillText(name, W / 2, 324);
-
-  // Gold underline under name
-  var nw = ctx.measureText(name).width;
-  ctx.strokeStyle = GOLD;
-  ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(W/2 - nw/2, 336); ctx.lineTo(W/2 + nw/2, 336); ctx.stroke();
-
-  // ── City · Date ──
-  var dateStr = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
-  ctx.fillStyle = TEXT_MID;
-  ctx.font = '22px Georgia, serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('from ' + city + '   \u00B7   ' + dateStr, W / 2, 376);
-
-  // ── Has pledged to ──
-  ctx.fillStyle = TEXT_DARK;
-  ctx.font = 'italic 20px Georgia, serif';
-  ctx.fillText('has solemnly pledged to:', W / 2, 418);
-
-  // Light horizontal rule
-  ctx.strokeStyle = 'rgba(0,104,87,0.18)';
-  ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(60, 433); ctx.lineTo(W-60, 433); ctx.stroke();
-
-  // ── Commitment items ──
-  var commitments = [
-    'Take antibiotics only when prescribed by a qualified doctor',
-    'Complete every antibiotic course, even when feeling better',
-    'Never share antibiotics with any other person',
-    'Return leftover antibiotics to the nearest health facility or disposal site'
-  ];
-  var lineH = 52, startY = 464, blockX = 130;
-
-  commitments.forEach(function (text, i) {
-    var y = startY + i * lineH;
-
-    // Filled circle bullet
-    ctx.fillStyle = GREEN;
-    ctx.beginPath();
-    ctx.arc(blockX, y - 5, 14, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Checkmark inside circle
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 2.5;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.beginPath();
-    ctx.moveTo(blockX - 5.5, y - 5);
-    ctx.lineTo(blockX - 1.5, y);
-    ctx.lineTo(blockX + 6, y - 9);
-    ctx.stroke();
-    ctx.lineCap = 'butt';
-    ctx.lineJoin = 'miter';
-
-    // Commitment text (last point in bold)
-    ctx.fillStyle = TEXT_DARK;
-    ctx.font = (i === commitments.length - 1) ? 'bold 18px Arial, sans-serif' : '18px Arial, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(text, blockX + 28, y + 1);
-  });
-
-  // ── Bottom separator ──
-  ctx.strokeStyle = 'rgba(0,104,87,0.18)';
-  ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(60, 680); ctx.lineTo(W-60, 680); ctx.stroke();
-
-  // ── Logo (Main.png) ──
-  if (logo && logo.naturalWidth) {
-    var maxLH = 72, maxLW = 220;
-    var ratio = Math.min(maxLW / logo.naturalWidth, maxLH / logo.naturalHeight);
-    var lW = logo.naturalWidth * ratio;
-    var lH = logo.naturalHeight * ratio;
-    ctx.drawImage(logo, 80, 700, lW, lH);
+    ctx.font = 'bold ' + fontSize + 'px "Georgia", "Palatino Linotype", Palatino, serif';
   }
 
-  // Campaign attribution
-  ctx.fillStyle = TEXT_LIGHT;
-  ctx.font = '14px Arial, sans-serif';
+  ctx.fillStyle = '#005647';
   ctx.textAlign = 'center';
-  ctx.fillText('DISPOSEFORHEALTH · Safe Antibiotic Disposal Campaign · Maharashtra', W / 2, 742);
+  ctx.textBaseline = 'alphabetic';
+  // Sit cleanly above the red line with 14px breathing room above baseline
+  ctx.fillText(name, centerX, lineY - 14);
 
-  // ── Cache data URL (wrapped in try-catch: canvas.toDataURL may throw if the
-  //    canvas is "tainted" by a cross-origin image in stricter browser contexts) ──
+  // ── Draw City & Date ──
+  // Placed elegantly between the red line and "has solemnly pledged to:"
+  var isMarathi = document.documentElement.lang === 'mr';
+  var dateStr;
+  try {
+    dateStr = new Date().toLocaleDateString(isMarathi ? 'mr-IN' : 'en-IN', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  } catch (e) {
+    dateStr = new Date().toLocaleDateString();
+  }
+
+  var subText = (city ? (isMarathi ? city + ' येथून   ·   ' : 'from ' + city + '   ·   ') : '') + dateStr;
+  ctx.font = 'italic 34px "Georgia", serif';
+  ctx.fillStyle = '#4a5568';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText(subText, centerX, 654);
+
+  // ── Cache data URL for download / share ──
   try {
     _certDataUrl = canvas.toDataURL('image/png');
   } catch (e) {
-    console.warn('[cert] toDataURL failed (tainted canvas?). Redrawing without logo.', e);
-    // Redraw without the logo so the canvas is clean, then retry
-    drawCertCanvas(name, city, null);
+    console.warn('[cert] toDataURL failed', e);
   }
 }
 
@@ -1124,18 +1035,12 @@ function downloadCertificate() {
   var canvas = document.getElementById('certCanvas');
   if (!canvas) return;
 
-  // Try to get a data URL from the canvas directly each time (more reliable than the
-  // cached value; also refreshes if the canvas was redrawn without a logo)
-  var dataUrl;
-  try {
-    dataUrl = canvas.toDataURL('image/png');
-  } catch (e) {
-    // Canvas tainted — redraw without logo then retry
-    var nm = (document.getElementById('certName').value || '').trim();
-    var ct = (document.getElementById('certCity').value || '').trim();
-    drawCertCanvas(nm, ct, null);
-    try { dataUrl = canvas.toDataURL('image/png'); } catch (e2) {
-      console.warn('[cert] download failed — canvas still tainted', e2);
+  var dataUrl = _certDataUrl;
+  if (!dataUrl) {
+    try {
+      dataUrl = canvas.toDataURL('image/png');
+    } catch (e) {
+      console.warn('[cert] download failed to get dataUrl', e);
       return;
     }
   }
