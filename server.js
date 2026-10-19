@@ -6,6 +6,9 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMAkBgfhD47rOBERGpEYhVeqY3Q4byo401V_8KTyK_tMNqgTv7br5Ov5rCS_noIeM7KA/exec';
+const COUNTS_FILE = path.join(__dirname, 'counts.json');
+
 // GZIP compression for fast text, script, CSS and JSON delivery
 app.use(compression({
   threshold: 1024,
@@ -18,8 +21,6 @@ app.use(compression({
 // Body parsers for API endpoints
 app.use(express.json());
 app.use(express.text({ type: '*/*' }));
-
-const COUNTS_FILE = path.join(__dirname, 'counts.json');
 
 function getCounts() {
   try {
@@ -49,19 +50,42 @@ function saveCounts(counts) {
   }
 }
 
-// ── Real-Time Counter API ─────────────────────────────────────────────────────
+// ── Real-Time Counter API (Synchronized with Google Apps Script) ──────────────
 
-// GET: Current counts
-app.get('/api/pledge', (req, res) => {
+// GET: Current counts from Google Apps Script
+app.get('/api/pledge', async (req, res) => {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 4000);
+    const gRes = await fetch(GOOGLE_APPS_SCRIPT_URL, { signal: controller.signal });
+    clearTimeout(timeout);
+    if (gRes.ok) {
+      const data = await gRes.json();
+      if (data && Number.isFinite(Number(data.count))) {
+        saveCounts({
+          pledge_count: Number(data.count),
+          quiz_count: Number(data.quiz_count) || 0
+        });
+        return res.json({
+          count: Number(data.count),
+          quiz_count: Number(data.quiz_count) || 0
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('Apps Script GET fallback to local cache:', err.message);
+  }
+
+  // Fallback to local counts if Apps Script is slow
   const counts = getCounts();
-  res.json({
+  return res.json({
     count: counts.pledge_count,
     quiz_count: counts.quiz_count
   });
 });
 
-// POST: Increment pledge or quiz count
-app.post('/api/pledge', (req, res) => {
+// POST: Increment pledge or quiz count directly in Google Apps Script
+app.post('/api/pledge', async (req, res) => {
   let action = 'pledge';
   try {
     let body = req.body;
@@ -72,18 +96,46 @@ app.post('/api/pledge', (req, res) => {
       action = String(body.action).trim().toLowerCase();
     }
   } catch (e) {
-    // Malformed JSON: safely default to pledge
+    // Malformed body: safely default to pledge
   }
 
-  const counts = getCounts();
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const gRes = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action }),
+      redirect: 'follow',
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if (gRes.ok) {
+      const data = await gRes.json();
+      if (action === 'quiz_complete' && data && Number.isFinite(Number(data.quiz_count))) {
+        const counts = getCounts();
+        counts.quiz_count = Number(data.quiz_count);
+        saveCounts(counts);
+        return res.json({ quiz_count: counts.quiz_count });
+      } else if (data && Number.isFinite(Number(data.count))) {
+        const counts = getCounts();
+        counts.pledge_count = Number(data.count);
+        saveCounts(counts);
+        return res.json({ count: counts.pledge_count });
+      }
+    }
+  } catch (err) {
+    console.warn('Apps Script POST fallback to local increment:', err.message);
+  }
 
+  // Fallback if Apps Script is unreachable
+  const counts = getCounts();
   if (action === 'quiz_complete') {
     counts.quiz_count = (counts.quiz_count || 0) + 1;
     saveCounts(counts);
     return res.json({ quiz_count: counts.quiz_count });
   }
 
-  // Default: increment pledge
   counts.pledge_count = (counts.pledge_count || 0) + 1;
   saveCounts(counts);
   return res.json({ count: counts.pledge_count });
