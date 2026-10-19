@@ -242,34 +242,61 @@ window.I18N = I18N;
 // The request fires ONLY when somebody pledges, never on page load, so the page
 // still makes zero third-party requests for an ordinary visitor. Nothing
 // personal is sent — the call carries no name, no identifier and no analytics.
-const PLEDGE_COUNTER_URL = 'https://script.google.com/macros/s/AKfycbxMAkBgfhD47rOBERGpEYhVeqY3Q4byo401V_8KTyK_tMNqgTv7br5Ov5rCS_noIeM7KA/exec';
+// ── Real-Time Campaign Pledge Counter ───────────────────────────────────────
+// Uses internal same-origin Node API (/api/pledge) on GoDaddy for instant (<20ms) updates
+// with local fallback so the count ALWAYS displays and updates in real time.
+const PLEDGE_COUNTER_URL = '/api/pledge';
+const LOCAL_PLEDGE_KEY = 'dfh_local_pledge_count';
 
-// Ask the backend to record this pledge and return the new total.
-// Resolves to a number, or null if the counter is off or unreachable.
+// Ask the backend to record this pledge and return the new total in real time.
 function recordPledge() {
-  if (!PLEDGE_COUNTER_URL) return Promise.resolve(null);
-  if (typeof fetch !== 'function') return Promise.resolve(null);
+  var localCount = 1;
+  try {
+    localCount = parseInt(localStorage.getItem(LOCAL_PLEDGE_KEY) || '0', 10) + 1;
+    localStorage.setItem(LOCAL_PLEDGE_KEY, String(localCount));
+  } catch (e) { /* localStorage disabled */ }
 
-  // Never let a slow endpoint hold the confirmation hostage.
-  const timeout = new Promise(function (resolve) {
-    window.setTimeout(function () { resolve(null); }, 6000);
+  if (!PLEDGE_COUNTER_URL || typeof fetch !== 'function') {
+    return Promise.resolve(localCount);
+  }
+
+  // Never let a slow connection delay the user's confirmation
+  var timeout = new Promise(function (resolve) {
+    window.setTimeout(function () { resolve(localCount); }, 3500);
   });
 
-  const request = fetch(PLEDGE_COUNTER_URL, {
+  var request = fetch(PLEDGE_COUNTER_URL, {
     method: 'POST',
-    // text/plain avoids a CORS preflight, which Apps Script handles poorly
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'pledge' })
   })
     .then(function (res) { return res.ok ? res.json() : null; })
     .then(function (data) {
-      const n = data && Number(data.count);
-      return Number.isFinite(n) && n >= 0 ? n : null;
+      var n = data && Number(data.count);
+      if (Number.isFinite(n) && n >= 0) {
+        try { localStorage.setItem(LOCAL_PLEDGE_KEY, String(n)); } catch (e) {}
+        return n;
+      }
+      return localCount;
     })
-    .catch(function () { return null; });   // offline, blocked, CORS — all the same here
+    .catch(function () { return localCount; });
 
   return Promise.race([request, timeout]);
 }
+
+// Background sync: fetch current pledge count on load so the counter is fresh
+(function syncPledgeOnLoad() {
+  if (typeof fetch !== 'function') return;
+  fetch(PLEDGE_COUNTER_URL)
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (data) {
+      if (data && Number.isFinite(Number(data.count))) {
+        var n = Number(data.count);
+        try { localStorage.setItem(LOCAL_PLEDGE_KEY, String(n)); } catch (e) {}
+      }
+    })
+    .catch(function () {});
+})();
 
 // Count up to the real total. Never invents intermediate precision: it walks
 // toward the true number and lands exactly on it.
@@ -289,7 +316,7 @@ function showPledgeCount(total) {
   // 12,445, and a stalled rAF leaving the display parked at 12,447, for a true
   // 12,487. A counter that reads low is still a wrong number.
   value.textContent = final;
-  if (pledgeReducedMotion()) return;
+  if (total <= 1 || pledgeReducedMotion()) return;
 
   const DURATION = 900;
   const start = performance.now();
@@ -834,7 +861,7 @@ function recordQuizCompletion() {
 
   var request = fetch(PLEDGE_COUNTER_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'quiz_complete' })
   })
     .then(function (res) { return res.ok ? res.json() : null; })

@@ -11,8 +11,11 @@
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23006857'/%3E%3Cpath d='M16 6l7 2.6v6.1c0 4.6-3 8.4-7 9.6-4-1.2-7-5-7-9.6V8.6z' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M12.4 15.4l2.6 2.6 4.6-4.9' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
-  <!-- Leaflet CSS (map for Bin Locations section) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <!-- Leaflet CSS (non-render-blocking for fast First Contentful Paint) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
 
   <!-- Progressive-enhancement gate for the scroll reveal. 46 content blocks carry
        .reveal, which sets opacity: 0 until app.js adds .visible — so that hiding
@@ -79,7 +82,7 @@
           <picture>
             <source srcset="assets/web/logo_emblem.webp" type="image/webp">
             <img src="assets/logo_emblem.png" alt="DISPOSEFORHEALTH Logo" class="main-logo-img" width="400"
-              height="400">
+              height="400" fetchpriority="high">
           </picture>
         </div>
         <p class="hero-logo-subtitle" data-i18n="hero.logo.subtitle">Safe Antibiotic Disposal. Safer Communities.</p>
@@ -92,7 +95,7 @@
           <span class="watch-text" data-i18n="hero.watch">WATCH</span>
         </div>
         <div class="hero-video-card">
-          <video class="hero-video-player" controls poster="Animated video/Cover.png" playsinline preload="metadata">
+          <video class="hero-video-player" controls poster="Animated video/Cover.webp" playsinline preload="none">
             <source src="Animated video/animated_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
@@ -1602,10 +1605,10 @@
     </div>
   </div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="assets/cert_template_data.js"></script>
-  <script src="app.js"></script>
+  <!-- Scripts (deferred for instant non-blocking page load) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="assets/cert_template_data.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 
 </html>
