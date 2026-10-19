@@ -570,7 +570,7 @@ header.scrolled {
 .logo-text {
   font-size: clamp(1.15rem, 2.2vw, 1.45rem);
   font-weight: var(--weight-black);
-  color: var(--green-800);
+  color: var(--orange-600);
   letter-spacing: var(--tracking-tighter);
   line-height: 1;
   white-space: nowrap;
