@@ -701,7 +701,7 @@ nav ul li a:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
+  padding: 0.75rem;
   box-sizing: border-box;
   box-shadow: 0 20px 48px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(255, 255, 255, 0.25);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -733,12 +733,12 @@ nav ul li a:active {
 
 .hero-logo-subtitle {
   color: #ffffff;
-  font-size: 1.18rem;
+  font-size: clamp(0.92rem, 1.25vw, 1.15rem);
   font-weight: 700;
   text-align: center;
   letter-spacing: 0.02em;
   margin: 0;
-  max-width: 380px;
+  white-space: nowrap;
   line-height: 1.4;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
@@ -811,11 +811,19 @@ nav ul li a:active {
   }
   .main-logo-card {
     width: min(290px, 78vw);
-    padding: 1rem;
+    padding: 0.6rem;
   }
   .hero-logo-subtitle {
-    font-size: 1rem;
-    max-width: 300px;
+    font-size: clamp(0.82rem, 3.2vw, 1rem);
+    white-space: nowrap;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 440px) {
+  .hero-logo-subtitle {
+    font-size: clamp(0.72rem, 3.8vw, 0.85rem);
+    white-space: nowrap;
   }
 }
 
