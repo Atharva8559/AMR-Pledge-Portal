@@ -29,11 +29,12 @@ machine translation.
 | `nav.roadmap` | Roadmap | वाटचाल |
 | `nav.language` | Language | भाषा |
 
-## hero  (1/1 done)
+## hero  (2/2 done)
 
 | Key | English | Marathi |
 |---|---|---|
 | `hero.watch` | WATCH | पहा |
+| `hero.logo.subtitle` | Safe Antibiotic Disposal. Safer Communities. | प्रतिजैविकांची सुरक्षित विल्हेवाट. सुरक्षित समाज. |
 
 ## pledge  (10/10 done)
 

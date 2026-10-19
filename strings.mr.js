@@ -60,6 +60,8 @@ registerStrings('mr', {
   // ── hero ──────────────────────────────────────────────────────
   // EN: WATCH
   'hero.watch': 'पहा',
+  // EN: Safe Antibiotic Disposal. Safer Communities.
+  'hero.logo.subtitle': 'प्रतिजैविकांची सुरक्षित विल्हेवाट. सुरक्षित समाज.',
 
   // ── pledge ────────────────────────────────────────────────────
   // EN: # योग्य विल्हेवाट, AMR वर मात!
