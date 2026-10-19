@@ -143,7 +143,7 @@ machine translation.
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
 
-## testimonials  (9/9 done)
+## testimonials  (12/12 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -156,6 +156,9 @@ machine translation.
 | `testimonials.quote2` | “Antimicrobial resistance is one of the most pressing public health challenges of our time, and addressing it requires action beyond healthcare settings. Effective AMR containment requires a whole-of-society approach that combines awareness, stewardship, and responsible disposal practices. The Maharashtra initiative is an important example of how partnerships between government, communities, and development organizations can translate AMR commitments into tangible action. Together, we can strengthen public understanding and protect the effectiveness of life-saving antimicrobials.” | “प्रतिजैविक प्रतिकारशक्ती (AMR) हे आपल्या काळातील सर्वात गंभीर सार्वजनिक आरोग्य आव्हानांपैकी एक आहे आणि त्यावर मात करण्यासाठी आरोग्य यंत्रणेच्या पलीकडे जाऊन कृती करणे आवश्यक आहे. AMR च्या प्रभावी नियंत्रणासाठी संपूर्ण समाजाचा सहभाग आवश्यक आहे, ज्यामध्ये जनजागृती, सुयोग्य वापर आणि जबाबदार विल्हेवाट यांचा समावेश होतो. महाराष्ट्र उपक्रम हे शासन, समुदाय आणि विकास संस्थांमधील भागीदारी AMR वरील वचनबद्धतेला प्रत्यक्ष कृतीत कसे रूपांतरित करू शकते याचे एक महत्त्वाचे उदाहरण आहे. एकत्रितपणे, आपण जनजागृती अधिक बळकट करू शकतो आणि जीवनरक्षक प्रतिजैविकांची परिणामकारकता टिकवून ठेवू शकतो.” |
 | `testimonials.author2.name` | Dr Bassem Zayed | डॉ. बास्सेम झायेद |
 | `testimonials.author2.designation` | Unit Head & Regional Advisor, Antimicrobial Resistance (AMR), Health System Department (HSD). | युनिट हेड आणि प्रादेशिक सल्लागार, रोगाणूरोधक प्रतिकारशक्ती (AMR), आरोग्य प्रणाली विभाग (HSD). |
+| `testimonials.quote3` | “Safe disposal must become part of prescribing behaviour, just as much as the right drug, dose and duration. Every antibiotic prescription should come with a clear message—not only about how to take the medicine, but also how to safely dispose of what remains. Responsible antibiotic use does not end with the last dose; it ends with safe disposal.” | “योग्य औषध, मात्रा आणि कालावधी इतकेच औषधांची सुरक्षित विल्हेवाट लावणे हे देखील प्रिस्क्रिप्शन वर्तनाचा भाग बनले पाहिजे. प्रत्येक प्रतिजैविकाच्या प्रिस्क्रिप्शनसोबत एक स्पष्ट संदेश असावा — केवळ औषध कसे घ्यावे याबद्दलच नाही, तर उरलेल्या औषधांची सुरक्षित विल्हेवाट कशी लावावी याबद्दलही. प्रतिजैविकांचा जबाबदार वापर हा शेवटच्या डोससोबत संपत नाही; तो सुरक्षित विल्हेवाटीने पूर्ण होतो.” |
+| `testimonials.author3.name` | Kamini Walia | कामिनी वालिया |
+| `testimonials.author3.designation` | Senior Scientist at ICMR. | वरिष्ठ वैज्ञानिक, आयसीएमआर (ICMR). |
 
 ## roadmap  (76/76 done)
 
