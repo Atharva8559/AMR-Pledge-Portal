@@ -1,0 +1,17 @@
+{
+  "name": "amr-pledge-portal",
+  "version": "1.0.0",
+  "description": "DISPOSEFORHEALTH | Antimicrobial Resistance Campaign Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
