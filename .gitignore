@@ -36,3 +36,4 @@ assets/video/dindi_song_540p.m4v
 
 # Build output from tools/deploy-aws.sh
 /.dist/
+godaddy-deploy.zip
