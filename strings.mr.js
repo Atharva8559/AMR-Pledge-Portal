@@ -258,6 +258,12 @@ registerStrings('mr', {
   'testimonials.author3.name': 'कामिनी वालिया',
   // EN: Senior Scientist at ICMR.
   'testimonials.author3.designation': 'वरिष्ठ वैज्ञानिक, आयसीएमआर (ICMR).',
+  // EN: Ankur Mutreja quote
+  'testimonials.quote4': '“अन्नाच्या साखळीतून प्रतिजैविकांचे अनावश्यक नियमित सेवन टाळण्यासाठी त्यांची सुरक्षित विल्हेवाट लावणे अत्यंत आवश्यक आहे. पर्यावरणातील प्रदूषण रोखणे हा एएमआर (AMR) विरुद्धच्या लढ्यातील महत्त्वाचा घटक आहे आणि यामध्ये आपण सर्वांनी सहभागी झाले पाहिजे.”',
+  // EN: Ankur Mutreja
+  'testimonials.author4.name': 'अंकुर मुत्रेजा',
+  // EN: Director Health Security and External Affairs, PATH
+  'testimonials.author4.designation': 'संचालक, आरोग्य सुरक्षा आणि बाह्य व्यवहार, पाथ (PATH)',
 
   // ── roadmap ───────────────────────────────────────────────────
   // EN: Project Milestones

@@ -143,7 +143,7 @@ machine translation.
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
 
-## testimonials  (12/12 done)
+## testimonials  (15/15 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -159,6 +159,9 @@ machine translation.
 | `testimonials.quote3` | “Safe disposal must become part of prescribing behaviour, just as much as the right drug, dose and duration. Every antibiotic prescription should come with a clear message—not only about how to take the medicine, but also how to safely dispose of what remains. Responsible antibiotic use does not end with the last dose; it ends with safe disposal.” | “योग्य औषध, मात्रा आणि कालावधी इतकेच औषधांची सुरक्षित विल्हेवाट लावणे हे देखील प्रिस्क्रिप्शन वर्तनाचा भाग बनले पाहिजे. प्रत्येक प्रतिजैविकाच्या प्रिस्क्रिप्शनसोबत एक स्पष्ट संदेश असावा — केवळ औषध कसे घ्यावे याबद्दलच नाही, तर उरलेल्या औषधांची सुरक्षित विल्हेवाट कशी लावावी याबद्दलही. प्रतिजैविकांचा जबाबदार वापर हा शेवटच्या डोससोबत संपत नाही; तो सुरक्षित विल्हेवाटीने पूर्ण होतो.” |
 | `testimonials.author3.name` | Kamini Walia | कामिनी वालिया |
 | `testimonials.author3.designation` | Senior Scientist at ICMR. | वरिष्ठ वैज्ञानिक, आयसीएमआर (ICMR). |
+| `testimonials.quote4` | “Safe disposal of antibiotics is critical to protect us from consumption of unnecessary regular dosages of antibiotics through the food chain. Saving environmental contamination is key to our fight against AMR and we must all participate” | “अन्नाच्या साखळीतून प्रतिजैविकांचे अनावश्यक नियमित सेवन टाळण्यासाठी त्यांची सुरक्षित विल्हेवाट लावणे अत्यंत आवश्यक आहे. पर्यावरणातील प्रदूषण रोखणे हा एएमआर (AMR) विरुद्धच्या लढ्यातील महत्त्वाचा घटक आहे आणि यामध्ये आपण सर्वांनी सहभागी झाले पाहिजे.” |
+| `testimonials.author4.name` | Ankur Mutreja | अंकुर मुत्रेजा |
+| `testimonials.author4.designation` | Director Health Security and External Affairs, PATH | संचालक, आरोग्य सुरक्षा आणि बाह्य व्यवहार, पाथ (PATH) |
 
 ## roadmap  (76/76 done)
 
