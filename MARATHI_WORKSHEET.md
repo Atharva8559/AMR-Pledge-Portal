@@ -143,7 +143,7 @@ machine translation.
 | `quiz.results.default_message` | Great job! | छान काम! |
 | `quiz.results.retake` | Retake Quiz | पुन्हा प्रश्नमंजुषा द्या |
 
-## testimonials  (15/15 done)
+## testimonials  (18/18 done)
 
 | Key | English | Marathi |
 |---|---|---|
@@ -162,6 +162,9 @@ machine translation.
 | `testimonials.quote4` | “Safe disposal of antibiotics is critical to protect us from consumption of unnecessary regular dosages of antibiotics through the food chain. Saving environmental contamination is key to our fight against AMR and we must all participate” | “अन्नाच्या साखळीतून प्रतिजैविकांचे अनावश्यक नियमित सेवन टाळण्यासाठी त्यांची सुरक्षित विल्हेवाट लावणे अत्यंत आवश्यक आहे. पर्यावरणातील प्रदूषण रोखणे हा एएमआर (AMR) विरुद्धच्या लढ्यातील महत्त्वाचा घटक आहे आणि यामध्ये आपण सर्वांनी सहभागी झाले पाहिजे.” |
 | `testimonials.author4.name` | Ankur Mutreja | अंकुर मुत्रेजा |
 | `testimonials.author4.designation` | Director Health Security and External Affairs, PATH | संचालक, आरोग्य सुरक्षा आणि बाह्य व्यवहार, पाथ (PATH) |
+| `testimonials.quote5` | “Addressing antimicrobial resistance requires us to look beyond the use of antibiotics to how unused and expired antibiotics are disposed of. Through meaningful community engagement and accessible disposal options, we aim to make responsible disposal an everyday practice. Lasting behavior change depends on communities being informed, involved, and empowered to make safer choices that protect public health and the environment.” | “प्रतिजैविक प्रतिकारशक्तीच्या (AMR) समस्येवर मात करण्यासाठी केवळ प्रतिजैविकांच्या वापरावरच नव्हे, तर न वापरलेल्या आणि मुदतबाह्य औषधांची सुरक्षित विल्हेवाट कशी लावली जाते यावरही लक्ष केंद्रित करणे आवश्यक आहे. अर्थपूर्ण समुदाय सहभाग आणि सुलभ विल्हेवाट पर्यायांच्या माध्यमातून जबाबदार विल्हेवाट ही दैनंदिन सवय बनवण्याचे आमचे उद्दिष्ट आहे. दीर्घकालीन वर्तनबदल हा समुदाय माहितीपूर्ण, सक्रिय आणि सार्वजनिक आरोग्य व पर्यावरणाचे रक्षण करणारे सुरक्षित निर्णय घेण्यासाठी सक्षम होण्यावर अवलंबून असतो.” |
+| `testimonials.author5.name` | Dr. Asha Hegde | डॉ. आशा हेगडे |
+| `testimonials.author5.designation` | Country Director- India, Director- South Asia Hub, PATH | कंट्री डायरेक्टर - भारत, संचालक - दक्षिण आशिया हब, पाथ (PATH) |
 
 ## roadmap  (76/76 done)
 

@@ -264,6 +264,12 @@ registerStrings('mr', {
   'testimonials.author4.name': 'अंकुर मुत्रेजा',
   // EN: Director Health Security and External Affairs, PATH
   'testimonials.author4.designation': 'संचालक, आरोग्य सुरक्षा आणि बाह्य व्यवहार, पाथ (PATH)',
+  // EN: Dr. Asha Hegde quote
+  'testimonials.quote5': '“प्रतिजैविक प्रतिकारशक्तीच्या (AMR) समस्येवर मात करण्यासाठी केवळ प्रतिजैविकांच्या वापरावरच नव्हे, तर न वापरलेल्या आणि मुदतबाह्य औषधांची सुरक्षित विल्हेवाट कशी लावली जाते यावरही लक्ष केंद्रित करणे आवश्यक आहे. अर्थपूर्ण समुदाय सहभाग आणि सुलभ विल्हेवाट पर्यायांच्या माध्यमातून जबाबदार विल्हेवाट ही दैनंदिन सवय बनवण्याचे आमचे उद्दिष्ट आहे. दीर्घकालीन वर्तनबदल हा समुदाय माहितीपूर्ण, सक्रिय आणि सार्वजनिक आरोग्य व पर्यावरणाचे रक्षण करणारे सुरक्षित निर्णय घेण्यासाठी सक्षम होण्यावर अवलंबून असतो.”',
+  // EN: Dr. Asha Hegde
+  'testimonials.author5.name': 'डॉ. आशा हेगडे',
+  // EN: Country Director- India, Director- South Asia Hub, PATH
+  'testimonials.author5.designation': 'कंट्री डायरेक्टर - भारत, संचालक - दक्षिण आशिया हब, पाथ (PATH)',
 
   // ── roadmap ───────────────────────────────────────────────────
   // EN: Project Milestones
