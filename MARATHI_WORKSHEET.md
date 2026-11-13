@@ -275,7 +275,7 @@ machine translation.
 
 | Key | English | Marathi |
 |---|---|---|
-| `footer.tagline` | Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by Public Health Department, Govt of Maharashtra, NHM, CHRI, PATH & GSK Cares. | सक्रिय समुदाय सहभाग, अधिकृत संकलन केंद्रे आणि जनजागृतीच्या माध्यमातून प्रतिजैविकांची परिणामकारकता जपणे. सार्वजनिक आरोग्य विभाग, महाराष्ट्र शासन, NHM, CHRI, PATH आणि GSK Cares यांच्या सहकार्याने. |
+| `footer.tagline` | Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by Public Health Department, Govt of Maharashtra, NHM, CHRI, PATH & GSK cares. | सक्रिय समुदाय सहभाग, अधिकृत संकलन केंद्रे आणि जनजागृतीच्या माध्यमातून प्रतिजैविकांची परिणामकारकता जपणे. सार्वजनिक आरोग्य विभाग, महाराष्ट्र शासन, NHM, CHRI, PATH आणि GSK cares यांच्या सहकार्याने. |
 | `footer.nav.heading` | Navigation | मार्गदर्शन |
 | `footer.nav.about` | About AMR | AMR विषयी |
 | `footer.nav.journey` | Safe Disposal | सुरक्षित विल्हेवाट |

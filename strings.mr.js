@@ -461,8 +461,8 @@ registerStrings('mr', {
   'partners.title': 'अधिकृत सार्वजनिक आरोग्य आणि संशोधन भागीदार',
 
   // ── footer ────────────────────────────────────────────────────
-  // EN: Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by Public Health Department, Govt of Maharashtra, NHM, CHRI, PATH & GSK Cares.
-  'footer.tagline': 'सक्रिय समुदाय सहभाग, अधिकृत संकलन केंद्रे आणि जनजागृतीच्या माध्यमातून प्रतिजैविकांची परिणामकारकता जपणे. सार्वजनिक आरोग्य विभाग, महाराष्ट्र शासन, NHM, CHRI, PATH आणि GSK Cares यांच्या सहकार्याने.',
+  // EN: Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by Public Health Department, Govt of Maharashtra, NHM, CHRI, PATH & GSK cares.
+  'footer.tagline': 'सक्रिय समुदाय सहभाग, अधिकृत संकलन केंद्रे आणि जनजागृतीच्या माध्यमातून प्रतिजैविकांची परिणामकारकता जपणे. सार्वजनिक आरोग्य विभाग, महाराष्ट्र शासन, NHM, CHRI, PATH आणि GSK cares यांच्या सहकार्याने.',
   // EN: Navigation
   'footer.nav.heading': 'मार्गदर्शन',
   // EN: About AMR
