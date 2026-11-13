@@ -461,8 +461,8 @@ registerStrings('mr', {
   'partners.title': 'अधिकृत सार्वजनिक आरोग्य आणि संशोधन भागीदार',
 
   // ── footer ────────────────────────────────────────────────────
-  // EN: Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by MH Public Health, NHM, CHRI, PATH & GSK.
-  'footer.tagline': 'सक्रिय समुदाय सहभाग, अधिकृत संकलन केंद्रे आणि जनजागृतीच्या माध्यमातून प्रतिजैविकांची परिणामकारकता जपणे. महाराष्ट्र सार्वजनिक आरोग्य विभाग, NHM, CHRI, PATH आणि GSK यांच्या सहकार्याने.',
+  // EN: Safeguarding antimicrobial efficacy through active community engagement, official collection centers, and public awareness. Supported by Public Health Department, Govt of Maharashtra, NHM, CHRI, PATH & GSK Cares.
+  'footer.tagline': 'सक्रिय समुदाय सहभाग, अधिकृत संकलन केंद्रे आणि जनजागृतीच्या माध्यमातून प्रतिजैविकांची परिणामकारकता जपणे. सार्वजनिक आरोग्य विभाग, महाराष्ट्र शासन, NHM, CHRI, PATH आणि GSK Cares यांच्या सहकार्याने.',
   // EN: Navigation
   'footer.nav.heading': 'मार्गदर्शन',
   // EN: About AMR
@@ -483,6 +483,8 @@ registerStrings('mr', {
   'footer.resources.who': 'WHO AMR पोर्टल',
   // EN: CDC Drug Resistance Info
   'footer.resources.cdc': 'CDC औषध प्रतिरोध माहिती',
+  // EN: GSK India
+  'footer.resources.gsk': 'GSK भारत (GSK India)',
   // EN: © 2026 DISPOSEFORHEALTH Project | Public Health Department Maharashtra, NHM, CHRI, PATH & GSK Collaboration.
   'footer.copyright': '© २०२६ DISPOSEFORHEALTH प्रकल्प | सार्वजनिक आरोग्य विभाग महाराष्ट्र, NHM, CHRI, PATH आणि GSK यांचे सहकार्य.',
   // EN: Twitter
