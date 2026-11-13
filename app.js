@@ -403,21 +403,21 @@ window.takeSwachhPledge = takeSwachhPledge;
 const QUIZ_QUESTIONS = {
   en: [
     {
-      q: "What does AMR — antimicrobial resistance — actually mean?",
+      q: "What does AMR - antimicrobial resistance - actually mean?",
       options: [
         { text: "Your body becomes resistant to medicines", isCorrect: false },
         { text: "Germs change so antibiotics stop working against them", isCorrect: true },
         { text: "You become allergic to antibiotics", isCorrect: false },
         { text: "Antibiotics expire and lose strength", isCorrect: false }
       ],
-      fact: "It's the germs — not you — that change. When bacteria survive antibiotics, those tougher germs spread and the medicine stops working."
+      fact: "It's the germs, not you, that change. When bacteria survive antibiotics, those tougher germs spread and the medicine stops working."
     },
     {
       q: "You have a common cold or the flu. Will antibiotics help you recover?",
       options: [
         { text: "Yes, they speed up recovery", isCorrect: false },
         { text: "Yes, but only the strong ones", isCorrect: false },
-        { text: "No — colds and flu are caused by viruses", isCorrect: true },
+        { text: "No, colds and flu are caused by viruses", isCorrect: true },
         { text: "Only if you take them for 3 days", isCorrect: false }
       ],
       fact: "Antibiotics fight bacteria, not viruses. Taking them for a cold or flu won't help and only fuels resistance."
@@ -425,7 +425,7 @@ const QUIZ_QUESTIONS = {
     {
       q: "Your doctor gave you a 5-day antibiotic course. You feel better on day 3. What should you do?",
       options: [
-        { text: "Stop — you're already better", isCorrect: false },
+        { text: "Stop, you're already better", isCorrect: false },
         { text: "Save the rest for next time you're sick", isCorrect: false },
         { text: "Finish the full course as prescribed", isCorrect: true },
         { text: "Take a double dose to finish faster", isCorrect: false }
@@ -450,17 +450,17 @@ const QUIZ_QUESTIONS = {
         { text: "It's actually a safe way to dispose of them", isCorrect: false },
         { text: "It wastes water", isCorrect: false }
       ],
-      fact: "Flushed antibiotics enter water and soil, where they push germs to become resistant — affecting everyone downstream."
+      fact: "Flushed antibiotics enter water and soil, where they push germs to become resistant, affecting everyone downstream."
     },
     {
       q: "Your cousin has the same symptoms you had. Should you share your leftover antibiotics?",
       options: [
         { text: "Yes, it saves a doctor's visit", isCorrect: false },
         { text: "Yes, if it's the same illness", isCorrect: false },
-        { text: "No — never share or self-prescribe antibiotics", isCorrect: true },
+        { text: "No, never share or self-prescribe antibiotics", isCorrect: true },
         { text: "Only half the dose to be safe", isCorrect: false }
       ],
-      fact: "Same symptoms don't mean the same cause. Sharing antibiotics can be useless or harmful — always see a doctor."
+      fact: "Same symptoms don't mean the same cause. Sharing antibiotics can be useless or harmful, so always see a doctor."
     },
     {
       q: "You're unsure how to dispose of old medicines safely. Who's the best person to ask?",
@@ -468,7 +468,7 @@ const QUIZ_QUESTIONS = {
         { text: "A neighbour who takes the same pills", isCorrect: false },
         { text: "Your local pharmacist or healthcare worker", isCorrect: true },
         { text: "Social media groups", isCorrect: false },
-        { text: "No one — just guess", isCorrect: false }
+        { text: "No one, just guess", isCorrect: false }
       ],
       fact: "Pharmacists and health workers are trained on safe disposal and take-back. They're your go-to source."
     },
@@ -480,7 +480,7 @@ const QUIZ_QUESTIONS = {
         { text: "Only use antibiotics when a doctor prescribes them", isCorrect: true },
         { text: "Stockpile antibiotics at home", isCorrect: false }
       ],
-      fact: "Using antibiotics only when truly needed — and only as prescribed — is the single biggest thing you can do."
+      fact: "Using antibiotics only when truly needed, and only as prescribed, is the single biggest thing you can do."
     }
   ],
   mr: [
@@ -767,14 +767,14 @@ function showQuizResults() {
     title = isMr ? "AMR जागरूक" : "AMR Aware";
     messageText = isMr
       ? "छान प्रयत्न — तुम्हाला मूलभूत गोष्टींची चांगली समज आहे. थोडे अधिक जाणून घेतल्यास तुम्ही चॅम्पियन व्हाल!"
-      : "Nice work — you've got a solid grip on the basics. Just a few gaps to close and you'll be a champion!";
+      : "Nice work, you've got a solid grip on the basics. Just a few gaps to close and you'll be a champion!";
     tips = isMr ? [
       "डॉक्टरांनी सांगितल्यानुसार संपूर्ण कोर्स नेहमी पूर्ण करा.",
       "औषधे कधीही वाहून देऊ नका — सुरक्षित संकलन केंद्रात द्या.",
       "सुरक्षित विल्हेवाटीबाबत तुमच्या फार्मासिस्टचा सल्ला घ्या."
     ] : [
       "Always finish your full antibiotic course as prescribed.",
-      "Never flush medicines — use safe disposal instead.",
+      "Never flush medicines, use safe take-back instead.",
       "Ask your pharmacist about safe disposal."
     ];
   } else {
@@ -788,9 +788,9 @@ function showQuizResults() {
       "फक्त डॉक्टरांच्या सल्ल्यानेच प्रतिजैविके वापरा.",
       "उरलेली औषधे जवळच्या आरोग्य केंद्रात जमा करा, कचऱ्यात किंवा टॉयलेटमध्ये टाकू नका."
     ] : [
-      "Antibiotics fight bacteria — not colds, flu, or viruses.",
+      "Antibiotics fight bacteria, not colds, flu, or viruses.",
       "Only use antibiotics when a doctor prescribes them.",
-      "Take leftover medicines to nearest health facility, never the bin or toilet."
+      "Take leftover medicines to a pharmacy, never the bin or toilet."
     ];
   }
 
